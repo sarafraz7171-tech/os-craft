@@ -62,3 +62,83 @@ if (copyButton && serverIp && copyStatus) {
     }, 3000);
   });
 }
+/* ==============================
+   OS CRAFT - Intro Animation
+   ============================== */
+
+const osCraftReduceMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)"
+).matches;
+
+if (!osCraftReduceMotion) {
+  const osCraftIntro = document.createElement("div");
+
+  osCraftIntro.className = "site-intro";
+  osCraftIntro.setAttribute("role", "status");
+  osCraftIntro.setAttribute("aria-label", "ورود به OS CRAFT");
+
+  osCraftIntro.innerHTML = `
+    <div class="intro-card">
+      <div class="intro-cube">OC</div>
+      <div class="intro-wordmark">OS CRAFT</div>
+      <p>آماده ورود به شهر هستی؟</p>
+      <div class="intro-loading">
+        <span></span>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(osCraftIntro);
+
+  window.setTimeout(() => {
+    osCraftIntro.classList.add("is-leaving");
+
+    window.setTimeout(() => {
+      osCraftIntro.remove();
+    }, 650);
+  }, 1500);
+}
+
+/* ==============================
+   OS CRAFT - Parallax Scroll
+   ============================== */
+
+const osCraftHero = document.querySelector(".hero");
+const osCraftHeroBg = document.querySelector(".hero-bg");
+
+if (
+  osCraftHero &&
+  osCraftHeroBg &&
+  !osCraftReduceMotion
+) {
+  let osCraftScrollScheduled = false;
+
+  const updateOsCraftParallax = () => {
+    const heroPosition = osCraftHero.getBoundingClientRect().top;
+
+    const offset = Math.max(
+      -40,
+      Math.min(40, -heroPosition * 0.12)
+    );
+
+    osCraftHeroBg.style.setProperty(
+      "--parallax-y",
+      `${offset}px`
+    );
+
+    osCraftScrollScheduled = false;
+  };
+
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (osCraftScrollScheduled) return;
+
+      osCraftScrollScheduled = true;
+      window.requestAnimationFrame(updateOsCraftParallax);
+    },
+    { passive: true }
+  );
+
+  updateOsCraftParallax();
+}
