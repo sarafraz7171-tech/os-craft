@@ -1,9 +1,380 @@
-/* ذرات پیکسلی شناور */
-.hero-content,
-.scroll-indicator {
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Vazirmatn:wght@400;500;600;700;800;900&display=swap');
+
+/* =========================
+   تنظیمات اصلی
+========================= */
+
+:root {
+  --red: #ff3030;
+  --red-bright: #ff5555;
+  --red-dark: #920000;
+  --bg: #090303;
+  --panel: #180707;
+  --white: #fff;
+  --muted: #cdbaba;
+  --font: "Vazirmatn", Tahoma, sans-serif;
+  --pixel: "Press Start 2P", monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: var(--white);
+  font-family: var(--font);
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      #400707,
+      #180606 45%,
+      #080303 90%
+    );
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid #ff7777;
+  outline-offset: 4px;
+}
+
+.container {
+  width: min(1160px, calc(100% - 40px));
+  margin-inline: auto;
+}
+
+/* =========================
+   طرح پیکسلی پس‌زمینه
+========================= */
+
+.background-pattern {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      135deg,
+      #ff000008 25%,
+      transparent 25%
+    ) 0 0 / 40px 40px,
+    linear-gradient(
+      315deg,
+      #ffffff05 25%,
+      transparent 25%
+    ) 0 0 / 40px 40px;
+}
+
+/* =========================
+   منوی بالای سایت
+========================= */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #0a0303ed;
+  border-bottom: 1px solid #ff303055;
+  box-shadow: 0 8px 28px #0008;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.nav-shell {
+  min-height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.brand-mark {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #ff3939, #850000);
+  border: 2px solid #ff7777;
+  box-shadow: 0 0 18px #f004;
+  font: 11px var(--pixel);
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.brand-text strong {
+  direction: ltr;
+  color: #ff4545;
+  font: 11px var(--pixel);
+  text-shadow: 0 0 12px #f006;
+}
+
+.brand-text small {
+  direction: ltr;
+  color: #c4aaaa;
+  font: 6px var(--pixel);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  list-style: none;
+}
+
+.nav-links a {
+  display: block;
+  padding: 11px;
+  color: #e9dada;
+  font-size: 14px;
+  font-weight: 700;
+  border: 1px solid transparent;
+  transition: color .2s, background .2s, border-color .2s;
+}
+
+.nav-links a:hover {
+  color: #fff;
+  background: #ff000018;
+  border-color: #ff454550;
+}
+
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  padding: 12px 15px;
+  color: white;
+  background: linear-gradient(#ff3939, #970000);
+  border: 2px solid #ff7777;
+  box-shadow: 0 4px 0 #430000;
+  font-size: 13px;
+  font-weight: 900;
+  transition: transform .2s, box-shadow .2s, filter .2s;
+}
+
+.nav-cta:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.15);
+  box-shadow:
+    0 7px 0 #430000,
+    0 0 24px #f008;
+}
+
+.menu-toggle {
+  display: none;
+  width: 42px;
+  height: 42px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  background: #200808;
+  border: 2px solid #8b2222;
+}
+
+.menu-toggle span {
+  width: 20px;
+  height: 2px;
+  background: white;
+}
+
+/* =========================
+   صفحه ورود اصلی
+========================= */
+
+.hero {
+  min-height: 720px;
+  min-height: max(670px, calc(100svh - 78px));
+  position: relative;
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+  overflow: hidden;
+  border-bottom: 1px solid #ff303033;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: -50px;
+  z-index: -2;
+  background: url("./hero.png") center / cover no-repeat;
+  filter: brightness(.43) saturate(1.15) blur(2px);
+  transform: translate3d(0, var(--parallax-y, 0px), 0) scale(1.08);
+  will-change: transform;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(circle, transparent, #08030366 78%),
+    linear-gradient(#25000022, #080303ed);
+}
+
+.hero-content {
   position: relative;
   z-index: 2;
+  padding-top: 70px;
+  padding-bottom: 90px;
+  text-align: center;
 }
+
+.hero-badge {
+  display: inline-block;
+  margin-bottom: 25px;
+  padding: 11px 17px;
+  background: #100303df;
+  border: 1px solid #ff6969;
+  color: #ffe5e5;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.hero-logo {
+  direction: ltr;
+  margin-bottom: 25px;
+  color: #ff3030;
+  font: clamp(23px, 4vw, 45px)/1.9 var(--pixel);
+  text-shadow:
+    4px 4px 0 #390000,
+    0 0 15px #f00,
+    0 0 40px #f008;
+}
+
+.hero h1 {
+  max-width: 950px;
+  margin-inline: auto;
+  color: white;
+  font-size: clamp(27px, 4.5vw, 52px);
+  font-weight: 900;
+  line-height: 1.9;
+  text-shadow:
+    3px 3px 0 #360000,
+    0 0 14px #f008,
+    0 0 34px #f005;
+}
+
+.hero-description {
+  max-width: 720px;
+  margin: 20px auto 0;
+  color: #eadbdb;
+  font-size: clamp(14px, 1.7vw, 18px);
+  line-height: 2.2;
+}
+
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 23px;
+  font-size: 14px;
+  font-weight: 900;
+  border: 2px solid transparent;
+  transition: transform .22s, box-shadow .22s, filter .22s;
+}
+
+.btn-primary {
+  color: white;
+  background: linear-gradient(#ff3939, #990000);
+  border-color: #ff6969;
+  box-shadow: 0 5px 0 #430000, 0 0 18px #f005;
+}
+
+.btn-primary:hover {
+  transform: translateY(-4px);
+  filter: brightness(1.15);
+  box-shadow:
+    0 9px 0 #430000,
+    0 0 28px #f008;
+}
+
+.btn-secondary {
+  color: white;
+  background: #100606dd;
+  border-color: #bd3939;
+  box-shadow: 0 5px 0 #300000;
+}
+
+.btn-secondary:hover {
+  transform: translateY(-4px);
+  background: #510808;
+  box-shadow:
+    0 8px 0 #300000,
+    0 0 20px #f005;
+}
+
+.hero-highlights {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 38px;
+}
+
+.highlight {
+  padding: 11px 16px;
+  color: #eee0e0;
+  background: #100606bf;
+  border: 1px solid #ff000033;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.scroll-indicator {
+  position: absolute;
+  z-index: 2;
+  bottom: 18px;
+  right: 50%;
+  transform: translateX(50%);
+  color: #ff7777;
+  font-size: 13px;
+  animation: scroll-bounce 1.8s ease-in-out infinite;
+}
+
+/* =========================
+   ذرات پیکسلی شناور
+========================= */
 
 .pixel-particles {
   position: absolute;
@@ -22,7 +393,8 @@
     0 0 8px #ff0000,
     0 0 18px #ff000066;
   opacity: 0;
-  animation: pixel-drift var(--duration, 13s) linear
+  animation:
+    pixel-drift var(--duration, 13s) linear
     var(--delay, 0s) infinite;
 }
 
@@ -32,7 +404,7 @@
 }
 
 .pixel-particle:nth-child(7n) {
-  background: #ffffff;
+  background: #fff;
   box-shadow: 0 0 10px #ff5555;
 }
 
@@ -43,11 +415,11 @@
   }
 
   15% {
-    opacity: 0.7;
+    opacity: .7;
   }
 
   75% {
-    opacity: 0.45;
+    opacity: .45;
   }
 
   100% {
@@ -56,13 +428,497 @@
   }
 }
 
-/* ظاهرشدن بخش‌ها هنگام اسکرول */
+@keyframes scroll-bounce {
+  0%, 100% {
+    transform: translate(50%, 0);
+  }
+
+  50% {
+    transform: translate(50%, 5px);
+  }
+}
+
+/* =========================
+   عنوان و بخش‌های سایت
+========================= */
+
+.content-section,
+.server-section,
+.end-section {
+  padding: 90px 0;
+  scroll-margin-top: 85px;
+}
+
+.section-heading {
+  max-width: 750px;
+  margin: 0 auto 42px;
+  text-align: center;
+}
+
+.section-label {
+  display: inline-block;
+  margin-bottom: 17px;
+  color: #ff5555;
+  font: 9px/2 var(--pixel);
+  text-shadow: 0 0 12px #f006;
+}
+
+.section-heading h2,
+.server-panel h2,
+.end-section h2 {
+  color: white;
+  font-size: clamp(27px, 4vw, 42px);
+  font-weight: 900;
+  line-height: 1.9;
+  text-shadow:
+    3px 3px 0 #350000,
+    0 0 20px #f005;
+}
+
+.section-heading p {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 2.1;
+}
+
+/* =========================
+   کارت‌های قابلیت‌ها
+========================= */
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 19px;
+}
+
+.feature-card {
+  min-height: 270px;
+  position: relative;
+  padding: 26px 22px;
+  background: linear-gradient(145deg, #310909, #100505);
+  border: 2px solid #8c2222;
+  box-shadow:
+    5px 5px 0 #300606,
+    0 0 18px #f001;
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    border-color .25s ease;
+}
+
+.feature-card::before,
+.job-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 35px;
+  height: 4px;
+  background: #ff3030;
+  box-shadow: 0 0 12px #f008;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  border-color: #ff4545;
+  box-shadow:
+    5px 9px 0 #400606,
+    0 0 28px #f004;
+}
+
+.pixel-icon {
+  width: 60px;
+  height: 60px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 21px;
+  background: #300909;
+  border: 2px solid #a52a2a;
+  box-shadow: 4px 4px 0 #430707;
+  font-size: 28px;
+}
+
+.card-number {
+  position: absolute;
+  top: 23px;
+  left: 20px;
+  color: #a95151;
+  font: 9px var(--pixel);
+}
+
+.feature-card h3 {
+  margin-bottom: 10px;
+  color: #ff6464;
+  font-size: 19px;
+  font-weight: 900;
+}
+
+.feature-card p {
+  color: #d4c0c0;
+  font-size: 13px;
+  line-height: 2.1;
+}
+
+/* =========================
+   شغل‌های سرور
+========================= */
+
+.jobs-section {
+  background: linear-gradient(#110404cc, #080303d9);
+  border-block: 1px solid #ff000022;
+}
+
+.jobs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.job-card {
+  min-width: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  background: linear-gradient(110deg, #230707, #100505);
+  border: 2px solid #561717;
+  box-shadow: 4px 4px 0 #290505;
+  transition:
+    transform .22s ease,
+    border-color .22s ease,
+    box-shadow .22s ease;
+}
+
+.job-card:hover {
+  transform: translate(-3px, -4px);
+  border-color: #ff4545;
+  box-shadow:
+    5px 8px 0 #390606,
+    0 0 22px #f003;
+}
+
+.job-icon {
+  width: 54px;
+  height: 54px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  background: #2a0808;
+  border: 2px solid #852525;
+  font-size: 26px;
+}
+
+.job-info {
+  min-width: 0;
+}
+
+.job-category {
+  display: block;
+  margin-bottom: 5px;
+  color: #ff6262;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.job-info h3 {
+  margin-bottom: 5px;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.job-info p {
+  color: #cdbaba;
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.jobs-note {
+  margin-top: 22px;
+  color: #aa9494;
+  font-size: 12px;
+  line-height: 2;
+  text-align: center;
+}
+
+/* =========================
+   آدرس سرور و کپی IP
+========================= */
+
+.server-panel {
+  padding: 55px 25px 35px;
+  text-align: center;
+  background:
+    radial-gradient(circle at 50% 0%, #740b0b66, transparent 65%),
+    #160606;
+  border: 2px solid #8f2222;
+  box-shadow:
+    0 0 0 5px #31060670,
+    0 0 35px #f002;
+}
+
+.server-panel h2 {
+  margin-bottom: 10px;
+}
+
+.server-description {
+  margin-bottom: 25px;
+  color: #d3bebe;
+  font-size: 14px;
+  line-height: 2;
+}
+
+.server-address {
+  width: min(850px, 100%);
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+  margin-inline: auto;
+  padding: 10px;
+  background: #080303;
+  border: 2px solid #742020;
+}
+
+.server-address code {
+  min-width: 0;
+  flex: 1;
+  align-self: center;
+  color: #ffe0e0;
+  font: 13px/1.9 Consolas, monospace;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+
+.copy-btn {
+  flex-shrink: 0;
+  padding: 13px 18px;
+  color: white;
+  background: linear-gradient(#ff3b3b, #970000);
+  border: 2px solid #ff6969;
+  box-shadow: 0 4px 0 #430000;
+  font-weight: 900;
+  transition:
+    transform .2s,
+    box-shadow .2s,
+    filter .2s;
+}
+
+.copy-btn:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.12);
+  box-shadow:
+    0 7px 0 #430000,
+    0 0 22px #f008;
+}
+
+.copy-status {
+  min-height: 26px;
+  margin-top: 14px;
+  color: #ff7979;
+  font-size: 13px;
+}
+
+/* =========================
+   بخش پایانی و پاورقی
+========================= */
+
+.end-section {
+  text-align: center;
+  border-top: 1px solid #ff000022;
+}
+
+.end-block {
+  width: 95px;
+  height: 95px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 28px;
+  background: linear-gradient(145deg, #ff3939, #790000);
+  border: 4px solid #ff7777;
+  box-shadow:
+    6px 6px 0 #3b0606,
+    0 0 28px #f004;
+  font: 20px var(--pixel);
+}
+
+.end-section h2 {
+  margin-bottom: 15px;
+}
+
+.end-section p {
+  margin-bottom: 25px;
+  color: #cdbaba;
+  font-size: 14px;
+  line-height: 2.1;
+}
+
+.site-footer {
+  background: #080303;
+  border-top: 1px solid #451111;
+}
+
+.footer-inner {
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding-block: 22px;
+}
+
+.footer-brand {
+  color: #ff4545;
+  font: 11px var(--pixel);
+}
+
+.footer-inner p,
+.footer-inner > a:last-child {
+  font-size: 12px;
+}
+
+.footer-inner p {
+  color: #a99494;
+  text-align: center;
+}
+
+.footer-inner > a:last-child {
+  color: #ff6262;
+}
+
+/* =========================
+   صفحه ورود انیمیشنی
+========================= */
+
+.site-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background:
+    radial-gradient(circle at center, #450707, #160404 55%, #070202);
+  opacity: 1;
+  visibility: visible;
+  transition: opacity .55s ease, visibility .55s ease;
+}
+
+.site-intro.is-leaving {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.intro-card {
+  width: min(440px, 100%);
+  padding: 35px 20px;
+  text-align: center;
+  background: #120404;
+  border: 2px solid #ff3636;
+  box-shadow:
+    0 0 0 5px #350505,
+    0 0 35px #ff000055;
+  animation: intro-appear .7s cubic-bezier(.2,.8,.2,1) both;
+}
+
+.intro-cube {
+  width: 88px;
+  height: 88px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 25px;
+  color: white;
+  background: linear-gradient(135deg, #ff4545, #850000);
+  border: 4px solid #ff8888;
+  box-shadow:
+    6px 6px 0 #390505,
+    0 0 30px #ff000066;
+  font: 15px var(--pixel);
+  animation: intro-cube-float 1.4s ease-in-out infinite alternate;
+}
+
+.intro-wordmark {
+  direction: ltr;
+  color: #ff3535;
+  font: clamp(18px, 5vw, 27px)/1.8 var(--pixel);
+  text-shadow:
+    3px 3px 0 #370000,
+    0 0 12px #ff0000,
+    0 0 30px #ff000077;
+}
+
+.intro-card p {
+  margin-top: 18px;
+  color: #e6caca;
+  font-size: 14px;
+  line-height: 2;
+}
+
+.intro-loading {
+  width: min(260px, 90%);
+  height: 7px;
+  overflow: hidden;
+  margin: 25px auto 0;
+  background: #350909;
+  border: 1px solid #8b2222;
+}
+
+.intro-loading span {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: #ff3333;
+  box-shadow: 0 0 12px #ff0000;
+  animation: intro-progress 1.35s ease-out forwards;
+}
+
+@keyframes intro-appear {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes intro-cube-float {
+  from {
+    transform: translateY(0) rotate(-3deg);
+  }
+
+  to {
+    transform: translateY(-7px) rotate(3deg);
+  }
+}
+
+@keyframes intro-progress {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+/* =========================
+   پارالاکس پس‌زمینه
+========================= */
+
+.hero-bg {
+  transform: translate3d(0, var(--parallax-y, 0px), 0) scale(1.08);
+  will-change: transform;
+}
+
+/* =========================
+   انیمیشن ورود بخش‌ها هنگام اسکرول
+========================= */
+
 .reveal {
   opacity: 0;
   transform: translateY(24px);
   transition:
-    opacity 0.7s ease,
-    transform 0.7s ease;
+    opacity .7s ease,
+    transform .7s ease;
 }
 
 .reveal.is-visible {
@@ -70,32 +926,257 @@
   transform: translateY(0);
 }
 
-/* تأخیر کوتاه بین کارت‌ها */
 .feature-card:nth-child(2),
 .job-card:nth-child(2) {
-  transition-delay: 0.08s;
+  transition-delay: .08s;
 }
 
 .feature-card:nth-child(3),
 .job-card:nth-child(3) {
-  transition-delay: 0.16s;
+  transition-delay: .16s;
 }
 
 .feature-card:nth-child(4),
 .job-card:nth-child(4) {
-  transition-delay: 0.24s;
+  transition-delay: .24s;
 }
 
-/* اگر کاربر کاهش حرکت را انتخاب کرده باشد */
+/* =========================
+   تبلت و موبایل
+========================= */
+
+@media (max-width: 950px) {
+  .nav-shell {
+    gap: 12px;
+  }
+
+  .nav-links a {
+    padding: 9px;
+    font-size: 12px;
+  }
+
+  .feature-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  html {
+    scroll-padding-top: 75px;
+  }
+
+  .container {
+    width: calc(100% - 28px);
+  }
+
+  .nav-shell {
+    min-height: 72px;
+    flex-wrap: wrap;
+    padding-block: 10px;
+  }
+
+  .brand {
+    margin-left: auto;
+  }
+
+  .brand-mark {
+    width: 39px;
+    height: 39px;
+    font-size: 9px;
+  }
+
+  .brand-text strong {
+    font-size: 9px;
+  }
+
+  .brand-text small {
+    font-size: 5px;
+  }
+
+  .menu-toggle {
+    display: flex;
+    order: 2;
+  }
+
+  .nav-cta {
+    order: 3;
+    padding: 9px 10px;
+    font-size: 11px;
+  }
+
+  .main-nav {
+    order: 4;
+    flex-basis: 100%;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    padding-top: 10px;
+    border-top: 1px solid #ff000022;
+  }
+
+  .nav-links.is-open {
+    display: flex;
+  }
+
+  .nav-links a {
+    padding: 12px;
+    background: #ff000011;
+    font-size: 13px;
+  }
+
+  .hero {
+    min-height: 720px;
+  }
+
+  .hero-bg {
+    background-position: 57% center;
+  }
+
+  .hero-content {
+    padding-top: 55px;
+    padding-bottom: 90px;
+  }
+
+  .hero-badge {
+    font-size: 11px;
+    line-height: 1.9;
+  }
+
+  .hero-logo {
+    font-size: clamp(20px, 6vw, 30px);
+  }
+
+  .hero h1 {
+    font-size: clamp(26px, 7vw, 36px);
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-actions .btn {
+    width: min(100%, 320px);
+  }
+
+  .hero-highlights {
+    gap: 8px;
+    margin-top: 27px;
+  }
+
+  .highlight {
+    padding: 10px 9px;
+    font-size: 11px;
+  }
+
+  .scroll-indicator {
+    bottom: 14px;
+  }
+
+  .content-section,
+  .server-section,
+  .end-section {
+    padding: 65px 0;
+  }
+
+  .section-heading {
+    margin-bottom: 30px;
+  }
+
+  .section-heading h2,
+  .server-panel h2,
+  .end-section h2 {
+    font-size: 27px;
+  }
+
+  .section-label {
+    font-size: 8px;
+  }
+
+  .feature-grid,
+  .jobs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-card {
+    min-height: 0;
+  }
+
+  .job-card {
+    gap: 12px;
+    padding: 16px 12px;
+  }
+
+  .job-icon {
+    width: 47px;
+    height: 47px;
+    font-size: 22px;
+  }
+
+  .job-info h3 {
+    font-size: 16px;
+  }
+
+  .server-panel {
+    padding: 40px 13px 25px;
+  }
+
+  .server-address {
+    flex-direction: column;
+  }
+
+  .server-address code {
+    width: 100%;
+    font-size: 11px;
+    padding: 8px 2px;
+  }
+
+  .copy-btn {
+    width: 100%;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    justify-content: center;
+    gap: 13px;
+  }
+}
+
+/* =========================
+   تنظیم کاهش حرکت
+========================= */
+
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   .pixel-particle {
     display: none;
     animation: none;
+  }
+
+  .scroll-indicator,
+  .intro-cube,
+  .intro-loading span {
+    animation: none;
+  }
+
+  .hero-bg {
+    transform: scale(1.03) !important;
+    will-change: auto;
   }
 
   .reveal {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
+  }
+
+  .intro-card {
+    animation: none;
   }
 }
