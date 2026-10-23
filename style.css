@@ -1,392 +1,848 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#090303">
-
-  <meta name="description"
-        content="به OS CRAFT، سرور SMP و رول‌پلی ماینکرفت، خوش آمدید.">
-
-  <title>OS CRAFT | سرور ماینکرفت</title>
-
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
-</head>
-
-<body>
-
-  <div class="background-pattern" aria-hidden="true"></div>
-
-  <!-- منوی بالای سایت -->
-  <header class="site-header">
-    <div class="nav-shell container">
-
-      <a class="brand" href="#home" aria-label="صفحه اصلی OS CRAFT">
-        <span class="brand-mark">OC</span>
-
-        <span class="brand-text">
-          <strong>OS CRAFT</strong>
-          <small>SMP • ROLEPLAY</small>
-        </span>
-      </a>
-
-      <button
-        class="menu-toggle"
-        id="menu-toggle"
-        type="button"
-        aria-label="باز کردن منو"
-        aria-controls="nav-links"
-        aria-expanded="false"
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-
-      <nav class="main-nav" aria-label="منوی اصلی">
-        <ul class="nav-links" id="nav-links">
-          <li><a class="nav-link" href="#home">خانه</a></li>
-          <li><a class="nav-link" href="#features">قابلیت‌ها</a></li>
-          <li><a class="nav-link" href="#jobs">شغل‌ها</a></li>
-          <li><a class="nav-link" href="#server">آی‌پی سرور</a></li>
-        </ul>
-      </nav>
-
-      <a class="nav-cta" href="#server">
-        <span>ورود به سرور</span>
-        <span aria-hidden="true">↗</span>
-      </a>
-
-    </div>
-  </header>
-
-  <main>
-
-    <!-- صفحه اول -->
-    <section class="hero" id="home">
-
-      <div class="hero-bg" aria-hidden="true"></div>
-      <div class="hero-overlay" aria-hidden="true"></div>
-
-      <div class="hero-content container reveal">
-
-        <div class="hero-badge">
-          <span class="status-dot"></span>
-          دنیای نقش‌آفرینی OS CRAFT
-        </div>
-
-        <div class="hero-logo">OS CRAFT</div>
-
-        <h1>
-          اولین سرور اس‌ام‌پی + رول‌پلی ایران و جهان
-        </h1>
-
-        <p class="hero-description">
-          وارد یک شهر ماینکرفتی شو، شغل انتخاب کن،
-          خانه بخر، کسب‌وکار بساز و داستان خودت را شروع کن!
-        </p>
-
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#server">
-            ورود به سرور
-            <span aria-hidden="true">↗</span>
-          </a>
-
-          <a class="btn btn-secondary" href="#jobs">
-            آشنایی با شغل‌ها
-          </a>
-        </div>
-
-        <div class="hero-highlights">
-          <div class="highlight">
-            <span class="highlight-icon">⚒</span>
-            <span>شغل‌های متنوع</span>
-          </div>
-
-          <div class="highlight">
-            <span class="highlight-icon">🏠</span>
-            <span>زندگی شهری</span>
-          </div>
-
-          <div class="highlight">
-            <span class="highlight-icon">◆</span>
-            <span>خرید و فروش</span>
-          </div>
-        </div>
-
-      </div>
-
-      <a href="#features" class="scroll-indicator">
-        <span>برای ادامه اسکرول کن</span>
-        <span class="scroll-arrow">↓</span>
-      </a>
-
-    </section>
-
-    <!-- قابلیت‌های سرور -->
-    <section class="content-section" id="features">
-
-      <div class="container">
-
-        <div class="section-heading reveal">
-          <span class="section-label">SERVER FEATURES</span>
-
-          <h2>چرا OS CRAFT؟</h2>
-
-          <p>
-            در شهر ما فقط بازی نمی‌کنی؛
-            می‌توانی نقش خودت را بسازی و پیشرفت کنی.
-          </p>
-        </div>
-
-        <div class="feature-grid">
-
-          <article class="feature-card reveal">
-            <div class="pixel-icon">⚒</div>
-            <span class="card-number">01</span>
-            <h3>شغل‌های متنوع</h3>
-            <p>
-              شغل مناسب خودت را پیدا کن و در دنیای نقش‌آفرینی
-              شهر فعالیت داشته باش.
-            </p>
-          </article>
-
-          <article class="feature-card reveal">
-            <div class="pixel-icon">🏠</div>
-            <span class="card-number">02</span>
-            <h3>خرید خانه و غذا</h3>
-            <p>
-              در زندگی شهری شرکت کن، خانه داشته باش
-              و نیازهای خودت را تهیه کن.
-            </p>
-          </article>
-
-          <article class="feature-card reveal">
-            <div class="pixel-icon">◆</div>
-            <span class="card-number">03</span>
-            <h3>خرید و فروش</h3>
-            <p>
-              آیتم‌ها و بلاک‌های موردنیازت را تهیه کن
-              و در اقتصاد شهر نقش داشته باش.
-            </p>
-          </article>
-
-          <article class="feature-card reveal">
-            <div class="pixel-icon">♜</div>
-            <span class="card-number">04</span>
-            <h3>مدیریت شهر</h3>
-            <p>
-              در دنیای رول‌پلی شرکت کن، با دیگر بازیکنان
-              تعامل داشته باش و پیشرفت کن.
-            </p>
-          </article>
-
-        </div>
-      </div>
-
-    </section>
-
-    <!-- شغل‌های سرور -->
-    <section class="content-section jobs-section" id="jobs">
-
-      <div class="container">
-
-        <div class="section-heading reveal">
-          <span class="section-label">CHOOSE YOUR ROLE</span>
-
-          <h2>شغل‌های سرور</h2>
-
-          <p>
-            توی شهر OS CRAFT چه نقشی را انتخاب می‌کنی؟
-          </p>
-        </div>
-
-        <div class="jobs-grid">
-
-          <article class="job-card reveal">
-            <div class="job-icon">⚕</div>
-            <div class="job-info">
-              <span class="job-category">خدمات شهری</span>
-              <h3>پزشک</h3>
-              <p>در نقش پزشک به شهروندان خدمت کن.</p>
-            </div>
-            <span class="job-symbol">01</span>
-          </article>
-
-          <article class="job-card reveal">
-            <div class="job-icon">🌾</div>
-            <div class="job-info">
-              <span class="job-category">تولید</span>
-              <h3>کشاورز</h3>
-              <p>به کشت محصولات و تهیه غذا بپرداز.</p>
-            </div>
-            <span class="job-symbol">02</span>
-          </article>
-
-          <article class="job-card reveal">
-            <div class="job-icon">⚒</div>
-            <div class="job-info">
-              <span class="job-category">کار و درآمد</span>
-              <h3>کارگر</h3>
-              <p>کار کن و مسیر پیشرفت خودت را بساز.</p>
-            </div>
-            <span class="job-symbol">03</span>
-          </article>
-
-          <article class="job-card reveal">
-            <div class="job-icon">💎</div>
-            <div class="job-info">
-              <span class="job-category">استخراج</span>
-              <h3>معدن‌کار</h3>
-              <p>منابع و مواد معدنی موردنیاز را استخراج کن.</p>
-            </div>
-            <span class="job-symbol">04</span>
-          </article>
-
-          <article class="job-card reveal">
-            <div class="job-icon">🏦</div>
-            <div class="job-info">
-              <span class="job-category">اقتصاد</span>
-              <h3>رئیس بانک</h3>
-              <p>در مدیریت امور بانکی شهر نقش داشته باش.</p>
-            </div>
-            <span class="job-symbol">05</span>
-          </article>
-
-          <article class="job-card reveal">
-            <div class="job-icon">🏨</div>
-            <div class="job-info">
-              <span class="job-category">مدیریت</span>
-              <h3>رئیس هتل</h3>
-              <p>مسئولیت اداره هتل شهر را برعهده بگیر.</p>
-            </div>
-            <span class="job-symbol">06</span>
-          </article>
-
-          <article class="job-card reveal">
-            <div class="job-icon">🏙</div>
-            <div class="job-info">
-              <span class="job-category">مدیریت شهری</span>
-              <h3>رئیس شهر</h3>
-              <p>در اداره و پیشرفت شهر نقش داشته باش.</p>
-            </div>
-            <span class="job-symbol">07</span>
-          </article>
-
-          <article class="job-card reveal">
-            <div class="job-icon">👑</div>
-            <div class="job-info">
-              <span class="job-category">مدیریت کشور</span>
-              <h3>رئیس‌جمهور</h3>
-              <p>در بالاترین سطح مدیریت کشور نقش‌آفرینی کن.</p>
-            </div>
-            <span class="job-symbol">08</span>
-          </article>
-
-          <article class="job-card reveal">
-            <div class="job-icon">🚆</div>
-            <div class="job-info">
-              <span class="job-category">حمل‌ونقل</span>
-              <h3>رئیس حمل‌ونقل</h3>
-              <p>مسئولیت بخش حمل‌ونقل شهر را برعهده بگیر.</p>
-            </div>
-            <span class="job-symbol">09</span>
-          </article>
-
-          <article class="job-card reveal">
-            <div class="job-icon">🧱</div>
-            <div class="job-info">
-              <span class="job-category">ساخت‌وساز</span>
-              <h3>معمار</h3>
-              <p>در ساخت و توسعه ساختمان‌های شهر فعالیت کن.</p>
-            </div>
-            <span class="job-symbol">10</span>
-          </article>
-
-        </div>
-
-        <p class="jobs-note reveal">
-          شرایط انتخاب بعضی شغل‌ها ممکن است به قوانین و مدیریت سرور بستگی داشته باشد.
-        </p>
-
-      </div>
-    </section>
-
-    <!-- آی‌پی سرور -->
-    <section class="server-section" id="server">
-
-      <div class="container">
-        <div class="server-panel reveal">
-
-          <div class="server-decoration" aria-hidden="true">OC</div>
-
-          <span class="section-label">JOIN OUR WORLD</span>
-
-          <h2>آماده‌ای وارد شهر بشی؟</h2>
-
-          <p class="server-description">
-            آدرس سرور را کپی کن و ماجراجویی خودت را شروع کن!
-          </p>
-
-          <div class="server-address">
-
-            <code id="server-ip" dir="ltr">sarafraz7171-srv-os_craft_asli.play.mihancraft.com:25566</code>
-
-            <button class="copy-btn" id="copy-ip" type="button">
-              <span>کپی IP</span>
-              <span aria-hidden="true">▣</span>
-            </button>
-
-          </div>
-
-          <p class="copy-status" id="copy-status" aria-live="polite"></p>
-
-        </div>
-      </div>
-
-    </section>
-
-    <!-- پایان صفحه -->
-    <section class="end-section">
-      <div class="container reveal">
-
-        <div class="end-block">OC</div>
-
-        <span class="section-label">YOUR STORY STARTS HERE</span>
-
-        <h2>داستان تو در OS CRAFT شروع می‌شه!</h2>
-
-        <p>
-          دوستات رو دعوت کن و در ساختن یک شهر ماینکرفتی
-          متفاوت نقش داشته باش.
-        </p>
-
-        <a class="btn btn-primary" href="#home">
-          برگشت به بالای صفحه ↑
-        </a>
-
-      </div>
-    </section>
-
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-
-      <a class="footer-brand" href="#home">OS CRAFT</a>
-
-      <p>ساخته‌شده برای عاشقان ماینکرفت و رول‌پلی</p>
-
-      <a href="#server">آدرس سرور ↗</a>
-
-    </div>
-  </footer>
-
-</body>
-</html>
-/* Fix: show page content */
-.reveal.is-visible {
-  opacity: 1 !important;
-  transform: translateY(0) !important;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --red: #ff3030;
+  --red-dark: #920000;
+  --bg: #090303;
+  --panel: #180707;
+  --white: #fff;
+  --muted: #cdbaba;
+  --font: "Vazirmatn", Tahoma, sans-serif;
+  --pixel: "Press Start 2P", monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 50% 0%, #400707, #170606 40%, #080303 85%);
+  color: var(--white);
+  font-family: var(--font);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid #ff7777;
+  outline-offset: 4px;
+}
+
+.container {
+  width: min(1160px, calc(100% - 40px));
+  margin-inline: auto;
+}
+
+.background-pattern {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(135deg, rgba(255,0,0,.035) 25%, transparent 25%) 0 0 / 40px 40px,
+    linear-gradient(315deg, rgba(255,255,255,.018) 25%, transparent 25%) 0 0 / 40px 40px;
+}
+
+/* منو */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(10,3,3,.94);
+  border-bottom: 1px solid rgba(255,50,50,.4);
+  box-shadow: 0 8px 25px #0006;
+  backdrop-filter: blur(12px);
+}
+
+.nav-shell {
+  min-height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-mark {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #ff3939, #820000);
+  border: 2px solid #ff7777;
+  box-shadow: 0 0 18px #f002;
+  font: 11px var(--pixel);
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.brand-text strong {
+  direction: ltr;
+  color: #ff4545;
+  font: 11px var(--pixel);
+  text-shadow: 0 0 12px #f006;
+}
+
+.brand-text small {
+  direction: ltr;
+  color: #bdaaaa;
+  font: 6px var(--pixel);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  list-style: none;
+}
+
+.nav-links a {
+  display: block;
+  padding: 11px;
+  color: #eadada;
+  font-size: 14px;
+  font-weight: 700;
+  border: 1px solid transparent;
+  transition: .2s ease;
+}
+
+.nav-links a:hover {
+  color: #fff;
+  background: #f001;
+  border-color: #f004;
+}
+
+.nav-cta {
+  padding: 12px 16px;
+  color: white;
+  font-size: 13px;
+  font-weight: 900;
+  background: linear-gradient(#ff3939, #990000);
+  border: 2px solid #ff6969;
+  box-shadow: 0 4px 0 #430000;
+  transition: .2s ease;
+}
+
+.nav-cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 0 #430000, 0 0 24px #f008;
+}
+
+.menu-toggle {
+  display: none;
+  width: 42px;
+  height: 42px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  border: 2px solid #8b2222;
+  background: #1a0707;
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  width: 20px;
+  height: 2px;
+  background: white;
+}
+
+/* صفحه اول */
+
+.hero {
+  min-height: 720px;
+  min-height: max(670px, calc(100svh - 78px));
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  isolation: isolate;
+  border-bottom: 1px solid #f003;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: -15px;
+  z-index: -2;
+  background: url("./hero.png") center / cover no-repeat;
+  filter: brightness(.43) saturate(1.15) blur(2px);
+  transform: scale(1.03);
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(circle, transparent 0%, #08030355 70%),
+    linear-gradient(#25000022, #080303ed);
+}
+
+.hero-content {
+  padding-top: 70px;
+  padding-bottom: 95px;
+  text-align: center;
+}
+
+.hero-badge {
+  display: inline-block;
+  margin-bottom: 24px;
+  padding: 10px 15px;
+  background: #100303d9;
+  border: 1px solid #f66;
+  color: #ffe4e4;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.hero-logo {
+  margin-bottom: 22px;
+  direction: ltr;
+  color: #ff3333;
+  font: clamp(23px, 4vw, 45px)/1.8 var(--pixel);
+  text-shadow: 4px 4px 0 #390000, 0 0 15px #f00, 0 0 40px #f008;
+}
+
+.hero h1 {
+  max-width: 950px;
+  margin-inline: auto;
+  color: white;
+  font-size: clamp(27px, 4.5vw, 52px);
+  font-weight: 900;
+  line-height: 1.9;
+  text-shadow: 3px 3px 0 #360000, 0 0 14px #f008, 0 0 34px #f005;
+}
+
+.hero-description {
+  max-width: 720px;
+  margin: 18px auto 0;
+  color: #eadbdb;
+  font-size: clamp(14px, 1.7vw, 18px);
+  line-height: 2.2;
+}
+
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 22px;
+  font-size: 14px;
+  font-weight: 900;
+  border: 2px solid transparent;
+  transition: .2s ease;
+}
+
+.btn-primary {
+  color: white;
+  background: linear-gradient(#ff3939, #990000);
+  border-color: #ff6969;
+  box-shadow: 0 5px 0 #430000, 0 0 18px #f005;
+}
+
+.btn-primary:hover {
+  transform: translateY(-4px);
+  filter: brightness(1.15);
+  box-shadow: 0 9px 0 #430000, 0 0 28px #f008;
+}
+
+.btn-secondary {
+  color: white;
+  background: #100606d9;
+  border-color: #bd3939;
+  box-shadow: 0 5px 0 #300000;
+}
+
+.btn-secondary:hover {
+  transform: translateY(-4px);
+  background: #510808;
+  box-shadow: 0 8px 0 #300000, 0 0 20px #f005;
+}
+
+.hero-highlights {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 38px;
+}
+
+.highlight {
+  padding: 11px 16px;
+  color: #eee0e0;
+  background: #100606bf;
+  border: 1px solid #f003;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 18px;
+  right: 50%;
+  transform: translateX(50%);
+  color: #ff7676;
+  font-size: 13px;
+}
+
+/* عنوان بخش‌ها */
+
+.content-section,
+.server-section,
+.end-section {
+  padding: 90px 0;
+  scroll-margin-top: 85px;
+}
+
+.section-heading {
+  max-width: 750px;
+  margin: 0 auto 42px;
+  text-align: center;
+}
+
+.section-label {
+  display: inline-block;
+  margin-bottom: 17px;
+  color: #ff5555;
+  font: 9px/2 var(--pixel);
+  text-shadow: 0 0 12px #f006;
+}
+
+.section-heading h2,
+.server-panel h2,
+.end-section h2 {
+  color: white;
+  font-size: clamp(27px, 4vw, 42px);
+  font-weight: 900;
+  line-height: 1.9;
+  text-shadow: 3px 3px 0 #350000, 0 0 20px #f005;
+}
+
+.section-heading p {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 2.1;
+}
+
+/* کارت قابلیت‌ها */
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 19px;
+}
+
+.feature-card {
+  position: relative;
+  min-height: 270px;
+  padding: 26px 22px;
+  background: linear-gradient(145deg, #310909, #100505);
+  border: 2px solid #8c2222;
+  box-shadow: 5px 5px 0 #300606, 0 0 18px #f001;
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.feature-card::before,
+.job-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 35px;
+  height: 4px;
+  background: #ff3030;
+  box-shadow: 0 0 12px #f008;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  border-color: #ff4545;
+  box-shadow: 5px 9px 0 #400606, 0 0 28px #f004;
+}
+
+.pixel-icon {
+  width: 60px;
+  height: 60px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 21px;
+  background: #300909;
+  border: 2px solid #a52a2a;
+  box-shadow: 4px 4px 0 #430707;
+  font-size: 28px;
+}
+
+.card-number {
+  position: absolute;
+  top: 23px;
+  left: 20px;
+  color: #a95151;
+  font: 9px var(--pixel);
+}
+
+.feature-card h3 {
+  margin-bottom: 10px;
+  color: #ff6464;
+  font-size: 19px;
+  font-weight: 900;
+}
+
+.feature-card p {
+  color: #d4c0c0;
+  font-size: 13px;
+  line-height: 2.1;
+}
+
+/* شغل‌ها */
+
+.jobs-section {
+  background: linear-gradient(#110404cc, #080303d9);
+  border-block: 1px solid #f002;
+}
+
+.jobs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.job-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  background: linear-gradient(110deg, #230707, #100505);
+  border: 2px solid #561717;
+  box-shadow: 4px 4px 0 #290505;
+  transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+}
+
+.job-card:hover {
+  transform: translate(-3px, -4px);
+  border-color: #ff4545;
+  box-shadow: 5px 8px 0 #390606, 0 0 22px #f003;
+}
+
+.job-icon {
+  width: 54px;
+  height: 54px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  background: #2a0808;
+  border: 2px solid #852525;
+  font-size: 26px;
+}
+
+.job-info {
+  min-width: 0;
+}
+
+.job-category {
+  display: block;
+  margin-bottom: 5px;
+  color: #ff6262;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.job-info h3 {
+  margin-bottom: 5px;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.job-info p {
+  color: #cdbaba;
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.jobs-note {
+  margin-top: 22px;
+  color: #aa9494;
+  font-size: 12px;
+  line-height: 2;
+  text-align: center;
+}
+
+/* آدرس سرور */
+
+.server-panel {
+  padding: 55px 25px 35px;
+  text-align: center;
+  background: radial-gradient(circle at 50% 0%, #740b0b66, transparent 65%), #160606;
+  border: 2px solid #8f2222;
+  box-shadow: 0 0 0 5px #31060670, 0 0 35px #f002;
+}
+
+.server-panel h2 {
+  margin-bottom: 10px;
+}
+
+.server-description {
+  margin-bottom: 25px;
+  color: #d3bebe;
+  font-size: 14px;
+  line-height: 2;
+}
+
+.server-address {
+  width: min(850px, 100%);
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+  margin-inline: auto;
+  padding: 10px;
+  background: #080303;
+  border: 2px solid #742020;
+}
+
+.server-address code {
+  min-width: 0;
+  flex: 1;
+  align-self: center;
+  color: #ffe0e0;
+  font: 13px/1.9 Consolas, monospace;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+
+.copy-btn {
+  flex-shrink: 0;
+  padding: 13px 18px;
+  color: white;
+  background: linear-gradient(#ff3b3b, #970000);
+  border: 2px solid #ff6969;
+  box-shadow: 0 4px 0 #430000;
+  font-weight: 900;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.copy-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 0 #430000, 0 0 22px #f008;
+}
+
+.copy-status {
+  min-height: 26px;
+  margin-top: 14px;
+  color: #ff7979;
+  font-size: 13px;
+}
+
+/* پایان و پاورقی */
+
+.end-section {
+  text-align: center;
+  border-top: 1px solid #f002;
+}
+
+.end-block {
+  width: 95px;
+  height: 95px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 28px;
+  background: linear-gradient(145deg, #ff3939, #790000);
+  border: 4px solid #ff7777;
+  box-shadow: 6px 6px 0 #3b0606, 0 0 28px #f004;
+  font: 20px var(--pixel);
+}
+
+.end-section h2 {
+  margin-bottom: 15px;
+}
+
+.end-section p {
+  margin-bottom: 25px;
+  color: #cdbaba;
+  font-size: 14px;
+  line-height: 2.1;
+}
+
+.site-footer {
+  background: #080303;
+  border-top: 1px solid #451111;
+}
+
+.footer-inner {
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding-block: 22px;
+}
+
+.footer-brand {
+  color: #ff4545;
+  font: 11px var(--pixel);
+}
+
+.footer-inner p,
+.footer-inner > a:last-child {
+  font-size: 12px;
+}
+
+.footer-inner p {
+  color: #a99494;
+  text-align: center;
+}
+
+.footer-inner > a:last-child {
+  color: #ff6262;
+}
+
+/* موبایل */
+
+@media (max-width: 950px) {
+  .nav-shell {
+    gap: 12px;
+  }
+
+  .nav-links a {
+    padding: 9px;
+    font-size: 12px;
+  }
+
+  .feature-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .container {
+    width: calc(100% - 28px);
+  }
+
+  .nav-shell {
+    min-height: 72px;
+    flex-wrap: wrap;
+    padding-block: 10px;
+  }
+
+  .brand {
+    margin-left: auto;
+  }
+
+  .brand-mark {
+    width: 39px;
+    height: 39px;
+    font-size: 9px;
+  }
+
+  .brand-text strong {
+    font-size: 9px;
+  }
+
+  .brand-text small {
+    font-size: 5px;
+  }
+
+  .menu-toggle {
+    display: flex;
+    order: 2;
+  }
+
+  .nav-cta {
+    order: 3;
+    padding: 9px 10px;
+    font-size: 11px;
+  }
+
+  .main-nav {
+    order: 4;
+    flex-basis: 100%;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    padding-top: 10px;
+    border-top: 1px solid #f002;
+  }
+
+  .nav-links.is-open {
+    display: flex;
+  }
+
+  .nav-links a {
+    padding: 12px;
+    background: #f001;
+    font-size: 13px;
+  }
+
+  .hero {
+    min-height: 720px;
+  }
+
+  .hero-bg {
+    background-position: 57% center;
+  }
+
+  .hero-content {
+    padding-top: 55px;
+    padding-bottom: 90px;
+  }
+
+  .hero-badge {
+    font-size: 11px;
+    line-height: 1.9;
+  }
+
+  .hero-logo {
+    font-size: clamp(20px, 6vw, 30px);
+  }
+
+  .hero h1 {
+    font-size: clamp(26px, 7vw, 36px);
+    line-height: 1.9;
+  }
+
+  .hero-description {
+    font-size: 14px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-actions .btn {
+    width: min(100%, 320px);
+  }
+
+  .hero-highlights {
+    gap: 8px;
+    margin-top: 27px;
+  }
+
+  .highlight {
+    padding: 10px 9px;
+    font-size: 11px;
+  }
+
+  .content-section,
+  .server-section,
+  .end-section {
+    padding: 65px 0;
+  }
+
+  .section-heading {
+    margin-bottom: 30px;
+  }
+
+  .section-heading h2,
+  .server-panel h2,
+  .end-section h2 {
+    font-size: 27px;
+  }
+
+  .section-label {
+    font-size: 8px;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-card {
+    min-height: 0;
+  }
+
+  .jobs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .job-card {
+    gap: 12px;
+    padding: 16px 12px;
+  }
+
+  .job-icon {
+    width: 47px;
+    height: 47px;
+    font-size: 22px;
+  }
+
+  .job-info h3 {
+    font-size: 16px;
+  }
+
+  .server-panel {
+    padding: 40px 13px 25px;
+  }
+
+  .server-address {
+    flex-direction: column;
+  }
+
+  .server-address code {
+    width: 100%;
+    font-size: 11px;
+    padding: 8px 2px;
+  }
+
+  .copy-btn {
+    width: 100%;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    justify-content: center;
+    gap: 13px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
 }
