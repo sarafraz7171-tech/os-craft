@@ -1,448 +1,387 @@
-@import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css');
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-:root {
-  --red: #e00000;
-  --dark-red: #650000;
-  --deep: #090000;
-  --white: #fff;
-  --card: rgba(35, 0, 0, .82);
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  min-height: 100vh;
-  background: #120000;
-  color: white;
-  font-family: "Vazirmatn", Tahoma, sans-serif;
-  overflow-x: hidden;
-}
-
-.bg-pattern {
-  position: fixed;
-  inset: 0;
-  z-index: -5;
-  background:
-    linear-gradient(135deg, rgba(255,0,0,.07) 25%, transparent 25%) 0 0 / 42px 42px,
-    linear-gradient(315deg, rgba(255,255,255,.025) 25%, transparent 25%) 0 0 / 42px 42px,
-    radial-gradient(circle at 50% 20%, #7d0000 0, #260000 38%, #090000 100%);
-}
-
-.hero {
-  min-height: 100svh;
-  position: relative;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-}
-
-.hero-bg {
-  position: absolute;
-  inset: -25px;
-  background-image: url("hero.png");
-  background-size: cover;
-  background-position: center;
-  filter: blur(3px) brightness(.58) saturate(1.15);
-  transform: scale(1.04);
-}
-
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle, transparent 10%, rgba(0,0,0,.22) 60%, rgba(0,0,0,.72) 100%),
-    linear-gradient(180deg, rgba(100,0,0,.1), rgba(15,0,0,.7));
-}
-
-.hero-content {
-  position: relative;
-  z-index: 2;
-  width: min(1050px, 92%);
-  text-align: center;
-  padding: 45px 25px;
-}
-
-.badge {
-  display: inline-block;
-  background: #080000;
-  border: 3px solid #ff1616;
-  box-shadow: 0 0 30px rgba(255,0,0,.55), inset 0 0 20px rgba(255,0,0,.12);
-  padding: 10px 22px;
-  margin-bottom: 24px;
-  font-family: "Press Start 2P", monospace;
-  font-size: clamp(12px, 2vw, 20px);
-  color: #ff2b2b;
-  transform: skew(-5deg);
-}
-
-h1, h2, h3 {
-  text-shadow:
-    3px 3px 0 #240000,
-    0 0 8px rgba(255, 0, 0, .95),
-    0 0 22px rgba(255, 0, 0, .75),
-    0 0 42px rgba(255, 0, 0, .45);
-}
-
-h1 {
-  font-family: "Press Start 2P", "Vazirmatn", sans-serif;
-  color: #ff1717;
-  font-size: clamp(24px, 5vw, 62px);
-  line-height: 1.8;
-  -webkit-text-stroke: 1px #300000;
-  max-width: 1000px;
-  margin: auto;
-}
-
-.hero-sub {
-  max-width: 780px;
-  margin: 20px auto 0;
-  color: #fff;
-  font-size: clamp(15px, 2vw, 21px);
-  line-height: 2;
-  font-weight: 700;
-}
-
-.scroll-btn, .top-btn {
-  display: inline-block;
-  position: relative;
-  margin-top: 32px;
-  padding: 14px 24px;
-
-  color: #fff;
-  text-decoration: none;
-  font-weight: 900;
-  font-family: inherit;
-
-  background: linear-gradient(
-    180deg,
-    #ff3333 0%,
-    #d00000 50%,
-    #790000 100%
-  );
-
-  border: 3px solid #ff5555;
-  border-radius: 0;
-
-  box-shadow:
-    0 5px 0 #430000,
-    0 0 15px rgba(255, 0, 0, .55),
-    0 0 30px rgba(255, 0, 0, .25);
-
-  text-shadow: 0 0 8px rgba(255, 255, 255, .4);
-
-  transition:
-    transform .2s ease,
-    box-shadow .2s ease,
-    filter .2s ease;
-}
-
-.scroll-btn:hover,
-.top-btn:hover {
-  transform: translateY(-4px) scale(1.03);
-  filter: brightness(1.2);
-
-  box-shadow:
-    0 8px 0 #430000,
-    0 0 20px rgba(255, 0, 0, .8),
-    0 0 45px rgba(255, 0, 0, .55);
-}
-
-.scroll-btn:active,
-.top-btn:active {
-  transform: translateY(2px) scale(.98);
-
-  box-shadow:
-    0 2px 0 #430000,
-    0 0 15px rgba(255, 0, 0, .6);
-}
-
-.section {
-  min-height: 90svh;
-  display: grid;
-  place-items: center;
-  padding: 90px 20px;
-  position: relative;
-}
-
-.section-inner {
-  width: min(1100px, 94%);
-  text-align: center;
-}
-
-.section-label {
-  font-family: "Press Start 2P", monospace;
-  color: #ff3636;
-  font-size: clamp(9px, 1.6vw, 14px);
-  margin-bottom: 15px;
-  letter-spacing: 1px;
-}
-
-h2 {
-  font-size: clamp(28px, 5vw, 58px);
-  color: white;
-  line-height: 1.5;
-  margin-bottom: 45px;
-}
-
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 22px;
-}
-
-.card {
-  position: relative;
-  text-align: right;
-
-  background:
-    linear-gradient(135deg, rgba(255, 0, 0, .12), transparent 55%),
-    repeating-linear-gradient(
-      90deg,
-      transparent 0 14px,
-      rgba(255, 0, 0, .035) 14px 16px
-    ),
-    linear-gradient(145deg, #350000, #100000);
-
-  border: 3px solid #ff2424;
-  border-radius: 0;
-  padding: 30px;
-  min-height: 200px;
-
-  box-shadow:
-    0 0 0 4px #240000,
-    0 9px 0 #420000,
-    0 0 24px rgba(255, 0, 0, .3);
-
-  transition:
-    transform .25s ease,
-    box-shadow .25s ease,
-    border-color .25s ease;
-}
-
-.card:hover {
-  transform: translateY(-9px) scale(1.02);
-  border-color: #ff5555;
-
-  box-shadow:
-    0 0 0 4px #240000,
-    0 12px 0 #420000,
-    0 0 25px rgba(255, 0, 0, .65),
-    0 0 45px rgba(255, 0, 0, .35);
-
-  filter: brightness(1.15);
-}
-.icon {
-  font-size: 38px;
-  display: block;
-  margin-bottom: 15px;
-}
-
-.card h3 {
-  font-size: clamp(19px, 2.5vw, 27px);
-  margin-bottom: 10px;
-  color: #ff3a3a;
-}
-
-.card p {
-  color: #eee;
-  font-size: 15px;
-  line-height: 2;
-}
-
-.ip-section {
-  background:
-    linear-gradient(rgba(70,0,0,.75), rgba(12,0,0,.85)),
-    repeating-linear-gradient(45deg, transparent 0 18px, rgba(255,0,0,.06) 18px 36px);
-  border-top: 2px solid rgba(255,40,40,.4);
-  border-bottom: 2px solid rgba(255,40,40,.4);
-}
-
-.ip-box {
-  width: min(950px, 100%);
-  margin: 0 auto;
-  padding: 18px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  background: #090000;
-  border: 3px solid #ed1717;
-  box-shadow: 0 0 35px rgba(255,0,0,.25);
-}
-
-.ip-box code {
-  flex: 1;
-  direction: ltr;
-  text-align: center;
-  color: #fff;
-  font-size: clamp(11px, 1.6vw, 17px);
-  word-break: break-all;
-  line-height: 1.8;
-}
-
-.ip-box button {
-  border: 3px solid #ff5555;
-  border-radius: 0;
-  background: linear-gradient(180deg, #ff3333, #990000);
-  color: #fff;
-  font-family: inherit;
-  font-weight: 900;
-  padding: 13px 18px;
-  cursor: pointer;
-
-  box-shadow:
-    0 4px 0 #430000,
-    0 0 15px rgba(255, 0, 0, .5);
-
-  transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
-}
-
-.ip-box button:hover {
-  transform: translateY(-3px);
-  filter: brightness(1.2);
-  box-shadow:
-    0 7px 0 #430000,
-    0 0 25px rgba(255, 0, 0, .8);
-}
-
-.ip-box button:active {
-  transform: translateY(1px);
-}
-
-.ip-box button:active {
-  transform: scale(.96);
-}
-
-.copy-message {
-  min-height: 28px;
-  margin-top: 15px;
-  color: #ff6262;
-  font-weight: 700;
-}
-
-.end-section {
-  min-height: 100svh;
-  overflow: hidden;
-}
-
-.end-glow {
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  border-radius: 50%;
-  background: rgba(220,0,0,.22);
-  filter: blur(80px);
-}
-
-.minecraft-block {
-  width: 110px;
-  height: 110px;
-  display: grid;
-  place-items: center;
-  margin: 0 auto 35px;
-  font-family: "Press Start 2P", monospace;
-  font-size: 25px;
-  color: #fff;
-  background: linear-gradient(135deg, #f22 0 12%, #a00000 12% 25%, #d50000 25% 50%, #780000 50% 65%, #c40000 65%);
-  border: 5px solid #210000;
-  box-shadow: 0 0 0 4px #e00, 0 20px 40px rgba(0,0,0,.5);
-  transform: rotate(-4deg);
-}
-
-.end-section h2 {
-  max-width: 900px;
-  margin: 0 auto 20px;
-  color: #ff2a2a;
-}
-
-.end-section p {
-  font-size: clamp(16px, 2.5vw, 23px);
-  color: #ddd;
-}
-
-footer {
-  padding: 25px;
-  display: flex;
-  justify-content: space-between;
-  gap: 15px;
-  background: #050000;
-  border-top: 1px solid #520000;
-  color: #999;
-  font-size: 13px;
-}
-
-.reveal {
-  opacity: 0;
-  transform: translateY(35px);
-  transition: opacity .8s ease, transform .8s ease;
-}
-
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@media (max-width: 700px) {
-  .hero {
-    min-height: 100svh;
-  }
-
-  .hero-bg {
-    background-position: 57% center;
-  }
-
-  .hero-content {
-    padding: 25px 12px;
-  }
-
-  h1 {
-    line-height: 1.7;
-  }
-
-  .features-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .card {
-    min-height: auto;
-    padding: 24px;
-  }
-
-  .ip-box {
-    flex-direction: column;
-  }
-
-  .ip-box code {
-    width: 100%;
-  }
-
-  .ip-box button {
-    width: 100%;
-  }
-
-  .section {
-    padding: 75px 12px;
-  }
-
-  footer {
-    flex-direction: column;
-    text-align: center;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  .reveal {
-    transition: none;
-  }
-}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090303">
+
+  <meta name="description"
+        content="به OS CRAFT، سرور SMP و رول‌پلی ماینکرفت، خوش آمدید.">
+
+  <title>OS CRAFT | سرور ماینکرفت</title>
+
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+
+  <div class="background-pattern" aria-hidden="true"></div>
+
+  <!-- منوی بالای سایت -->
+  <header class="site-header">
+    <div class="nav-shell container">
+
+      <a class="brand" href="#home" aria-label="صفحه اصلی OS CRAFT">
+        <span class="brand-mark">OC</span>
+
+        <span class="brand-text">
+          <strong>OS CRAFT</strong>
+          <small>SMP • ROLEPLAY</small>
+        </span>
+      </a>
+
+      <button
+        class="menu-toggle"
+        id="menu-toggle"
+        type="button"
+        aria-label="باز کردن منو"
+        aria-controls="nav-links"
+        aria-expanded="false"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="main-nav" aria-label="منوی اصلی">
+        <ul class="nav-links" id="nav-links">
+          <li><a class="nav-link" href="#home">خانه</a></li>
+          <li><a class="nav-link" href="#features">قابلیت‌ها</a></li>
+          <li><a class="nav-link" href="#jobs">شغل‌ها</a></li>
+          <li><a class="nav-link" href="#server">آی‌پی سرور</a></li>
+        </ul>
+      </nav>
+
+      <a class="nav-cta" href="#server">
+        <span>ورود به سرور</span>
+        <span aria-hidden="true">↗</span>
+      </a>
+
+    </div>
+  </header>
+
+  <main>
+
+    <!-- صفحه اول -->
+    <section class="hero" id="home">
+
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero-overlay" aria-hidden="true"></div>
+
+      <div class="hero-content container reveal">
+
+        <div class="hero-badge">
+          <span class="status-dot"></span>
+          دنیای نقش‌آفرینی OS CRAFT
+        </div>
+
+        <div class="hero-logo">OS CRAFT</div>
+
+        <h1>
+          اولین سرور اس‌ام‌پی + رول‌پلی ایران و جهان
+        </h1>
+
+        <p class="hero-description">
+          وارد یک شهر ماینکرفتی شو، شغل انتخاب کن،
+          خانه بخر، کسب‌وکار بساز و داستان خودت را شروع کن!
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#server">
+            ورود به سرور
+            <span aria-hidden="true">↗</span>
+          </a>
+
+          <a class="btn btn-secondary" href="#jobs">
+            آشنایی با شغل‌ها
+          </a>
+        </div>
+
+        <div class="hero-highlights">
+          <div class="highlight">
+            <span class="highlight-icon">⚒</span>
+            <span>شغل‌های متنوع</span>
+          </div>
+
+          <div class="highlight">
+            <span class="highlight-icon">🏠</span>
+            <span>زندگی شهری</span>
+          </div>
+
+          <div class="highlight">
+            <span class="highlight-icon">◆</span>
+            <span>خرید و فروش</span>
+          </div>
+        </div>
+
+      </div>
+
+      <a href="#features" class="scroll-indicator">
+        <span>برای ادامه اسکرول کن</span>
+        <span class="scroll-arrow">↓</span>
+      </a>
+
+    </section>
+
+    <!-- قابلیت‌های سرور -->
+    <section class="content-section" id="features">
+
+      <div class="container">
+
+        <div class="section-heading reveal">
+          <span class="section-label">SERVER FEATURES</span>
+
+          <h2>چرا OS CRAFT؟</h2>
+
+          <p>
+            در شهر ما فقط بازی نمی‌کنی؛
+            می‌توانی نقش خودت را بسازی و پیشرفت کنی.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+
+          <article class="feature-card reveal">
+            <div class="pixel-icon">⚒</div>
+            <span class="card-number">01</span>
+            <h3>شغل‌های متنوع</h3>
+            <p>
+              شغل مناسب خودت را پیدا کن و در دنیای نقش‌آفرینی
+              شهر فعالیت داشته باش.
+            </p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="pixel-icon">🏠</div>
+            <span class="card-number">02</span>
+            <h3>خرید خانه و غذا</h3>
+            <p>
+              در زندگی شهری شرکت کن، خانه داشته باش
+              و نیازهای خودت را تهیه کن.
+            </p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="pixel-icon">◆</div>
+            <span class="card-number">03</span>
+            <h3>خرید و فروش</h3>
+            <p>
+              آیتم‌ها و بلاک‌های موردنیازت را تهیه کن
+              و در اقتصاد شهر نقش داشته باش.
+            </p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="pixel-icon">♜</div>
+            <span class="card-number">04</span>
+            <h3>مدیریت شهر</h3>
+            <p>
+              در دنیای رول‌پلی شرکت کن، با دیگر بازیکنان
+              تعامل داشته باش و پیشرفت کن.
+            </p>
+          </article>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- شغل‌های سرور -->
+    <section class="content-section jobs-section" id="jobs">
+
+      <div class="container">
+
+        <div class="section-heading reveal">
+          <span class="section-label">CHOOSE YOUR ROLE</span>
+
+          <h2>شغل‌های سرور</h2>
+
+          <p>
+            توی شهر OS CRAFT چه نقشی را انتخاب می‌کنی؟
+          </p>
+        </div>
+
+        <div class="jobs-grid">
+
+          <article class="job-card reveal">
+            <div class="job-icon">⚕</div>
+            <div class="job-info">
+              <span class="job-category">خدمات شهری</span>
+              <h3>پزشک</h3>
+              <p>در نقش پزشک به شهروندان خدمت کن.</p>
+            </div>
+            <span class="job-symbol">01</span>
+          </article>
+
+          <article class="job-card reveal">
+            <div class="job-icon">🌾</div>
+            <div class="job-info">
+              <span class="job-category">تولید</span>
+              <h3>کشاورز</h3>
+              <p>به کشت محصولات و تهیه غذا بپرداز.</p>
+            </div>
+            <span class="job-symbol">02</span>
+          </article>
+
+          <article class="job-card reveal">
+            <div class="job-icon">⚒</div>
+            <div class="job-info">
+              <span class="job-category">کار و درآمد</span>
+              <h3>کارگر</h3>
+              <p>کار کن و مسیر پیشرفت خودت را بساز.</p>
+            </div>
+            <span class="job-symbol">03</span>
+          </article>
+
+          <article class="job-card reveal">
+            <div class="job-icon">💎</div>
+            <div class="job-info">
+              <span class="job-category">استخراج</span>
+              <h3>معدن‌کار</h3>
+              <p>منابع و مواد معدنی موردنیاز را استخراج کن.</p>
+            </div>
+            <span class="job-symbol">04</span>
+          </article>
+
+          <article class="job-card reveal">
+            <div class="job-icon">🏦</div>
+            <div class="job-info">
+              <span class="job-category">اقتصاد</span>
+              <h3>رئیس بانک</h3>
+              <p>در مدیریت امور بانکی شهر نقش داشته باش.</p>
+            </div>
+            <span class="job-symbol">05</span>
+          </article>
+
+          <article class="job-card reveal">
+            <div class="job-icon">🏨</div>
+            <div class="job-info">
+              <span class="job-category">مدیریت</span>
+              <h3>رئیس هتل</h3>
+              <p>مسئولیت اداره هتل شهر را برعهده بگیر.</p>
+            </div>
+            <span class="job-symbol">06</span>
+          </article>
+
+          <article class="job-card reveal">
+            <div class="job-icon">🏙</div>
+            <div class="job-info">
+              <span class="job-category">مدیریت شهری</span>
+              <h3>رئیس شهر</h3>
+              <p>در اداره و پیشرفت شهر نقش داشته باش.</p>
+            </div>
+            <span class="job-symbol">07</span>
+          </article>
+
+          <article class="job-card reveal">
+            <div class="job-icon">👑</div>
+            <div class="job-info">
+              <span class="job-category">مدیریت کشور</span>
+              <h3>رئیس‌جمهور</h3>
+              <p>در بالاترین سطح مدیریت کشور نقش‌آفرینی کن.</p>
+            </div>
+            <span class="job-symbol">08</span>
+          </article>
+
+          <article class="job-card reveal">
+            <div class="job-icon">🚆</div>
+            <div class="job-info">
+              <span class="job-category">حمل‌ونقل</span>
+              <h3>رئیس حمل‌ونقل</h3>
+              <p>مسئولیت بخش حمل‌ونقل شهر را برعهده بگیر.</p>
+            </div>
+            <span class="job-symbol">09</span>
+          </article>
+
+          <article class="job-card reveal">
+            <div class="job-icon">🧱</div>
+            <div class="job-info">
+              <span class="job-category">ساخت‌وساز</span>
+              <h3>معمار</h3>
+              <p>در ساخت و توسعه ساختمان‌های شهر فعالیت کن.</p>
+            </div>
+            <span class="job-symbol">10</span>
+          </article>
+
+        </div>
+
+        <p class="jobs-note reveal">
+          شرایط انتخاب بعضی شغل‌ها ممکن است به قوانین و مدیریت سرور بستگی داشته باشد.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- آی‌پی سرور -->
+    <section class="server-section" id="server">
+
+      <div class="container">
+        <div class="server-panel reveal">
+
+          <div class="server-decoration" aria-hidden="true">OC</div>
+
+          <span class="section-label">JOIN OUR WORLD</span>
+
+          <h2>آماده‌ای وارد شهر بشی؟</h2>
+
+          <p class="server-description">
+            آدرس سرور را کپی کن و ماجراجویی خودت را شروع کن!
+          </p>
+
+          <div class="server-address">
+
+            <code id="server-ip" dir="ltr">sarafraz7171-srv-os_craft_asli.play.mihancraft.com:25566</code>
+
+            <button class="copy-btn" id="copy-ip" type="button">
+              <span>کپی IP</span>
+              <span aria-hidden="true">▣</span>
+            </button>
+
+          </div>
+
+          <p class="copy-status" id="copy-status" aria-live="polite"></p>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- پایان صفحه -->
+    <section class="end-section">
+      <div class="container reveal">
+
+        <div class="end-block">OC</div>
+
+        <span class="section-label">YOUR STORY STARTS HERE</span>
+
+        <h2>داستان تو در OS CRAFT شروع می‌شه!</h2>
+
+        <p>
+          دوستات رو دعوت کن و در ساختن یک شهر ماینکرفتی
+          متفاوت نقش داشته باش.
+        </p>
+
+        <a class="btn btn-primary" href="#home">
+          برگشت به بالای صفحه ↑
+        </a>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+
+      <a class="footer-brand" href="#home">OS CRAFT</a>
+
+      <p>ساخته‌شده برای عاشقان ماینکرفت و رول‌پلی</p>
+
+      <a href="#server">آدرس سرور ↗</a>
+
+    </div>
+  </footer>
+
+</body>
+</html>
