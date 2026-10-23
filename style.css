@@ -1,18 +1,19 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Vazirmatn:wght@400;500;600;700;800;900&display=swap');
 
 :root {
   --red: #ff3030;
-  --red-dark: #920000;
-  --bg: #090303;
-  --panel: #180707;
+  --dark: #090303;
+  --panel: #1c0707;
   --white: #fff;
   --muted: #cdbaba;
   --font: "Vazirmatn", Tahoma, sans-serif;
   --pixel: "Press Start 2P", monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
@@ -23,10 +24,10 @@ html {
 body {
   min-height: 100vh;
   overflow-x: hidden;
-  background:
-    radial-gradient(circle at 50% 0%, #400707, #170606 40%, #080303 85%);
   color: var(--white);
   font-family: var(--font);
+  background:
+    radial-gradient(circle at 50% 0%, #480909, #180606 45%, #080303 90%);
 }
 
 a {
@@ -36,12 +37,7 @@ a {
 
 button {
   font: inherit;
-}
-
-button:focus-visible,
-a:focus-visible {
-  outline: 3px solid #ff7777;
-  outline-offset: 4px;
+  cursor: pointer;
 }
 
 .container {
@@ -55,20 +51,20 @@ a:focus-visible {
   z-index: -1;
   pointer-events: none;
   background:
-    linear-gradient(135deg, rgba(255,0,0,.035) 25%, transparent 25%) 0 0 / 40px 40px,
-    linear-gradient(315deg, rgba(255,255,255,.018) 25%, transparent 25%) 0 0 / 40px 40px;
+    linear-gradient(135deg, #ff000008 25%, transparent 25%) 0 0 / 40px 40px,
+    linear-gradient(315deg, #ffffff05 25%, transparent 25%) 0 0 / 40px 40px;
 }
 
-/* منو */
+/* منوی بالا */
 
 .site-header {
   position: sticky;
   top: 0;
-  z-index: 10;
-  background: rgba(10,3,3,.94);
-  border-bottom: 1px solid rgba(255,50,50,.4);
-  box-shadow: 0 8px 25px #0006;
-  backdrop-filter: blur(12px);
+  z-index: 100;
+  background: #0a0303ed;
+  border-bottom: 1px solid #ff303055;
+  box-shadow: 0 8px 28px #0008;
+  backdrop-filter: blur(14px);
 }
 
 .nav-shell {
@@ -76,13 +72,14 @@ a:focus-visible {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 18px;
+  gap: 20px;
 }
 
 .brand {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-shrink: 0;
 }
 
 .brand-mark {
@@ -90,9 +87,9 @@ a:focus-visible {
   height: 44px;
   display: grid;
   place-items: center;
-  background: linear-gradient(135deg, #ff3939, #820000);
+  background: linear-gradient(135deg, #ff3939, #850000);
   border: 2px solid #ff7777;
-  box-shadow: 0 0 18px #f002;
+  box-shadow: 0 0 18px #f004;
   font: 11px var(--pixel);
 }
 
@@ -111,7 +108,7 @@ a:focus-visible {
 
 .brand-text small {
   direction: ltr;
-  color: #bdaaaa;
+  color: #c4aaaa;
   font: 6px var(--pixel);
 }
 
@@ -119,35 +116,38 @@ a:focus-visible {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 6px;
   list-style: none;
 }
 
 .nav-links a {
   display: block;
   padding: 11px;
-  color: #eadada;
+  color: #e9dada;
   font-size: 14px;
   font-weight: 700;
   border: 1px solid transparent;
-  transition: .2s ease;
+  transition: .2s;
 }
 
 .nav-links a:hover {
-  color: #fff;
-  background: #f001;
-  border-color: #f004;
+  color: white;
+  background: #ff000018;
+  border-color: #ff454550;
 }
 
 .nav-cta {
-  padding: 12px 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 15px;
   color: white;
+  background: linear-gradient(#ff3939, #970000);
+  border: 2px solid #ff7777;
+  box-shadow: 0 4px 0 #430000;
   font-size: 13px;
   font-weight: 900;
-  background: linear-gradient(#ff3939, #990000);
-  border: 2px solid #ff6969;
-  box-shadow: 0 4px 0 #430000;
-  transition: .2s ease;
+  transition: .2s;
 }
 
 .nav-cta:hover {
@@ -163,9 +163,8 @@ a:focus-visible {
   justify-content: center;
   align-items: center;
   gap: 5px;
+  background: #200808;
   border: 2px solid #8b2222;
-  background: #1a0707;
-  cursor: pointer;
 }
 
 .menu-toggle span {
@@ -182,9 +181,9 @@ a:focus-visible {
   position: relative;
   display: grid;
   place-items: center;
-  overflow: hidden;
   isolation: isolate;
-  border-bottom: 1px solid #f003;
+  overflow: hidden;
+  border-bottom: 1px solid #ff303033;
 }
 
 .hero-bg {
@@ -201,33 +200,36 @@ a:focus-visible {
   inset: 0;
   z-index: -1;
   background:
-    radial-gradient(circle, transparent 0%, #08030355 70%),
+    radial-gradient(circle, transparent, #08030366 78%),
     linear-gradient(#25000022, #080303ed);
 }
 
 .hero-content {
   padding-top: 70px;
-  padding-bottom: 95px;
+  padding-bottom: 90px;
   text-align: center;
 }
 
 .hero-badge {
   display: inline-block;
-  margin-bottom: 24px;
-  padding: 10px 15px;
-  background: #100303d9;
-  border: 1px solid #f66;
-  color: #ffe4e4;
+  margin-bottom: 25px;
+  padding: 11px 17px;
+  background: #100303df;
+  border: 1px solid #ff6969;
+  color: #ffe5e5;
   font-size: 13px;
   font-weight: 800;
 }
 
 .hero-logo {
-  margin-bottom: 22px;
   direction: ltr;
-  color: #ff3333;
-  font: clamp(23px, 4vw, 45px)/1.8 var(--pixel);
-  text-shadow: 4px 4px 0 #390000, 0 0 15px #f00, 0 0 40px #f008;
+  margin-bottom: 25px;
+  color: #ff3030;
+  font: clamp(23px, 4vw, 45px)/1.9 var(--pixel);
+  text-shadow:
+    4px 4px 0 #390000,
+    0 0 15px #f00,
+    0 0 40px #f008;
 }
 
 .hero h1 {
@@ -237,12 +239,15 @@ a:focus-visible {
   font-size: clamp(27px, 4.5vw, 52px);
   font-weight: 900;
   line-height: 1.9;
-  text-shadow: 3px 3px 0 #360000, 0 0 14px #f008, 0 0 34px #f005;
+  text-shadow:
+    3px 3px 0 #360000,
+    0 0 14px #f008,
+    0 0 34px #f005;
 }
 
 .hero-description {
   max-width: 720px;
-  margin: 18px auto 0;
+  margin: 20px auto 0;
   color: #eadbdb;
   font-size: clamp(14px, 1.7vw, 18px);
   line-height: 2.2;
@@ -261,11 +266,11 @@ a:focus-visible {
   justify-content: center;
   align-items: center;
   gap: 10px;
-  padding: 13px 22px;
+  padding: 14px 23px;
   font-size: 14px;
   font-weight: 900;
   border: 2px solid transparent;
-  transition: .2s ease;
+  transition: .22s;
 }
 
 .btn-primary {
@@ -283,7 +288,7 @@ a:focus-visible {
 
 .btn-secondary {
   color: white;
-  background: #100606d9;
+  background: #100606dd;
   border-color: #bd3939;
   box-shadow: 0 5px 0 #300000;
 }
@@ -306,7 +311,7 @@ a:focus-visible {
   padding: 11px 16px;
   color: #eee0e0;
   background: #100606bf;
-  border: 1px solid #f003;
+  border: 1px solid #ff000033;
   font-size: 13px;
   font-weight: 700;
 }
@@ -316,7 +321,7 @@ a:focus-visible {
   bottom: 18px;
   right: 50%;
   transform: translateX(50%);
-  color: #ff7676;
+  color: #ff7777;
   font-size: 13px;
 }
 
@@ -369,13 +374,13 @@ a:focus-visible {
 }
 
 .feature-card {
-  position: relative;
   min-height: 270px;
+  position: relative;
   padding: 26px 22px;
   background: linear-gradient(145deg, #310909, #100505);
   border: 2px solid #8c2222;
   box-shadow: 5px 5px 0 #300606, 0 0 18px #f001;
-  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  transition: transform .25s, box-shadow .25s, border-color .25s;
 }
 
 .feature-card::before,
@@ -433,7 +438,7 @@ a:focus-visible {
 
 .jobs-section {
   background: linear-gradient(#110404cc, #080303d9);
-  border-block: 1px solid #f002;
+  border-block: 1px solid #ff000022;
 }
 
 .jobs-grid {
@@ -443,6 +448,7 @@ a:focus-visible {
 }
 
 .job-card {
+  min-width: 0;
   position: relative;
   display: flex;
   align-items: center;
@@ -451,7 +457,7 @@ a:focus-visible {
   background: linear-gradient(110deg, #230707, #100505);
   border: 2px solid #561717;
   box-shadow: 4px 4px 0 #290505;
-  transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+  transition: transform .22s, border-color .22s, box-shadow .22s;
 }
 
 .job-card:hover {
@@ -508,7 +514,9 @@ a:focus-visible {
 .server-panel {
   padding: 55px 25px 35px;
   text-align: center;
-  background: radial-gradient(circle at 50% 0%, #740b0b66, transparent 65%), #160606;
+  background:
+    radial-gradient(circle at 50% 0%, #740b0b66, transparent 65%),
+    #160606;
   border: 2px solid #8f2222;
   box-shadow: 0 0 0 5px #31060670, 0 0 35px #f002;
 }
@@ -553,8 +561,7 @@ a:focus-visible {
   border: 2px solid #ff6969;
   box-shadow: 0 4px 0 #430000;
   font-weight: 900;
-  cursor: pointer;
-  transition: .2s ease;
+  transition: .2s;
 }
 
 .copy-btn:hover {
@@ -573,7 +580,7 @@ a:focus-visible {
 
 .end-section {
   text-align: center;
-  border-top: 1px solid #f002;
+  border-top: 1px solid #ff000022;
 }
 
 .end-block {
@@ -699,7 +706,7 @@ a:focus-visible {
     flex-direction: column;
     align-items: stretch;
     padding-top: 10px;
-    border-top: 1px solid #f002;
+    border-top: 1px solid #ff000022;
   }
 
   .nav-links.is-open {
@@ -708,7 +715,7 @@ a:focus-visible {
 
   .nav-links a {
     padding: 12px;
-    background: #f001;
+    background: #ff000011;
     font-size: 13px;
   }
 
@@ -736,11 +743,6 @@ a:focus-visible {
 
   .hero h1 {
     font-size: clamp(26px, 7vw, 36px);
-    line-height: 1.9;
-  }
-
-  .hero-description {
-    font-size: 14px;
   }
 
   .hero-actions {
@@ -768,10 +770,6 @@ a:focus-visible {
     padding: 65px 0;
   }
 
-  .section-heading {
-    margin-bottom: 30px;
-  }
-
   .section-heading h2,
   .server-panel h2,
   .end-section h2 {
@@ -782,16 +780,13 @@ a:focus-visible {
     font-size: 8px;
   }
 
-  .feature-grid {
+  .feature-grid,
+  .jobs-grid {
     grid-template-columns: 1fr;
   }
 
   .feature-card {
     min-height: 0;
-  }
-
-  .jobs-grid {
-    grid-template-columns: 1fr;
   }
 
   .job-card {
