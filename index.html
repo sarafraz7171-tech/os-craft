@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#080608" />
+  <meta name="description" content="وب‌سایت رسمی سرور ماینکرفت OS CRAFT؛ تجربه SMP و Roleplay نسخه 26.2" />
+  <title>OS CRAFT | SMP + ROLEPLAY</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{--red:#ff2638;--red2:#a90019;--bg:#080608;--panel:rgba(19,14,17,.84);--muted:#aaa1a5;--line:rgba(255,55,75,.22);--white:#fff}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;scroll-padding-top:82px}
+    body{font-family:'Vazirmatn',Tahoma,sans-serif;background:var(--bg);color:#f8f4f5;overflow-x:hidden}
+    a{color:inherit;text-decoration:none}button{font:inherit}
+    ::selection{background:var(--red);color:white}
+    #particles{position:fixed;inset:0;z-index:20;pointer-events:none;overflow:hidden}
+    .pixel{position:absolute;width:4px;height:4px;background:#ff1e35;opacity:0;box-shadow:0 0 12px #f00;animation:floatPixel linear infinite}
+    .pixel.dark{background:#090909;box-shadow:0 0 7px #ff2638}
+    @keyframes floatPixel{0%{transform:translate3d(0,25px,0) rotate(0);opacity:0}15%{opacity:.65}80%{opacity:.4}100%{transform:translate3d(35px,-115vh,0) rotate(180deg);opacity:0}}
+    /* CINEMATIC INTRO */
+    #intro{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;overflow:hidden;background:radial-gradient(ellipse at 50% 46%,#421018 0%,#17090d 37%,#050405 78%);transition:opacity .95s ease,visibility .95s ease}
+    #intro::before,#intro::after{content:"";position:absolute;width:min(75vw,720px);aspect-ratio:1;border:1px solid rgba(255,30,55,.18);border-radius:50%;animation:ring 12s linear infinite}
+    #intro::after{width:min(58vw,540px);animation-direction:reverse;border-style:dashed}
+    @keyframes ring{to{transform:rotate(360deg) scale(1.04)}}
+    #intro.hide{opacity:0;visibility:hidden;pointer-events:none}
+    .intro-inner{position:relative;z-index:2;text-align:center;padding:28px;animation:introRise 1.3s cubic-bezier(.2,.8,.2,1) both}
+    @keyframes introRise{from{opacity:0;transform:translateY(35px) scale(.94);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
+    .intro-kicker{color:#ff7a87;letter-spacing:5px;font-size:11px;font-weight:800;margin-bottom:16px}
+    .intro-logo{font-size:clamp(48px,11vw,112px);font-weight:900;letter-spacing:2px;line-height:1;color:#fff;text-shadow:0 0 12px #ff3448,0 0 35px #d00020,0 0 90px #890014;animation:logoPulse 2.4s ease-in-out infinite alternate}
+    @keyframes logoPulse{to{filter:brightness(1.35);text-shadow:0 0 18px #ff5363,0 0 55px #f0002b,0 0 110px #a0001a}}
+    .intro-sub{font-size:clamp(13px,2vw,18px);letter-spacing:7px;color:#ff6674;margin-top:16px;direction:ltr}
+    .intro-rule{width:190px;height:2px;margin:27px auto;background:linear-gradient(90deg,transparent,#ff2638,transparent);box-shadow:0 0 18px #ff2638}
+    .intro-meta{font-size:13px;color:#c6b7bb;margin-bottom:27px}
+    .enter-btn,.primary-btn{border:1px solid rgba(255,100,115,.8);background:linear-gradient(120deg,#ff2638,#8c0017);color:white;padding:14px 35px;border-radius:9px;font-weight:800;cursor:pointer;box-shadow:0 0 25px #f014343b;transition:.3s;display:inline-flex;align-items:center;justify-content:center;gap:10px}
+    .enter-btn:hover,.primary-btn:hover{transform:translateY(-4px);box-shadow:0 10px 35px #ff173d66;filter:brightness(1.13)}
+    .intro-foot{font-size:11px;color:#88777c;margin-top:22px;letter-spacing:2px;direction:ltr}
+    /* BACKGROUND */
+    .site-bg{position:fixed;inset:0;z-index:-3;overflow:hidden;background:#090608}
+    .scene{position:absolute;inset:-3%;background-position:center;background-size:cover;opacity:0;transform:scale(1.08);animation:sceneShow 35s infinite}
+    .scene:nth-child(1){background-image:url('assets/scene1.jpg');animation-delay:0s}
+    .scene:nth-child(2){background-image:url('assets/scene2.jpg');animation-delay:7s}
+    .scene:nth-child(3){background-image:url('assets/scene3.jpg');animation-delay:14s}
+    .scene:nth-child(4){background-image:url('assets/scene4.jpg');animation-delay:21s}
+    .scene:nth-child(5){background-image:url('assets/scene5.jpg');animation-delay:28s}
+    @keyframes sceneShow{0%{opacity:0;transform:scale(1.08)}4%{opacity:.34}18%{opacity:.34;transform:scale(1.17)}22%{opacity:0}100%{opacity:0}}
+    .site-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,4,6,.75),rgba(8,5,8,.88) 42%,#080608 100%),linear-gradient(90deg,rgba(30,0,8,.25),transparent,rgba(30,0,8,.25))}
+    .glow{position:fixed;z-index:-1;width:450px;height:450px;border-radius:50%;filter:blur(110px);opacity:.13;background:#ff102e;pointer-events:none}
+    .glow.one{top:15%;right:-240px}.glow.two{bottom:8%;left:-260px;background:#87001c}
+    /* HEADER */
+    header{position:sticky;top:0;z-index:100;background:rgba(8,5,7,.78);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+    .nav{max-width:1200px;margin:auto;padding:13px 22px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{font-size:22px;font-weight:900;letter-spacing:1px;direction:ltr;text-shadow:0 0 18px #f13}
+    .brand span{color:var(--red)}
+    .nav-links{display:flex;align-items:center;gap:22px;font-size:13px;color:#ddd}
+    .nav-links a{transition:.25s}.nav-links a:hover{color:#ff5869;text-shadow:0 0 12px #f24}
+    .nav-cta{font-size:12px;padding:9px 15px;border:1px solid var(--line);border-radius:7px;color:#ff8791}
+    .menu-btn{display:none;background:none;border:1px solid var(--line);color:white;border-radius:7px;padding:7px 11px}
+    /* COMMON */
+    .container{width:min(1120px,calc(100% - 38px));margin:auto}
+    section{padding:95px 0;position:relative}
+    .section-head{text-align:center;margin-bottom:38px}
+    .eyebrow{color:#ff6675;font-size:11px;letter-spacing:3px;font-weight:800;direction:ltr}
+    .section-title{font-size:clamp(26px,4vw,42px);font-weight:900;margin-top:10px}
+    .section-title span{color:var(--red)}
+    .section-desc{color:var(--muted);font-size:14px;line-height:2;margin:10px auto 0;max-width:650px}
+    .glass{background:linear-gradient(145deg,rgba(27,18,22,.88),rgba(10,8,10,.86));border:1px solid var(--line);border-radius:17px;box-shadow:0 15px 55px #0005;backdrop-filter:blur(12px)}
+    /* HERO */
+    .hero{min-height:650px;display:flex;align-items:center;padding:100px 0 85px}
+    .hero-content{max-width:850px;margin:auto;text-align:center}
+    .status-pill{display:inline-flex;align-items:center;gap:9px;padding:8px 14px;border:1px solid #ff34464d;border-radius:50px;background:#9c10201f;color:#ff9ba5;font-size:12px;margin-bottom:25px}
+    .status-dot{width:7px;height:7px;border-radius:50%;background:#ff3549;box-shadow:0 0 12px #f24;animation:blink 1.3s infinite}
+    @keyframes blink{50%{opacity:.25}}
+    .hero h1{font-size:clamp(52px,11vw,112px);line-height:1.12;font-weight:900;letter-spacing:2px;direction:ltr;text-shadow:0 0 25px #f2233c66}
+    .hero h1 span{color:var(--red)}
+    .hero-tag{font-size:clamp(15px,2.5vw,21px);letter-spacing:5px;color:#e6cbd0;margin:15px 0 26px;direction:ltr}
+    .hero-copy{color:#c3b7bb;line-height:2.1;font-size:14px;max-width:650px;margin:0 auto 30px}
+    .hero-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+    .secondary-btn{border:1px solid #ffffff30;padding:13px 27px;border-radius:9px;color:#eee;background:#ffffff0a;transition:.3s}
+    .secondary-btn:hover{border-color:#ff5366;color:white;background:#ff26381a}
+    .server-strip{margin:55px auto 0;max-width:760px;padding:17px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:right}
+    .server-label{font-size:11px;color:#a99ca1}.server-version{font-weight:800;font-size:16px}.server-ip{font-size:13px;color:#ff7885;direction:ltr;display:inline-block;margin-top:4px}
+    .copy-btn{border:1px solid #ff425455;background:#ff26381a;color:#ff9aa4;border-radius:7px;padding:9px 13px;cursor:pointer;font-size:12px;white-space:nowrap}
+    /* NOTICE */
+    .notice{padding:22px 25px;display:flex;align-items:center;justify-content:center;gap:15px;text-align:center;border-color:#ff34465c;background:linear-gradient(100deg,#300a13d9,#160a10e8,#300a13d9);box-shadow:0 0 45px #f0012420}
+    .notice-icon{font-size:25px}.notice strong{font-size:clamp(15px,2.5vw,20px);color:#fff}.notice strong span{color:#ff586b}
+    /* VIDEO */
+    .video-card{padding:14px;max-width:900px;margin:auto}
+    .video-frame{position:relative;overflow:hidden;border-radius:12px;background:#030303;aspect-ratio:16/9}
+    .video-frame video{width:100%;height:100%;object-fit:contain;display:block;background:#030303}
+    .video-note{text-align:center;color:#a99da1;font-size:12px;margin-top:14px}
+    /* JOBS */
+    .jobs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+    .job-card{padding:23px 18px;min-height:185px;transition:.35s;position:relative;overflow:hidden}
+    .job-card::after{content:"";position:absolute;width:100px;height:100px;border-radius:50%;background:#ff1d3512;filter:blur(20px);left:-35px;bottom:-45px;transition:.35s}
+    .job-card:hover{transform:translateY(-8px);border-color:#ff425b88;box-shadow:0 15px 40px #e0003020}
+    .job-card:hover::after{transform:scale(2)}
+    .job-icon{font-size:28px;margin-bottom:14px;display:block}.job-card h3{font-size:16px;margin-bottom:7px}.job-card p{font-size:12px;color:#aaa;line-height:1.9}
+    /* FEATURES */
+    .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .feature{padding:25px;transition:.3s}.feature:hover{transform:translateY(-5px);border-color:#ff5267}.feature-icon{width:45px;height:45px;border-radius:12px;display:grid;place-items:center;background:#ff26381c;border:1px solid #ff263844;font-size:22px;margin-bottom:15px}.feature h3{font-size:16px;margin-bottom:8px}.feature p{font-size:12px;color:#aaa;line-height:2}
+    /* CONNECT + APARAT */
+    .connect-box{padding:35px;text-align:center;max-width:800px;margin:auto}.connect-box h3{font-size:23px;margin-bottom:10px}.connect-box p{font-size:13px;color:#aaa;line-height:2;margin-bottom:22px}
+    .aparat-link{display:inline-flex;align-items:center;gap:10px;border:1px solid #ff465b66;background:#ff26381a;padding:14px 22px;border-radius:9px;color:#ff9ba5;font-weight:800;transition:.3s}.aparat-link:hover{background:#e51b32;color:white;box-shadow:0 0 25px #f23a}
+    footer{border-top:1px solid var(--line);padding:28px 15px;text-align:center;background:#050405;color:#857a7e;font-size:11px}
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}.reveal.visible{opacity:1;transform:none}
+    .toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);background:#171014;border:1px solid #ff34465c;color:#fff;padding:11px 18px;border-radius:8px;font-size:12px;opacity:0;transition:.3s;z-index:500;pointer-events:none}.toast.show{opacity:1;transform:translate(-50%,0)}
+    @media(max-width:850px){.jobs-grid{grid-template-columns:repeat(2,1fr)}.features-grid{grid-template-columns:repeat(2,1fr)}.nav-links{gap:12px}}
+    @media(max-width:650px){.nav{padding:11px 16px}.menu-btn{display:block}.nav-links{display:none;position:absolute;top:58px;right:12px;left:12px;background:#100a0e;border:1px solid var(--line);border-radius:12px;padding:17px;flex-direction:column;align-items:stretch}.nav-links.open{display:flex}.nav-links a{padding:7px}.nav-cta{display:none}.hero{min-height:590px;padding:75px 0 55px}.server-strip{flex-direction:column;align-items:stretch;text-align:center}.notice{flex-direction:column;padding:20px}.jobs-grid,.features-grid{grid-template-columns:1fr}.job-card{min-height:unset}.connect-box{padding:25px 18px}section{padding:70px 0}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+  </style>
+</head>
+<body>
+  <!-- افکت پیکسل‌های قرمز و مشکی -->
+  <div id="particles" aria-hidden="true"></div>
+
+  <!-- ورود سینمایی -->
+  <div id="intro">
+    <div class="intro-inner">
+      <div class="intro-kicker">WELCOME TO THE WORLD</div>
+      <div class="intro-logo">OS CRAFT</div>
+      <div class="intro-sub">SMP • ROLEPLAY</div>
+      <div class="intro-rule"></div>
+      <div class="intro-meta">MINECRAFT SERVER &nbsp;|&nbsp; VERSION 26.2</div>
+      <button class="enter-btn" id="enterBtn">ورود به سایت <span>←</span></button>
+      <div class="intro-foot">YOUR ADVENTURE STARTS HERE</div>
+    </div>
+  </div>
+
+  <div class="site-bg" aria-hidden="true">
+    <div class="scene"></div><div class="scene"></div><div class="scene"></div><div class="scene"></div><div class="scene"></div>
+  </div>
+  <div class="glow one"></div><div class="glow two"></div>
+
+  <header>
+    <nav class="nav container">
+      <a class="brand" href="#home">OS <span>CRAFT</span></a>
+      <button class="menu-btn" id="menuBtn" aria-label="باز کردن منو">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#home">صفحه اصلی</a><a href="#video">ویدیو</a><a href="#jobs">شغل‌ها</a><a href="#features">امکانات</a><a href="#join">اتصال به سرور</a>
+      </div>
+      <a class="nav-cta" href="https://aparat.com/sarafraztr" target="_blank" rel="noopener">کانال آپارات ↗</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-content">
+        <div class="status-pill"><span class="status-dot"></span> دنیای SMP + ROLEPLAY</div>
+        <h1>OS <span>CRAFT</span></h1>
+        <div class="hero-tag">SURVIVE • BUILD • ROLEPLAY</div>
+        <p class="hero-copy">تجربه‌ای متفاوت از زندگی در یک دنیای ماینکرفتی؛ با شغل‌های متنوع، اقتصاد، خانه‌ها و تعاملات بازیکنان در سرور OS CRAFT.</p>
+        <div class="hero-actions"><a class="primary-btn" href="#join">اتصال به سرور <span>←</span></a><a class="secondary-btn" href="#jobs">مشاهده شغل‌ها</a></div>
+        <div class="server-strip glass">
+          <div><div class="server-label">نسخه سرور</div><div class="server-version">Minecraft 26.2</div></div>
+          <div><div class="server-label">IP سرور</div><span class="server-ip" id="serverIp">YOUR_SERVER_IP:PORT</span></div>
+          <button class="copy-btn" id="copyIp">کپی IP</button>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:0">
+      <div class="container reveal">
+        <div class="notice glass"><span class="notice-icon">⚡</span><strong>این سرور خفن تا <span>۳۰ آذر</span> برقرار میشه!</strong></div>
+      </div>
+    </section>
+
+    <section id="video">
+      <div class="container">
+        <div class="section-head reveal"><div class="eyebrow">SERVER VIDEO</div><h2 class="section-title">ویدیوی <span>OS CRAFT</span></h2><p class="section-desc">نگاهی به فضای سرور و تجربه‌ای که در OS CRAFT منتظر شماست.</p></div>
+        <div class="video-card glass reveal">
+          <div class="video-frame"><video controls preload="metadata" playsinline poster="assets/scene1.jpg"><source src="assets/os-craft-video.mp4" type="video/mp4">مرورگر شما از پخش ویدیو پشتیبانی نمی‌کند.</video></div>
+          <p class="video-note">برای تماشای ویدیو روی دکمه پخش کلیک کنید.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="jobs">
+      <div class="container">
+        <div class="section-head reveal"><div class="eyebrow">CHOOSE YOUR CAREER</div><h2 class="section-title">شغل‌های <span>سرور</span></h2><p class="section-desc">در اقتصاد و زندگی شهر نقش داشته باش؛ شغلی انتخاب کن و مهارتت را در دنیای سرور نشان بده.</p></div>
+        <div class="jobs-grid">
+          <article class="job-card glass reveal"><span class="job-icon">🩺</span><h3>پزشک</h3><p>خدمات درمانی و کمک به سلامت بازیکنان شهر.</p></article>
+          <article class="job-card glass reveal"><span class="job-icon">🌾</span><h3>کشاورز</h3><p>تولید محصولات غذایی و تأمین نیازهای شهر.</p></article>
+          <article class="job-card glass reveal"><span class="job-icon">🏦</span><h3>رئیس بانک</h3><p>مدیریت خدمات بانکی و فعالیت‌های اقتصادی.</p></article>
+          <article class="job-card glass reveal"><span class="job-icon">🏨</span><h3>رئیس هتل</h3><p>مدیریت هتل و رسیدگی به اقامت بازیکنان.</p></article>
+          <article class="job-card glass reveal"><span class="job-icon">🏛️</span><h3>رئیس شهر</h3><p>رسیدگی به امور و هماهنگی فعالیت‌های شهری.</p></article>
+          <article class="job-card glass reveal"><span class="job-icon">👑</span><h3>رئیس جمهور</h3><p>نقش‌آفرینی در جایگاه رهبری و مسئولیت‌های سرور.</p></article>
+          <article class="job-card glass reveal"><span class="job-icon">🧱</span><h3>معمار</h3><p>ساخت‌وساز، طراحی ساختمان‌ها و توسعه شهر.</p></article>
+          <article class="job-card glass reveal"><span class="job-icon">🚚</span><h3>حمل‌ونقل</h3><p>جابجایی کالاها و کمک به ارتباط بخش‌های شهر.</p></article>
+          <article class="job-card glass reveal"><span class="job-icon">⛏️</span><h3>معدن‌کار</h3><p>استخراج منابع و کمک به چرخه تولید و اقتصاد.</p></article>
+          <article class="job-card glass reveal"><span class="job-icon">👷</span><h3>کارگر</h3><p>شروع فعالیت اقتصادی و انجام کارهای مختلف.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="container">
+        <div class="section-head reveal"><div class="eyebrow">SERVER FEATURES</div><h2 class="section-title">امکانات <span>OS CRAFT</span></h2><p class="section-desc">امکاناتی برای ساختن یک تجربه نقش‌آفرینی پویا و سرگرم‌کننده.</p></div>
+        <div class="features-grid">
+          <article class="feature glass reveal"><div class="feature-icon">🏠</div><h3>خانه و املاک</h3><p>خرید، اجاره و مدیریت خانه در شهر.</p></article>
+          <article class="feature glass reveal"><div class="feature-icon">💰</div><h3>اقتصاد و بانک</h3><p>فعالیت اقتصادی، درآمد شغلی و خدمات بانکی.</p></article>
+          <article class="feature glass reveal"><div class="feature-icon">🏪</div><h3>فروشگاه‌ها</h3><p>خریدوفروش کالا و فعالیت در بازار شهر.</p></article>
+          <article class="feature glass reveal"><div class="feature-icon">📱</div><h3>موبایل داخل بازی</h3><p>دسترسی به امکانات و ارتباطات از طریق موبایل بازی.</p></article>
+          <article class="feature glass reveal"><div class="feature-icon">🤝</div><h3>نقش‌آفرینی</h3><p>تعامل با بازیکنان و تجربه نقش‌های گوناگون.</p></article>
+          <article class="feature glass reveal"><div class="feature-icon">🏙️</div><h3>زندگی شهری</h3><p>فعالیت در محیط شهری با شغل‌ها و مسئولیت‌های مختلف.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="join">
+      <div class="container">
+        <div class="section-head reveal"><div class="eyebrow">JOIN THE SERVER</div><h2 class="section-title">به <span>OS CRAFT</span> بپیوند</h2><p class="section-desc">نسخه بازی را روی 26.2 قرار بده و با IP سرور وارد شو.</p></div>
+        <div class="connect-box glass reveal"><h3>آماده ورود هستی؟</h3><p>اطلاعات اتصال سرور را کپی کن و در بخش Multiplayer ماینکرفت وارد کن.</p><div class="hero-actions"><button class="primary-btn" id="copyIpBottom">کپی IP سرور</button><a class="secondary-btn" href="https://aparat.com/sarafraztr" target="_blank" rel="noopener">کانال آپارات OS CRAFT ↗</a></div></div>
+      </div>
+    </section>
+
+    <section id="aparat" style="padding-top:0">
+      <div class="container reveal"><div class="connect-box glass"><div class="eyebrow">FOLLOW US</div><h3>لینک کانال او اس کرفت</h3><p>برای دیدن ویدیوها و خبرهای OS CRAFT وارد کانال ما در آپارات شو.</p><a class="aparat-link" href="https://aparat.com/sarafraztr" target="_blank" rel="noopener">مشاهده کانال آپارات <span>↗</span></a></div></div>
+    </section>
+  </main>
+
+  <footer>© OS CRAFT — SMP + ROLEPLAY | Minecraft 26.2</footer>
+  <div class="toast" id="toast">IP سرور کپی شد!</div>
+
+  <script>
+    // IP واقعی سرور را در این خط جایگزین کنید.
+    const SERVER_IP = 'sarafraz7171-srv-os_craft_asli.play.mihancraft.com:25566:PORT';
+    document.getElementById('serverIp').textContent = SERVER_IP;
+
+    // ورود سینمایی
+    const intro = document.getElementById('intro');
+    document.getElementById('enterBtn').addEventListener('click', () => {
+      intro.classList.add('hide');
+      setTimeout(() => intro.remove(), 1000);
+    });
+
+    // ساخت پیکسل‌های شناور قرمز و مشکی
+    const particleLayer = document.getElementById('particles');
+    for(let i=0;i<75;i++){
+      const p=document.createElement('span');
+      p.className='pixel'+(i%4===0?' dark':'');
+      p.style.left=Math.random()*100+'%';
+      p.style.top=(Math.random()*100+10)+'%';
+      p.style.animationDuration=(7+Math.random()*12)+'s';
+      p.style.animationDelay=(-Math.random()*18)+'s';
+      p.style.transform=`scale(${.5+Math.random()*1.5})`;
+      particleLayer.appendChild(p);
+    }
+
+    // کپی IP و پیام کوچک
+    const toast=document.getElementById('toast');
+    let toastTimer;
+    function showToast(message){toast.textContent=message;toast.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('show'),2100)}
+    async function copyIP(){
+      try{
+        await navigator.clipboard.writeText(SERVER_IP);
+        showToast('IP سرور کپی شد!');
+      }catch(e){showToast('کپی خودکار انجام نشد؛ IP را دستی انتخاب کن.');}
+    }
+    document.getElementById('copyIp').addEventListener('click',copyIP);
+    document.getElementById('copyIpBottom').addEventListener('click',copyIP);
+
+    // منوی موبایل
+    const menuBtn=document.getElementById('menuBtn');
+    const navLinks=document.getElementById('navLinks');
+    menuBtn.addEventListener('click',()=>navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navLinks.classList.remove('open')));
+
+    // ظاهر شدن تدریجی بخش‌ها هنگام اسکرول
+    const observer=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}});
+    },{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+  </script>
+</body>
+</html>
