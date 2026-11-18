@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090a0f">
+  <meta name="description" content="راهنمای دسته‌بندی‌شده دستورات سرور OS CRAFT">
+  <title>OS CRAFT | راهنمای دستورات</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="site-header">
+    <a class="logo" href="index.html"><span class="logo-mark">OS</span><span>OS <b>CRAFT</b></span></a>
+    <button class="menu-toggle" id="menuToggle" aria-label="باز کردن منو" aria-expanded="false">☰</button>
+    <nav class="main-nav" id="mainNav"><a class="nav-link" href="index.html">خانه</a><a class="nav-link active" href="commands.html">راهنمای دستورات</a><a class="nav-link" href="index.html#new-features">امکانات</a><a class="nav-link" href="index.html#connect">اتصال به سرور</a></nav>
+  </header>
+  <main class="section-wrap commands-page">
+    <div class="page-intro"><div class="eyebrow">COMMAND DIRECTORY</div><h1>راهنمای <span class="gradient-text">دستورات</span></h1><p>دستورها را بر اساس بخش موردنظر پیدا کن. برای کپی هر دستور، روی دکمه کپی بزن.</p></div>
+    <div class="command-toolbar">
+      <label class="search-box"><span>⌕</span><input id="commandSearch" type="search" placeholder="جست‌وجوی دستور یا کاربرد..." autocomplete="off"></label>
+      <div class="result-count" id="resultCount">در حال نمایش همه بخش‌ها</div>
+    </div>
+    <div class="command-layout">
+      <aside class="category-nav" aria-label="دسته‌بندی دستورات">
+        <button class="category-button selected" data-filter="all">همه دسته‌ها <span>۰</span></button>
+        <button class="category-button" data-filter="general">عمومی</button>
+        <button class="category-button" data-filter="jobs">مشاغل</button>
+        <button class="category-button" data-filter="mobile">موبایل</button>
+        <button class="category-button" data-filter="city">نقش‌ها و شهر</button>
+        <button class="category-button" data-filter="bank">بانک و اقتصاد</button>
+        <button class="category-button" data-filter="shop">فروشگاه</button>
+        <button class="category-button" data-filter="home">خانه‌ها و املاک</button>
+        <button class="category-button" data-filter="business">کسب‌وکار</button>
+        <button class="category-button" data-filter="transport">حمل‌ونقل</button>
+        <button class="category-button" data-filter="admin">مدیریت سرور</button>
+      </aside>
+      <div class="command-content" id="commandContent">
+        <section class="command-group" data-category="general"><div class="group-title"><div><span class="group-number">01</span><h2>دستورات عمومی</h2></div><span class="group-count">۵ دستور</span></div><div class="command-grid">
+          <article class="command-card" data-search="/help راهنما فهرست دستورها"><div class="command-top"><span class="status-tag common">دستور رایج Minecraft</span><button class="copy-command" data-copy="/help">کپی</button></div><h3>/help</h3><p>نمایش راهنمای دستورهایی که سرور برای بازیکن قابل‌دسترسی کرده است.</p></article>
+          <article class="command-card" data-search="/list آنلاین بازیکنان فهرست"><div class="command-top"><span class="status-tag common">دستور رایج Minecraft</span><button class="copy-command" data-copy="/list">کپی</button></div><h3>/list</h3><p>نمایش فهرست بازیکنان آنلاین سرور.</p></article>
+          <article class="command-card" data-search="/msg پیام خصوصی بازیکن"><div class="command-top"><span class="status-tag common">دستور رایج Minecraft</span><button class="copy-command" data-copy="/msg <player> <message>">کپی</button></div><h3>/msg &lt;player&gt; &lt;message&gt;</h3><p>ارسال پیام خصوصی به یک بازیکن. دسترسی و شکل دقیق آن ممکن است به تنظیمات سرور بستگی داشته باشد.</p></article>
+          <article class="command-card" data-search="/tell پیام خصوصی بازیکن"><div class="command-top"><span class="status-tag common">دستور رایج Minecraft</span><button class="copy-command" data-copy="/tell <player> <message>">کپی</button></div><h3>/tell &lt;player&gt; &lt;message&gt;</h3><p>ارسال پیام خصوصی؛ در بسیاری از نسخه‌ها نام جایگزین پیام خصوصی است.</p></article>
+          <article class="command-card" data-search="/me نقش آفرینی عمل"><div class="command-top"><span class="status-tag common">دستور رایج Minecraft</span><button class="copy-command" data-copy="/me <action>">کپی</button></div><h3>/me &lt;action&gt;</h3><p>نمایش یک عمل یا توضیح کوتاه در چت، در صورت فعال بودن فرمان در سرور.</p></article>
+        </div></section>
+
+        <section class="command-group" data-category="jobs"><div class="group-title"><div><span class="group-number">02</span><h2>سیستم مشاغل</h2></div><span class="group-count">۲ دستور</span></div><div class="command-grid">
+          <article class="command-card" data-search="/kargar player کارگر آزاد کردن کارمند"><div class="command-top"><span class="status-tag project">شناخته‌شده در پروژه</span><button class="copy-command" data-copy="/kargar <player>">کپی</button></div><h3>/kargar &lt;player&gt;</h3><p>دستور مدیریتی برای آزاد کردن بازیکن از وضعیت کارگر؛ نام بازیکن را جایگزین کن.</p></article>
+          <article class="command-card" data-search="/mdone معمار پایان کار"><div class="command-top"><span class="status-tag project">شناخته‌شده در پروژه</span><button class="copy-command" data-copy="/mdone">کپی</button></div><h3>/mdone</h3><p>ثبت پایان کار مربوط به نقش معمار، مطابق سازوکاری که برای سرور تعریف شده است.</p></article>
+        </div></section>
+
+        <section class="command-group" data-category="mobile"><div class="group-title"><div><span class="group-number">03</span><h2>موبایل داخل بازی</h2></div><span class="group-count">۱ دستور</span></div><div class="command-grid">
+          <article class="command-card" data-search="/mobile موبایل منو بانک خانه مخاطبین"><div class="command-top"><span class="status-tag project">شناخته‌شده در پروژه</span><button class="copy-command" data-copy="/mobile">کپی</button></div><h3>/mobile</h3><p>باز کردن منوی موبایل داخل بازی؛ امکاناتی مانند مخاطبین، بانک و خانه طبق نسخه پلاگین.</p></article>
+        </div></section>
+
+        <section class="command-group" data-category="city"><div class="group-title"><div><span class="group-number">04</span><h2>نقش‌ها و مدیریت شهر</h2></div><span class="group-count">۱ دستور</span></div><div class="command-grid">
+          <article class="command-card" data-search="/r.jomhur رئیس جمهور نقش"><div class="command-top"><span class="status-tag project">شناخته‌شده در پروژه</span><button class="copy-command" data-copy="/r.jomhur">کپی</button></div><h3>/r.jomhur</h3><p>دستور اختصاصی مرتبط با نقش رئیس‌جمهور در سیستم نقش‌آفرینی OS CRAFT. ممکن است دسترسی آن محدود باشد.</p></article>
+        </div></section>
+
+        <section class="command-group empty-category" data-category="bank"><div class="group-title"><div><span class="group-number">05</span><h2>بانک و اقتصاد</h2></div><span class="group-count">در انتظار تأیید</span></div><div class="empty-note">نام سیستم بانکی در پروژه مشخص است، اما شکل دقیق دستورهای فعال آن هنوز تأیید نشده؛ برای جلوگیری از درج دستور اشتباه، چیزی حدس زده نشده است.</div></section>
+        <section class="command-group empty-category" data-category="shop"><div class="group-title"><div><span class="group-number">06</span><h2>فروشگاه و خریدوفروش</h2></div><span class="group-count">در انتظار تأیید</span></div><div class="empty-note">دستورهای دقیق پلاگین فروشگاه و فروشگاه غذا هنوز از روی راهنمای داخل بازی یا تنظیمات تأیید نشده‌اند.</div></section>
+        <section class="command-group empty-category" data-category="home"><div class="group-title"><div><span class="group-number">07</span><h2>خانه‌ها و املاک</h2></div><span class="group-count">در انتظار تأیید</span></div><div class="empty-note">سیستم خانه در سرور وجود دارد، اما فرمان‌های فعال خرید، اجاره و مدیریت ملک هنوز به‌طور کامل تأیید نشده‌اند.</div></section>
+        <section class="command-group empty-category" data-category="business"><div class="group-title"><div><span class="group-number">08</span><h2>کسب‌وکارها</h2></div><span class="group-count">در انتظار تأیید</span></div><div class="empty-note">برای درج دستورهای واقعی کسب‌وکار باید فرمان‌های ثبت‌شده در پلاگین مربوط بررسی شوند.</div></section>
+        <section class="command-group empty-category" data-category="transport"><div class="group-title"><div><span class="group-number">09</span><h2>حمل‌ونقل</h2></div><span class="group-count">در انتظار تأیید</span></div><div class="empty-note">در اطلاعات فعلی، دستور اختصاصی تأییدشده‌ای برای این بخش نداریم.</div></section>
+        <section class="command-group empty-category" data-category="admin"><div class="group-title"><div><span class="group-number">10</span><h2>مدیریت سرور</h2></div><span class="group-count">مخصوص مدیران</span></div><div class="empty-note">دستورهای مدیریتی به افزونه‌ها و سطح دسترسی بستگی دارند. فقط پس از تأیید از کنسول یا راهنمای پلاگین به این بخش اضافه می‌شوند.</div></section>
+      </div>
+    </div>
+    <div class="guide-disclaimer"><strong>یادآوری:</strong> این راهنما شامل دستورهای شناخته‌شده از اطلاعات پروژه و چند فرمان رایج Minecraft است؛ تضمین «تمام دستورهای نصب‌شده» بدون خروجی <code>/help</code> یا بررسی فایل‌های پلاگین ممکن نیست. دستورات WorldEdit و WorldGuard عمداً در این راهنما قرار نگرفته‌اند.</div>
+  </main>
+  <footer class="site-footer"><a class="logo footer-logo" href="index.html"><span class="logo-mark">OS</span><span>OS <b>CRAFT</b></span></a><span>OS CRAFT · COMMAND DIRECTORY</span><a href="index.html">بازگشت به خانه ↑</a></footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
