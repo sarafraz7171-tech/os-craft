@@ -34,28 +34,44 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // COPY SERVER ADDRESS
-  const copyButton = document.getElementById("copyButton");
-  const serverAddress = document.getElementById("serverAddress");
-  const copyFeedback = document.getElementById("copyFeedback");
+  const toast = document.getElementById("toast");
 
-  if (copyButton && serverAddress && copyFeedback) {
-    copyButton.addEventListener("click", async () => {
-      const address = serverAddress.textContent.trim();
+  document.querySelectorAll(".copy-button").forEach(button => {
+    const originalText = button.textContent.trim();
+
+    button.addEventListener("click", async () => {
+      const address = button.dataset.copy;
 
       try {
         await navigator.clipboard.writeText(address);
-        copyFeedback.textContent = "آدرس سرور با موفقیت کپی شد ✓";
-        copyButton.textContent = "کپی شد ✓";
+
+        button.textContent = "کپی شد ✓";
+
+        if (toast) {
+          toast.textContent = "آدرس سرور با موفقیت کپی شد ✓";
+          toast.classList.add("show");
+
+          setTimeout(() => {
+            toast.classList.remove("show");
+          }, 2500);
+        }
+
       } catch (error) {
-        copyFeedback.textContent =
-          "کپی خودکار انجام نشد؛ آدرس را به‌صورت دستی انتخاب و کپی کن.";
+        if (toast) {
+          toast.textContent = "کپی خودکار انجام نشد؛ آدرس را دستی کپی کن.";
+          toast.classList.add("show");
+
+          setTimeout(() => {
+            toast.classList.remove("show");
+          }, 2500);
+        }
       }
 
       setTimeout(() => {
-        copyButton.textContent = "کپی آدرس سرور";
+        button.textContent = originalText;
       }, 2500);
     });
-  }
+  });
 
   // INTRO
   const intro = document.getElementById("intro");
