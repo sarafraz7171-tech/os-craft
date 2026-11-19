@@ -1087,3 +1087,35 @@ button {
     transform: none;
   }
 }
+/* Colorful animated background */
+body {
+    background: linear-gradient(
+        120deg,
+        #080d24,
+        #251044,
+        #073b50,
+        #10152f,
+        #351044
+    );
+    background-size: 300% 300%;
+    animation: colorfulBackground 18s ease infinite;
+}
+
+@keyframes colorfulBackground {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Disable old background effects */
+.background-glow,
+.background-grid,
+.background-particles {
+    display: none !important;
+}
