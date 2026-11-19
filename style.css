@@ -977,3 +977,7 @@ button {
     scroll-behavior: auto !important;
   }
 }
+/* TEMPORARY INTRO FIX */
+.intro {
+  display: none !important;
+}
