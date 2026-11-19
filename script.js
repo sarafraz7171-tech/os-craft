@@ -1,87 +1,199 @@
 
-/* ===== OS CRAFT TYPING SYSTEM ===== */
+(() => {
 
-const typingElement = document.getElementById("typingText");
+  // متن‌های افکت تایپ
+  const messages = [
+    "به دنیای OS CRAFT خوش آمدید",
+    "نسخه 26.2 | SMP + ROLEPLAY",
+    "یک تجربه متفاوت از ماینکرفت",
+    "جهان OS CRAFT آماده ورود شماست"
+  ];
 
-if (typingElement) {
-    const messages = [
-        "به دنیای OS CRAFT خوش آمدید",
-        "نسخه 26.2 | SMP + ROLEPLAY",
-        "یک تجربه متفاوت از ماینکرفت",
-        "جهان OS CRAFT آماده ورود شماست"
-    ];
+  const typingElement = document.getElementById("typingText");
+  const menuButton = document.getElementById("menuToggle");
+  const nav = document.getElementById("nav");
+  const copyButton = document.getElementById("copyServer");
+  const addressElement = document.getElementById("serverAddress");
+  const toast = document.getElementById("toast");
+
+
+  // افکت تایپ‌شدن
+  if (typingElement) {
 
     let messageIndex = 0;
     let charIndex = 0;
     let deleting = false;
 
-    function typeEffect() {
-        const currentMessage = messages[messageIndex];
+    function typeLoop() {
 
-        if (!deleting) {
-            charIndex++;
+      const current = messages[messageIndex];
 
-            typingElement.textContent =
-                currentMessage.substring(0, charIndex);
+      typingElement.textContent =
+        current.slice(0, charIndex);
 
-            if (charIndex >= currentMessage.length) {
-                deleting = true;
-                setTimeout(typeEffect, 1800);
-                return;
-            }
-        } else {
-            charIndex--;
+      if (!deleting && charIndex < current.length) {
 
-            typingElement.textContent =
-                currentMessage.substring(0, charIndex);
+        charIndex++;
 
-            if (charIndex <= 0) {
-                deleting = false;
+        setTimeout(typeLoop, 65);
 
-                messageIndex =
-                    (messageIndex + 1) % messages.length;
-            }
+      } else if (!deleting) {
+
+        deleting = true;
+
+        setTimeout(typeLoop, 1500);
+
+      } else if (charIndex > 0) {
+
+        charIndex--;
+
+        setTimeout(typeLoop, 28);
+
+      } else {
+
+        deleting = false;
+
+        messageIndex =
+          (messageIndex + 1) % messages.length;
+
+        setTimeout(typeLoop, 350);
+
+      }
+
+    }
+
+    typeLoop();
+  }
+
+
+  // منوی موبایل
+  if (menuButton && nav) {
+
+    menuButton.addEventListener("click", () => {
+
+      const isOpen = nav.classList.toggle("open");
+
+      menuButton.setAttribute(
+        "aria-expanded",
+        String(isOpen)
+      );
+
+      menuButton.textContent =
+        isOpen ? "×" : "☰";
+
+    });
+
+
+    nav.querySelectorAll("a").forEach(link => {
+
+      link.addEventListener("click", () => {
+
+        nav.classList.remove("open");
+
+        menuButton.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+
+        menuButton.textContent = "☰";
+
+      });
+
+    });
+
+  }
+
+
+  // کپی آدرس سرور
+  if (copyButton && addressElement && toast) {
+
+    copyButton.addEventListener("click", async () => {
+
+      const address =
+        addressElement.textContent.trim();
+
+      try {
+
+        await navigator.clipboard.writeText(address);
+
+        toast.textContent =
+          "آدرس سرور کپی شد!";
+
+      } catch (error) {
+
+        const temporary =
+          document.createElement("textarea");
+
+        temporary.value = address;
+
+        temporary.setAttribute("readonly", "");
+
+        temporary.style.position = "absolute";
+        temporary.style.opacity = "0";
+
+        document.body.appendChild(temporary);
+
+        temporary.select();
+
+        const copied =
+          document.execCommand("copy");
+
+        temporary.remove();
+
+        toast.textContent = copied
+          ? "آدرس سرور کپی شد!"
+          : "کپی خودکار ممکن نیست؛ آدرس را دستی انتخاب کن.";
+
+      }
+
+      window.setTimeout(() => {
+
+        toast.textContent = "";
+
+      }, 2800);
+
+    });
+
+  }
+
+
+  // تشخیص بخش فعال در منو
+  const sections =
+    document.querySelectorAll("main section[id]");
+
+  const navLinks =
+    document.querySelectorAll(".nav a[href^='#']");
+
+  if ("IntersectionObserver" in window) {
+
+    const observer = new IntersectionObserver(entries => {
+
+      entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+
+          navLinks.forEach(link => {
+
+            link.classList.toggle(
+              "active",
+              link.getAttribute("href") ===
+              `#${entry.target.id}`
+            );
+
+          });
+
         }
 
-        setTimeout(typeEffect, deleting ? 35 : 85);
-    }
+      });
 
-    typeEffect();
-}
+    }, {
+      rootMargin: "-35% 0px -55% 0px"
+    });
 
-/* ===== COPY SERVER ADDRESS ===== */
+    sections.forEach(section => {
+      observer.observe(section);
+    });
 
-const copyButton = document.getElementById("copyServer");
-const serverAddress = document.querySelector(".server-address");
-const toast = document.getElementById("toast");
+  }
 
-function showToast(message) {
-    toast.textContent = message;
-    toast.classList.add("show");
-
-    clearTimeout(window.toastTimer);
-
-    window.toastTimer = setTimeout(() => {
-        toast.classList.remove("show");
-    }, 1800);
-}
-
-copyButton.addEventListener("click", async () => {
-    const address = serverAddress.textContent.trim();
-
-    try {
-        await navigator.clipboard.writeText(address);
-        showToast("آدرس سرور کپی شد!");
-    } catch (error) {
-        const textarea = document.createElement("textarea");
-
-        textarea.value = address;
-        document.body.appendChild(textarea);
-        textarea.select();
-
-        const success = document.execCommand("copy");
-        textarea.remove();
-
-        showToast(success ? "آدرس سرور کپی شد!" : "کپی انجام نشد!");
-    }
-});
+})();
