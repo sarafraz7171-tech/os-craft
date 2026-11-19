@@ -1188,3 +1188,63 @@ button {
   }
 
 }
+
+/* ===== OS CRAFT 3D BACKGROUND GRID ===== */
+
+.background-grid {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+
+    background-image:
+        linear-gradient(rgba(237, 24, 56, 0.13) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(237, 24, 56, 0.13) 1px, transparent 1px);
+
+    background-size: 55px 55px;
+
+    transform: perspective(650px) rotateX(58deg) scale(1.8);
+    transform-origin: center bottom;
+
+    opacity: 0.35;
+
+    mask-image: linear-gradient(
+        to bottom,
+        transparent 5%,
+        black 45%,
+        black 100%
+    );
+
+    animation: gridMove 18s linear infinite;
+}
+
+@keyframes gridMove {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: 0 55px;
+    }
+}
+
+/* نور قرمز ملایم روی شبکه */
+.background-grid::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: radial-gradient(
+        ellipse at center,
+        rgba(237, 24, 56, 0.18),
+        transparent 65%
+    );
+}
+
+/* کاهش حرکت برای دستگاه‌هایی که انیمیشن را محدود کرده‌اند */
+@media (prefers-reduced-motion: reduce) {
+    .background-grid {
+        animation: none;
+    }
+}
