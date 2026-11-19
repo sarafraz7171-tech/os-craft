@@ -1285,3 +1285,57 @@ button, a {
     transform: none;
   }
 }
+/* 3D ROTATING OS LOGO */
+
+.hero-decoration {
+  perspective: 1000px;
+}
+
+.hero-cube {
+  position: relative;
+  transform-style: preserve-3d;
+  animation: rotateOS 9s linear infinite;
+  border: 2px solid rgba(255,255,255,.5);
+
+  background:
+    linear-gradient(135deg, #f4d28f, #7650c9 50%, #176b9c);
+  box-shadow:
+    0 0 35px rgba(126,91,255,.45),
+    0 0 85px rgba(36,181,255,.22),
+    inset 0 0 35px rgba(255,255,255,.2);
+}
+
+.hero-cube::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px solid rgba(255,255,255,.45);
+  border-radius: inherit;
+  background: linear-gradient(135deg, #d9a84f, #7251c7);
+  transform: translateZ(-28px);
+}
+
+.hero-cube::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 100%;
+  width: 56px;
+  height: 100%;
+  border: 1px solid rgba(255,255,255,.3);
+  background: linear-gradient(180deg, #286bba, #35205d);
+  transform-origin: right;
+  transform: rotateY(-90deg);
+}
+
+@keyframes rotateOS {
+  0% {
+    transform: rotateY(0deg) rotateX(-8deg);
+  }
+  50% {
+    transform: rotateY(180deg) rotateX(8deg);
+  }
+  100% {
+    transform: rotateY(360deg) rotateX(-8deg);
+  }
+}
