@@ -1,29 +1,39 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    // INTRO ANIMATION
+    /* =====================================
+       INTRO ANIMATION
+    ===================================== */
+
     const intro = document.getElementById("intro");
 
     if (intro) {
         document.body.style.overflow = "hidden";
 
+        // مکعب 10 ثانیه می‌چرخد و روی OS CRAFT می‌ایستد.
+        // سپس سایت نمایش داده می‌شود.
         setTimeout(() => {
             intro.classList.add("is-hidden");
 
             setTimeout(() => {
                 intro.remove();
                 document.body.style.overflow = "";
-            }, 500);
+            }, 700);
 
-        }, 2600);
+        }, 11000);
     }
 
-    // MOBILE MENU
+    /* =====================================
+       MOBILE MENU
+    ===================================== */
+
     const menuToggle = document.getElementById("menuToggle");
     const mainNav = document.getElementById("mainNav");
 
     function closeMenu() {
-        if (mainNav) mainNav.classList.remove("active");
+        if (mainNav) {
+            mainNav.classList.remove("active");
+        }
     }
 
     if (menuToggle && mainNav) {
@@ -37,12 +47,14 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         document.addEventListener("click", event => {
+
             if (
                 !mainNav.contains(event.target) &&
                 !menuToggle.contains(event.target)
             ) {
                 closeMenu();
             }
+
         });
 
         window.addEventListener("resize", () => {
@@ -52,7 +64,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // COPY SERVER ADDRESS
+    /* =====================================
+       COPY SERVER ADDRESS
+    ===================================== */
+
     const copyButton = document.getElementById("copyButton");
     const serverAddress = document.getElementById("serverAddress");
     const copyFeedback = document.getElementById("copyFeedback");
@@ -60,9 +75,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (copyButton && serverAddress) {
 
         copyButton.addEventListener("click", async () => {
+
             const address = serverAddress.textContent.trim();
 
             try {
+
                 await navigator.clipboard.writeText(address);
 
                 if (copyFeedback) {
@@ -70,12 +87,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
 
             } catch (error) {
+
                 const temp = document.createElement("textarea");
+
                 temp.value = address;
+                temp.style.position = "fixed";
+                temp.style.opacity = "0";
+
                 document.body.appendChild(temp);
                 temp.select();
 
                 const copied = document.execCommand("copy");
+
                 temp.remove();
 
                 if (copyFeedback) {
@@ -88,12 +111,15 @@ document.addEventListener("DOMContentLoaded", () => {
             copyButton.textContent = "کپی شد!";
 
             setTimeout(() => {
+
                 copyButton.textContent = "کپی آدرس";
 
                 if (copyFeedback) {
                     copyFeedback.textContent = "";
                 }
+
             }, 2500);
+
         });
     }
 
