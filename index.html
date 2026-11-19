@@ -2,636 +2,268 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#09090d">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#09090d">
+  <meta name="description" content="OS CRAFT؛ سرور ماینکرفت SMP و Roleplay نسخه 26.2">
+  <title>OS CRAFT | SMP + ROLEPLAY</title>
 
-    <title>OS CRAFT | SMP + ROLEPLAY</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <meta name="description" content="OS CRAFT - سرور ماینکرفت SMP و Roleplay نسخه 26.2">
-
-    <link rel="stylesheet" href="style.css">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 
 <body>
 
-<!-- BACKGROUND EFFECTS -->
-
-<div class="ambient ambient-one"></div>
-<div class="ambient ambient-two"></div>
-
-<!-- INTRO ANIMATION -->
-
-<div id="intro">
-    <div class="intro-glow"></div>
-
-    <div class="intro-content">
-        <div class="intro-logo">OS</div>
-
-        <h1>OS CRAFT</h1>
-
-        <p>SMP • ROLEPLAY • 26.2</p>
-
-        <div class="intro-line"></div>
-
-        <span>WELCOME TO THE WORLD</span>
+  <!-- Intro -->
+  <div class="intro" id="intro" aria-label="OS CRAFT">
+    <div class="intro-orb"></div>
+    <div class="intro-inner">
+      <div class="intro-mark">OS</div>
+      <h1>OS CRAFT</h1>
+      <p>SMP • ROLEPLAY • 26.2</p>
+      <div class="intro-progress"><span></span></div>
+      <small>WELCOME TO THE WORLD</small>
     </div>
-</div>
+  </div>
 
-<!-- HEADER -->
+  <!-- Background effects -->
+  <div class="background-glow glow-one"></div>
+  <div class="background-glow glow-two"></div>
+  <div class="background-grid"></div>
 
-<header class="site-header">
-
-    <a class="logo" href="index.html" aria-label="صفحه اصلی OS CRAFT">
-        <span class="logo-mark">OS</span>
-        <span>OS <b>CRAFT</b></span>
+  <!-- Header -->
+  <header class="header">
+    <a class="brand" href="#home" aria-label="OS CRAFT صفحه اصلی">
+      <span class="brand-mark">OS</span>
+      <span class="brand-name">OS <b>CRAFT</b></span>
     </a>
 
-    <button class="menu-toggle"
-            id="menuToggle"
-            aria-label="باز کردن منو"
-            aria-expanded="false">
-        ☰
+    <button class="menu-toggle" id="menuToggle"
+      type="button" aria-label="باز کردن منو"
+      aria-expanded="false" aria-controls="mainNav">
+      <span></span><span></span><span></span>
     </button>
 
-    <nav class="main-nav" id="mainNav">
-        <a href="#home">صفحه اصلی</a>
-        <a href="#about">درباره سرور</a>
-        <a href="#media">ویدئو و کانال</a>
-        <a href="commands.html">دستورات سرور</a>
-        <a href="#connect">ورود به سرور</a>
+    <nav class="nav" id="mainNav">
+      <a href="#home">صفحه اصلی</a>
+      <a href="#about">درباره سرور</a>
+      <a href="#features">امکانات</a>
+      <a href="#media">ویدئو و کانال</a>
+      <a href="#connect">ورود به سرور</a>
     </nav>
+  </header>
 
-</header>
+  <main>
 
-<main>
+    <!-- Hero -->
+    <section class="hero section" id="home">
+      <div class="hero-content">
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          OFFICIAL MINECRAFT SERVER
+        </div>
 
-<!-- HERO SECTION -->
-
-<section class="hero" id="home">
-
-    <div class="hero-content">
-
-        <span class="hero-label">
-            OFFICIAL MINECRAFT SERVER
-        </span>
-
-        <h1>
-            <span>OS</span> CRAFT
+        <h1 class="hero-title">
+          <span class="hero-os">OS</span> CRAFT
         </h1>
 
-        <h2>
-            SMP <span>+</span> ROLEPLAY
-        </h2>
+        <div class="hero-subtitle">SMP <i>+</i> ROLEPLAY</div>
 
-        <p>
-            تجربه‌ای متفاوت از دنیای ماینکرفت
-            در سرور OS CRAFT
+        <p class="hero-description">
+          وارد دنیای OS CRAFT شو؛ تجربه‌ای متفاوت از ماینکرفت
+          با سیستم اقتصادی، شغل‌ها، خانه‌ها و زندگی شهری.
         </p>
 
-        <div class="hero-buttons">
-            <a href="#connect" class="btn-primary">
-                ورود به سرور
-            </a>
-
-            <a href="#about" class="btn-secondary">
-                اطلاعات بیشتر
-            </a>
+        <div class="hero-actions">
+          <a href="#connect" class="button button-primary">ورود به سرور</a>
+          <a href="#about" class="button button-outline">آشنایی با سرور</a>
         </div>
 
-        <div class="hero-version">
-            <span>SERVER VERSION</span>
+        <div class="hero-meta">
+          <div>
+            <span>نسخه سرور</span>
             <strong>26.2</strong>
+          </div>
+          <div class="meta-divider"></div>
+          <div>
+            <span>سبک بازی</span>
+            <strong>SMP + RP</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-decoration" aria-hidden="true">
+        <div class="hero-ring ring-one"></div>
+        <div class="hero-ring ring-two"></div>
+        <div class="hero-cube">OS</div>
+        <span class="floating-pixel pixel-one"></span>
+        <span class="floating-pixel pixel-two"></span>
+        <span class="floating-pixel pixel-three"></span>
+      </div>
+
+      <a class="scroll-hint" href="#about">
+        <span></span>
+        مشاهده بیشتر
+      </a>
+    </section>
+
+    <!-- About -->
+    <section class="section content-section" id="about">
+      <div class="section-heading">
+        <span class="section-kicker">ABOUT THE SERVER</span>
+        <h2>درباره <em>OS CRAFT</em></h2>
+        <p>یک تجربه متفاوت از ماینکرفت در سبک SMP و Roleplay</p>
+      </div>
+
+      <div class="about-panel">
+        <div class="about-symbol">OS</div>
+        <div>
+          <h3>به دنیای OS CRAFT خوش آمدی</h3>
+          <p>
+            در این سرور می‌توانی در شهر زندگی کنی، شغل انتخاب کنی،
+            خانه داشته باشی، خرید و فروش انجام بدهی و در فعالیت‌های
+            مختلف دنیای سرور شرکت کنی.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="section content-section" id="features">
+      <div class="section-heading">
+        <span class="section-kicker">SERVER FEATURES</span>
+        <h2>امکانات سرور</h2>
+        <p>بخش‌های مختلف دنیای OS CRAFT</p>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="feature-icon">🏙️</div>
+          <h3>زندگی شهری</h3>
+          <p>زندگی و فعالیت در فضای شهری سرور</p>
+          <span class="card-number">01</span>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">💼</div>
+          <h3>سیستم شغل</h3>
+          <p>انتخاب شغل و فعالیت برای کسب درآمد</p>
+          <span class="card-number">02</span>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">🏠</div>
+          <h3>خانه‌ها</h3>
+          <p>داشتن خانه و استفاده از امکانات آن</p>
+          <span class="card-number">03</span>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">💰</div>
+          <h3>اقتصاد سرور</h3>
+          <p>خرید و فروش و فعالیت در اقتصاد بازی</p>
+          <span class="card-number">04</span>
+        </article>
+      </div>
+    </section>
+
+    <!-- Video and channel -->
+    <section class="section content-section media-section" id="media">
+      <div class="section-heading">
+        <span class="section-kicker">OS CRAFT MEDIA</span>
+        <h2>رسانه <em>OS CRAFT</em></h2>
+        <p>ویدئو و اخبار سرور را دنبال کن</p>
+      </div>
+
+      <div class="video-card">
+        <div class="media-heading">
+          <span class="status-light"></span>
+          <h3>ویدئوی معرفی سرور</h3>
+          <span class="media-version">VERSION 26.2</span>
         </div>
 
-    </div>
-
-</section>
-
-<!-- ABOUT SECTION -->
-
-<section class="about-section" id="about">
-
-    <div class="section-heading">
-        <span>ABOUT OS CRAFT</span>
-        <h2>درباره OS CRAFT</h2>
-        <p>
-            دنیایی با امکانات متنوع در سبک SMP و Roleplay
-        </p>
-    </div>
-
-    <div class="about-grid">
-
-        <article class="about-card">
-            <div class="about-icon">🏙️</div>
-            <h3>زندگی شهری</h3>
-            <p>
-                تجربه زندگی در یک شهر ماینکرفتی
-                با امکانات و فعالیت‌های مختلف
-            </p>
-        </article>
-
-        <article class="about-card">
-            <div class="about-icon">💼</div>
-            <h3>سیستم شغل</h3>
-            <p>
-                انتخاب شغل، فعالیت اقتصادی
-                و کسب درآمد در دنیای بازی
-            </p>
-        </article>
-
-        <article class="about-card">
-            <div class="about-icon">🏠</div>
-            <h3>خانه و کسب‌وکار</h3>
-            <p>
-                خرید خانه و فعالیت در
-                بخش‌های مختلف شهر
-            </p>
-        </article>
-
-        <article class="about-card">
-            <div class="about-icon">💎</div>
-            <h3>اقتصاد سرور</h3>
-            <p>
-                خرید، فروش و مدیریت پول
-                در اقتصاد اختصاصی سرور
-            </p>
-        </article>
-
-    </div>
-
-</section>
-
-<!-- MEDIA SECTION -->
-
-<section class="os-media-section" id="media">
-
-    <div class="os-section-title">
-        <span>DISCOVER OS CRAFT</span>
-        <h2>رسانه OS CRAFT</h2>
-        <p>
-            ویدئوها و اخبار سرور را دنبال کن
-        </p>
-    </div>
-
-    <!-- VIDEO -->
-
-    <div class="os-video-card">
-
-        <div class="os-video-heading">
-            <span class="live-dot"></span>
-            <h3>ویدئوی معرفی OS CRAFT</h3>
-        </div>
-
-        <video
-            class="os-video"
-            controls
-            preload="metadata"
-            playsinline
-            poster="assets/os-craft-channel.jpg">
-
-            <source
-                src="assets/os-craft-video.mp4"
-                type="video/mp4">
-
-            مرورگر شما از پخش ویدئو پشتیبانی نمی‌کند.
-
+        <video class="server-video" controls playsinline preload="metadata"
+          poster="assets/os-craft-channel.jpg">
+          <source src="assets/os-craft-video.mp4" type="video/mp4">
+          مرورگر شما از پخش ویدئو پشتیبانی نمی‌کند.
         </video>
 
-        <p class="video-caption">
-            OS CRAFT | SMP + ROLEPLAY | VERSION 26.2
-        </p>
+        <p class="video-caption">OS CRAFT • SMP + ROLEPLAY</p>
+      </div>
 
-    </div>
-
-    <!-- APARAT CHANNEL -->
-
-    <a
+      <a class="channel-card"
         href="https://aparat.com/os_craft"
         target="_blank"
-        rel="noopener noreferrer"
-        class="os-channel-card">
+        rel="noopener noreferrer">
 
-        <div class="channel-image-box">
-
-            <img
-                src="assets/os-craft-channel.jpg"
-                alt="تصویر کانال OS CRAFT">
-
+        <div class="channel-image">
+          <img src="assets/os-craft-channel.jpg"
+            alt="تصویر کانال OS CRAFT">
         </div>
 
-        <div class="channel-info">
-
-            <span>OFFICIAL CHANNEL</span>
-
-            <h3>کانال OS CRAFT</h3>
-
-            <p>
-                برای مشاهده ویدئوها و اخبار
-                OS CRAFT وارد کانال رسمی شو.
-            </p>
-
-            <div class="channel-button">
-                مشاهده کانال
-                <span>↗</span>
-            </div>
-
+        <div class="channel-details">
+          <span class="channel-kicker">OFFICIAL APARAT CHANNEL</span>
+          <h3>کانال OS CRAFT</h3>
+          <p>برای مشاهده ویدئوها و اخبار سرور وارد کانال شو.</p>
+          <span class="channel-link">مشاهده کانال <b>↗</b></span>
         </div>
 
-    </a>
+        <div class="channel-arrow" aria-hidden="true">↗</div>
+      </a>
+    </section>
 
-</section>
+    <!-- Connect -->
+    <section class="section content-section connect-section" id="connect">
+      <div class="section-heading">
+        <span class="section-kicker">JOIN THE SERVER</span>
+        <h2>ورود به سرور</h2>
+        <p>برای اتصال به OS CRAFT از آدرس زیر استفاده کن</p>
+      </div>
 
-<!-- CONNECT SECTION -->
-
-<section class="connect-section" id="connect">
-
-    <div class="section-heading">
-        <span>JOIN THE SERVER</span>
-        <h2>ورود به OS CRAFT</h2>
-        <p>
-            نسخه موردنیاز سرور 26.2 است.
-        </p>
-    </div>
-
-    <div class="server-box">
-
-        <div class="server-status">
-            <span class="status-dot"></span>
-            آدرس سرور
+      <div class="server-card">
+        <div class="server-card-top">
+          <span class="server-indicator"></span>
+          <span>آدرس سرور</span>
+          <span class="server-version-tag">1.26.2</span>
         </div>
 
         <h3>OS CRAFT</h3>
+        <p class="server-type">SMP • ROLEPLAY</p>
 
-        <p class="server-version">
-            VERSION 26.2
-        </p>
-
-        <div class="server-ip" dir="ltr">
-            sarafraz7171-srv-os_craft_asli.play.mihancraft.com:25566
+        <div class="ip-box" dir="ltr">
+          <code id="serverAddress">sarafraz7171-srv-os_craft_asli.play.mihancraft.com:25566</code>
         </div>
 
-        <button
-            class="copy-ip"
-            id="copyIp"
-            type="button">
-
-            کپی آدرس سرور
-
+        <button class="button button-primary copy-button" id="copyButton" type="button">
+          کپی آدرس سرور
         </button>
 
-        <p id="copyMessage" class="copy-message" aria-live="polite"></p>
+        <p class="copy-feedback" id="copyFeedback" aria-live="polite"></p>
+      </div>
+    </section>
 
-    </div>
+  </main>
 
-</section>
-
-</main>
-
-<!-- FOOTER -->
-
-<footer class="site-footer">
-
-    <a class="footer-logo" href="#home">
-        OS CRAFT
-    </a>
-
-    <p>
-        OS CRAFT | SMP + ROLEPLAY
-    </p>
+  <!-- Footer -->
+  <footer class="footer">
+    <a class="footer-brand" href="#home">OS CRAFT</a>
+    <p>SMP + ROLEPLAY • MINECRAFT SERVER</p>
 
     <div class="footer-links">
-
-        <a href="#home">صفحه اصلی</a>
-
-        <a href="commands.html">دستورات سرور</a>
-
-        <a
-            href="https://aparat.com/os_craft"
-            target="_blank"
-            rel="noopener noreferrer">
-            کانال آپارات
-        </a>
-
+      <a href="#home">صفحه اصلی</a>
+      <a href="#about">درباره سرور</a>
+      <a href="#media">رسانه</a>
+      <a href="https://aparat.com/os_craft" target="_blank"
+        rel="noopener noreferrer">آپارات</a>
     </div>
 
-    <div class="footer-line"></div>
-
-    <span>
-        © 2026 OS CRAFT - All Rights Reserved
-    </span>
-
-</footer>
-
-<!-- JAVASCRIPT -->
-
-<script src="script.js"></script>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-
-    const copyButton = document.getElementById("copyIp");
-    const copyMessage = document.getElementById("copyMessage");
-
-    const serverIP =
-        "sarafraz7171-srv-os_craft_asli.play.mihancraft.com:25566";
-
-    if (copyButton) {
-        copyButton.addEventListener("click", async function () {
-
-            try {
-                await navigator.clipboard.writeText(serverIP);
-
-                copyMessage.textContent = "آدرس سرور کپی شد!";
-                copyButton.textContent = "کپی شد ✓";
-
-            } catch (error) {
-
-                copyMessage.textContent =
-                    "کپی خودکار ممکن نیست؛ آدرس را دستی کپی کن.";
-
-            }
-
-        });
-    }
-
-    // Close intro after animation
-    const intro = document.getElementById("intro");
-
-    if (intro) {
-        setTimeout(function () {
-            intro.style.pointerEvents = "none";
-        }, 5300);
-    }
-
-});
-</script>
+    <div class="footer-rule"></div>
+    <small>© 2026 OS CRAFT — All Rights Reserved</small>
+  </footer>
 
 </body>
 </html>
-/* ==============================
-   OS CRAFT MEDIA SECTION
-============================== */
-
-.os-media-section {
-    position: relative;
-    padding: 100px 6%;
-    overflow: hidden;
-    isolation: isolate;
-}
-
-.os-media-section::before {
-    content: "";
-    position: absolute;
-    width: 500px;
-    height: 500px;
-    background: #e5092f;
-    filter: blur(180px);
-    opacity: .10;
-    top: 10%;
-    left: -200px;
-    z-index: -1;
-    pointer-events: none;
-}
-
-.os-section-title {
-    text-align: center;
-    margin-bottom: 45px;
-}
-
-.os-section-title > span {
-    color: #ff4058;
-    font-size: 12px;
-    letter-spacing: 5px;
-    font-weight: 800;
-}
-
-.os-section-title h2 {
-    color: white;
-    font-size: clamp(28px, 5vw, 42px);
-    margin: 15px 0;
-    text-shadow: 0 0 25px #ff263d55;
-}
-
-.os-section-title p {
-    color: #999;
-    font-size: 14px;
-}
-
-/* VIDEO CARD */
-
-.os-video-card {
-    max-width: 950px;
-    margin: 0 auto 35px;
-    padding: 18px;
-    background: linear-gradient(145deg, #19191f, #09090d);
-    border: 1px solid #ffffff17;
-    border-radius: 22px;
-    box-shadow: 0 20px 70px #0008;
-    transition: .35s ease;
-}
-
-.os-video-card:hover {
-    border-color: #ff263d88;
-    transform: translateY(-5px);
-    box-shadow: 0 25px 80px #ff263d20;
-}
-
-.os-video-heading {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 16px;
-}
-
-.os-video-heading h3 {
-    color: white;
-    font-size: 17px;
-    margin: 0;
-}
-
-.live-dot {
-    width: 10px;
-    height: 10px;
-    background: #ff263d;
-    border-radius: 50%;
-    box-shadow: 0 0 15px #ff263d;
-    animation: livePulse 1.4s infinite;
-}
-
-.os-video {
-    display: block;
-    width: 100%;
-    max-height: 520px;
-    background: black;
-    border-radius: 15px;
-    outline: none;
-}
-
-.video-caption {
-    color: #888;
-    text-align: center;
-    font-size: 11px;
-    letter-spacing: 2px;
-    margin: 16px 0 3px;
-}
-
-/* CHANNEL CARD */
-
-.os-channel-card {
-    max-width: 950px;
-    margin: auto;
-    padding: 18px;
-    display: flex;
-    align-items: center;
-    gap: 25px;
-    text-decoration: none;
-    background: linear-gradient(110deg, #17171c, #0b0b10);
-    border: 1px solid #ffffff18;
-    border-radius: 22px;
-    transition: .35s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.os-channel-card::after {
-    content: "";
-    position: absolute;
-    width: 180px;
-    height: 180px;
-    background: #ff183a;
-    filter: blur(100px);
-    opacity: .12;
-    right: -70px;
-    top: -70px;
-    transition: .35s;
-    pointer-events: none;
-}
-
-.os-channel-card:hover {
-    transform: translateY(-6px);
-    border-color: #ff4058;
-    box-shadow: 0 20px 60px #ff263d20;
-}
-
-.os-channel-card:hover::after {
-    opacity: .35;
-}
-
-.channel-image-box {
-    width: 180px;
-    height: 140px;
-    flex-shrink: 0;
-    border-radius: 15px;
-    overflow: hidden;
-    border: 1px solid #ffffff25;
-}
-
-.channel-image-box img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform .5s ease;
-}
-
-.os-channel-card:hover img {
-    transform: scale(1.12);
-}
-
-.channel-info {
-    position: relative;
-    z-index: 1;
-}
-
-.channel-info > span {
-    color: #ff5268;
-    font-size: 10px;
-    letter-spacing: 3px;
-    font-weight: bold;
-}
-
-.channel-info h3 {
-    color: white;
-    font-size: 24px;
-    margin: 10px 0;
-}
-
-.channel-info p {
-    color: #aaa;
-    font-size: 13px;
-    line-height: 1.9;
-}
-
-.channel-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    margin-top: 10px;
-    padding: 11px 20px;
-    border-radius: 10px;
-    color: white;
-    background: linear-gradient(100deg, #d80d2d, #ff4058);
-    font-size: 13px;
-    font-weight: bold;
-    box-shadow: 0 5px 25px #ff263d30;
-    transition: .3s;
-}
-
-.os-channel-card:hover .channel-button {
-    box-shadow: 0 5px 30px #ff263d75;
-    transform: translateX(-4px);
-}
-
-/* ANIMATIONS */
-
-@keyframes livePulse {
-    0%, 100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-
-    50% {
-        opacity: .4;
-        transform: scale(.7);
-    }
-}
-
-/* MOBILE */
-
-@media (max-width: 650px) {
-
-    .os-media-section {
-        padding: 65px 5%;
-    }
-
-    .os-channel-card {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 15px;
-    }
-
-    .channel-image-box {
-        width: 100%;
-        height: 190px;
-    }
-
-    .channel-info {
-        padding: 5px;
-    }
-
-    .channel-info h3 {
-        font-size: 21px;
-    }
-
-    .os-video-card {
-        padding: 12px;
-    }
-
-    .video-caption {
-        font-size: 9px;
-    }
-}
