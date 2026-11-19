@@ -1069,3 +1069,25 @@ button { font: inherit; }
   *,*::before,*::after { transition-duration: .01ms !important; }
   .pulse { animation: none; }
 }
+#intro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+#intro .intro-content,
+#intro .intro-inner {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+#intro .intro-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
