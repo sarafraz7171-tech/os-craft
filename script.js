@@ -1,56 +1,59 @@
 
-/* =====================================
-   OS CRAFT - MAIN JAVASCRIPT
-   LOGO EXPLOSION INTRO
-===================================== */
+/* =========================================
+   OS CRAFT - LUXURY JAVASCRIPT
+========================================= */
 
 
-/* ---------- INTRO ELEMENTS ---------- */
+/* =========================================
+   LUXURY INTRO
+========================================= */
 
 const intro = document.getElementById("intro");
 const enterButton = document.getElementById("enterButton");
-const particlesContainer = document.getElementById("logoParticles");
+const sparklesContainer = document.getElementById("logoSparkles");
+
+let introClosed = false;
 
 
-/* ---------- CREATE EXPLOSION ---------- */
+/* =========================================
+   CREATE GOLD SPARKLES
+========================================= */
 
-function createExplosion() {
+function createSparkles() {
 
-    if (!particlesContainer) return;
+    if (!sparklesContainer) return;
 
-    const particleCount = window.innerWidth < 600 ? 45 : 85;
+    const count = window.innerWidth < 600 ? 18 : 32;
 
-    for (let i = 0; i < particleCount; i++) {
+    for (let i = 0; i < count; i++) {
 
-        const particle = document.createElement("span");
+        const sparkle = document.createElement("span");
 
-        particle.className = "particle";
+        sparkle.className = "sparkle";
 
-        const angle = Math.random() * Math.PI * 2;
-        const distance = 100 + Math.random() * 260;
+        const x = Math.random() * 100;
+        const y = Math.random() * 100;
 
-        const x = Math.cos(angle) * distance;
-        const y = Math.sin(angle) * distance;
+        sparkle.style.left = `${x}%`;
+        sparkle.style.top = `${y}%`;
 
-        particle.style.setProperty("--x", `${x}px`);
-        particle.style.setProperty("--y", `${y}px`);
+        sparkle.style.animationDelay = `${Math.random() * 2.5}s`;
 
-        const size = 2 + Math.random() * 5;
+        const size = 2 + Math.random() * 4;
 
-        particle.style.width = `${size}px`;
-        particle.style.height = `${size}px`;
+        sparkle.style.width = `${size}px`;
+        sparkle.style.height = `${size}px`;
 
-        particle.style.animationDelay =
-            `${Math.random() * 0.35}s`;
+        sparklesContainer.appendChild(sparkle);
 
-        particlesContainer.appendChild(particle);
     }
+
 }
 
 
-/* ---------- CLOSE INTRO ---------- */
-
-let introClosed = false;
+/* =========================================
+   CLOSE INTRO
+========================================= */
 
 function closeIntro() {
 
@@ -61,26 +64,36 @@ function closeIntro() {
     intro.classList.add("hide");
 
     setTimeout(() => {
+
         intro.style.display = "none";
-    }, 1100);
+
+    }, 1250);
+
 }
 
 
-/* ---------- START INTRO ---------- */
+/* =========================================
+   START INTRO
+========================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    createExplosion();
+    createSparkles();
 
-    // بستن خودکار اینترو بعد از 8.5 ثانیه
+    // بستن خودکار اینترو پس از 8 ثانیه
+
     setTimeout(() => {
+
         closeIntro();
-    }, 8500);
+
+    }, 8000);
 
 });
 
 
-/* ---------- ENTER BUTTON ---------- */
+/* =========================================
+   ENTER BUTTON
+========================================= */
 
 if (enterButton) {
 
@@ -93,9 +106,9 @@ if (enterButton) {
 }
 
 
-/* =====================================
+/* =========================================
    MOBILE MENU
-===================================== */
+========================================= */
 
 const menuToggle = document.getElementById("menuToggle");
 const navMenu = document.getElementById("navMenu");
@@ -108,7 +121,6 @@ if (menuToggle && navMenu) {
 
     });
 
-    // بستن منو بعد از انتخاب لینک
     navMenu.querySelectorAll("a").forEach(link => {
 
         link.addEventListener("click", () => {
@@ -122,9 +134,9 @@ if (menuToggle && navMenu) {
 }
 
 
-/* =====================================
+/* =========================================
    COPY SERVER ADDRESS
-===================================== */
+========================================= */
 
 const copyButton = document.getElementById("copyButton");
 const serverAddress = document.getElementById("serverAddress");
@@ -148,10 +160,12 @@ if (copyButton && serverAddress) {
 
         } catch (error) {
 
-            // روش جایگزین برای مرورگرهایی که Clipboard API ندارند
             const temporaryInput = document.createElement("textarea");
 
             temporaryInput.value = address;
+
+            temporaryInput.style.position = "fixed";
+            temporaryInput.style.opacity = "0";
 
             document.body.appendChild(temporaryInput);
 
@@ -191,13 +205,13 @@ if (copyButton && serverAddress) {
 }
 
 
-/* =====================================
+/* =========================================
    SMOOTH SCROLL
-===================================== */
+========================================= */
 
 document.querySelectorAll('a[href^="#"]').forEach(link => {
 
-    link.addEventListener("click", function (event) {
+    link.addEventListener("click", function(event) {
 
         const targetId = this.getAttribute("href");
 
@@ -210,8 +224,11 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
             event.preventDefault();
 
             target.scrollIntoView({
+
                 behavior: "smooth",
+
                 block: "start"
+
             });
 
         }
@@ -221,16 +238,16 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 });
 
 
-/* =====================================
-   OS CRAFT CONSOLE MESSAGE
-===================================== */
+/* =========================================
+   CONSOLE
+========================================= */
 
 console.log(
-    "%c OS CRAFT NETWORK ",
-    "background: #704cff; color: white; font-size: 20px; font-weight: bold; padding: 10px;"
+    "%c OS CRAFT ",
+    "background: linear-gradient(90deg,#d8bb78,#94713a); color: #17130a; font-size: 22px; font-weight: bold; padding: 10px;"
 );
 
 console.log(
     "%c SMP + ROLEPLAY | VERSION 26.2 ",
-    "color: #a58aff; font-size: 13px;"
+    "color: #c7a45d; font-size: 13px;"
 );
