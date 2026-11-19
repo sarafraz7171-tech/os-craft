@@ -1119,3 +1119,64 @@ body {
 .background-particles {
     display: none !important;
 }
+/* FIX INTRO AND PAGE VISIBILITY */
+
+.intro {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #101426;
+}
+
+.intro-inner {
+    text-align: center;
+}
+
+.intro-title {
+    display: flex;
+    justify-content: center;
+    direction: ltr;
+}
+
+.intro-title span {
+    opacity: 0;
+    animation: letterReveal .55s ease forwards;
+}
+
+.intro-title span:nth-child(1) { animation-delay: 0s; }
+.intro-title span:nth-child(2) { animation-delay: .16s; }
+.intro-title span:nth-child(3) { animation-delay: .32s; }
+.intro-title span:nth-child(4) { animation-delay: .48s; }
+.intro-title span:nth-child(5) { animation-delay: .64s; }
+.intro-title span:nth-child(6) { animation-delay: .80s; }
+.intro-title span:nth-child(7) { animation-delay: .96s; }
+
+.intro-crown {
+    opacity: 0;
+    animation: crownReveal .7s ease 1.7s forwards;
+}
+
+@keyframes letterReveal {
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes crownReveal {
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Make sure main page is visible */
+body > header,
+body > main,
+body > footer {
+    visibility: visible;
+    opacity: 1;
+}
