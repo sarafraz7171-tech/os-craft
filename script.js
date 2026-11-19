@@ -1,44 +1,87 @@
-const intro=document.getElementById('intro');const site=document.getElementById('site');const fill=document.getElementById('loadingFill');const number=document.getElementById('loadingNumber');const loadingText=document.getElementById('loadingText');let done=false;let progress=0;const messages=['در حال اتصال به جهان OS CRAFT','در حال ساخت تونل بی‌نهایت','بارگذاری سیستم رول‌پلی','آماده ورود'];const timer=setInterval(()=>{if(done)return;progress=Math.min(100,progress+Math.ceil(Math.random()*3));fill.style.width=progress+'%';number.textContent=String(progress).padStart(2,'0')+'%';loadingText.textContent=messages[Math.min(3,Math.floor(progress/26))];if(progress>=100){clearInterval(timer);setTimeout(closeIntro,650)}},75);function closeIntro(){if(done)return;done=true;intro.classList.add('hide');site.classList.add('ready');setTimeout(()=>intro.remove(),1100)}document.getElementById('skipIntro').addEventListener('click',()=>{clearInterval(timer);closeIntro()});document.getElementById('menuToggle').addEventListener('click',()=>document.getElementById('nav').classList.toggle('open'));document.querySelectorAll('nav a').forEach(a=>a.addEventListener('click',()=>document.getElementById('nav').classList.remove('open')));const toast=document.getElementById('toast');let toastTimer;function showToast(text){toast.textContent=text;toast.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('show'),1700)}async function copyText(value){try{await navigator.clipboard.writeText(value);showToast('کپی شد!')}catch(e){const area=document.createElement('textarea');area.value=value;document.body.appendChild(area);area.select();document.execCommand('copy');area.remove();showToast('کپی شد!')}}document.getElementById('copyServer').addEventListener('click',()=>copyText(document.getElementById('serverAddress').textContent.trim()));document.querySelectorAll('.copy-command').forEach(btn=>btn.addEventListener('click',()=>copyText(btn.dataset.copy)));
 
-/* ===== OS CRAFT PARALLAX ENGINE ===== */
+/* ===== OS CRAFT TYPING SYSTEM ===== */
 
-const parallaxContainer = document.querySelector('.parallax-container');
+const typingElement = document.getElementById("typingText");
 
-if (parallaxContainer && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+if (typingElement) {
+    const messages = [
+        "به دنیای OS CRAFT خوش آمدید",
+        "نسخه 26.2 | SMP + ROLEPLAY",
+        "یک تجربه متفاوت از ماینکرفت",
+        "جهان OS CRAFT آماده ورود شماست"
+    ];
 
-    const layers = parallaxContainer.querySelectorAll('.parallax-layer');
-    const glow = parallaxContainer.querySelector('.parallax-glow');
+    let messageIndex = 0;
+    let charIndex = 0;
+    let deleting = false;
 
-    parallaxContainer.addEventListener('mousemove', (event) => {
+    function typeEffect() {
+        const currentMessage = messages[messageIndex];
 
-        const rect = parallaxContainer.getBoundingClientRect();
+        if (!deleting) {
+            charIndex++;
 
-        const x = (event.clientX - rect.left) / rect.width - 0.5;
-        const y = (event.clientY - rect.top) / rect.height - 0.5;
+            typingElement.textContent =
+                currentMessage.substring(0, charIndex);
 
-        layers.forEach(layer => {
+            if (charIndex >= currentMessage.length) {
+                deleting = true;
+                setTimeout(typeEffect, 1800);
+                return;
+            }
+        } else {
+            charIndex--;
 
-            const depth = Number(layer.dataset.depth || 10);
+            typingElement.textContent =
+                currentMessage.substring(0, charIndex);
 
-            layer.style.transform =
-                `translate3d(${x * depth}px, ${y * depth}px, 0)
-                 rotateX(${-y * 4}deg)
-                 rotateY(${x * 4}deg)`;
+            if (charIndex <= 0) {
+                deleting = false;
 
-        });
-
-        if (glow) {
-            glow.style.left = `${(x + 0.5) * 100}%`;
-            glow.style.top = `${(y + 0.5) * 100}%`;
+                messageIndex =
+                    (messageIndex + 1) % messages.length;
+            }
         }
 
-    });
+        setTimeout(typeEffect, deleting ? 35 : 85);
+    }
 
-    parallaxContainer.addEventListener('mouseleave', () => {
-
-        layers.forEach(layer => {
-            layer.style.transform = '';
-        });
-
-    });
+    typeEffect();
 }
+
+/* ===== COPY SERVER ADDRESS ===== */
+
+const copyButton = document.getElementById("copyServer");
+const serverAddress = document.querySelector(".server-address");
+const toast = document.getElementById("toast");
+
+function showToast(message) {
+    toast.textContent = message;
+    toast.classList.add("show");
+
+    clearTimeout(window.toastTimer);
+
+    window.toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+    }, 1800);
+}
+
+copyButton.addEventListener("click", async () => {
+    const address = serverAddress.textContent.trim();
+
+    try {
+        await navigator.clipboard.writeText(address);
+        showToast("آدرس سرور کپی شد!");
+    } catch (error) {
+        const textarea = document.createElement("textarea");
+
+        textarea.value = address;
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        const success = document.execCommand("copy");
+        textarea.remove();
+
+        showToast(success ? "آدرس سرور کپی شد!" : "کپی انجام نشد!");
+    }
+});
