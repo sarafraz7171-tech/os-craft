@@ -1339,3 +1339,44 @@ button, a {
     transform: rotateY(360deg) rotateX(-8deg);
   }
 }
+/* COLORFUL ANIMATED BACKGROUND */
+
+.background-glow {
+  position: fixed;
+  inset: -30%;
+  z-index: -3;
+  pointer-events: none;
+
+  background:
+    radial-gradient(ellipse at 20% 25%,
+      rgba(116,65,255,.25), transparent 35%),
+
+    radial-gradient(ellipse at 80% 25%,
+      rgba(0,170,255,.23), transparent 35%),
+
+    radial-gradient(ellipse at 55% 75%,
+      rgba(0,220,180,.16), transparent 35%),
+
+    radial-gradient(ellipse at 25% 85%,
+      rgba(255,174,65,.15), transparent 30%);
+
+  filter: blur(25px);
+  animation: colorfulBackground 18s ease-in-out infinite alternate;
+}
+
+@keyframes colorfulBackground {
+  0% {
+    transform: translate(-3%, -2%) scale(1);
+    filter: hue-rotate(0deg) blur(25px);
+  }
+
+  50% {
+    transform: translate(3%, 2%) scale(1.08);
+    filter: hue-rotate(35deg) blur(30px);
+  }
+
+  100% {
+    transform: translate(-1%, 4%) scale(1.04);
+    filter: hue-rotate(70deg) blur(25px);
+  }
+}
