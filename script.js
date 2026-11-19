@@ -1,7 +1,7 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  // منوی موبایل
+  // MOBILE MENU
   const menuToggle = document.getElementById("menuToggle");
   const mainNav = document.getElementById("mainNav");
 
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // کپی آدرس سرور
+  // COPY SERVER IP
   const copyButton = document.getElementById("copyButton");
   const serverAddress = document.getElementById("serverAddress");
   const copyFeedback = document.getElementById("copyFeedback");
