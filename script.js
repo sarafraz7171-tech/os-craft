@@ -59,15 +59,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // صفحه شروع
-  const intro = document.getElementById("intro");
-
-  if (intro) {
-    window.addEventListener("load", () => {
-      setTimeout(() => {
-        intro.setAttribute("aria-hidden", "true");
-      }, 4700);
-    });
-  }
-
-});
+ <!-- CINEMATIC INTRO -->
+<div class="intro" id="intro">
+  <div class="intro-line"></div>
+  <div class="intro-inner">
+    <div class="intro-mark">OS</div>
+    <h1>OS CRAFT</h1>
+    <p>SMP + ROLEPLAY</p>
+  </div>
+</div>
