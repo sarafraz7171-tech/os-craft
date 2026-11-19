@@ -1,10 +1,21 @@
 
-// DIGITAL TYPING INTRO
+/* INTRO */
+
+const intro = document.getElementById("intro");
+
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    intro?.classList.add("hide");
+  }, 4200);
+});
+
+
+/* TYPING EFFECT */
 
 const typingElement = document.getElementById("typingText");
 
-const typingWords = [
-  "SMP WORLD",
+const words = [
+  "MINECRAFT SMP",
   "ROLEPLAY EXPERIENCE",
   "BUILD YOUR WORLD",
   "WELCOME TO OS CRAFT"
@@ -17,7 +28,7 @@ let deleting = false;
 function typeEffect() {
   if (!typingElement) return;
 
-  const currentWord = typingWords[wordIndex];
+  const word = words[wordIndex];
 
   if (deleting) {
     charIndex--;
@@ -25,26 +36,26 @@ function typeEffect() {
     charIndex++;
   }
 
-  typingElement.textContent = currentWord.substring(0, charIndex);
+  typingElement.textContent = word.substring(0, charIndex);
 
-  let delay = deleting ? 45 : 90;
+  let speed = deleting ? 45 : 90;
 
-  if (!deleting && charIndex === currentWord.length) {
+  if (!deleting && charIndex === word.length) {
     deleting = true;
-    delay = 1500;
+    speed = 1400;
   } else if (deleting && charIndex === 0) {
     deleting = false;
-    wordIndex = (wordIndex + 1) % typingWords.length;
-    delay = 400;
+    wordIndex = (wordIndex + 1) % words.length;
+    speed = 350;
   }
 
-  setTimeout(typeEffect, delay);
+  setTimeout(typeEffect, speed);
 }
 
 typeEffect();
 
 
-// MOBILE MENU
+/* MOBILE MENU */
 
 const menuToggle = document.getElementById("menuToggle");
 const nav = document.getElementById("nav");
@@ -71,7 +82,7 @@ if (menuToggle && nav) {
 }
 
 
-// COPY SERVER IP
+/* COPY SERVER IP */
 
 const copyButton = document.getElementById("copyIP");
 const serverIP = document.getElementById("serverIP");
@@ -83,22 +94,22 @@ if (copyButton && serverIP && copyMessage) {
 
     try {
       await navigator.clipboard.writeText(ip);
-      copyMessage.textContent = "آی‌پی سرور با موفقیت کپی شد!";
+      copyMessage.textContent = "آی‌پی سرور کپی شد!";
     } catch (error) {
-      const temp = document.createElement("textarea");
-      temp.value = ip;
-      temp.style.position = "fixed";
-      temp.style.opacity = "0";
+      const input = document.createElement("textarea");
+      input.value = ip;
+      input.style.position = "fixed";
+      input.style.opacity = "0";
 
-      document.body.appendChild(temp);
-      temp.select();
+      document.body.appendChild(input);
+      input.select();
 
-      const copied = document.execCommand("copy");
-      temp.remove();
+      const success = document.execCommand("copy");
+      input.remove();
 
-      copyMessage.textContent = copied
+      copyMessage.textContent = success
         ? "آی‌پی سرور کپی شد!"
-        : "کپی خودکار انجام نشد؛ آی‌پی را دستی کپی کن.";
+        : "کپی انجام نشد؛ آی‌پی را دستی کپی کن.";
     }
 
     setTimeout(() => {
@@ -108,16 +119,42 @@ if (copyButton && serverIP && copyMessage) {
 }
 
 
-// ACTIVE NAVIGATION
+/* SCROLL REVEAL */
 
-const sections = document.querySelectorAll("main section[id]");
-const navLinks = document.querySelectorAll(".nav a[href^='#']");
+const revealElements = document.querySelectorAll(".reveal");
 
 if ("IntersectionObserver" in window) {
-  const observer = new IntersectionObserver(entries => {
+  const revealObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        navLinks.forEach(link => {
+        entry.target.classList.add("visible");
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.12
+  });
+
+  revealElements.forEach(element => {
+    revealObserver.observe(element);
+  });
+} else {
+  revealElements.forEach(element => {
+    element.classList.add("visible");
+  });
+}
+
+
+/* ACTIVE NAVIGATION */
+
+const pageSections = document.querySelectorAll("main section[id]");
+const navigationLinks = document.querySelectorAll(".nav a[href^='#']");
+
+if ("IntersectionObserver" in window) {
+  const sectionObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navigationLinks.forEach(link => {
           link.classList.toggle(
             "active",
             link.getAttribute("href") === "#" + entry.target.id
@@ -126,8 +163,22 @@ if ("IntersectionObserver" in window) {
       }
     });
   }, {
-    threshold: 0.25
+    threshold: 0.35
   });
 
-  sections.forEach(section => observer.observe(section));
+  pageSections.forEach(section => {
+    sectionObserver.observe(section);
+  });
+}
+
+
+/* MOUSE LIGHT EFFECT */
+
+const mouseGlow = document.getElementById("mouseGlow");
+
+if (mouseGlow && window.matchMedia("(pointer: fine)").matches) {
+  document.addEventListener("mousemove", event => {
+    mouseGlow.style.left = event.clientX + "px";
+    mouseGlow.style.top = event.clientY + "px";
+  });
 }
