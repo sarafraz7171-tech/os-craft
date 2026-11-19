@@ -1,44 +1,53 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
+  // =========================
   // INTRO ANIMATION
+  // =========================
+
   const intro = document.getElementById("intro");
 
   if (intro) {
+    document.body.style.overflow = "hidden";
+
     setTimeout(() => {
-      intro.style.opacity = "0";
-      intro.style.visibility = "hidden";
-      intro.style.pointerEvents = "none";
+      intro.classList.add("is-hidden");
 
       setTimeout(() => {
         intro.remove();
+        document.body.style.overflow = "";
       }, 1100);
-    }, 4200);
+
+    }, 3500);
   }
 
+  // =========================
   // MOBILE MENU
+  // =========================
+
   const menuToggle = document.getElementById("menuToggle");
   const mainNav = document.getElementById("mainNav");
 
+  function closeMenu() {
+    if (!menuToggle || !mainNav) return;
+
+    mainNav.classList.remove("open");
+    menuToggle.setAttribute("aria-expanded", "false");
+  }
+
   if (menuToggle && mainNav) {
+
     menuToggle.addEventListener("click", () => {
       const isOpen = mainNav.classList.toggle("open");
 
-      menuToggle.setAttribute("aria-expanded", String(isOpen));
       menuToggle.setAttribute(
-        "aria-label",
-        isOpen ? "بستن منو" : "باز کردن منو"
+        "aria-expanded",
+        String(isOpen)
       );
-
-      menuToggle.textContent = isOpen ? "✕" : "☰";
     });
 
     mainNav.querySelectorAll("a").forEach(link => {
-      link.addEventListener("click", () => {
-        mainNav.classList.remove("open");
-        menuToggle.setAttribute("aria-expanded", "false");
-        menuToggle.textContent = "☰";
-      });
+      link.addEventListener("click", closeMenu);
     });
 
     document.addEventListener("click", event => {
@@ -46,119 +55,164 @@ document.addEventListener("DOMContentLoaded", () => {
         !mainNav.contains(event.target) &&
         !menuToggle.contains(event.target)
       ) {
-        mainNav.classList.remove("open");
-        menuToggle.setAttribute("aria-expanded", "false");
-        menuToggle.textContent = "☰";
+        closeMenu();
+      }
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 680) {
+        closeMenu();
       }
     });
   }
 
-  // TOAST MESSAGE
-  const toast = document.getElementById("toast");
-  let toastTimer;
+  // =========================
+  // COPY SERVER ADDRESS
+  // =========================
 
-  function showToast(message) {
-    if (!toast) return;
+  const copyButton = document.getElementById("copyButton");
+  const serverAddress = document.getElementById("serverAddress");
+  const copyFeedback = document.getElementById("copyFeedback");
 
-    toast.textContent = message;
-    toast.classList.add("show");
+  async function copyAddress() {
 
-    clearTimeout(toastTimer);
+    if (!serverAddress || !copyFeedback) return;
 
-    toastTimer = setTimeout(() => {
-      toast.classList.remove("show");
-    }, 2300);
-  }
+    const address = serverAddress.textContent.trim();
 
-  // COPY SERVER IP
-  async function copyText(text) {
     try {
+
       if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(text);
+        await navigator.clipboard.writeText(address);
       } else {
-        const input = document.createElement("textarea");
 
-        input.value = text;
-        input.style.position = "fixed";
-        input.style.opacity = "0";
+        const textArea = document.createElement("textarea");
 
-        document.body.appendChild(input);
-        input.select();
+        textArea.value = address;
+        textArea.style.position = "fixed";
+        textArea.style.opacity = "0";
 
-        const copied = document.execCommand("copy");
-        input.remove();
+        document.body.appendChild(textArea);
 
-        if (!copied) throw new Error("Copy failed");
+        textArea.select();
+
+        const successful = document.execCommand("copy");
+
+        textArea.remove();
+
+        if (!successful) {
+          throw new Error("Copy failed");
+        }
       }
 
-      showToast("آدرس سرور با موفقیت کپی شد ✓");
+      copyFeedback.textContent = "آدرس سرور با موفقیت کپی شد ✓";
+
+      if (copyButton) {
+        copyButton.textContent = "کپی شد ✓";
+
+        setTimeout(() => {
+          copyButton.textContent = "کپی آدرس سرور";
+        }, 2200);
+      }
 
     } catch (error) {
-      showToast("کپی انجام نشد؛ آدرس را دستی کپی کن.");
+
+      copyFeedback.textContent =
+        "کپی خودکار انجام نشد؛ آدرس را دستی انتخاب و کپی کن.";
+
     }
   }
 
-  document.querySelectorAll("[data-copy]").forEach(button => {
-    button.addEventListener("click", () => {
-      const address = button.getAttribute("data-copy");
+  if (copyButton) {
+    copyButton.addEventListener("click", copyAddress);
+  }
 
-      if (address) {
-        copyText(address);
-      }
-    });
-  });
-
-  // MOUSE LIGHT EFFECT
-  const cards = document.querySelectorAll(
-    ".feature-card, .connect-panel, .command-card"
-  );
-
-  cards.forEach(card => {
-    card.addEventListener("pointermove", event => {
-      const rect = card.getBoundingClientRect();
-
-      card.style.setProperty(
-        "--mouse-x",
-        `${event.clientX - rect.left}px`
-      );
-
-      card.style.setProperty(
-        "--mouse-y",
-        `${event.clientY - rect.top}px`
-      );
-    });
-  });
-
+  // =========================
   // SCROLL REVEAL
-  const revealItems = document.querySelectorAll(
-    ".section-heading, .feature-card, .connect-panel, .hero-copy, .hero-art"
+  // =========================
+
+  const revealElements = document.querySelectorAll(
+    ".section-heading, .about-panel, .feature-card, .video-card, .channel-card, .server-card"
   );
 
-  revealItems.forEach(item => {
-    item.classList.add("reveal");
+  revealElements.forEach(element => {
+    element.classList.add("reveal");
   });
 
   if ("IntersectionObserver" in window) {
+
     const observer = new IntersectionObserver(
       (entries, currentObserver) => {
+
         entries.forEach(entry => {
+
           if (entry.isIntersecting) {
+
             entry.target.classList.add("is-visible");
+
             currentObserver.unobserve(entry.target);
+
           }
+
         });
+
       },
-      { threshold: 0.12 }
+      {
+        threshold: 0.12
+      }
     );
 
-    revealItems.forEach(item => {
-      observer.observe(item);
+    revealElements.forEach(element => {
+      observer.observe(element);
     });
 
   } else {
-    revealItems.forEach(item => {
-      item.classList.add("is-visible");
+
+    revealElements.forEach(element => {
+      element.classList.add("is-visible");
     });
+
+  }
+
+  // =========================
+  // ACTIVE NAV LINK
+  // =========================
+
+  const sections = document.querySelectorAll("main section[id]");
+  const navLinks = document.querySelectorAll(".nav a");
+
+  if ("IntersectionObserver" in window) {
+
+    const sectionObserver = new IntersectionObserver(
+      entries => {
+
+        entries.forEach(entry => {
+
+          if (entry.isIntersecting) {
+
+            navLinks.forEach(link => {
+
+              const isActive =
+                link.getAttribute("href") === "#" + entry.target.id;
+
+              link.classList.toggle("active", isActive);
+
+            });
+
+          }
+
+        });
+
+      },
+      {
+        rootMargin: "-30% 0px -60% 0px"
+      }
+    );
+
+    sections.forEach(section => {
+      sectionObserver.observe(section);
+    });
+
   }
 
 });
