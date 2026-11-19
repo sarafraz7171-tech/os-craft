@@ -1394,3 +1394,36 @@ button, a {
     0 0 45px rgba(0,180,255,.08);
   border-color: rgba(150,125,255,.5);
 }
+
+/* Performance optimization */
+
+.background-glow {
+  animation: none !important;
+  filter: none !important;
+}
+
+.background-grid {
+  opacity: 0.15;
+}
+
+.hero-cube {
+  animation: none !important;
+  transform: none !important;
+}
+
+.feature-card,
+.about-panel,
+.video-card,
+.server-card {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.feature-card:hover {
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+* {
+  scroll-behavior: auto;
+}
