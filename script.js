@@ -1,184 +1,236 @@
 
+/* =====================================
+   OS CRAFT - MAIN JAVASCRIPT
+   LOGO EXPLOSION INTRO
+===================================== */
+
+
+/* ---------- INTRO ELEMENTS ---------- */
+
+const intro = document.getElementById("intro");
+const enterButton = document.getElementById("enterButton");
+const particlesContainer = document.getElementById("logoParticles");
+
+
+/* ---------- CREATE EXPLOSION ---------- */
+
+function createExplosion() {
+
+    if (!particlesContainer) return;
+
+    const particleCount = window.innerWidth < 600 ? 45 : 85;
+
+    for (let i = 0; i < particleCount; i++) {
+
+        const particle = document.createElement("span");
+
+        particle.className = "particle";
+
+        const angle = Math.random() * Math.PI * 2;
+        const distance = 100 + Math.random() * 260;
+
+        const x = Math.cos(angle) * distance;
+        const y = Math.sin(angle) * distance;
+
+        particle.style.setProperty("--x", `${x}px`);
+        particle.style.setProperty("--y", `${y}px`);
+
+        const size = 2 + Math.random() * 5;
+
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+
+        particle.style.animationDelay =
+            `${Math.random() * 0.35}s`;
+
+        particlesContainer.appendChild(particle);
+    }
+}
+
+
+/* ---------- CLOSE INTRO ---------- */
+
+let introClosed = false;
+
+function closeIntro() {
+
+    if (!intro || introClosed) return;
+
+    introClosed = true;
+
+    intro.classList.add("hide");
+
+    setTimeout(() => {
+        intro.style.display = "none";
+    }, 1100);
+}
+
+
+/* ---------- START INTRO ---------- */
+
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* =================================
-       INTRO
-    ================================= */
+    createExplosion();
 
-    const intro = document.getElementById("intro");
-    const enterButton = document.getElementById("enterButton");
-
-    let introClosed = false;
-
-    function playIntroSound() {
-        const AudioContext =
-            window.AudioContext || window.webkitAudioContext;
-
-        if (!AudioContext) return;
-
-        const audio = new AudioContext();
-
-        audio.resume().then(() => {
-            const oscillator = audio.createOscillator();
-            const gain = audio.createGain();
-
-            oscillator.type = "sine";
-
-            oscillator.frequency.setValueAtTime(
-                180,
-                audio.currentTime
-            );
-
-            oscillator.frequency.exponentialRampToValueAtTime(
-                720,
-                audio.currentTime + 0.45
-            );
-
-            oscillator.frequency.exponentialRampToValueAtTime(
-                260,
-                audio.currentTime + 1.2
-            );
-
-            gain.gain.setValueAtTime(0.001, audio.currentTime);
-
-            gain.gain.exponentialRampToValueAtTime(
-                0.13,
-                audio.currentTime + 0.12
-            );
-
-            gain.gain.exponentialRampToValueAtTime(
-                0.001,
-                audio.currentTime + 1.5
-            );
-
-            oscillator.connect(gain);
-            gain.connect(audio.destination);
-
-            oscillator.start();
-            oscillator.stop(audio.currentTime + 1.5);
-
-            oscillator.onended = () => audio.close();
-        });
-    }
-
-    function closeIntro(withSound = false) {
-        if (!intro || introClosed) return;
-
-        introClosed = true;
-
-        if (withSound) {
-            playIntroSound();
-        }
-
-        intro.classList.add("is-hidden");
-        document.body.style.overflow = "";
-
-        setTimeout(() => {
-            intro.remove();
-        }, 1100);
-    }
-
-    if (intro) {
-        document.body.style.overflow = "hidden";
-
-        if (enterButton) {
-            enterButton.addEventListener("click", () => {
-                closeIntro(true);
-            });
-        }
-
-        // اگر کاربر دکمه را نزند، سایت خودکار باز می‌شود.
-        setTimeout(() => {
-            closeIntro(false);
-        }, 9000);
-    }
-
-    /* =================================
-       MOBILE MENU
-    ================================= */
-
-    const menuToggle = document.getElementById("menuToggle");
-    const mainNav = document.getElementById("mainNav");
-
-    function closeMenu() {
-        if (mainNav) {
-            mainNav.classList.remove("active");
-        }
-    }
-
-    if (menuToggle && mainNav) {
-        menuToggle.addEventListener("click", () => {
-            mainNav.classList.toggle("active");
-        });
-
-        mainNav.querySelectorAll("a").forEach(link => {
-            link.addEventListener("click", closeMenu);
-        });
-
-        document.addEventListener("click", event => {
-            if (
-                !mainNav.contains(event.target) &&
-                !menuToggle.contains(event.target)
-            ) {
-                closeMenu();
-            }
-        });
-
-        window.addEventListener("resize", () => {
-            if (window.innerWidth > 700) {
-                closeMenu();
-            }
-        });
-    }
-
-    /* =================================
-       COPY SERVER ADDRESS
-    ================================= */
-
-    const copyButton = document.getElementById("copyButton");
-    const serverAddress = document.getElementById("serverAddress");
-    const copyFeedback = document.getElementById("copyFeedback");
-
-    if (copyButton && serverAddress) {
-        copyButton.addEventListener("click", async () => {
-            const address = serverAddress.textContent.trim();
-
-            try {
-                await navigator.clipboard.writeText(address);
-
-                if (copyFeedback) {
-                    copyFeedback.textContent = "آدرس سرور کپی شد!";
-                }
-            } catch (error) {
-                const temp = document.createElement("textarea");
-
-                temp.value = address;
-                temp.style.position = "fixed";
-                temp.style.opacity = "0";
-
-                document.body.appendChild(temp);
-                temp.select();
-
-                const copied = document.execCommand("copy");
-                temp.remove();
-
-                if (copyFeedback) {
-                    copyFeedback.textContent = copied
-                        ? "آدرس سرور کپی شد!"
-                        : "کپی انجام نشد؛ آدرس را دستی کپی کنید.";
-                }
-            }
-
-            copyButton.textContent = "کپی شد!";
-
-            setTimeout(() => {
-                copyButton.textContent = "کپی آدرس سرور";
-
-                if (copyFeedback) {
-                    copyFeedback.textContent = "";
-                }
-            }, 2500);
-        });
-    }
+    // بستن خودکار اینترو بعد از 8.5 ثانیه
+    setTimeout(() => {
+        closeIntro();
+    }, 8500);
 
 });
+
+
+/* ---------- ENTER BUTTON ---------- */
+
+if (enterButton) {
+
+    enterButton.addEventListener("click", () => {
+
+        closeIntro();
+
+    });
+
+}
+
+
+/* =====================================
+   MOBILE MENU
+===================================== */
+
+const menuToggle = document.getElementById("menuToggle");
+const navMenu = document.getElementById("navMenu");
+
+if (menuToggle && navMenu) {
+
+    menuToggle.addEventListener("click", () => {
+
+        navMenu.classList.toggle("active");
+
+    });
+
+    // بستن منو بعد از انتخاب لینک
+    navMenu.querySelectorAll("a").forEach(link => {
+
+        link.addEventListener("click", () => {
+
+            navMenu.classList.remove("active");
+
+        });
+
+    });
+
+}
+
+
+/* =====================================
+   COPY SERVER ADDRESS
+===================================== */
+
+const copyButton = document.getElementById("copyButton");
+const serverAddress = document.getElementById("serverAddress");
+const copyMessage = document.getElementById("copyMessage");
+
+if (copyButton && serverAddress) {
+
+    copyButton.addEventListener("click", async () => {
+
+        const address = serverAddress.textContent.trim();
+
+        try {
+
+            await navigator.clipboard.writeText(address);
+
+            copyButton.textContent = "کپی شد ✓";
+
+            if (copyMessage) {
+                copyMessage.textContent = "آدرس سرور با موفقیت کپی شد.";
+            }
+
+        } catch (error) {
+
+            // روش جایگزین برای مرورگرهایی که Clipboard API ندارند
+            const temporaryInput = document.createElement("textarea");
+
+            temporaryInput.value = address;
+
+            document.body.appendChild(temporaryInput);
+
+            temporaryInput.select();
+
+            try {
+
+                document.execCommand("copy");
+
+                copyButton.textContent = "کپی شد ✓";
+
+                if (copyMessage) {
+                    copyMessage.textContent = "آدرس سرور کپی شد.";
+                }
+
+            } catch (fallbackError) {
+
+                if (copyMessage) {
+                    copyMessage.textContent =
+                        "کپی خودکار انجام نشد؛ آدرس را دستی کپی کن.";
+                }
+
+            }
+
+            temporaryInput.remove();
+
+        }
+
+        setTimeout(() => {
+
+            copyButton.textContent = "کپی آدرس";
+
+        }, 2500);
+
+    });
+
+}
+
+
+/* =====================================
+   SMOOTH SCROLL
+===================================== */
+
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+
+    link.addEventListener("click", function (event) {
+
+        const targetId = this.getAttribute("href");
+
+        if (!targetId || targetId === "#") return;
+
+        const target = document.querySelector(targetId);
+
+        if (target) {
+
+            event.preventDefault();
+
+            target.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        }
+
+    });
+
+});
+
+
+/* =====================================
+   OS CRAFT CONSOLE MESSAGE
+===================================== */
+
+console.log(
+    "%c OS CRAFT NETWORK ",
+    "background: #704cff; color: white; font-size: 20px; font-weight: bold; padding: 10px;"
+);
+
+console.log(
+    "%c SMP + ROLEPLAY | VERSION 26.2 ",
+    "color: #a58aff; font-size: 13px;"
+);
