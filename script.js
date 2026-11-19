@@ -1,6 +1,20 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
+  // INTRO ANIMATION
+  const intro = document.getElementById("intro");
+
+  if (intro) {
+    setTimeout(() => {
+      intro.classList.add("is-hidden");
+
+      setTimeout(() => {
+        intro.remove();
+      }, 900);
+
+    }, 3500);
+  }
+
   // MOBILE MENU
   const menuToggle = document.getElementById("menuToggle");
   const mainNav = document.getElementById("mainNav");
@@ -56,6 +70,53 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => {
         copyButton.textContent = "کپی آدرس سرور";
       }, 2500);
+    });
+  }
+
+  // GLASS CARD MOUSE LIGHT
+  const glassCards = document.querySelectorAll(
+    ".about-panel, .feature-card, .video-card, .channel-card, .server-card"
+  );
+
+  glassCards.forEach(card => {
+    card.addEventListener("pointermove", event => {
+      const rect = card.getBoundingClientRect();
+
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+
+      card.style.setProperty("--mouse-x", `${x}px`);
+      card.style.setProperty("--mouse-y", `${y}px`);
+    });
+  });
+
+  // SCROLL REVEAL
+  const revealElements = document.querySelectorAll(
+    ".section-heading, .about-panel, .feature-card, .video-card, .channel-card, .server-card"
+  );
+
+  revealElements.forEach(element => {
+    element.classList.add("reveal");
+  });
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12
+    });
+
+    revealElements.forEach(element => {
+      observer.observe(element);
+    });
+  } else {
+    revealElements.forEach(element => {
+      element.classList.add("is-visible");
     });
   }
 
