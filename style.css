@@ -981,3 +981,159 @@ button {
 .intro {
   display: none !important;
 }
+
+/* =========================
+   OS CRAFT - NEW ANIMATIONS
+========================= */
+
+/* PROFESSIONAL INTRO */
+.intro {
+  animation: none;
+  transition: opacity .8s ease, visibility .8s ease;
+}
+
+.intro.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.intro-line {
+  animation: redLineExpand 1.3s cubic-bezier(.7,0,.2,1) forwards;
+}
+
+.intro-inner {
+  animation: introContent .9s ease 1s forwards;
+}
+
+.intro-mark {
+  animation: introGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes introGlow {
+  from {
+    text-shadow: 0 0 12px rgba(237,24,56,.3);
+  }
+  to {
+    text-shadow: 0 0 35px rgba(237,24,56,.9);
+  }
+}
+
+/* GLASSMORPHISM CARDS */
+.about-panel,
+.feature-card,
+.video-card,
+.channel-card,
+.server-card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: rgba(22, 22, 30, .48);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255,255,255,.11);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.06),
+    0 12px 35px rgba(0,0,0,.18);
+}
+
+/* Moving light reflection */
+.about-panel::before,
+.feature-card::before,
+.video-card::before,
+.channel-card::before,
+.server-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    350px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(237,24,56,.17),
+    transparent 70%
+  );
+  transition: opacity .35s ease;
+}
+
+.about-panel:hover::before,
+.feature-card:hover::before,
+.video-card:hover::before,
+.channel-card:hover::before,
+.server-card:hover::before {
+  opacity: 1;
+}
+
+/* Glass borders */
+.feature-card:hover,
+.channel-card:hover {
+  border-color: rgba(237,24,56,.65);
+  box-shadow:
+    0 15px 40px rgba(0,0,0,.3),
+    0 0 25px rgba(237,24,56,.10);
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(35px);
+  transition:
+    opacity .8s ease,
+    transform .8s cubic-bezier(.2,.7,.2,1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.feature-card.reveal.is-visible:hover {
+  transform: translateY(-7px);
+}
+
+/* Subtle glass highlight */
+.feature-card,
+.about-panel,
+.video-card,
+.channel-card,
+.server-card {
+  transition:
+    transform .35s ease,
+    border-color .35s ease,
+    box-shadow .35s ease,
+    background .35s ease;
+}
+
+/* Mobile performance */
+@media (max-width: 650px) {
+  .about-panel,
+  .feature-card,
+  .video-card,
+  .channel-card,
+  .server-card {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .reveal {
+    transform: translateY(20px);
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .intro,
+  .intro-line,
+  .intro-inner,
+  .intro-mark,
+  .reveal {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
