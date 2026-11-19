@@ -1380,3 +1380,17 @@ button, a {
     filter: hue-rotate(70deg) blur(25px);
   }
 }
+.feature-card,
+.about-panel,
+.video-card,
+.server-card {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.feature-card:hover {
+  box-shadow:
+    0 0 25px rgba(111,76,255,.16),
+    0 0 45px rgba(0,180,255,.08);
+  border-color: rgba(150,125,255,.5);
+}
