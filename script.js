@@ -1,7 +1,7 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  // MOBILE MENU
+  // منوی موبایل
   const menuToggle = document.getElementById("menuToggle");
   const mainNav = document.getElementById("mainNav");
 
@@ -33,47 +33,33 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // COPY SERVER ADDRESS
-  const toast = document.getElementById("toast");
+  // کپی آدرس سرور
+  const copyButton = document.getElementById("copyButton");
+  const serverAddress = document.getElementById("serverAddress");
+  const copyFeedback = document.getElementById("copyFeedback");
 
-  document.querySelectorAll(".copy-button").forEach(button => {
-    const originalText = button.textContent.trim();
-
-    button.addEventListener("click", async () => {
-      const address = button.dataset.copy;
+  if (copyButton && serverAddress && copyFeedback) {
+    copyButton.addEventListener("click", async () => {
+      const address = serverAddress.textContent.trim();
 
       try {
         await navigator.clipboard.writeText(address);
 
-        button.textContent = "کپی شد ✓";
-
-        if (toast) {
-          toast.textContent = "آدرس سرور با موفقیت کپی شد ✓";
-          toast.classList.add("show");
-
-          setTimeout(() => {
-            toast.classList.remove("show");
-          }, 2500);
-        }
+        copyFeedback.textContent = "آدرس سرور با موفقیت کپی شد ✓";
+        copyButton.textContent = "کپی شد ✓";
 
       } catch (error) {
-        if (toast) {
-          toast.textContent = "کپی خودکار انجام نشد؛ آدرس را دستی کپی کن.";
-          toast.classList.add("show");
-
-          setTimeout(() => {
-            toast.classList.remove("show");
-          }, 2500);
-        }
+        copyFeedback.textContent =
+          "کپی خودکار انجام نشد؛ آدرس را دستی کپی کنید.";
       }
 
       setTimeout(() => {
-        button.textContent = originalText;
+        copyButton.textContent = "کپی آدرس سرور";
       }, 2500);
     });
-  });
+  }
 
-  // INTRO
+  // صفحه شروع
   const intro = document.getElementById("intro");
 
   if (intro) {
