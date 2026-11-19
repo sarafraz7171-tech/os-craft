@@ -1,7 +1,7 @@
 
-/* ================================
-   OS CRAFT - MAIN STYLE
-================================ */
+/* =====================================
+   OS CRAFT - COMPLETE STYLE
+===================================== */
 
 /* RESET */
 * {
@@ -32,17 +32,9 @@ body {
 }
 
 @keyframes colorfulBackground {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 a {
@@ -54,9 +46,9 @@ button {
     font-family: inherit;
 }
 
-/* ================================
+/* =====================================
    3D INTRO
-================================ */
+===================================== */
 
 .intro {
     position: fixed;
@@ -65,19 +57,16 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    background:
-        radial-gradient(
-            circle at center,
-            #25204d 0%,
-            #10152f 45%,
-            #050814 100%
-        );
+    background: radial-gradient(
+        circle at center,
+        #25204d 0%,
+        #10152f 45%,
+        #050814 100%
+    );
     perspective: 1000px;
     opacity: 1;
     visibility: visible;
-    transition:
-        opacity 0.7s ease,
-        visibility 0.7s ease;
+    transition: opacity .7s ease, visibility .7s ease;
 }
 
 .intro.is-hidden {
@@ -109,66 +98,57 @@ button {
     inset: 0;
     width: 240px;
     height: 240px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     padding: 15px;
     text-align: center;
-
     font-size: 25px;
     font-weight: 900;
     color: white;
-
-    border: 2px solid rgba(255, 255, 255, 0.75);
-    background: linear-gradient(
-        145deg,
-        rgba(94, 65, 180, 0.95),
-        rgba(16, 38, 83, 0.98)
-    );
-
+    border: 2px solid rgba(255,255,255,.75);
     box-shadow:
-        inset 0 0 35px rgba(255, 255, 255, 0.12),
-        0 0 25px rgba(120, 100, 255, 0.35);
-
+        inset 0 0 35px rgba(255,255,255,.12),
+        0 0 25px rgba(120,100,255,.35);
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
 }
 
-/* Cube faces */
+/* SIX CUBE FACES */
 
 .face-front {
     transform: rotateY(0deg) translateZ(120px);
-    background: linear-gradient(145deg, #4424a5, #111d4b);
+    background: linear-gradient(145deg,#4424a5,#111d4b);
 }
 
 .face-right {
     transform: rotateY(90deg) translateZ(120px);
-    background: linear-gradient(145deg, #087e9b, #10294d);
+    background: linear-gradient(145deg,#087e9b,#10294d);
 }
 
 .face-back {
     transform: rotateY(180deg) translateZ(120px);
-    background: linear-gradient(145deg, #7135a8, #251044);
+    background: linear-gradient(145deg,#7135a8,#251044);
 }
 
 .face-left {
     transform: rotateY(-90deg) translateZ(120px);
-    background: linear-gradient(145deg, #176c85, #102044);
+    background: linear-gradient(145deg,#176c85,#102044);
 }
 
 .face-top {
     transform: rotateX(90deg) translateZ(120px);
-    background: linear-gradient(145deg, #a16a25, #4b286c);
+    background: linear-gradient(145deg,#a16a25,#4b286c);
 }
 
 .face-bottom {
     transform: rotateX(-90deg) translateZ(120px);
-    background: linear-gradient(145deg, #a52c67, #32134f);
+    background: linear-gradient(145deg,#a52c67,#32134f);
 }
 
-/* Cube rotation sequence */
+/* CUBE ANIMATION
+   Final face: OS CRAFT
+*/
 
 @keyframes cubeJourney {
     0% {
@@ -191,31 +171,33 @@ button {
         transform: rotateX(0deg) rotateY(-360deg);
     }
 
+    /* Having a job */
     72% {
+        transform: rotateX(-90deg) rotateY(-360deg);
+    }
+
+    /* OS CRAFT - FINAL */
+    85% {
         transform: rotateX(90deg) rotateY(-360deg);
     }
 
-    85% {
-        transform: rotateX(180deg) rotateY(-360deg);
-    }
-
     100% {
-        transform: rotateX(180deg) rotateY(-360deg) scale(1.08);
+        transform: rotateX(90deg) rotateY(-360deg) scale(1.08);
     }
 }
 
-/* ================================
+/* =====================================
    HEADER
-================================ */
+===================================== */
 
 .header {
     width: 100%;
     position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(7, 10, 28, 0.85);
+    background: rgba(7,10,28,.85);
     backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255,255,255,.08);
 }
 
 .header-container {
@@ -249,7 +231,7 @@ button {
 .nav a {
     color: #d6d5e7;
     font-size: 14px;
-    transition: 0.3s;
+    transition: .3s;
 }
 
 .nav a:hover {
@@ -265,9 +247,9 @@ button {
     cursor: pointer;
 }
 
-/* ================================
+/* =====================================
    HERO
-================================ */
+===================================== */
 
 .hero {
     min-height: 680px;
@@ -290,16 +272,16 @@ button {
 .hero-label {
     display: inline-block;
     padding: 9px 20px;
-    border: 1px solid rgba(173, 146, 255, 0.4);
+    border: 1px solid rgba(173,146,255,.4);
     border-radius: 30px;
     color: #c7b4ff;
-    background: rgba(126, 91, 220, 0.12);
+    background: rgba(126,91,220,.12);
     font-size: 13px;
     margin-bottom: 25px;
 }
 
 .hero h1 {
-    font-size: clamp(45px, 8vw, 85px);
+    font-size: clamp(45px,8vw,85px);
     font-weight: 1000;
     letter-spacing: 4px;
     background: linear-gradient(
@@ -317,7 +299,7 @@ button {
 
 .hero-subtitle {
     color: #b9a3ff;
-    font-size: clamp(20px, 4vw, 32px);
+    font-size: clamp(20px,4vw,32px);
     font-weight: 800;
     margin-bottom: 25px;
     letter-spacing: 3px;
@@ -347,39 +329,39 @@ button {
     border-radius: 12px;
     font-size: 14px;
     font-weight: 800;
-    transition: 0.3s;
+    transition: .3s;
     cursor: pointer;
 }
 
 .btn-primary {
     color: #fff;
-    background: linear-gradient(135deg, #7954dc, #3978c9);
-    box-shadow: 0 8px 25px rgba(100, 80, 220, 0.3);
+    background: linear-gradient(135deg,#7954dc,#3978c9);
+    box-shadow: 0 8px 25px rgba(100,80,220,.3);
 }
 
 .btn-primary:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 30px rgba(100, 80, 220, 0.45);
+    box-shadow: 0 12px 30px rgba(100,80,220,.45);
 }
 
 .btn-secondary {
     color: #ddd5ff;
-    border: 1px solid rgba(190, 170, 255, 0.4);
-    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(190,170,255,.4);
+    background: rgba(255,255,255,.04);
 }
 
 .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255,255,255,.1);
     transform: translateY(-4px);
 }
 
-/* Hero decorations */
+/* HERO DECORATIONS */
 
 .hero-ring {
     position: absolute;
     width: 450px;
     height: 450px;
-    border: 1px solid rgba(151, 122, 255, 0.12);
+    border: 1px solid rgba(151,122,255,.12);
     border-radius: 50%;
     pointer-events: none;
 }
@@ -390,14 +372,14 @@ button {
     height: 90px;
     left: 10%;
     top: 20%;
-    border: 1px solid rgba(160, 140, 255, 0.3);
+    border: 1px solid rgba(160,140,255,.3);
     transform: rotate(35deg);
     animation: floatingCube 7s ease-in-out infinite;
     pointer-events: none;
 }
 
 @keyframes floatingCube {
-    0%, 100% {
+    0%,100% {
         transform: translateY(0) rotate(35deg);
     }
 
@@ -419,9 +401,9 @@ button {
 }
 
 @keyframes floatingPixel {
-    0%, 100% {
+    0%,100% {
         transform: translateY(0);
-        opacity: 0.5;
+        opacity: .5;
     }
 
     50% {
@@ -437,9 +419,9 @@ button {
     font-size: 12px;
 }
 
-/* ================================
+/* =====================================
    GENERAL SECTIONS
-================================ */
+===================================== */
 
 .section {
     max-width: 1200px;
@@ -453,7 +435,7 @@ button {
 }
 
 .section-heading h2 {
-    font-size: clamp(27px, 5vw, 40px);
+    font-size: clamp(27px,5vw,40px);
     color: #fff;
     margin-bottom: 15px;
 }
@@ -468,9 +450,9 @@ button {
     color: #a991ff;
 }
 
-/* ================================
+/* =====================================
    ABOUT
-================================ */
+===================================== */
 
 .about-content {
     max-width: 850px;
@@ -478,8 +460,8 @@ button {
     text-align: center;
     padding: 35px;
     border-radius: 20px;
-    background: rgba(255, 255, 255, 0.035);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255,255,255,.035);
+    border: 1px solid rgba(255,255,255,.08);
 }
 
 .about-content p {
@@ -488,13 +470,13 @@ button {
     line-height: 2.4;
 }
 
-/* ================================
+/* =====================================
    FEATURES
-================================ */
+===================================== */
 
 .features-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3,1fr);
     gap: 22px;
 }
 
@@ -502,15 +484,15 @@ button {
     padding: 30px 25px;
     min-height: 190px;
     border-radius: 18px;
-    background: rgba(255, 255, 255, 0.045);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    transition: 0.3s;
+    background: rgba(255,255,255,.045);
+    border: 1px solid rgba(255,255,255,.08);
+    transition: .3s;
 }
 
 .feature-card:hover {
     transform: translateY(-6px);
-    background: rgba(125, 91, 220, 0.12);
-    border-color: rgba(172, 145, 255, 0.4);
+    background: rgba(125,91,220,.12);
+    border-color: rgba(172,145,255,.4);
 }
 
 .feature-icon {
@@ -530,17 +512,17 @@ button {
     color: #aeb3cd;
 }
 
-/* ================================
+/* =====================================
    MEDIA
-================================ */
+===================================== */
 
 .media-box {
     max-width: 850px;
     margin: auto;
     padding: 15px;
     border-radius: 20px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.1);
 }
 
 .media-box video {
@@ -550,9 +532,9 @@ button {
     background: #050814;
 }
 
-/* ================================
+/* =====================================
    CONNECT
-================================ */
+===================================== */
 
 .connect-box {
     max-width: 800px;
@@ -562,10 +544,10 @@ button {
     border-radius: 22px;
     background: linear-gradient(
         145deg,
-        rgba(105, 75, 190, 0.16),
-        rgba(20, 80, 130, 0.12)
+        rgba(105,75,190,.16),
+        rgba(20,80,130,.12)
     );
-    border: 1px solid rgba(174, 145, 255, 0.2);
+    border: 1px solid rgba(174,145,255,.2);
 }
 
 .server-version {
@@ -582,8 +564,8 @@ button {
     margin: 20px auto;
     max-width: 600px;
     border-radius: 12px;
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(0,0,0,.3);
+    border: 1px solid rgba(255,255,255,.12);
     color: #d9d1ff;
     font-family: monospace;
     font-size: 15px;
@@ -593,13 +575,13 @@ button {
 .copy-button {
     border: none;
     color: white;
-    background: linear-gradient(135deg, #7651d5, #3479c7);
+    background: linear-gradient(135deg,#7651d5,#3479c7);
     padding: 13px 30px;
     border-radius: 10px;
     font-size: 14px;
     font-weight: 800;
     cursor: pointer;
-    transition: 0.3s;
+    transition: .3s;
 }
 
 .copy-button:hover {
@@ -614,15 +596,15 @@ button {
     margin-top: 12px;
 }
 
-/* ================================
+/* =====================================
    FOOTER
-================================ */
+===================================== */
 
 .footer {
     padding: 35px 20px;
     text-align: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(3, 6, 18, 0.35);
+    border-top: 1px solid rgba(255,255,255,.08);
+    background: rgba(3,6,18,.35);
 }
 
 .footer p {
@@ -635,13 +617,13 @@ button {
     color: #b49aff;
 }
 
-/* ================================
+/* =====================================
    RESPONSIVE
-================================ */
+===================================== */
 
 @media (max-width: 950px) {
     .features-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2,1fr);
     }
 
     .hero {
@@ -668,8 +650,8 @@ button {
         align-items: stretch;
         gap: 0;
         padding: 10px 20px;
-        background: rgba(7, 10, 28, 0.98);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(7,10,28,.98);
+        border-bottom: 1px solid rgba(255,255,255,.1);
     }
 
     .nav.active {
@@ -678,7 +660,7 @@ button {
 
     .nav a {
         padding: 14px 5px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        border-bottom: 1px solid rgba(255,255,255,.06);
     }
 
     .hero {
@@ -788,9 +770,9 @@ button {
     }
 }
 
-/* ================================
+/* =====================================
    ACCESSIBILITY
-================================ */
+===================================== */
 
 @media (prefers-reduced-motion: reduce) {
     body,
