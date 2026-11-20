@@ -2,327 +2,957 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#080705">
-  <meta name="description" content="OS CRAFT؛ سرور Minecraft با تجربه SMP و Roleplay.">
-  <title>OS CRAFT | SMP + ROLEPLAY</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#11152d">
+<title>OS CRAFT | SMP + Roleplay</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap');
 
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+:root {
+  --bg: #10152d;
+  --ink: #f7f5ff;
+  --muted: #c4c8df;
+  --gold: #ffd477;
+  --cyan: #72e5df;
+  --purple: #a99aff;
+  --line: #ffffff20;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+body {
+  margin: 0;
+  font-family: Vazirmatn, Tahoma, sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(ellipse at 12% 8%, #51418b80, transparent 34%),
+    radial-gradient(ellipse at 90% 35%, #146d7780, transparent 34%),
+    linear-gradient(145deg, #11152d, #20234c 55%, #102b43);
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.wrap {
+  width: min(1120px, 92%);
+  margin: auto;
+}
+
+/* INTRO */
+
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: linear-gradient(135deg, #171a3d, #252052 55%, #123b4b);
+  display: grid;
+  place-items: center;
+  transition: opacity .55s ease, visibility .55s;
+}
+
+.intro.hide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.intro-box {
+  text-align: center;
+  animation: introIn .7s ease both;
+}
+
+.intro-logo {
+  width: 86px;
+  height: 86px;
+  margin: auto;
+  border-radius: 26px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--gold), #9cebe4);
+  color: #222447;
+  font-size: 2.5rem;
+  font-weight: 900;
+  box-shadow: 0 12px 40px #ffd47735;
+}
+
+.intro-title {
+  font-weight: 900;
+  letter-spacing: 3px;
+  font-size: 1.8rem;
+  margin: 17px 0 4px;
+}
+
+.intro-sub {
+  color: #d4d5e9;
+  font-size: .9rem;
+}
+
+.loader {
+  width: 120px;
+  height: 3px;
+  background: #ffffff25;
+  margin: 22px auto 0;
+  border-radius: 9px;
+  overflow: hidden;
+}
+
+.loader:after {
+  content: "";
+  display: block;
+  width: 45%;
+  height: 100%;
+  background: var(--gold);
+  animation: load 1.1s ease-in-out infinite;
+}
+
+@keyframes load {
+  from { transform: translateX(220%); }
+  to { transform: translateX(-220%); }
+}
+
+@keyframes introIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* HEADER */
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: #11152ddd;
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+
+.nav {
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font-weight: 900;
+  font-size: 1.25rem;
+  letter-spacing: 1px;
+}
+
+.brand-mark {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  color: #1c2040;
+  background: linear-gradient(135deg, var(--gold), #fff0b9);
+  font-weight: 900;
+  box-shadow: 0 5px 24px #ffd47735;
+}
+
+.links {
+  display: flex;
+  gap: 24px;
+  color: #e1e2f2;
+  font-size: .92rem;
+}
+
+.links a:hover {
+  color: var(--gold);
+}
+
+.menu {
+  display: none;
+  background: #ffffff12;
+  color: white;
+  border: 1px solid var(--line);
+  padding: 8px 12px;
+  border-radius: 10px;
+}
+
+/* HERO */
+
+.hero {
+  min-height: 590px;
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  align-items: center;
+  gap: 40px;
+  padding: 75px 0 65px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  gap: 9px;
+  align-items: center;
+  border: 1px solid #ffd47755;
+  background: #ffd47712;
+  color: #ffe1a0;
+  border-radius: 30px;
+  padding: 8px 15px;
+  font-size: .85rem;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #71e6b3;
+  box-shadow: 0 0 12px #71e6b3;
+}
+
+h1 {
+  font-size: clamp(2.7rem, 6vw, 5.4rem);
+  line-height: 1.12;
+  margin: 22px 0 16px;
+  font-weight: 900;
+  letter-spacing: -2px;
+}
+
+h1 span {
+  background: linear-gradient(90deg, #fff0b7, var(--gold), #9cf3eb);
+  background-clip: text;
+  color: transparent;
+}
+
+.lead {
+  color: var(--muted);
+  font-size: 1.08rem;
+  line-height: 2;
+  max-width: 590px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 13px;
+  margin-top: 28px;
+}
+
+.btn {
+  border: 0;
+  border-radius: 13px;
+  padding: 13px 22px;
+  font-weight: 800;
+  transition: .2s;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+}
+
+.primary {
+  background: linear-gradient(110deg, var(--gold), #fff0bd);
+  color: #28213a;
+  box-shadow: 0 10px 28px #ffd47730;
+}
+
+.secondary {
+  border: 1px solid #ffffff45;
+  background: #ffffff12;
+  color: white;
+}
+
+/* HERO VISUAL */
+
+.visual {
+  position: relative;
+  min-height: 350px;
+  display: grid;
+  place-items: center;
+}
+
+.orb {
+  width: min(340px, 75vw);
+  aspect-ratio: 1;
+  border-radius: 34% 66% 61% 39% / 40% 40% 60% 60%;
+  background: linear-gradient(145deg, #ffd477, #a99aff 48%, #72e5df);
+  filter: drop-shadow(0 25px 55px #8e83ff45);
+  animation: float 7s ease-in-out infinite;
+  display: grid;
+  place-items: center;
+  transform: rotate(-8deg);
+}
+
+.orb-inner {
+  width: 78%;
+  height: 78%;
+  border-radius: inherit;
+  background: linear-gradient(145deg, #252650, #172c49);
+  display: grid;
+  place-items: center;
+  border: 1px solid #ffffff55;
+  transform: rotate(8deg);
+}
+
+.orb-logo {
+  font-size: 7rem;
+  font-weight: 900;
+  letter-spacing: -12px;
+  background: linear-gradient(130deg, #fff2bd, var(--gold), #83e9e2);
+  background-clip: text;
+  color: transparent;
+}
+
+.float-card {
+  position: absolute;
+  background: #1b2147d9;
+  border: 1px solid #ffffff30;
+  backdrop-filter: blur(12px);
+  padding: 13px 17px;
+  border-radius: 15px;
+  box-shadow: 0 15px 40px #0003;
+}
+
+.float-card.one {
+  top: 12%;
+  right: 0;
+}
+
+.float-card.two {
+  bottom: 10%;
+  left: 0;
+}
+
+@keyframes float {
+  50% {
+    transform: translateY(-13px) rotate(-3deg);
+  }
+}
+
+/* SECTIONS */
+
+section {
+  padding: 76px 0;
+}
+
+.section-head {
+  text-align: center;
+  margin: 0 auto 36px;
+  max-width: 680px;
+}
+
+.kicker {
+  color: var(--gold);
+  font-weight: 800;
+  font-size: .85rem;
+  letter-spacing: 1px;
+}
+
+.section-head h2 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  margin: 9px 0;
+}
+
+.section-head p {
+  color: var(--muted);
+  line-height: 1.9;
+  margin: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.card {
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: linear-gradient(145deg, #ffffff15, #ffffff08);
+  box-shadow: 0 15px 40px #080c2420;
+  transition: .25s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: #ffd47775;
+  background: #ffffff1b;
+}
+
+.icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 15px;
+  display: grid;
+  place-items: center;
+  font-size: 1.5rem;
+  background: linear-gradient(135deg, #ffd47735, #72e5df25);
+  margin-bottom: 16px;
+}
+
+.card h3 {
+  margin: 0 0 8px;
+}
+
+.card p {
+  color: var(--muted);
+  line-height: 1.85;
+  margin: 0;
+}
+
+/* JOBS */
+
+.jobs {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.job {
+  padding: 18px;
+  text-align: center;
+}
+
+.job .icon {
+  margin: 0 auto 12px;
+}
+
+/* COMMANDS */
+
+.command-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.command {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 15px 18px;
+  border-radius: 14px;
+  background: #ffffff10;
+  border: 1px solid var(--line);
+}
+
+code {
+  direction: ltr;
+  unicode-bidi: plaintext;
+  color: #ffe2a0;
+  background: #080d2580;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: .9rem;
+}
+
+/* CONNECT */
+
+.connect {
+  background: linear-gradient(120deg, #ffd47720, #a99aff20, #72e5df20);
+  border: 1px solid #ffffff25;
+  border-radius: 28px;
+  padding: 36px;
+  text-align: center;
+}
+
+.server-ip {
+  direction: ltr;
+  display: inline-block;
+  margin: 16px 0;
+  padding: 13px 18px;
+  border-radius: 12px;
+  background: #10152d;
+  border: 1px solid #ffd47765;
+  color: #ffe3a3;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+footer {
+  padding: 30px 0;
+  border-top: 1px solid var(--line);
+  color: #bfc4dc;
+  text-align: center;
+  font-size: .9rem;
+}
+
+/* MOBILE */
+
+@media(max-width:800px) {
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding-top: 55px;
+  }
+
+  .lead {
+    margin: auto;
+  }
+
+  .actions {
+    justify-content: center;
+  }
+
+  .visual {
+    min-height: 300px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .jobs {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .links {
+    display: none;
+    position: absolute;
+    top: 76px;
+    right: 0;
+    left: 0;
+    padding: 20px;
+    background: #141936;
+    flex-direction: column;
+    gap: 15px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .links.open {
+    display: flex;
+  }
+
+  .menu {
+    display: block;
+  }
+}
+
+@media(max-width:520px) {
+  section {
+    padding: 58px 0;
+  }
+
+  .grid,
+  .command-list {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    min-height: auto;
+  }
+
+  .orb {
+    width: 260px;
+  }
+
+  .orb-logo {
+    font-size: 5rem;
+  }
+
+  .connect {
+    padding: 26px 18px;
+  }
+
+  .command {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .nav {
+    height: 68px;
+  }
+
+  .links {
+    top: 68px;
+  }
+}
+
+/* REDUCE MOTION */
+
+@media(prefers-reduced-motion:reduce) {
+  *,
+  *:before,
+  *:after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <!-- صفحه اصلی سایت -->
-  <main id="website">
+<!-- INTRO -->
+<div class="intro" id="intro">
+  <div class="intro-box">
+    <div class="intro-logo">OS</div>
+    <div class="intro-title">OS CRAFT</div>
+    <div class="intro-sub">SMP • ROLEPLAY • 26.2</div>
+    <div class="loader"></div>
+  </div>
+</div>
 
-    <header class="site-header">
-      <a class="site-brand" href="#home" aria-label="OS CRAFT">
-        <svg class="mini-mark" viewBox="0 0 220 220" aria-hidden="true">
-          <path d="M110 9L197 59L197 160L110 211L23 160L23 59Z"
-                fill="none" stroke="currentColor" stroke-width="5"/>
-          <path d="M110 47C72 47 54 69 54 110S76 173 110 173 166 151 166 110 144 47 110 47Z"
-                fill="none" stroke="currentColor" stroke-width="8"/>
-          <path d="M143 77C130 61 89 60 76 83C60 111 157 107 145 141C137 164 99 165 77 147"
-                fill="none" stroke="currentColor" stroke-width="7"/>
-        </svg>
-        <span>OS CRAFT</span>
-      </a>
+<!-- HEADER -->
+<header>
+  <div class="wrap nav">
 
-      <button class="menu-toggle" id="menuToggle" aria-label="باز کردن منو" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
+    <a class="brand" href="#home">
+      <span class="brand-mark">OS</span>
+      <span>OS CRAFT</span>
+    </a>
 
-      <nav class="site-nav" id="siteNav">
-        <a href="#home">خانه</a>
-        <a href="#about">درباره سرور</a>
-        <a href="#features">ویژگی‌ها</a>
-        <a href="#commands">دستورات</a>
-        <a href="#connect">اتصال</a>
-      </nav>
+    <nav class="links" id="navLinks">
+      <a href="#about">معرفی</a>
+      <a href="#features">امکانات</a>
+      <a href="#jobs">شغل‌ها</a>
+      <a href="#commands">دستورات</a>
+      <a href="#connect">ورود به سرور</a>
+    </nav>
 
-      <a class="header-join" href="#connect">ورود به سرور</a>
-    </header>
+    <button class="menu" id="menuBtn">☰</button>
 
-    <!-- بخش اول -->
-    <section class="hero" id="home">
-      <div class="hero-decoration hero-decoration-one"></div>
-      <div class="hero-decoration hero-decoration-two"></div>
+  </div>
+</header>
 
-      <div class="hero-content">
-        <div class="eyebrow">
-          <span class="eyebrow-line"></span>
-          THE WORLD OF OS CRAFT
-          <span class="eyebrow-line"></span>
-        </div>
+<main>
 
-        <h1 class="hero-title">OS CRAFT</h1>
-        <div class="hero-subtitle">SMP <span>+</span> ROLEPLAY</div>
+<!-- HERO -->
+<section class="wrap hero" id="home">
 
-        <p class="hero-description">
-          تجربه‌ای متفاوت از دنیای ماینکرفت؛
-          در یک سرور ترکیبی SMP و Roleplay،
-          ماجراجویی کن، پیشرفت کن و بخشی از دنیای OS CRAFT باش.
-        </p>
-
-        <div class="hero-actions">
-          <a class="button button-gold" href="#connect">اطلاعات ورود به سرور</a>
-          <a class="button button-outline" href="#about">آشنایی با سرور</a>
-        </div>
-
-        <div class="hero-meta">
-          <span class="status-dot"></span>
-          <span>نسخه سرور: 26.2</span>
-          <span class="meta-separator">/</span>
-          <span>MINECRAFT SMP + ROLEPLAY</span>
-        </div>
-      </div>
-
-      <a class="scroll-indicator" href="#about">
-        <span>SCROLL TO EXPLORE</span>
-        <i></i>
-      </a>
-    </section>
-
-    <!-- معرفی -->
-    <section class="section about-section" id="about">
-      <div class="section-heading">
-        <span class="section-kicker">ABOUT THE SERVER</span>
-        <h2>درباره OS CRAFT</h2>
-        <p>یک تجربه متفاوت در دنیای Minecraft</p>
-      </div>
-
-      <div class="about-content">
-        <div class="about-emblem">
-          <svg viewBox="0 0 220 220" aria-hidden="true">
-            <path d="M110 9L197 59L197 160L110 211L23 160L23 59Z"
-                  fill="none" stroke="currentColor" stroke-width="2"/>
-            <path d="M110 27L181 68L181 151L110 193L39 151L39 68Z"
-                  fill="none" stroke="currentColor" stroke-width="1"/>
-            <path d="M110 47C72 47 54 69 54 110S76 173 110 173 166 151 166 110 144 47 110 47Z"
-                  fill="none" stroke="currentColor" stroke-width="7"/>
-            <path d="M143 77C130 61 89 60 76 83C60 111 157 107 145 141C137 164 99 165 77 147"
-                  fill="none" stroke="currentColor" stroke-width="6"/>
-          </svg>
-        </div>
-
-        <div class="about-text">
-          <h3>فراتر از یک سرور معمولی</h3>
-          <p>
-            OS CRAFT ترکیبی از فضای بقای چندنفره و نقش‌آفرینی شهری است.
-            می‌توانی در دنیای سرور پیشرفت کنی، شغل انتخاب کنی،
-            در شهر فعالیت داشته باشی و با بازیکنان دیگر تعامل کنی.
-          </p>
-          <p>
-            هدف، ساختن یک تجربه گروهی و سرگرم‌کننده در دنیای Minecraft است.
-          </p>
-          <a href="#features" class="text-link">مشاهده ویژگی‌ها ←</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ویژگی‌ها -->
-    <section class="section features-section" id="features">
-      <div class="section-heading">
-        <span class="section-kicker">SERVER FEATURES</span>
-        <h2>ویژگی‌های سرور</h2>
-        <p>بخش‌هایی از تجربه‌ای که در OS CRAFT منتظر توست</p>
-      </div>
-
-      <div class="feature-grid">
-        <article class="feature-card">
-          <span class="feature-number">01</span>
-          <div class="feature-icon">⌂</div>
-          <h3>زندگی شهری</h3>
-          <p>در شهر فعالیت کن، خانه داشته باش و با دیگر بازیکنان تعامل داشته باش.</p>
-        </article>
-
-        <article class="feature-card">
-          <span class="feature-number">02</span>
-          <div class="feature-icon">⚒</div>
-          <h3>سیستم شغل</h3>
-          <p>شغل مورد علاقه‌ات را انتخاب کن و در اقتصاد شهر پیشرفت کن.</p>
-        </article>
-
-        <article class="feature-card">
-          <span class="feature-number">03</span>
-          <div class="feature-icon">◇</div>
-          <h3>اقتصاد سرور</h3>
-          <p>خریدوفروش، کسب درآمد و فعالیت در سیستم اقتصادی سرور.</p>
-        </article>
-
-        <article class="feature-card">
-          <span class="feature-number">04</span>
-          <div class="feature-icon">▦</div>
-          <h3>سیستم خانه</h3>
-          <p>خانه داشته باش و فضای شخصی خودت را در شهر مدیریت کن.</p>
-        </article>
-
-        <article class="feature-card">
-          <span class="feature-number">05</span>
-          <div class="feature-icon">⚔</div>
-          <h3>بقای چندنفره</h3>
-          <p>در کنار بازیکنان دیگر بازی کن و دنیای خودت را گسترش بده.</p>
-        </article>
-
-        <article class="feature-card">
-          <span class="feature-number">06</span>
-          <div class="feature-icon">✦</div>
-          <h3>نقش‌آفرینی</h3>
-          <p>در فضای Roleplay نقش خودت را در زندگی شهری دنبال کن.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- دستورات -->
-    <section class="section commands-section" id="commands">
-      <div class="section-heading">
-        <span class="section-kicker">SERVER COMMANDS</span>
-        <h2>دستورات سرور</h2>
-        <p>دستورات پرکاربرد برای شروع کار در OS CRAFT</p>
-      </div>
-
-      <div class="command-list">
-        <div class="command-item">
-          <div>
-            <strong>نمایش اطلاعات شغل</strong>
-            <small>مشاهده و انتخاب شغل</small>
-          </div>
-          <code>/jobs</code>
-        </div>
-
-        <div class="command-item">
-          <div>
-            <strong>دسترسی‌های خانه</strong>
-            <small>مدیریت خانه و محدوده آن</small>
-          </div>
-          <code>/house</code>
-        </div>
-
-        <div class="command-item">
-          <div>
-            <strong>نمایش موبایل</strong>
-            <small>باز کردن امکانات موبایل سرور</small>
-          </div>
-          <code>/mobile</code>
-        </div>
-
-        <div class="command-item">
-          <div>
-            <strong>پایان فعالیت ساختمانی</strong>
-            <small>ثبت پایان کار معمار</small>
-          </div>
-          <code>/mdone</code>
-        </div>
-      </div>
-
-      <p class="commands-note">
-        این فهرست فعلاً شامل چند دستور نمونه است؛ برای انتشار نهایی،
-        دستورات دقیق و کامل پلاگین‌های سرورت را جایگزین کن.
-      </p>
-    </section>
-
-    <!-- اتصال -->
-    <section class="section connect-section" id="connect">
-      <div class="section-heading">
-        <span class="section-kicker">JOIN THE SERVER</span>
-        <h2>به OS CRAFT بپیوند</h2>
-        <p>آماده ورود به دنیای سرور هستی؟</p>
-      </div>
-
-      <div class="connect-card">
-        <div class="connect-top">
-          <span class="connect-label">SERVER ADDRESS</span>
-          <span class="version-label">VERSION 26.2</span>
-        </div>
-
-        <div class="server-address" id="serverAddress">
-          sarafraz717-srv-os_craft_asli.play.mihancraft.com:25566
-        </div>
-
-        <button class="copy-button" id="copyServerButton">
-          کپی آدرس سرور
-        </button>
-
-        <p class="copy-feedback" id="copyFeedback" aria-live="polite"></p>
-      </div>
-    </section>
-
-    <footer class="site-footer">
-      <div class="footer-brand">OS CRAFT</div>
-      <p>SMP + ROLEPLAY</p>
-      <span>© 2026 OS CRAFT — ALL RIGHTS RESERVED</span>
-    </footer>
-
-  </main>
-
-  <!-- اینترو -->
-  <section id="intro" aria-label="OS CRAFT introduction">
-
-    <div class="frame">
-      <div class="frame-inner"></div>
-      <div class="frame-detail"></div>
-      <i class="frame-corner corner-tl"></i>
-      <i class="frame-corner corner-tr"></i>
-      <i class="frame-corner corner-bl"></i>
-      <i class="frame-corner corner-br"></i>
+  <div>
+    <div class="eyebrow">
+      <span class="dot"></span>
+      سرور فعال OS CRAFT • نسخه 26.2
     </div>
 
-    <div class="frame-label frame-top">OS CRAFT • EST. 2026</div>
-    <div class="frame-label frame-bottom">SMP • ROLEPLAY • MINECRAFT</div>
+    <h1>
+      دنیای تازه‌ای از<br>
+      <span>ماینکرفت</span>
+    </h1>
 
-    <canvas id="dust"></canvas>
+    <p class="lead">
+      ترکیبی از بقا، اقتصاد و زندگی شهری در یک تجربه SMP + Roleplay.
+      شغل انتخاب کن، پیشرفت کن و در شهر جایگاه خودت را بساز.
+    </p>
 
-    <div id="introContent">
-      <div class="logo-wrap">
-        <svg class="logo-svg" viewBox="0 0 220 220">
-          <defs>
-            <linearGradient id="logoGold" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#fff1c7"/>
-              <stop offset="28%" stop-color="#d2a451"/>
-              <stop offset="55%" stop-color="#f6d99a"/>
-              <stop offset="100%" stop-color="#8c5b20"/>
-            </linearGradient>
-          </defs>
-
-          <path class="logo-outline"
-                d="M110 9L197 59L197 160L110 211L23 160L23 59Z"/>
-          <path class="logo-outline"
-                d="M110 27L181 68L181 151L110 193L39 151L39 68Z"/>
-          <path class="logo-inner-line"
-                d="M110 15L190 61M30 61L110 15M30 158L110 205M190 158L110 205"/>
-
-          <path id="logoO" class="logo-o"
-                d="M110 47C72 47 54 69 54 110S76 173 110 173 166 151 166 110 144 47 110 47Z"/>
-
-          <path class="logo-s"
-                d="M143 77C130 61 89 60 76 83C60 111 157 107 145 141C137 164 99 165 77 147"/>
-        </svg>
-      </div>
-
-      <div class="intro-brand">OS CRAFT</div>
-      <div class="intro-subtitle">SMP • ROLEPLAY</div>
-      <div class="intro-divider"></div>
-      <div class="intro-caption">A NEW WORLD IS WAITING</div>
+    <div class="actions">
+      <a class="btn primary" href="#connect">ورود به سرور</a>
+      <a class="btn secondary" href="#features">آشنایی با امکانات</a>
     </div>
-  </section>
+  </div>
 
-  <!-- O بزرگ‌شونده برای انتقال -->
-  <svg id="oPortal" viewBox="0 0 220 220" aria-hidden="true">
-    <defs>
-      <linearGradient id="portalGold" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stop-color="#fff3cf"/>
-        <stop offset="45%" stop-color="#d5a34e"/>
-        <stop offset="100%" stop-color="#fff0c1"/>
-      </linearGradient>
-    </defs>
-    <path id="portalPath"></path>
-  </svg>
+  <div class="visual">
+    <div class="orb">
+      <div class="orb-inner">
+        <div class="orb-logo">OS</div>
+      </div>
+    </div>
+
+    <div class="float-card one">✨ اقتصاد و خریدوفروش</div>
+    <div class="float-card two">🏙️ تجربه زندگی شهری</div>
+  </div>
+
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+<div class="wrap">
+
+  <div class="section-head">
+    <div class="kicker">ABOUT OS CRAFT</div>
+    <h2>OS CRAFT چیست؟</h2>
+    <p>
+      یک سرور ماینکرفت با فضای شهری و نقش‌آفرینی؛
+      جایی برای ساختن، همکاری، تجارت و تجربه یک زندگی متفاوت.
+    </p>
+  </div>
+
+  <div class="grid">
+
+    <article class="card">
+      <div class="icon">🏙️</div>
+      <h3>شهر زنده</h3>
+      <p>در یک شهر مشترک زندگی کن، خانه داشته باش و با بازیکنان دیگر تعامل داشته باش.</p>
+    </article>
+
+    <article class="card">
+      <div class="icon">💎</div>
+      <h3>اقتصاد سرور</h3>
+      <p>با فعالیت و انجام کارها درآمد کسب کن و از فروشگاه‌ها خرید کن.</p>
+    </article>
+
+    <article class="card">
+      <div class="icon">🤝</div>
+      <h3>نقش‌آفرینی</h3>
+      <p>نقش خودت را انتخاب کن و در شکل‌گیری اتفاقات شهر سهم داشته باش.</p>
+    </article>
+
+  </div>
+</div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+<div class="wrap">
+
+  <div class="section-head">
+    <div class="kicker">SERVER FEATURES</div>
+    <h2>امکانات سرور</h2>
+    <p>ابزارها و سیستم‌هایی برای یک تجربه کامل‌تر از بازی گروهی.</p>
+  </div>
+
+  <div class="grid">
+
+    <article class="card">
+      <div class="icon">🏠</div>
+      <h3>خانه و ملک</h3>
+      <p>خانه داشته باش و فضای اختصاصی خودت را مدیریت کن.</p>
+    </article>
+
+    <article class="card">
+      <div class="icon">🛒</div>
+      <h3>فروشگاه‌ها</h3>
+      <p>خریدوفروش آیتم‌ها و تعامل با اقتصاد شهر.</p>
+    </article>
+
+    <article class="card">
+      <div class="icon">📱</div>
+      <h3>موبایل درون‌بازی</h3>
+      <p>دسترسی به امکاناتی مانند ارتباطات و خدمات شهری.</p>
+    </article>
+
+    <article class="card">
+      <div class="icon">⛏️</div>
+      <h3>فعالیت و کسب درآمد</h3>
+      <p>با کار و فعالیت در سرور منابع و درآمد به دست بیاور.</p>
+    </article>
+
+    <article class="card">
+      <div class="icon">🏦</div>
+      <h3>بانک</h3>
+      <p>از سیستم اقتصادی برای مدیریت دارایی‌های خود استفاده کن.</p>
+    </article>
+
+    <article class="card">
+      <div class="icon">🧱</div>
+      <h3>ساخت‌وساز</h3>
+      <p>در توسعه و زیباسازی شهر مشارکت داشته باش.</p>
+    </article>
+
+  </div>
+</div>
+</section>
+
+<!-- JOBS -->
+<section id="jobs">
+<div class="wrap">
+
+  <div class="section-head">
+    <div class="kicker">CHOOSE YOUR PATH</div>
+    <h2>شغل‌های قابل انتخاب</h2>
+    <p>با انتخاب شغل، مسیر پیشرفت خودت را در شهر شروع کن.</p>
+  </div>
+
+  <div class="grid jobs">
+
+    <article class="card job">
+      <div class="icon">🩺</div>
+      <h3>پزشک</h3>
+    </article>
+
+    <article class="card job">
+      <div class="icon">🌾</div>
+      <h3>کشاورز</h3>
+    </article>
+
+    <article class="card job">
+      <div class="icon">🏦</div>
+      <h3>رئیس بانک</h3>
+    </article>
+
+    <article class="card job">
+      <div class="icon">🏨</div>
+      <h3>رئیس هتل</h3>
+    </article>
+
+    <article class="card job">
+      <div class="icon">🏗️</div>
+      <h3>معمار</h3>
+    </article>
+
+    <article class="card job">
+      <div class="icon">🚚</div>
+      <h3>حمل‌ونقل</h3>
+    </article>
+
+    <article class="card job">
+      <div class="icon">🛠️</div>
+      <h3>کارگر</h3>
+    </article>
+
+    <article class="card job">
+      <div class="icon">⛏️</div>
+      <h3>معدن‌کار</h3>
+    </article>
+
+  </div>
+</div>
+</section>
+
+<!-- COMMANDS -->
+<section id="commands">
+<div class="wrap">
+
+  <div class="section-head">
+    <div class="kicker">QUICK GUIDE</div>
+    <h2>دستورات کاربردی</h2>
+    <p>برای استفاده از امکانات مختلف سرور، این دستورات را به خاطر بسپار.</p>
+  </div>
+
+  <div class="command-list">
+
+    <div class="command">
+      <span>نمایش منوی انتخاب شغل</span>
+      <code>/jobs</code>
+    </div>
+
+    <div class="command">
+      <span>مدیریت خانه‌ها</span>
+      <code>/house</code>
+    </div>
+
+    <div class="command">
+      <span>نمایش موبایل</span>
+      <code>/mobile</code>
+    </div>
+
+    <div class="command">
+      <span>دریافت پاداش معماری</span>
+      <code>/mdone</code>
+    </div>
+
+    <div class="command">
+      <span>مدیریت شغل کارگری</span>
+      <code>/kargar</code>
+    </div>
+
+    <div class="command">
+      <span>دستورات فروشگاه</span>
+      <code>/shop</code>
+    </div>
+
+  </div>
+
+  <p style="text-align:center;color:var(--muted);margin-top:18px;font-size:.88rem">
+    ممکن است برخی دستورات با توجه به نقش و دسترسی بازیکن محدود باشند.
+  </p>
+
+</div>
+</section>
+
+<!-- CONNECT -->
+<section id="connect">
+<div class="wrap">
+
+  <div class="connect">
+
+    <div class="kicker">JOIN THE SERVER</div>
+    <h2>آماده‌ای وارد شهر شوی؟</h2>
+
+    <p style="color:var(--muted)">
+      آدرس سرور را کپی کن و در بخش Multiplayer ماینکرفت وارد کن.
+    </p>
+
+    <div class="server-ip" id="serverIp">
+      sarafraz7171-srv-os_craft_asli.play.mihancraft.com:25566
+    </div>
+
+    <br>
+
+    <button class="btn primary" id="copyBtn">
+      کپی آدرس سرور
+    </button>
+
+    <p id="copyStatus" aria-live="polite"
+       style="min-height:24px;color:var(--cyan);margin-bottom:0"></p>
+
+    <p style="color:var(--muted);margin:8px 0 0">
+      نسخه سرور: 26.2
+    </p>
+
+  </div>
+</div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    © OS CRAFT — SMP + Roleplay
+  </div>
+</footer>
+
+<script>
+// INTRO
+const intro = document.getElementById('intro');
+
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    intro.classList.add('hide');
+  }, 1250);
+}, { once: true });
+
+// MOBILE MENU
+const menuBtn = document.getElementById('menuBtn');
+const navLinks = document.getElementById('navLinks');
+
+menuBtn.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+});
+
+navLinks.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+  });
+});
+
+// COPY SERVER IP
+document.getElementById('copyBtn').addEventListener('click', async () => {
+
+  const ip = document.getElementById('serverIp').textContent.trim();
+  const status = document.getElementById('copyStatus');
+
+  try {
+    await navigator.clipboard.writeText(ip);
+    status.textContent = 'آدرس سرور کپی شد!';
+  } catch (error) {
+    status.textContent = 'کپی خودکار ممکن نیست؛ آدرس را دستی انتخاب کن.';
+  }
+
+});
+</script>
 
 </body>
 </html>
