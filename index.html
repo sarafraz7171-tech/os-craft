@@ -5,571 +5,796 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#08090c">
-<title>OS CRAFT | SMP + ROLEPLAY</title>
+<title>OS CRAFT | Official Server</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
 :root {
-    --red: #f02b3d;
-    --dark: #08090c;
-    --panel: #111217;
-    --muted: #a4a5ad;
+    --red:#ed263b;
+    --red-light:#ff5263;
+    --dark:#07080b;
+    --panel:#111319;
+    --muted:#a2a4ad;
 }
 
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
 html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 85px;
+    scroll-behavior:smooth;
+    scroll-padding-top:85px;
 }
 
 body {
-    background: var(--dark);
-    color: white;
-    font-family: Vazirmatn, Tahoma, sans-serif;
-    overflow-x: hidden;
+    background:var(--dark);
+    color:white;
+    font-family:Vazirmatn,Tahoma,sans-serif;
+    overflow-x:hidden;
 }
 
-body.locked {
-    overflow: hidden;
+body.intro-active {
+    overflow:hidden;
 }
 
 a {
-    text-decoration: none;
-    color: inherit;
+    text-decoration:none;
+    color:inherit;
 }
 
-/* INTRO */
+button {
+    font-family:inherit;
+}
+
+/* =========================
+   CINEMATIC INTRO
+========================= */
 
 .intro {
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-    display: grid;
-    place-items: center;
-    text-align: center;
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    background:#050609;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    transition:opacity 1s ease, visibility 1s ease;
+}
+
+.intro.finished {
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+}
+
+/* Red light background */
+
+.intro-bg {
+    position:absolute;
+    inset:0;
     background:
-        radial-gradient(ellipse, #8e1025 0%, transparent 45%),
-        linear-gradient(135deg, #08090c, #19070d, #050507);
-    transition: opacity .8s, visibility .8s;
+        radial-gradient(ellipse at 50% 45%,#a20d2440,transparent 35%),
+        radial-gradient(ellipse at 50% 100%,#5d071c35,transparent 50%);
 }
 
-.intro.hide {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
+.intro-bg::before {
+    content:"";
+    position:absolute;
+    width:700px;
+    height:700px;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    border-radius:50%;
+    border:1px solid #f02b3d20;
+    box-shadow:
+        0 0 0 60px #f02b3d08,
+        0 0 0 120px #f02b3d06,
+        0 0 100px #f02b3d20;
+    animation:introRing 8s linear infinite;
 }
 
-.intro::before,
-.intro::after {
-    content: "";
-    position: absolute;
-    width: 65vw;
-    height: 65vw;
-    border: 1px solid #f02b3d33;
-    border-radius: 50%;
-    animation: rotate 12s linear infinite;
+@keyframes introRing {
+    to { transform:translate(-50%,-50%) rotate(360deg); }
 }
 
-.intro::after {
-    width: 85vw;
-    height: 85vw;
-    animation-direction: reverse;
+/* Grid */
+
+.intro-grid {
+    position:absolute;
+    inset:0;
+    opacity:.18;
+    background-image:
+        linear-gradient(#ffffff10 1px,transparent 1px),
+        linear-gradient(90deg,#ffffff10 1px,transparent 1px);
+    background-size:55px 55px;
+    mask-image:radial-gradient(ellipse,black,transparent 75%);
 }
 
-@keyframes rotate {
-    to { transform: rotate(360deg); }
+/* Light sweep */
+
+.intro-light {
+    position:absolute;
+    top:-20%;
+    left:-50%;
+    width:35%;
+    height:150%;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        #ff263b0c,
+        #ff263b33,
+        transparent
+    );
+    transform:rotate(20deg);
+    animation:lightSweep 3.5s ease-in-out infinite;
 }
+
+@keyframes lightSweep {
+    0% { left:-50%; }
+    100% { left:130%; }
+}
+
+/* Particles */
+
+.particles {
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+}
+
+.particle {
+    position:absolute;
+    width:3px;
+    height:3px;
+    background:#ff5364;
+    border-radius:50%;
+    box-shadow:0 0 12px #ff263b;
+    animation:floatParticle 6s ease-in-out infinite;
+}
+
+.particle:nth-child(1) {top:20%;left:15%;animation-delay:0s}
+.particle:nth-child(2) {top:75%;left:25%;animation-delay:1s}
+.particle:nth-child(3) {top:30%;left:80%;animation-delay:2s}
+.particle:nth-child(4) {top:80%;left:75%;animation-delay:3s}
+.particle:nth-child(5) {top:15%;left:60%;animation-delay:1.5s}
+.particle:nth-child(6) {top:55%;left:10%;animation-delay:2.5s}
+.particle:nth-child(7) {top:65%;left:90%;animation-delay:1s}
+.particle:nth-child(8) {top:40%;left:45%;animation-delay:3.5s}
+
+@keyframes floatParticle {
+    0%,100% {transform:translateY(0);opacity:.2}
+    50% {transform:translateY(-35px);opacity:1}
+}
+
+/* Intro content */
 
 .intro-content {
-    position: relative;
-    z-index: 2;
-    padding: 20px;
+    position:relative;
+    z-index:5;
+    text-align:center;
+    width:100%;
+    padding:20px;
+    animation:introContent 1.3s cubic-bezier(.16,1,.3,1) both;
+}
+
+@keyframes introContent {
+    from {
+        opacity:0;
+        transform:translateY(45px) scale(.92);
+        filter:blur(12px);
+    }
+    to {
+        opacity:1;
+        transform:translateY(0) scale(1);
+        filter:blur(0);
+    }
 }
 
 .intro-logo {
-    width: 85px;
-    height: 85px;
-    margin: auto auto 25px;
-    display: grid;
-    place-items: center;
-    border-radius: 22px;
-    background: linear-gradient(145deg, #ff344b, #760817);
-    font-size: 30px;
-    font-weight: 900;
-    box-shadow: 0 0 55px #f02b3d66;
-    transform: rotate(-8deg);
+    width:110px;
+    height:110px;
+    margin:0 auto 30px;
+    display:grid;
+    place-items:center;
+    position:relative;
+    border-radius:27px;
+    background:linear-gradient(145deg,#ff465b,#9b071b 65%,#45050e);
+    box-shadow:
+        0 0 25px #f02b3d77,
+        0 0 75px #f02b3d44,
+        inset 0 1px 1px #ffffff66;
+    transform:rotate(-7deg);
+    animation:logoFloat 4s ease-in-out infinite;
 }
 
-.intro h1 {
-    font-size: clamp(42px, 9vw, 85px);
-    font-weight: 900;
-    direction: ltr;
-    text-shadow: 0 0 35px #f02b3d66;
+.intro-logo::before {
+    content:"";
+    position:absolute;
+    inset:-8px;
+    border:1px solid #ff455b66;
+    border-radius:32px;
+    animation:logoBorder 3s linear infinite;
 }
 
-.intro p {
-    margin: 15px 0 30px;
-    color: #ddd;
-    letter-spacing: 5px;
-    direction: ltr;
+.intro-logo::after {
+    content:"";
+    position:absolute;
+    inset:-18px;
+    border:1px solid #ff455b22;
+    border-radius:37px;
 }
 
-.loading {
-    width: 170px;
-    height: 3px;
-    background: #ffffff22;
-    margin: auto;
-    overflow: hidden;
+.intro-logo span {
+    font-size:38px;
+    font-weight:900;
+    letter-spacing:-3px;
+    direction:ltr;
+    text-shadow:0 3px 15px #45000b;
 }
 
-.loading span {
-    display: block;
-    height: 100%;
-    width: 40%;
-    background: var(--red);
-    animation: loading 1.5s infinite;
+@keyframes logoFloat {
+    0%,100% {transform:rotate(-7deg) translateY(0)}
+    50% {transform:rotate(-3deg) translateY(-9px)}
 }
 
-@keyframes loading {
-    from { transform: translateX(260%); }
-    to { transform: translateX(-260%); }
+@keyframes logoBorder {
+    to {transform:rotate(360deg)}
 }
 
-.skip {
-    margin-top: 25px;
-    background: none;
-    border: none;
-    color: #aaa;
-    cursor: pointer;
+.intro-title {
+    font-size:clamp(43px,9vw,92px);
+    font-weight:900;
+    letter-spacing:2px;
+    direction:ltr;
+    text-shadow:
+        0 0 20px #ed263b66,
+        0 0 70px #ed263b33;
 }
 
-/* NAVBAR */
+.intro-title span {
+    color:var(--red);
+}
+
+.intro-subtitle {
+    margin-top:12px;
+    color:#c7c7ce;
+    font-size:13px;
+    letter-spacing:7px;
+    direction:ltr;
+}
+
+.intro-line {
+    width:220px;
+    height:2px;
+    margin:38px auto 18px;
+    background:#ffffff15;
+    overflow:hidden;
+    border-radius:10px;
+}
+
+.intro-line span {
+    display:block;
+    width:35%;
+    height:100%;
+    background:var(--red-light);
+    box-shadow:0 0 15px var(--red);
+    animation:progress 2.5s ease-in-out infinite;
+}
+
+@keyframes progress {
+    from {transform:translateX(300%)}
+    to {transform:translateX(-300%)}
+}
+
+.intro-status {
+    color:#888;
+    font-size:11px;
+    letter-spacing:3px;
+    direction:ltr;
+}
+
+.intro-enter {
+    margin-top:30px;
+    border:1px solid #ff526366;
+    color:white;
+    background:#ed263b20;
+    border-radius:9px;
+    padding:10px 25px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.intro-enter:hover {
+    background:var(--red);
+    box-shadow:0 0 25px #ed263b55;
+}
+
+/* =========================
+   HEADER
+========================= */
 
 header {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    background: #08090cdd;
-    backdrop-filter: blur(18px);
-    border-bottom: 1px solid #ffffff12;
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:#08090cdd;
+    backdrop-filter:blur(20px);
+    border-bottom:1px solid #ffffff12;
 }
 
 .nav {
-    max-width: 1180px;
-    margin: auto;
-    padding: 15px 22px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    max-width:1200px;
+    margin:auto;
+    padding:15px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
 }
 
 .brand {
-    font-size: 23px;
-    font-weight: 900;
-    direction: ltr;
+    font-size:23px;
+    font-weight:900;
+    direction:ltr;
 }
 
 .brand span {
-    color: var(--red);
+    color:var(--red);
 }
 
 .links {
-    display: flex;
-    gap: 27px;
-    font-size: 13px;
-    color: #ccc;
+    display:flex;
+    align-items:center;
+    gap:28px;
+    font-size:13px;
+    color:#c9c9ce;
+}
+
+.links a {
+    transition:.25s;
 }
 
 .links a:hover {
-    color: var(--red);
+    color:var(--red-light);
 }
 
-.nav-cta,
+.nav-button,
 .btn {
-    background: var(--red);
-    color: white;
-    padding: 11px 20px;
-    border-radius: 10px;
-    border: none;
-    font-family: inherit;
-    font-weight: 800;
-    cursor: pointer;
-    transition: .3s;
+    display:inline-block;
+    background:var(--red);
+    color:white;
+    padding:12px 21px;
+    border-radius:10px;
+    border:1px solid transparent;
+    font-size:13px;
+    font-weight:800;
+    cursor:pointer;
+    transition:.3s;
 }
 
-.nav-cta:hover,
+.nav-button:hover,
 .btn:hover {
-    background: #ff4556;
-    transform: translateY(-3px);
+    transform:translateY(-3px);
+    box-shadow:0 10px 30px #ed263b44;
+    background:#ff4053;
 }
 
-.menu-btn {
-    display: none;
-    background: none;
-    color: white;
-    border: 1px solid #ffffff33;
-    padding: 8px 12px;
-    border-radius: 9px;
+.menu-button {
+    display:none;
+    background:none;
+    border:1px solid #ffffff30;
+    border-radius:9px;
+    padding:9px 12px;
+    color:white;
+    cursor:pointer;
 }
 
-/* HERO */
+/* =========================
+   PAGE ENTRANCE
+========================= */
+
+body:not(.page-ready) header,
+body:not(.page-ready) main,
+body:not(.page-ready) footer {
+    opacity:0;
+    transform:translateY(35px);
+}
+
+body.page-ready header {
+    animation:topEnter 1s cubic-bezier(.16,1,.3,1) both;
+}
+
+body.page-ready main {
+    animation:pageEnter 1.2s cubic-bezier(.16,1,.3,1) both;
+}
+
+body.page-ready footer {
+    opacity:1;
+    transform:none;
+}
+
+@keyframes topEnter {
+    from {opacity:0;transform:translateY(-40px)}
+    to {opacity:1;transform:translateY(0)}
+}
+
+@keyframes pageEnter {
+    from {opacity:0;transform:translateY(40px)}
+    to {opacity:1;transform:translateY(0)}
+}
+
+/* =========================
+   HERO
+========================= */
 
 .hero {
-    min-height: 680px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
+    min-height:690px;
+    display:flex;
+    align-items:center;
+    position:relative;
+    overflow:hidden;
     background:
-        radial-gradient(ellipse at 75% 45%, #7d101f88, transparent 45%),
-        linear-gradient(135deg, #171016, #08090c 65%);
+        radial-gradient(ellipse at 75% 45%,#8c112788,transparent 45%),
+        linear-gradient(135deg,#170c11,#08090c 70%);
 }
 
 .hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
+    content:"";
+    position:absolute;
+    inset:0;
     background-image:
-        linear-gradient(#ffffff08 1px, transparent 1px),
-        linear-gradient(90deg, #ffffff08 1px, transparent 1px);
-    background-size: 55px 55px;
+        linear-gradient(#ffffff08 1px,transparent 1px),
+        linear-gradient(90deg,#ffffff08 1px,transparent 1px);
+    background-size:55px 55px;
 }
 
 .hero::after {
-    content: "";
-    position: absolute;
-    width: 460px;
-    height: 460px;
-    border: 1px solid #f02b3d35;
-    border-radius: 50%;
-    left: 8%;
-    top: 10%;
+    content:"";
+    position:absolute;
+    width:470px;
+    height:470px;
+    left:8%;
+    top:12%;
+    border:1px solid #ed263b35;
+    border-radius:50%;
     box-shadow:
-        0 0 0 45px #f02b3d09,
-        0 0 0 90px #f02b3d06;
+        0 0 0 50px #ed263b08,
+        0 0 0 100px #ed263b05;
+    animation:heroRing 20s linear infinite;
+}
+
+@keyframes heroRing {
+    to {transform:rotate(360deg)}
 }
 
 .hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: 1180px;
-    width: 100%;
-    margin: auto;
-    padding: 100px 24px;
+    position:relative;
+    z-index:2;
+    width:100%;
+    max-width:1200px;
+    margin:auto;
+    padding:100px 24px;
 }
 
-.eyebrow {
-    color: #ff7a87;
-    font-size: 13px;
-    letter-spacing: 3px;
-    direction: ltr;
+.hero-label {
+    color:#ff7582;
+    font-size:13px;
+    letter-spacing:3px;
+    direction:ltr;
 }
 
-.hero h2 {
-    font-size: clamp(48px, 9vw, 100px);
-    font-weight: 900;
-    line-height: 1.1;
-    margin: 20px 0 8px;
-    direction: ltr;
+.hero h1 {
+    font-size:clamp(55px,10vw,110px);
+    font-weight:900;
+    line-height:1.15;
+    direction:ltr;
+    margin:22px 0 5px;
 }
 
-.hero h2 span {
-    color: var(--red);
-    text-shadow: 0 0 35px #f02b3d55;
+.hero h1 span {
+    color:var(--red);
+    text-shadow:0 0 40px #ed263b66;
 }
 
-.sub {
-    color: #ccc;
-    font-size: 18px;
-    letter-spacing: 5px;
-    direction: ltr;
+.hero-sub {
+    direction:ltr;
+    font-size:19px;
+    letter-spacing:6px;
+    color:#ccc;
 }
 
-.hero-desc {
-    max-width: 590px;
-    color: #bbb;
-    line-height: 2.2;
-    font-size: 14px;
-    margin: 25px 0 30px;
+.hero-description {
+    max-width:600px;
+    margin:28px 0;
+    line-height:2.3;
+    font-size:14px;
+    color:#bdbdc5;
 }
 
 .hero-actions {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
+    display:flex;
+    gap:13px;
+    flex-wrap:wrap;
 }
 
-.secondary {
-    background: transparent;
-    border: 1px solid #ffffff44;
+.btn-outline {
+    background:transparent;
+    border-color:#ffffff44;
 }
 
 .version {
-    margin-top: 35px;
-    color: #999;
-    font-size: 13px;
+    margin-top:35px;
+    color:#999;
+    font-size:13px;
 }
 
 .version strong {
-    color: white;
-    direction: ltr;
-    display: inline-block;
+    color:white;
+    direction:ltr;
+    display:inline-block;
 }
 
-/* GENERAL SECTIONS */
+/* =========================
+   COMMON SECTIONS
+========================= */
 
 section {
-    padding: 95px 22px;
+    padding:100px 22px;
 }
 
 .container {
-    max-width: 1120px;
-    margin: auto;
+    max-width:1150px;
+    margin:auto;
 }
 
-.section-head {
-    text-align: center;
-    margin-bottom: 45px;
+.section-title {
+    text-align:center;
+    margin-bottom:48px;
 }
 
-.tag {
-    color: var(--red);
-    font-size: 12px;
-    font-weight: 900;
-    letter-spacing: 2px;
-    direction: ltr;
+.section-title small {
+    color:var(--red-light);
+    font-size:12px;
+    letter-spacing:3px;
+    direction:ltr;
+    display:block;
 }
 
-.section-head h2 {
-    font-size: clamp(28px, 4vw, 43px);
-    margin: 10px 0;
+.section-title h2 {
+    font-size:clamp(28px,5vw,44px);
+    margin:12px 0;
 }
 
-.section-head p {
-    color: var(--muted);
-    font-size: 14px;
+.section-title p {
+    color:var(--muted);
+    font-size:14px;
 }
 
 /* ABOUT */
 
 .about-grid {
-    display: grid;
-    grid-template-columns: 1.1fr .9fr;
-    gap: 24px;
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    gap:22px;
 }
 
-.about-copy,
-.info-card,
-.feature,
-.video-shell,
-.connect-card {
-    background: linear-gradient(145deg, #15161c, #0e0f13);
-    border: 1px solid #ffffff12;
-    border-radius: 18px;
+.about-box,
+.info-box,
+.feature-card,
+.video-box,
+.join-box {
+    background:linear-gradient(145deg,#15161c,#0e0f13);
+    border:1px solid #ffffff12;
+    border-radius:18px;
 }
 
-.about-copy {
-    padding: 32px;
+.about-box {
+    padding:35px;
 }
 
-.about-copy h3 {
-    font-size: 23px;
-    margin-bottom: 15px;
+.about-box h3 {
+    font-size:23px;
+    margin-bottom:18px;
 }
 
-.about-copy p {
-    color: #b4b5bd;
-    line-height: 2.3;
-    font-size: 14px;
+.about-box p {
+    color:#b5b5be;
+    line-height:2.4;
+    font-size:14px;
 }
 
-.info-stack {
-    display: grid;
-    gap: 14px;
+.info-list {
+    display:grid;
+    gap:14px;
 }
 
-.info-card {
-    padding: 22px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.info-box {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:23px;
 }
 
-.info-card small {
-    display: block;
-    color: #999;
-    margin-bottom: 5px;
+.info-box small {
+    color:#999;
+    display:block;
+    margin-bottom:6px;
+}
+
+.info-box strong {
+    font-size:14px;
 }
 
 .info-icon {
-    width: 43px;
-    height: 43px;
-    display: grid;
-    place-items: center;
-    background: #f02b3d22;
-    color: #ff6574;
-    border-radius: 12px;
+    width:45px;
+    height:45px;
+    border-radius:12px;
+    background:#ed263b20;
+    display:grid;
+    place-items:center;
+    color:#ff6475;
+    font-size:20px;
 }
 
 /* FEATURES */
 
-.features {
-    background: linear-gradient(180deg, #0a0b0f, #101116, #090a0d);
+.features-section {
+    background:linear-gradient(180deg,#090a0e,#111218,#090a0e);
 }
 
 .feature-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 17px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
 }
 
-.feature {
-    padding: 27px;
-    transition: .3s;
+.feature-card {
+    padding:28px;
+    transition:.35s;
 }
 
-.feature:hover {
-    transform: translateY(-7px);
-    border-color: #f02b3d77;
-    box-shadow: 0 15px 35px #0005;
+.feature-card:hover {
+    transform:translateY(-8px);
+    border-color:#ed263b77;
+    box-shadow:0 15px 40px #0006;
 }
 
-.symbol {
-    font-size: 28px;
-    color: #ff5667;
+.feature-icon {
+    color:#ff5263;
+    font-size:30px;
 }
 
-.feature h3 {
-    font-size: 17px;
-    margin: 15px 0 8px;
+.feature-card h3 {
+    font-size:17px;
+    margin:15px 0 9px;
 }
 
-.feature p {
-    color: #aaa;
-    font-size: 13px;
-    line-height: 2.1;
+.feature-card p {
+    color:#aaa;
+    line-height:2.1;
+    font-size:13px;
 }
 
-/* APARAT VIDEO */
+/* VIDEO */
 
 .video-section {
-    background: radial-gradient(ellipse at center, #50101c33, transparent 60%);
+    background:radial-gradient(ellipse at center,#60101c30,transparent 60%);
 }
 
-.video-shell {
-    max-width: 900px;
-    margin: auto;
-    padding: 12px;
-    box-shadow: 0 25px 80px #0008;
+.video-box {
+    max-width:920px;
+    margin:auto;
+    padding:12px;
+    box-shadow:0 30px 80px #0008;
 }
 
 .video-frame {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    background: #050507;
-    border-radius: 12px;
-    overflow: hidden;
+    width:100%;
+    aspect-ratio:16/9;
+    position:relative;
+    overflow:hidden;
+    border-radius:12px;
+    background:#050507;
 }
 
 .video-frame iframe {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    border:0;
 }
 
-.video-note {
-    text-align: center;
-    color: #999;
-    font-size: 12px;
-    margin-top: 18px;
+.video-caption {
+    color:#999;
+    text-align:center;
+    font-size:12px;
+    margin-top:18px;
 }
 
 /* JOIN */
 
-.connect-card {
-    padding: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 25px;
-    flex-wrap: wrap;
+.join-box {
+    padding:35px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:25px;
+    flex-wrap:wrap;
 }
 
-.connect-card h3 {
-    font-size: 23px;
-    margin-bottom: 8px;
+.join-box h3 {
+    font-size:23px;
+    margin-bottom:8px;
 }
 
-.connect-card p {
-    color: #aaa;
-    font-size: 13px;
+.join-box p {
+    color:#aaa;
+    font-size:13px;
 }
 
-.ip-box {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    direction: ltr;
-    background: #08090c;
-    border: 1px solid #ffffff18;
-    padding: 10px;
-    border-radius: 11px;
-    max-width: 100%;
+.ip-container {
+    display:flex;
+    gap:10px;
+    align-items:center;
+    direction:ltr;
+    background:#08090c;
+    border:1px solid #ffffff20;
+    padding:10px;
+    border-radius:10px;
+    max-width:100%;
 }
 
-.ip-box code {
-    font-family: Consolas, monospace;
-    font-size: 12px;
-    overflow-wrap: anywhere;
-    color: #f2dfe2;
+.ip-container code {
+    color:#eee;
+    font-family:Consolas,monospace;
+    font-size:12px;
+    overflow-wrap:anywhere;
 }
 
-.copy {
-    background: var(--red);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 9px 13px;
-    cursor: pointer;
-    font-weight: 800;
-    white-space: nowrap;
+.copy-button {
+    border:0;
+    background:var(--red);
+    color:white;
+    padding:10px 14px;
+    border-radius:8px;
+    font-weight:800;
+    cursor:pointer;
+    white-space:nowrap;
 }
 
 /* FOOTER */
 
 footer {
-    border-top: 1px solid #ffffff15;
-    padding: 28px 20px;
-    text-align: center;
-    color: #888;
-    font-size: 12px;
+    border-top:1px solid #ffffff15;
+    padding:30px 20px;
+    text-align:center;
+    color:#85858e;
+    font-size:12px;
 }
 
 footer strong {
-    color: white;
+    color:white;
 }
 
-/* ANIMATIONS */
+/* SCROLL REVEAL */
 
 .reveal {
-    opacity: 0;
-    transform: translateY(25px);
-    transition: .7s;
+    opacity:0;
+    transform:translateY(35px);
+    transition:opacity .8s ease,transform .8s ease;
 }
 
-.reveal.show {
-    opacity: 1;
-    transform: translateY(0);
+.reveal.visible {
+    opacity:1;
+    transform:translateY(0);
 }
 
 /* MOBILE */
@@ -577,88 +802,137 @@ footer strong {
 @media(max-width:760px) {
 
     .links {
-        display: none;
-        position: absolute;
-        top: 65px;
-        right: 14px;
-        left: 14px;
-        padding: 20px;
-        background: #111217;
-        border: 1px solid #ffffff20;
-        border-radius: 13px;
-        flex-direction: column;
-        gap: 18px;
+        display:none;
+        position:absolute;
+        top:70px;
+        right:15px;
+        left:15px;
+        background:#111319;
+        border:1px solid #ffffff20;
+        border-radius:13px;
+        padding:20px;
+        flex-direction:column;
+        align-items:stretch;
+        gap:18px;
     }
 
     .links.open {
-        display: flex;
+        display:flex;
     }
 
-    .menu-btn {
-        display: block;
+    .menu-button {
+        display:block;
     }
 
-    .nav-cta {
-        display: none;
+    .nav-button {
+        display:none;
     }
 
     .hero {
-        min-height: 610px;
+        min-height:620px;
     }
 
-    .hero h2 {
-        font-size: clamp(47px, 15vw, 75px);
+    .hero-content {
+        padding:80px 22px;
+    }
+
+    .hero h1 {
+        font-size:clamp(48px,14vw,78px);
     }
 
     section {
-        padding: 70px 17px;
+        padding:75px 17px;
     }
 
     .about-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns:1fr;
     }
 
     .feature-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns:1fr;
     }
 
-    .connect-card {
-        padding: 23px;
+    .join-box {
+        padding:24px;
     }
 
-    .ip-box {
-        width: 100%;
+    .ip-container {
+        width:100%;
     }
 
-    .ip-box code {
-        font-size: 10px;
+    .ip-container code {
+        font-size:10px;
+    }
+
+    .intro-logo {
+        width:85px;
+        height:85px;
     }
 }
 
-@media(prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        animation: none !important;
-        transition: none !important;
+@media(prefers-reduced-motion:reduce) {
+    *,*::before,*::after {
+        animation:none!important;
+        transition:none!important;
     }
-    html { scroll-behavior: auto; }
+    html {scroll-behavior:auto}
+    .reveal {opacity:1;transform:none}
 }
 </style>
 </head>
 
-<body class="locked">
+<body class="intro-active">
 
-<!-- INTRO -->
+<!-- CINEMATIC INTRO -->
+
 <div class="intro" id="intro">
+
+    <div class="intro-bg"></div>
+    <div class="intro-grid"></div>
+    <div class="intro-light"></div>
+
+    <div class="particles">
+        <i class="particle"></i>
+        <i class="particle"></i>
+        <i class="particle"></i>
+        <i class="particle"></i>
+        <i class="particle"></i>
+        <i class="particle"></i>
+        <i class="particle"></i>
+        <i class="particle"></i>
+    </div>
+
     <div class="intro-content">
-        <div class="intro-logo">OS</div>
-        <h1>OS CRAFT</h1>
-        <p>SMP • ROLEPLAY</p>
-        <div class="loading"><span></span></div>
-        <button class="skip" id="skipIntro">ورود به سایت</button>
+
+        <div class="intro-logo">
+            <span>OS</span>
+        </div>
+
+        <h1 class="intro-title">
+            OS <span>CRAFT</span>
+        </h1>
+
+        <p class="intro-subtitle">
+            SMP • ROLEPLAY
+        </p>
+
+        <div class="intro-line">
+            <span></span>
+        </div>
+
+        <div class="intro-status">
+            ENTERING THE WORLD
+        </div>
+
+        <button class="intro-enter" id="enterButton">
+            ورود به دنیای OS CRAFT
+        </button>
+
     </div>
 </div>
 
-<!-- NAVIGATION -->
+<!-- HEADER -->
+
 <header>
 <nav class="nav">
 
@@ -671,12 +945,16 @@ footer strong {
         <a href="#about">درباره سرور</a>
         <a href="#features">امکانات</a>
         <a href="#video">ویدیو</a>
-        <a href="#join">ورود به سرور</a>
+        <a href="#join">اتصال به سرور</a>
     </div>
 
-    <a href="#join" class="nav-cta">اتصال به سرور</a>
+    <a href="#join" class="nav-button">
+        ورود به سرور
+    </a>
 
-    <button class="menu-btn" id="menuBtn">☰</button>
+    <button class="menu-button" id="menuButton">
+        ☰
+    </button>
 
 </nav>
 </header>
@@ -684,62 +962,79 @@ footer strong {
 <main id="top">
 
 <!-- HERO -->
+
 <section class="hero">
 
-<div class="hero-content">
+    <div class="hero-content">
 
-    <div class="eyebrow">WELCOME TO THE WORLD</div>
+        <div class="hero-label">
+            WELCOME TO OS CRAFT
+        </div>
 
-    <h2>OS <span>CRAFT</span></h2>
+        <h1>
+            OS <span>CRAFT</span>
+        </h1>
 
-    <p class="sub">SMP + ROLEPLAY</p>
+        <p class="hero-sub">
+            SMP + ROLEPLAY
+        </p>
 
-    <p class="hero-desc">
-        به دنیای OS CRAFT خوش آمدی؛ تجربه‌ای متفاوت از
-        بقا و نقش‌آفرینی در یک شهر زنده.
-        شغل انتخاب کن، کسب‌وکار بساز و در کنار دیگر بازیکنان
-        دنیای خودت را تجربه کن.
-    </p>
+        <p class="hero-description">
+            به دنیای OS CRAFT خوش آمدی؛ تجربه‌ای متفاوت
+            از بقا و نقش‌آفرینی در یک شهر زنده.
+            شغل انتخاب کن، کسب‌وکار بساز و در کنار دیگر
+            بازیکنان دنیای خودت را تجربه کن.
+        </p>
 
-    <div class="hero-actions">
-        <a href="#join" class="btn">اطلاعات اتصال</a>
-        <a href="#video" class="btn secondary">تماشای ویدیو</a>
+        <div class="hero-actions">
+            <a href="#join" class="btn">
+                اطلاعات اتصال
+            </a>
+
+            <a href="#video" class="btn btn-outline">
+                تماشای ویدیو
+            </a>
+        </div>
+
+        <div class="version">
+            نسخه سرور: <strong>26.2</strong>
+        </div>
+
     </div>
-
-    <div class="version">
-        نسخه سرور: <strong>26.2</strong>
-    </div>
-
-</div>
 </section>
 
 <!-- ABOUT -->
+
 <section id="about">
 
 <div class="container">
 
-    <div class="section-head reveal">
-        <div class="tag">ABOUT OS CRAFT</div>
+    <div class="section-title reveal">
+        <small>ABOUT OS CRAFT</small>
         <h2>درباره سرور</h2>
         <p>یک تجربه SMP همراه با امکانات نقش‌آفرینی شهری</p>
     </div>
 
     <div class="about-grid">
 
-        <div class="about-copy reveal">
+        <div class="about-box reveal">
+
             <h3>دنیایی برای تجربه‌ای متفاوت</h3>
+
             <p>
                 در OS CRAFT می‌توانی وارد یک فضای چندنفره شوی،
                 شغل داشته باشی، در اقتصاد شهر فعالیت کنی
                 و با بازیکنان دیگر تعامل داشته باشی.
+
                 هدف، ساختن یک تجربه سرگرم‌کننده و منظم
                 از ماینکرفت در قالب SMP و Roleplay است.
             </p>
+
         </div>
 
-        <div class="info-stack">
+        <div class="info-list">
 
-            <div class="info-card reveal">
+            <div class="info-box reveal">
                 <div>
                     <small>حالت بازی</small>
                     <strong>SMP + ROLEPLAY</strong>
@@ -747,7 +1042,7 @@ footer strong {
                 <div class="info-icon">✦</div>
             </div>
 
-            <div class="info-card reveal">
+            <div class="info-box reveal">
                 <div>
                     <small>نسخه سرور</small>
                     <strong>26.2</strong>
@@ -755,7 +1050,7 @@ footer strong {
                 <div class="info-icon">◆</div>
             </div>
 
-            <div class="info-card reveal">
+            <div class="info-box reveal">
                 <div>
                     <small>پلتفرم</small>
                     <strong>Minecraft Java</strong>
@@ -764,44 +1059,44 @@ footer strong {
             </div>
 
         </div>
-
     </div>
 </div>
 </section>
 
 <!-- FEATURES -->
-<section class="features" id="features">
+
+<section class="features-section" id="features">
 
 <div class="container">
 
-    <div class="section-head reveal">
-        <div class="tag">SERVER FEATURES</div>
+    <div class="section-title reveal">
+        <small>SERVER FEATURES</small>
         <h2>امکانات سرور</h2>
         <p>بخش‌هایی از تجربه‌ای که در OS CRAFT منتظر توست</p>
     </div>
 
     <div class="feature-grid">
 
-        <article class="feature reveal">
-            <div class="symbol">⌂</div>
+        <article class="feature-card reveal">
+            <div class="feature-icon">⌂</div>
             <h3>زندگی شهری</h3>
             <p>
-                در شهر خانه داشته باش، محل زندگی‌ات را انتخاب کن
-                و در فضای شهری فعالیت کن.
+                در شهر خانه داشته باش، محل زندگی‌ات را
+                انتخاب کن و در فضای شهری فعالیت کن.
             </p>
         </article>
 
-        <article class="feature reveal">
-            <div class="symbol">⚒</div>
+        <article class="feature-card reveal">
+            <div class="feature-icon">⚒</div>
             <h3>سیستم شغل‌ها</h3>
             <p>
-                با انتخاب شغل مناسب، در بخش‌های مختلف شهر
-                نقش داشته باش و پیشرفت کن.
+                با انتخاب شغل مناسب، در بخش‌های مختلف
+                شهر نقش داشته باش و پیشرفت کن.
             </p>
         </article>
 
-        <article class="feature reveal">
-            <div class="symbol">◇</div>
+        <article class="feature-card reveal">
+            <div class="feature-icon">◇</div>
             <h3>اقتصاد و خریدوفروش</h3>
             <p>
                 از امکانات اقتصادی و فروشگاه‌ها برای
@@ -809,8 +1104,8 @@ footer strong {
             </p>
         </article>
 
-        <article class="feature reveal">
-            <div class="symbol">▤</div>
+        <article class="feature-card reveal">
+            <div class="feature-icon">▤</div>
             <h3>کسب‌وکارها</h3>
             <p>
                 در فعالیت‌های اقتصادی شهر مشارکت کن
@@ -818,8 +1113,8 @@ footer strong {
             </p>
         </article>
 
-        <article class="feature reveal">
-            <div class="symbol">♧</div>
+        <article class="feature-card reveal">
+            <div class="feature-icon">♧</div>
             <h3>خانه و ملک</h3>
             <p>
                 خانه موردنظرت را پیدا کن و فضای شخصی
@@ -827,8 +1122,8 @@ footer strong {
             </p>
         </article>
 
-        <article class="feature reveal">
-            <div class="symbol">◎</div>
+        <article class="feature-card reveal">
+            <div class="feature-icon">◎</div>
             <h3>تجربه چندنفره</h3>
             <p>
                 با دیگر بازیکنان تعامل داشته باش
@@ -840,55 +1135,69 @@ footer strong {
 </div>
 </section>
 
-<!-- APARAT -->
+<!-- APARAT VIDEO -->
+
 <section class="video-section" id="video">
 
 <div class="container">
 
-    <div class="section-head reveal">
-        <div class="tag">WATCH OS CRAFT</div>
+    <div class="section-title reveal">
+        <small>WATCH OS CRAFT</small>
         <h2>ویدیو سرور</h2>
         <p>با تماشای ویدیو، بیشتر با فضای OS CRAFT آشنا شو</p>
     </div>
 
-    <div class="video-shell reveal">
+    <div class="video-box reveal">
+
         <div class="video-frame">
+
             <iframe
                 src="https://www.aparat.com/video/video/embed/videohash/gac4d89/vt/frame"
-                title="ویدیو OS CRAFT"
+                title="OS CRAFT Aparat Video"
                 allow="autoplay; fullscreen"
                 allowfullscreen
                 loading="lazy">
             </iframe>
+
         </div>
     </div>
 
-    <p class="video-note">ویدیو از آپارات پخش می‌شود.</p>
+    <p class="video-caption">
+        ویدیو از آپارات پخش می‌شود.
+    </p>
 
 </div>
 </section>
 
 <!-- JOIN -->
+
 <section id="join">
 
 <div class="container">
 
-    <div class="section-head reveal">
-        <div class="tag">JOIN THE SERVER</div>
+    <div class="section-title reveal">
+        <small>JOIN THE SERVER</small>
         <h2>آماده ورود هستی؟</h2>
         <p>اطلاعات اتصال به سرور را کپی کن و وارد بازی شو</p>
     </div>
 
-    <div class="connect-card reveal">
+    <div class="join-box reveal">
 
         <div>
             <h3>به OS CRAFT بپیوند</h3>
             <p>نسخه موردنیاز: Minecraft 26.2</p>
         </div>
 
-        <div class="ip-box">
-            <code id="serverIp">sarafraz7171-srv-os_craft_asli.play.mihancraft.com:25566</code>
-            <button class="copy" id="copyIp">کپی IP</button>
+        <div class="ip-container">
+
+            <code id="serverIP">
+                sarafraz7171-srv-os_craft_asli.play.mihancraft.com:25566
+            </code>
+
+            <button class="copy-button" id="copyButton">
+                کپی IP
+            </button>
+
         </div>
 
     </div>
@@ -897,6 +1206,8 @@ footer strong {
 </section>
 
 </main>
+
+<!-- FOOTER -->
 
 <footer>
     <strong>OS CRAFT</strong>
@@ -908,66 +1219,112 @@ footer strong {
 
 <script>
 
-/* INTRO */
+/* INTRO CONTROL */
 
 const intro = document.getElementById("intro");
 
-function enterSite() {
-    intro.classList.add("hide");
-    document.body.classList.remove("locked");
+let introClosed = false;
+
+function enterWebsite() {
+
+    if (introClosed) return;
+
+    introClosed = true;
+
+    intro.classList.add("finished");
+
+    document.body.classList.remove("intro-active");
+
+    document.body.classList.add("page-ready");
+
+    // همیشه صفحه از بالای سایت آغاز شود
+    window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "instant"
+    });
 }
 
-document.getElementById("skipIntro")
-.addEventListener("click", enterSite);
+document.getElementById("enterButton")
+.addEventListener("click", enterWebsite);
 
+// ورود خودکار بعد از نمایش کامل اینترو
 window.addEventListener("load", () => {
-    setTimeout(enterSite, 2300);
+
+    setTimeout(() => {
+        enterWebsite();
+    }, 5000);
+
 });
+
+// جلوگیری از باقی ماندن صفحه پشت اینترو
+setTimeout(() => {
+    enterWebsite();
+}, 9000);
 
 
 /* MOBILE MENU */
 
-const menuBtn = document.getElementById("menuBtn");
+const menuButton = document.getElementById("menuButton");
+
 const navLinks = document.getElementById("navLinks");
 
-menuBtn.addEventListener("click", () => {
+menuButton.addEventListener("click", () => {
+
     navLinks.classList.toggle("open");
+
 });
 
 document.querySelectorAll("#navLinks a").forEach(link => {
+
     link.addEventListener("click", () => {
+
         navLinks.classList.remove("open");
+
     });
+
 });
 
 
-/* COPY IP */
+/* COPY SERVER IP */
 
-document.getElementById("copyIp")
+document.getElementById("copyButton")
 .addEventListener("click", async () => {
 
-    const ip = document.getElementById("serverIp").textContent;
-    const btn = document.getElementById("copyIp");
+    const ip = document.getElementById("serverIP")
+    .textContent.trim();
+
+    const button = document.getElementById("copyButton");
 
     try {
+
         await navigator.clipboard.writeText(ip);
-        btn.textContent = "کپی شد ✓";
+
+        button.textContent = "کپی شد ✓";
+
     } catch (error) {
-        const range = document.createRange();
-        range.selectNodeContents(
-            document.getElementById("serverIp")
-        );
 
-        const selection = window.getSelection();
-        selection.removeAllRanges();
-        selection.addRange(range);
+        const input = document.createElement("textarea");
 
-        btn.textContent = "IP انتخاب شد";
+        input.value = ip;
+
+        document.body.appendChild(input);
+
+        input.select();
+
+        document.execCommand("copy");
+
+        input.remove();
+
+        button.textContent = "کپی شد ✓";
+
     }
 
     setTimeout(() => {
-        btn.textContent = "کپی IP";
-    }, 1800);
+
+        button.textContent = "کپی IP";
+
+    }, 2000);
 
 });
 
@@ -979,16 +1336,23 @@ const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
 
         if (entry.isIntersecting) {
-            entry.target.classList.add("show");
+
+            entry.target.classList.add("visible");
+
             observer.unobserve(entry.target);
+
         }
 
     });
 
-}, { threshold: 0.12 });
+}, {
+    threshold:0.12
+});
 
 document.querySelectorAll(".reveal").forEach(element => {
+
     observer.observe(element);
+
 });
 
 </script>
