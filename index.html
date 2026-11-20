@@ -2,291 +2,569 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OS CRAFT | وضعیت سرور</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OS CRAFT | وب‌سایت رسمی</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    body {
-      font-family: Tahoma, Arial, sans-serif;
-      background: #101116;
-      color: white;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
+<style>
+:root {
+  --bg:#080e19;
+  --panel:#101b2c;
+  --panel2:#14243a;
+  --cyan:#26d9ed;
+  --blue:#347bff;
+  --gold:#e8bd6c;
+  --text:#f4f7fc;
+  --muted:#a4b1c3;
+  --border:#ffffff16;
+}
 
-    .server-card {
-      width: 100%;
-      max-width: 460px;
-      background: linear-gradient(145deg, #20212a, #15161d);
-      border: 1px solid #343541;
-      border-radius: 22px;
-      padding: 28px;
-      box-shadow: 0 20px 60px #0008;
-    }
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Vazirmatn',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit}
+.background{
+  position:fixed;inset:0;z-index:-2;
+  background:
+  radial-gradient(circle at 10% 15%,#174d7c35,transparent 35%),
+  radial-gradient(circle at 90% 70%,#553d9c30,transparent 35%),
+  #080e19;
+}
+.background:after{
+  content:"";position:absolute;inset:0;
+  background-image:
+  linear-gradient(#ffffff07 1px,transparent 1px),
+  linear-gradient(90deg,#ffffff07 1px,transparent 1px);
+  background-size:55px 55px;
+}
 
-    .logo {
-      color: #ff3939;
-      font-size: 28px;
-      font-weight: bold;
-      letter-spacing: 2px;
-      text-align: center;
-    }
+/* INTRO */
+#intro{
+  position:fixed;inset:0;z-index:9999;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+  background:radial-gradient(circle,#173c63,#091426 55%,#050912);
+}
+.intro-grid{
+  position:absolute;inset:-50%;
+  background-image:
+  linear-gradient(#30dfff16 1px,transparent 1px),
+  linear-gradient(90deg,#30dfff16 1px,transparent 1px);
+  background-size:55px 55px;
+  transform:perspective(500px) rotateX(60deg);
+  animation:gridMove 8s linear infinite;
+}
+@keyframes gridMove{
+  from{background-position:0 0}
+  to{background-position:0 550px}
+}
+.intro-glow{
+  position:absolute;width:420px;height:420px;border-radius:50%;
+  background:#20c9ef35;filter:blur(100px);
+  animation:glow 3s ease-in-out infinite alternate;
+}
+@keyframes glow{to{transform:scale(1.3);opacity:.5}}
+.intro-content{
+  position:relative;text-align:center;
+  opacity:0;transform:scale(.65);
+  animation:introAppear 1.3s cubic-bezier(.2,.8,.2,1) forwards;
+  animation-delay:.3s;
+}
+.intro-symbol{
+  width:105px;height:105px;margin:0 auto 24px;
+  border:2px solid var(--cyan);border-radius:28px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:58px;font-weight:900;
+  box-shadow:0 0 35px #20d9ef65,inset 0 0 25px #20d9ef20;
+  transform:rotate(-8deg);
+}
+.intro-title{
+  direction:ltr;font-size:clamp(40px,8vw,76px);
+  font-weight:900;letter-spacing:5px;
+  background:linear-gradient(90deg,#fff,var(--cyan),#fff);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.intro-subtitle{
+  margin-top:12px;color:#c4d7e9;
+  letter-spacing:5px;font-size:14px;direction:ltr;
+}
+.intro-line{
+  height:2px;width:0;margin:28px auto 0;
+  background:var(--cyan);box-shadow:0 0 15px var(--cyan);
+  animation:lineGrow 1s ease forwards;animation-delay:1.3s;
+}
+@keyframes introAppear{to{opacity:1;transform:scale(1)}}
+@keyframes lineGrow{to{width:220px}}
+#intro.exit{animation:introExit 1.1s cubic-bezier(.7,0,.3,1) forwards}
+#intro.exit .intro-content{animation:logoExit 1s forwards}
+@keyframes logoExit{
+  to{transform:translateY(-180px) scale(.65);opacity:0}
+}
+@keyframes introExit{
+  to{transform:translateY(-100%);opacity:0;visibility:hidden}
+}
 
-    .subtitle {
-      color: #999;
-      text-align: center;
-      margin-top: 8px;
-      font-size: 13px;
-    }
+/* NAVBAR */
+nav{
+  position:sticky;top:0;z-index:100;
+  min-height:76px;padding:14px 7%;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+  background:#091426dc;backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+.brand{
+  direction:ltr;font-size:25px;font-weight:900;
+  letter-spacing:2px;color:var(--cyan);
+}
+.nav-links{display:flex;gap:25px;color:#c4d0df;font-size:14px}
+.nav-links a:hover{color:var(--cyan)}
+.nav-cta{
+  background:linear-gradient(110deg,#168ab9,#5148c4);
+  padding:10px 19px;border-radius:10px;font-size:13px;font-weight:800;
+}
 
-    .status {
-      margin: 28px 0;
-      padding: 20px;
-      border-radius: 15px;
-      background: #292a34;
-      text-align: center;
-    }
+/* HERO */
+.hero{
+  padding:65px 7% 85px;
+  min-height:680px;
+  display:flex;align-items:center;justify-content:center;
+}
+.hero-wrap{
+  width:100%;max-width:1250px;
+  display:grid;grid-template-columns:1fr 1fr;
+  align-items:center;gap:45px;
+}
+.hero-text{animation:fadeUp 1s ease both}
+.eyebrow{
+  display:inline-block;padding:8px 16px;
+  border:1px solid #26d9ed55;background:#26d9ed12;
+  color:var(--cyan);border-radius:30px;font-size:13px;
+  margin-bottom:22px;
+}
+.hero h1{font-size:clamp(38px,5vw,65px);line-height:1.4;font-weight:900}
+.hero h1 span{
+  background:linear-gradient(90deg,#25d9ed,#9a8cff,#e8bd6c);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero-text p{
+  color:var(--muted);line-height:2.2;font-size:16px;
+  margin:20px 0 28px;max-width:590px;
+}
+.hero-actions{display:flex;flex-wrap:wrap;gap:13px}
+.btn{
+  display:inline-block;padding:13px 23px;border-radius:11px;
+  font-size:14px;font-weight:800;transition:.3s;
+}
+.btn-primary{background:linear-gradient(110deg,#168fc4,#5149c9)}
+.btn-outline{border:1px solid #ffffff38;background:#ffffff08}
+.btn:hover{transform:translateY(-4px)}
+.hero-image{
+  position:relative;overflow:hidden;border-radius:23px;
+  border:1px solid #ffffff2b;
+  box-shadow:0 25px 70px #0008;
+  animation:fadeUp 1.2s ease both;
+}
+.hero-image img{
+  width:100%;display:block;aspect-ratio:1/1;object-fit:cover;
+  transition:transform .7s;
+}
+.hero-image:hover img{transform:scale(1.04)}
+.image-caption{
+  position:absolute;bottom:0;right:0;left:0;
+  padding:20px;
+  background:linear-gradient(transparent,#000d);
+  font-size:14px;font-weight:800;
+}
 
-    .status-dot {
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #888;
-      margin-left: 8px;
-    }
+/* SECTIONS */
+.section{padding:75px 8%}
+.section-head{text-align:center;margin-bottom:40px}
+.section-head .small{
+  color:var(--cyan);font-size:13px;font-weight:800;
+}
+.section-head h2{font-size:32px;font-weight:900;margin-top:8px}
+.section-head p{color:var(--muted);font-size:14px;margin-top:10px}
+.cards{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:20px;
+}
+.card{
+  padding:26px 24px;border-radius:18px;
+  background:linear-gradient(145deg,#14243a,#0c1728);
+  border:1px solid var(--border);transition:.3s;
+}
+.card:hover{
+  transform:translateY(-7px);border-color:#26d9ed80;
+  box-shadow:0 15px 40px #0005;
+}
+.card-icon{font-size:30px;margin-bottom:14px}
+.card h3{font-size:18px;margin-bottom:10px}
+.card p{color:var(--muted);font-size:13px;line-height:2}
 
-    .status-text {
-      font-size: 23px;
-      font-weight: bold;
-    }
+/* NEWS */
+.news-card{position:relative;overflow:hidden}
+.news-label{
+  display:inline-block;color:var(--gold);
+  font-size:11px;font-weight:800;margin-bottom:13px;
+}
+.news-card h3{line-height:1.8}
+.news-card p{min-height:55px}
+.news-date{font-size:11px;color:#71839a;margin-top:15px}
 
-    .online { color: #35df85; }
-    .offline { color: #ff5050; }
-    .checking { color: #ffc857; }
+/* VIDEO */
+.video-layout{
+  display:grid;grid-template-columns:1.5fr 1fr;gap:25px;
+  align-items:start;
+}
+.video-box{
+  overflow:hidden;border-radius:20px;
+  background:#000;border:1px solid #ffffff25;
+  box-shadow:0 18px 50px #0007;
+}
+.video-box video{width:100%;display:block;aspect-ratio:16/9;background:#000}
+.video-info{padding:20px}
+.video-info h3{font-size:18px;margin-bottom:8px}
+.video-info p{font-size:13px;line-height:2;color:var(--muted)}
+.video-side{
+  padding:25px;border-radius:18px;
+  background:linear-gradient(145deg,#14243a,#0c1728);
+  border:1px solid var(--border);
+}
+.video-side h3{font-size:20px;margin-bottom:12px}
+.video-side p{font-size:13px;color:var(--muted);line-height:2.1}
+.video-side a{display:inline-block;margin-top:20px}
 
-    .status.online-bg .status-dot { background: #35df85; }
-    .status.offline-bg .status-dot { background: #ff5050; }
-    .status.checking-bg .status-dot { background: #ffc857; }
+/* APARAT */
+.aparat-panel{
+  max-width:900px;margin:auto;padding:35px;
+  border-radius:22px;text-align:center;
+  border:1px solid #e8bd6c55;
+  background:linear-gradient(120deg,#342719,#171d32 75%);
+}
+.aparat-logo{
+  width:65px;height:65px;border-radius:17px;
+  margin:0 auto 17px;background:#ed3442;
+  display:flex;align-items:center;justify-content:center;
+  font-size:30px;font-weight:900;
+}
+.aparat-panel h3{font-size:25px}
+.aparat-panel p{color:#c2c9d4;margin:12px 0 22px;font-size:14px;line-height:2}
+.aparat-link{
+  display:inline-block;background:#ed3442;color:white;
+  padding:12px 25px;border-radius:10px;font-weight:800;
+}
 
-    .stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
+/* SERVER */
+.server-panel{
+  max-width:850px;margin:auto;padding:35px;
+  border:1px solid #26d9ed50;border-radius:22px;
+  background:linear-gradient(120deg,#122b45,#171d40);
+  text-align:center;box-shadow:0 15px 55px #0005;
+}
+.server-version{font-size:13px;color:var(--gold);font-weight:800}
+.server-address{
+  direction:ltr;overflow-wrap:anywhere;
+  font-size:clamp(15px,3vw,22px);font-weight:900;margin:22px 0;
+}
+.copy-button{
+  background:var(--cyan);color:#061321;border:0;
+  border-radius:9px;padding:12px 25px;
+  font-weight:900;cursor:pointer;
+}
+#copyMessage{font-size:12px;color:var(--cyan);margin-top:12px}
 
-    .stat {
-      background: #292a34;
-      border-radius: 13px;
-      padding: 18px 10px;
-      text-align: center;
-    }
+/* FOOTER */
+footer{
+  border-top:1px solid var(--border);
+  padding:35px 7%;text-align:center;color:#8192a9;font-size:13px;
+}
+footer strong{color:var(--cyan)}
+.footer-links{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin:18px 0}
+.footer-links a:hover{color:var(--cyan)}
 
-    .stat-value {
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 8px;
-    }
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
+}
 
-    .stat-label {
-      color: #aaa;
-      font-size: 12px;
-    }
-
-    .ip-box {
-      margin-top: 18px;
-      padding: 15px;
-      background: #292a34;
-      border-radius: 12px;
-      text-align: center;
-      direction: ltr;
-      font-size: 13px;
-      overflow-wrap: anywhere;
-    }
-
-    button {
-      width: 100%;
-      margin-top: 20px;
-      border: none;
-      border-radius: 12px;
-      padding: 16px;
-      background: #e52e38;
-      color: white;
-      font-size: 15px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: .2s;
-    }
-
-    button:hover {
-      background: #ff414b;
-      transform: translateY(-2px);
-    }
-
-    button:disabled {
-      opacity: .6;
-      cursor: wait;
-      transform: none;
-    }
-
-    .last-check {
-      color: #888;
-      text-align: center;
-      font-size: 11px;
-      margin-top: 17px;
-    }
-
-    .error {
-      color: #ff8585;
-      text-align: center;
-      font-size: 12px;
-      margin-top: 12px;
-      line-height: 1.8;
-    }
-  </style>
+@media(max-width:850px){
+  .hero-wrap{grid-template-columns:1fr}
+  .hero-image{max-width:650px;margin:auto}
+  .video-layout{grid-template-columns:1fr}
+}
+@media(max-width:650px){
+  nav{padding:13px 5%}
+  .nav-links{display:none}
+  .hero{padding:55px 6%}
+  .section{padding:60px 6%}
+  .section-head h2{font-size:26px}
+  .aparat-panel{padding:28px 18px}
+}
+</style>
 </head>
 
 <body>
+<div class="background"></div>
 
-  <main class="server-card">
+<!-- INTRO -->
+<div id="intro">
+  <div class="intro-grid"></div>
+  <div class="intro-glow"></div>
+  <div class="intro-content">
+    <div class="intro-symbol">O</div>
+    <div class="intro-title">OS CRAFT</div>
+    <div class="intro-subtitle">SMP + ROLE PLAY</div>
+    <div class="intro-line"></div>
+  </div>
+</div>
 
-    <div class="logo">OS CRAFT</div>
-    <div class="subtitle">SMP + ROLE PLAY</div>
+<!-- NAVIGATION -->
+<nav>
+  <a class="brand" href="#">OS CRAFT</a>
+  <div class="nav-links">
+    <a href="#home">صفحه اصلی</a>
+    <a href="#news">اخبار</a>
+    <a href="#features">امکانات</a>
+    <a href="#videos">ویدیوها</a>
+    <a href="#aparat">آپارات</a>
+  </div>
+  <a class="nav-cta" href="#server">اطلاعات سرور</a>
+</nav>
 
-    <section class="status" id="statusBox">
-      <span class="status-dot"></span>
-      <span class="status-text" id="statusText">
-        هنوز بررسی نشده
-      </span>
-    </section>
-
-    <section class="stats">
-
-      <div class="stat">
-        <div class="stat-value" id="players">--</div>
-        <div class="stat-label">بازیکنان آنلاین</div>
+<!-- HERO -->
+<header class="hero" id="home">
+  <div class="hero-wrap">
+    <div class="hero-text">
+      <div class="eyebrow">وب‌سایت رسمی سرور OS CRAFT</div>
+      <h1>اخبار و اطلاعیه‌های<br><span>OS CRAFT</span></h1>
+      <p>
+        مرجع رسمی اطلاع‌رسانی سرور ماینکرفت OS CRAFT؛
+        آخرین اخبار، ویدیوها، اطلاعیه‌ها و اطلاعات مربوط به
+        امکانات و فعالیت‌های سرور را در این وب‌سایت دنبال کنید.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#news">مشاهده آخرین اخبار</a>
+        <a class="btn btn-outline" href="#videos">تماشای ویدیوها</a>
       </div>
+    </div>
 
-      <div class="stat">
-        <div class="stat-value" id="maxPlayers">--</div>
-        <div class="stat-label">ظرفیت سرور</div>
+    <div class="hero-image">
+      <img src="os-craft-banner.png" alt="تصویر اصلی OS CRAFT">
+      <div class="image-caption">OS CRAFT | SMP + ROLE PLAY</div>
+    </div>
+  </div>
+</header>
+
+<!-- NEWS -->
+<section class="section" id="news">
+  <div class="section-head">
+    <div class="small">OS CRAFT NEWS CENTER</div>
+    <h2>اخبار و اطلاعیه‌ها</h2>
+    <p>مرجع انتشار اخبار رسمی و اطلاعیه‌های سرور</p>
+  </div>
+
+  <div class="cards">
+    <article class="card news-card">
+      <div class="news-label">اطلاعیه رسمی</div>
+      <h3>اطلاعیه‌های سرور</h3>
+      <p>اطلاعیه‌های رسمی مربوط به وضعیت سرور و تغییرات مهم از این بخش منتشر خواهد شد.</p>
+      <div class="news-date">مرکز اطلاع‌رسانی OS CRAFT</div>
+    </article>
+
+    <article class="card news-card">
+      <div class="news-label">اخبار فنی</div>
+      <h3>به‌روزرسانی‌های سرور</h3>
+      <p>گزارش نسخه‌ها، تغییرات فنی و قابلیت‌های جدید سرور در این بخش قرار می‌گیرد.</p>
+      <div class="news-date">مرکز اطلاع‌رسانی OS CRAFT</div>
+    </article>
+
+    <article class="card news-card">
+      <div class="news-label">گزارش رویداد</div>
+      <h3>رویدادها و برنامه‌ها</h3>
+      <p>اخبار مربوط به رویدادها، مسابقات و برنامه‌های ویژه سرور در این قسمت منتشر می‌شود.</p>
+      <div class="news-date">مرکز اطلاع‌رسانی OS CRAFT</div>
+    </article>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section" id="features">
+  <div class="section-head">
+    <div class="small">SERVER FEATURES</div>
+    <h2>امکانات سرور</h2>
+    <p>معرفی بخش‌های مختلف تجربه SMP و Role Play</p>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon">🏦</div>
+      <h3>سیستم بانکداری</h3>
+      <p>امکان مدیریت دارایی و فعالیت‌های اقتصادی در سرور.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">💼</div>
+      <h3>سیستم مشاغل</h3>
+      <p>فعالیت در مشاغل گوناگون و کسب درآمد در دنیای بازی.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🏪</div>
+      <h3>کسب‌وکارها</h3>
+      <p>فعالیت در بخش خریدوفروش و کسب‌وکارهای سرور.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🏠</div>
+      <h3>خانه و املاک</h3>
+      <p>سیستم خرید و اجاره خانه در محیط شهر.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📱</div>
+      <h3>موبایل داخل بازی</h3>
+      <p>دسترسی به برخی خدمات سرور از طریق موبایل بازی.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🌆</div>
+      <h3>زندگی شهری</h3>
+      <p>تجربه فضای شهری و فعالیت‌های نقش‌آفرینی.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section class="section" id="videos">
+  <div class="section-head">
+    <div class="small">OS CRAFT MEDIA</div>
+    <h2>ویدیوهای OS CRAFT</h2>
+    <p>گزارش‌ها، آموزش‌ها و ویدیوهای منتشرشده از سرور</p>
+  </div>
+
+  <div class="video-layout">
+    <div class="video-box">
+      <video controls preload="metadata" poster="os-craft-banner.png">
+        <source src="os-craft-video.mp4" type="video/mp4">
+        مرورگر شما از پخش ویدیو پشتیبانی نمی‌کند.
+      </video>
+      <div class="video-info">
+        <h3>معرفی کدها و امکانات سرور OS CRAFT</h3>
+        <p>ویدیوی منتشرشده از سرور OS CRAFT</p>
       </div>
+    </div>
 
-      <div class="stat" style="grid-column: 1 / -1">
-        <div class="stat-value" id="version">--</div>
-        <div class="stat-label">نسخه ماینکرفت</div>
-      </div>
+    <div class="video-side">
+      <div class="small" style="color:var(--cyan)">بخش رسانه</div>
+      <h3>رسانه رسمی OS CRAFT</h3>
+      <p>
+        ویدیوهای معرفی، آموزش‌ها، گزارش فعالیت‌ها و محتوای
+        تصویری مرتبط با سرور از طریق این بخش در دسترس خواهند بود.
+      </p>
+      <a class="btn btn-primary" href="https://www.aparat.com/os_craft" target="_blank" rel="noopener">
+        مشاهده سایر ویدیوها
+      </a>
+    </div>
+  </div>
+</section>
 
-    </section>
+<!-- APARAT -->
+<section class="section" id="aparat">
+  <div class="section-head">
+    <div class="small">OFFICIAL VIDEO CHANNEL</div>
+    <h2>کانال رسمی آپارات</h2>
+    <p>دسترسی به ویدیوها و محتوای تصویری OS CRAFT</p>
+  </div>
 
-    <div class="ip-box">
+  <div class="aparat-panel">
+    <div class="aparat-logo">A</div>
+    <h3>OS CRAFT در آپارات</h3>
+    <p>
+      برای مشاهده ویدیوهای سرور، آموزش‌ها، معرفی قابلیت‌ها
+      و گزارش‌های تصویری به کانال رسمی OS CRAFT مراجعه کنید.
+    </p>
+    <a class="aparat-link" href="https://www.aparat.com/os_craft" target="_blank" rel="noopener">
+      ورود به کانال آپارات
+    </a>
+  </div>
+</section>
+
+<!-- SERVER -->
+<section class="section" id="server">
+  <div class="section-head">
+    <div class="small">SERVER INFORMATION</div>
+    <h2>اطلاعات اتصال به سرور</h2>
+    <p>مشخصات اتصال به سرور OS CRAFT</p>
+  </div>
+
+  <div class="server-panel">
+    <div class="server-version">MINECRAFT VERSION 26.2</div>
+    <div class="server-address" id="serverAddress">
       sarafraz7171-srv-os_craft_asli.play.mihancraft.com:25566
     </div>
+    <button class="copy-button" onclick="copyAddress()">کپی آدرس سرور</button>
+    <div id="copyMessage"></div>
+  </div>
+</section>
 
-    <button id="checkButton" onclick="checkServer()">
-      بررسی وضعیت سرور
-    </button>
+<footer>
+  <strong>OS CRAFT</strong>
+  <div class="footer-links">
+    <a href="#home">صفحه اصلی</a>
+    <a href="#news">اخبار</a>
+    <a href="#videos">ویدیوها</a>
+    <a href="https://www.aparat.com/os_craft" target="_blank" rel="noopener">آپارات</a>
+  </div>
+  <p>وب‌سایت رسمی سرور OS CRAFT | SMP + ROLE PLAY</p>
+</footer>
 
-    <div class="error" id="error"></div>
+<script>
+/* CINEMATIC INTRO */
+window.addEventListener("load", () => {
+  const intro = document.getElementById("intro");
 
-    <div class="last-check" id="lastCheck">
-      آخرین بررسی: هنوز انجام نشده
-    </div>
+  setTimeout(() => {
+    intro.classList.add("exit");
 
-  </main>
+    setTimeout(() => {
+      intro.remove();
+    }, 1200);
+  }, 3500);
+});
 
-  <script>
-    const HOST =
-      "sarafraz7171-srv-os_craft_asli.play.mihancraft.com";
+/* COPY SERVER ADDRESS */
+function copyAddress() {
+  const address = document.getElementById("serverAddress").innerText;
+  const message = document.getElementById("copyMessage");
 
-    const PORT = 25566;
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(address).then(() => {
+      message.innerText = "آدرس سرور با موفقیت کپی شد.";
+    }).catch(() => {
+      message.innerText = "کپی انجام نشد؛ آدرس را دستی انتخاب کنید.";
+    });
+  } else {
+    const input = document.createElement("textarea");
+    input.value = address;
+    document.body.appendChild(input);
+    input.select();
 
-    async function checkServer() {
-      const button = document.getElementById("checkButton");
-      const statusBox = document.getElementById("statusBox");
-      const statusText = document.getElementById("statusText");
-      const errorBox = document.getElementById("error");
-
-      button.disabled = true;
-      button.textContent = "در حال بررسی...";
-      errorBox.textContent = "";
-
-      statusText.textContent = "در حال بررسی";
-      statusText.className = "status-text checking";
-      statusBox.className = "status checking-bg";
-
-      try {
-        const url =
-          `https://api.mcsrvstat.us/3/${HOST}:${PORT}?t=${Date.now()}`;
-
-        const response = await fetch(url, {
-          cache: "no-store"
-        });
-
-        if (!response.ok) {
-          throw new Error("API_RESPONSE_ERROR");
-        }
-
-        const data = await response.json();
-
-        if (data.online === true) {
-          statusText.textContent = "سرور آنلاین است";
-          statusText.className = "status-text online";
-          statusBox.className = "status online-bg";
-
-          document.getElementById("players").textContent =
-            data.players?.online ?? 0;
-
-          document.getElementById("maxPlayers").textContent =
-            data.players?.max ?? "--";
-
-          document.getElementById("version").textContent =
-            data.version || "نامشخص";
-
-        } else {
-          statusText.textContent = "سرور آفلاین است";
-          statusText.className = "status-text offline";
-          statusBox.className = "status offline-bg";
-
-          document.getElementById("players").textContent = "--";
-          document.getElementById("maxPlayers").textContent = "--";
-          document.getElementById("version").textContent = "--";
-        }
-
-        document.getElementById("lastCheck").textContent =
-          "آخرین بررسی: " + new Date().toLocaleTimeString("fa-IR");
-
-      } catch (error) {
-        statusText.textContent = "بررسی ناموفق بود";
-        statusText.className = "status-text offline";
-        statusBox.className = "status offline-bg";
-
-        document.getElementById("players").textContent = "--";
-        document.getElementById("maxPlayers").textContent = "--";
-        document.getElementById("version").textContent = "--";
-
-        errorBox.textContent =
-          "ارتباط با سرویس بررسی وضعیت برقرار نشد. دوباره تلاش کن.";
-
-        document.getElementById("lastCheck").textContent =
-          "آخرین تلاش: " + new Date().toLocaleTimeString("fa-IR");
-
-      } finally {
-        button.disabled = false;
-        button.textContent = "بررسی دوباره وضعیت سرور";
-      }
+    try {
+      document.execCommand("copy");
+      message.innerText = "آدرس سرور با موفقیت کپی شد.";
+    } catch {
+      message.innerText = "آدرس را دستی انتخاب کنید.";
     }
-  </script>
+
+    input.remove();
+  }
+}
+</script>
 
 </body>
 </html>
