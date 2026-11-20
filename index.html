@@ -4,8 +4,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#08090c">
-<title>OS CRAFT | Official Server</title>
+<meta name="theme-color" content="#080609">
+<title>OS CRAFT | Ultimate Minecraft Experience</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,10 +14,12 @@
 <style>
 :root {
     --red:#ed263b;
-    --red-light:#ff5263;
-    --dark:#07080b;
-    --panel:#111319;
-    --muted:#a2a4ad;
+    --red2:#a90c22;
+    --black:#07070a;
+    --panel:#111116;
+    --text:#f5f5f7;
+    --muted:#9999a4;
+    --border:#ffffff13;
 }
 
 * {
@@ -28,17 +30,17 @@
 
 html {
     scroll-behavior:smooth;
-    scroll-padding-top:85px;
+    scroll-padding-top:90px;
 }
 
 body {
-    background:var(--dark);
-    color:white;
+    background:var(--black);
+    color:var(--text);
     font-family:Vazirmatn,Tahoma,sans-serif;
     overflow-x:hidden;
 }
 
-body.intro-active {
+body.loading {
     overflow:hidden;
 }
 
@@ -51,144 +53,147 @@ button {
     font-family:inherit;
 }
 
-/* =========================
+/* =================================
    CINEMATIC INTRO
-========================= */
+================================= */
 
 .intro {
     position:fixed;
     inset:0;
-    z-index:9999;
-    background:#050609;
+    z-index:99999;
+    background:#050508;
     display:flex;
     justify-content:center;
     align-items:center;
     overflow:hidden;
-    transition:opacity 1s ease, visibility 1s ease;
+    transition:opacity 1.2s ease,visibility 1.2s ease;
 }
 
-.intro.finished {
+.intro.out {
     opacity:0;
     visibility:hidden;
     pointer-events:none;
 }
 
-/* Red light background */
-
-.intro-bg {
+.intro-background {
     position:absolute;
     inset:0;
     background:
-        radial-gradient(ellipse at 50% 45%,#a20d2440,transparent 35%),
-        radial-gradient(ellipse at 50% 100%,#5d071c35,transparent 50%);
+        radial-gradient(ellipse at 50% 50%,#8f102544,transparent 35%),
+        radial-gradient(ellipse at 50% 100%,#5a071c35,transparent 60%),
+        #050508;
 }
 
-.intro-bg::before {
+.intro-background::before {
     content:"";
     position:absolute;
-    width:700px;
-    height:700px;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
+    inset:-50%;
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 48px,
+            #ffffff08 49px,
+            transparent 50px
+        );
+    transform:perspective(500px) rotateX(55deg);
+    animation:gridMove 12s linear infinite;
+}
+
+@keyframes gridMove {
+    to {background-position:0 500px}
+}
+
+.intro-orbit {
+    position:absolute;
+    width:min(80vw,650px);
+    aspect-ratio:1;
+    border:1px solid #ed263b30;
     border-radius:50%;
-    border:1px solid #f02b3d20;
     box-shadow:
-        0 0 0 60px #f02b3d08,
-        0 0 0 120px #f02b3d06,
-        0 0 100px #f02b3d20;
-    animation:introRing 8s linear infinite;
+        0 0 0 45px #ed263b09,
+        0 0 0 90px #ed263b06,
+        0 0 100px #ed263b18;
+    animation:orbit 20s linear infinite;
 }
 
-@keyframes introRing {
-    to { transform:translate(-50%,-50%) rotate(360deg); }
-}
-
-/* Grid */
-
-.intro-grid {
+.intro-orbit::before,
+.intro-orbit::after {
+    content:"";
     position:absolute;
-    inset:0;
-    opacity:.18;
-    background-image:
-        linear-gradient(#ffffff10 1px,transparent 1px),
-        linear-gradient(90deg,#ffffff10 1px,transparent 1px);
-    background-size:55px 55px;
-    mask-image:radial-gradient(ellipse,black,transparent 75%);
+    inset:10%;
+    border:1px dashed #ed263b25;
+    border-radius:50%;
 }
 
-/* Light sweep */
+.intro-orbit::after {
+    inset:22%;
+    border-style:solid;
+}
 
-.intro-light {
+@keyframes orbit {
+    to {transform:rotate(360deg)}
+}
+
+.intro-glow {
     position:absolute;
-    top:-20%;
-    left:-50%;
-    width:35%;
-    height:150%;
-    background:linear-gradient(
-        90deg,
-        transparent,
-        #ff263b0c,
-        #ff263b33,
-        transparent
-    );
-    transform:rotate(20deg);
-    animation:lightSweep 3.5s ease-in-out infinite;
+    width:450px;
+    height:450px;
+    background:#e51d3512;
+    filter:blur(100px);
+    border-radius:50%;
+    animation:glowPulse 4s ease-in-out infinite alternate;
 }
 
-@keyframes lightSweep {
-    0% { left:-50%; }
-    100% { left:130%; }
+@keyframes glowPulse {
+    to {transform:scale(1.5);opacity:.5}
 }
 
-/* Particles */
-
-.particles {
+.intro-particles {
     position:absolute;
     inset:0;
     pointer-events:none;
 }
 
-.particle {
+.intro-particles i {
     position:absolute;
     width:3px;
     height:3px;
-    background:#ff5364;
+    background:#ff5263;
     border-radius:50%;
-    box-shadow:0 0 12px #ff263b;
-    animation:floatParticle 6s ease-in-out infinite;
+    box-shadow:0 0 12px #ed263b;
+    animation:particleFloat 6s infinite ease-in-out;
 }
 
-.particle:nth-child(1) {top:20%;left:15%;animation-delay:0s}
-.particle:nth-child(2) {top:75%;left:25%;animation-delay:1s}
-.particle:nth-child(3) {top:30%;left:80%;animation-delay:2s}
-.particle:nth-child(4) {top:80%;left:75%;animation-delay:3s}
-.particle:nth-child(5) {top:15%;left:60%;animation-delay:1.5s}
-.particle:nth-child(6) {top:55%;left:10%;animation-delay:2.5s}
-.particle:nth-child(7) {top:65%;left:90%;animation-delay:1s}
-.particle:nth-child(8) {top:40%;left:45%;animation-delay:3.5s}
+.intro-particles i:nth-child(1){top:15%;left:20%}
+.intro-particles i:nth-child(2){top:25%;left:80%;animation-delay:1s}
+.intro-particles i:nth-child(3){top:75%;left:15%;animation-delay:2s}
+.intro-particles i:nth-child(4){top:80%;left:85%;animation-delay:3s}
+.intro-particles i:nth-child(5){top:40%;left:10%;animation-delay:1.5s}
+.intro-particles i:nth-child(6){top:60%;left:90%;animation-delay:2.5s}
+.intro-particles i:nth-child(7){top:10%;left:50%;animation-delay:3.5s}
+.intro-particles i:nth-child(8){top:90%;left:55%;animation-delay:2s}
+.intro-particles i:nth-child(9){top:35%;left:70%;animation-delay:4s}
+.intro-particles i:nth-child(10){top:65%;left:35%;animation-delay:1s}
 
-@keyframes floatParticle {
+@keyframes particleFloat {
     0%,100% {transform:translateY(0);opacity:.2}
     50% {transform:translateY(-35px);opacity:1}
 }
-
-/* Intro content */
 
 .intro-content {
     position:relative;
     z-index:5;
     text-align:center;
-    width:100%;
     padding:20px;
-    animation:introContent 1.3s cubic-bezier(.16,1,.3,1) both;
+    animation:introAppear 1.4s cubic-bezier(.16,1,.3,1) both;
 }
 
-@keyframes introContent {
+@keyframes introAppear {
     from {
         opacity:0;
-        transform:translateY(45px) scale(.92);
-        filter:blur(12px);
+        transform:translateY(50px) scale(.85);
+        filter:blur(15px);
     }
     to {
         opacity:1;
@@ -197,7 +202,7 @@ button {
     }
 }
 
-.intro-logo {
+.logo-3d {
     width:110px;
     height:110px;
     margin:0 auto 30px;
@@ -205,90 +210,83 @@ button {
     place-items:center;
     position:relative;
     border-radius:27px;
-    background:linear-gradient(145deg,#ff465b,#9b071b 65%,#45050e);
+    background:linear-gradient(145deg,#ff5264,#a30920 65%,#41040c);
     box-shadow:
-        0 0 25px #f02b3d77,
-        0 0 75px #f02b3d44,
-        inset 0 1px 1px #ffffff66;
-    transform:rotate(-7deg);
-    animation:logoFloat 4s ease-in-out infinite;
+        0 15px 35px #0008,
+        0 0 35px #ed263b88,
+        inset 0 1px 2px #ffffff77;
+    transform:rotate(-8deg);
+    animation:logoMotion 4s ease-in-out infinite;
 }
 
-.intro-logo::before {
+.logo-3d::before {
     content:"";
     position:absolute;
     inset:-8px;
-    border:1px solid #ff455b66;
+    border:1px solid #ff526477;
     border-radius:32px;
-    animation:logoBorder 3s linear infinite;
+    animation:orbit 8s linear infinite;
 }
 
-.intro-logo::after {
+.logo-3d::after {
     content:"";
     position:absolute;
-    inset:-18px;
-    border:1px solid #ff455b22;
+    inset:-17px;
+    border:1px solid #ff526422;
     border-radius:37px;
 }
 
-.intro-logo span {
-    font-size:38px;
+.logo-3d span {
+    direction:ltr;
+    font-size:39px;
     font-weight:900;
     letter-spacing:-3px;
-    direction:ltr;
-    text-shadow:0 3px 15px #45000b;
+    text-shadow:0 4px 12px #41000b;
 }
 
-@keyframes logoFloat {
-    0%,100% {transform:rotate(-7deg) translateY(0)}
-    50% {transform:rotate(-3deg) translateY(-9px)}
-}
-
-@keyframes logoBorder {
-    to {transform:rotate(360deg)}
+@keyframes logoMotion {
+    0%,100% {transform:rotate(-8deg) translateY(0)}
+    50% {transform:rotate(-3deg) translateY(-10px)}
 }
 
 .intro-title {
-    font-size:clamp(43px,9vw,92px);
+    font-size:clamp(45px,9vw,94px);
     font-weight:900;
     letter-spacing:2px;
     direction:ltr;
-    text-shadow:
-        0 0 20px #ed263b66,
-        0 0 70px #ed263b33;
+    text-shadow:0 0 30px #ed263b55;
 }
 
 .intro-title span {
     color:var(--red);
 }
 
-.intro-subtitle {
-    margin-top:12px;
+.intro-sub {
+    direction:ltr;
+    letter-spacing:8px;
     color:#c7c7ce;
     font-size:13px;
-    letter-spacing:7px;
-    direction:ltr;
+    margin-top:13px;
 }
 
-.intro-line {
-    width:220px;
+.intro-divider {
     height:2px;
-    margin:38px auto 18px;
-    background:#ffffff15;
+    width:220px;
+    margin:36px auto 20px;
+    background:#ffffff16;
     overflow:hidden;
-    border-radius:10px;
 }
 
-.intro-line span {
+.intro-divider span {
     display:block;
     width:35%;
     height:100%;
-    background:var(--red-light);
+    background:#ff5365;
     box-shadow:0 0 15px var(--red);
-    animation:progress 2.5s ease-in-out infinite;
+    animation:loadingBar 2.3s ease-in-out infinite;
 }
 
-@keyframes progress {
+@keyframes loadingBar {
     from {transform:translateX(300%)}
     to {transform:translateX(-300%)}
 }
@@ -300,239 +298,235 @@ button {
     direction:ltr;
 }
 
-.intro-enter {
-    margin-top:30px;
-    border:1px solid #ff526366;
-    color:white;
+.enter-btn {
+    margin-top:28px;
+    padding:12px 28px;
+    border:1px solid #ff526466;
     background:#ed263b20;
-    border-radius:9px;
-    padding:10px 25px;
+    border-radius:10px;
+    color:white;
     cursor:pointer;
     transition:.3s;
 }
 
-.intro-enter:hover {
+.enter-btn:hover {
     background:var(--red);
-    box-shadow:0 0 25px #ed263b55;
+    box-shadow:0 0 30px #ed263b66;
 }
 
-/* =========================
+/* =================================
    HEADER
-========================= */
+================================= */
 
 header {
     position:sticky;
     top:0;
-    z-index:100;
-    background:#08090cdd;
+    z-index:1000;
+    background:#08080bdf;
     backdrop-filter:blur(20px);
-    border-bottom:1px solid #ffffff12;
+    border-bottom:1px solid var(--border);
 }
 
 .nav {
-    max-width:1200px;
+    max-width:1250px;
     margin:auto;
-    padding:15px 24px;
+    padding:16px 25px;
     display:flex;
-    align-items:center;
     justify-content:space-between;
+    align-items:center;
     gap:20px;
 }
 
 .brand {
-    font-size:23px;
-    font-weight:900;
     direction:ltr;
+    font-size:24px;
+    font-weight:900;
+    letter-spacing:1px;
 }
 
 .brand span {
     color:var(--red);
 }
 
-.links {
+.nav-links {
     display:flex;
-    align-items:center;
     gap:28px;
     font-size:13px;
-    color:#c9c9ce;
+    color:#c8c8cf;
 }
 
-.links a {
+.nav-links a {
     transition:.25s;
+    position:relative;
 }
 
-.links a:hover {
-    color:var(--red-light);
-}
-
-.nav-button,
-.btn {
-    display:inline-block;
+.nav-links a::after {
+    content:"";
+    position:absolute;
+    width:0;
+    height:2px;
+    bottom:-8px;
+    right:0;
     background:var(--red);
-    color:white;
-    padding:12px 21px;
-    border-radius:10px;
-    border:1px solid transparent;
-    font-size:13px;
-    font-weight:800;
-    cursor:pointer;
     transition:.3s;
 }
 
-.nav-button:hover,
-.btn:hover {
-    transform:translateY(-3px);
-    box-shadow:0 10px 30px #ed263b44;
-    background:#ff4053;
+.nav-links a:hover {
+    color:white;
 }
 
-.menu-button {
-    display:none;
-    background:none;
-    border:1px solid #ffffff30;
+.nav-links a:hover::after {
+    width:100%;
+}
+
+.nav-join {
+    padding:11px 19px;
+    background:var(--red);
     border-radius:9px;
-    padding:9px 12px;
+    font-size:13px;
+    font-weight:800;
+    transition:.3s;
+}
+
+.nav-join:hover {
+    box-shadow:0 0 25px #ed263b66;
+    transform:translateY(-3px);
+}
+
+.menu-btn {
+    display:none;
+    border:1px solid #ffffff30;
+    background:none;
     color:white;
+    border-radius:8px;
+    padding:9px 13px;
     cursor:pointer;
 }
 
-/* =========================
-   PAGE ENTRANCE
-========================= */
-
-body:not(.page-ready) header,
-body:not(.page-ready) main,
-body:not(.page-ready) footer {
-    opacity:0;
-    transform:translateY(35px);
-}
-
-body.page-ready header {
-    animation:topEnter 1s cubic-bezier(.16,1,.3,1) both;
-}
-
-body.page-ready main {
-    animation:pageEnter 1.2s cubic-bezier(.16,1,.3,1) both;
-}
-
-body.page-ready footer {
-    opacity:1;
-    transform:none;
-}
-
-@keyframes topEnter {
-    from {opacity:0;transform:translateY(-40px)}
-    to {opacity:1;transform:translateY(0)}
-}
-
-@keyframes pageEnter {
-    from {opacity:0;transform:translateY(40px)}
-    to {opacity:1;transform:translateY(0)}
-}
-
-/* =========================
+/* =================================
    HERO
-========================= */
+================================= */
 
 .hero {
-    min-height:690px;
+    min-height:750px;
+    position:relative;
     display:flex;
     align-items:center;
-    position:relative;
     overflow:hidden;
     background:
-        radial-gradient(ellipse at 75% 45%,#8c112788,transparent 45%),
-        linear-gradient(135deg,#170c11,#08090c 70%);
+        radial-gradient(ellipse at 78% 45%,#94112888,transparent 43%),
+        linear-gradient(125deg,#170b10,#08080b 70%);
 }
 
-.hero::before {
-    content:"";
+.hero-grid {
     position:absolute;
     inset:0;
     background-image:
-        linear-gradient(#ffffff08 1px,transparent 1px),
-        linear-gradient(90deg,#ffffff08 1px,transparent 1px);
+        linear-gradient(#ffffff07 1px,transparent 1px),
+        linear-gradient(90deg,#ffffff07 1px,transparent 1px);
     background-size:55px 55px;
 }
 
-.hero::after {
-    content:"";
+.hero-circle {
     position:absolute;
-    width:470px;
-    height:470px;
-    left:8%;
+    width:500px;
+    height:500px;
+    left:7%;
     top:12%;
-    border:1px solid #ed263b35;
+    border:1px solid #ed263b30;
     border-radius:50%;
     box-shadow:
-        0 0 0 50px #ed263b08,
-        0 0 0 100px #ed263b05;
-    animation:heroRing 20s linear infinite;
+        0 0 0 55px #ed263b08,
+        0 0 0 110px #ed263b05;
+    animation:orbit 35s linear infinite;
 }
 
-@keyframes heroRing {
-    to {transform:rotate(360deg)}
+.hero-circle::after {
+    content:"";
+    position:absolute;
+    inset:15%;
+    border:1px dashed #ed263b35;
+    border-radius:50%;
 }
 
 .hero-content {
     position:relative;
     z-index:2;
+    max-width:1250px;
     width:100%;
-    max-width:1200px;
     margin:auto;
-    padding:100px 24px;
+    padding:120px 25px;
 }
 
-.hero-label {
-    color:#ff7582;
+.hero-tag {
+    color:#ff7885;
     font-size:13px;
-    letter-spacing:3px;
+    letter-spacing:4px;
     direction:ltr;
 }
 
 .hero h1 {
-    font-size:clamp(55px,10vw,110px);
+    font-size:clamp(55px,10vw,120px);
+    line-height:1.1;
     font-weight:900;
-    line-height:1.15;
     direction:ltr;
-    margin:22px 0 5px;
+    margin:25px 0 10px;
+    text-shadow:0 0 45px #ed263b22;
 }
 
 .hero h1 span {
     color:var(--red);
-    text-shadow:0 0 40px #ed263b66;
+    text-shadow:0 0 50px #ed263b66;
 }
 
-.hero-sub {
-    direction:ltr;
+.hero-mode {
     font-size:19px;
-    letter-spacing:6px;
+    letter-spacing:7px;
     color:#ccc;
+    direction:ltr;
 }
 
-.hero-description {
-    max-width:600px;
-    margin:28px 0;
-    line-height:2.3;
+.hero-text {
+    max-width:610px;
+    color:#bcbcc4;
+    line-height:2.4;
     font-size:14px;
-    color:#bdbdc5;
+    margin:30px 0;
 }
 
-.hero-actions {
+.hero-buttons {
     display:flex;
     gap:13px;
     flex-wrap:wrap;
 }
 
+.btn {
+    display:inline-block;
+    padding:13px 23px;
+    background:var(--red);
+    color:white;
+    border-radius:9px;
+    font-weight:800;
+    font-size:13px;
+    border:1px solid transparent;
+    transition:.3s;
+}
+
+.btn:hover {
+    transform:translateY(-4px);
+    box-shadow:0 12px 30px #ed263b44;
+    background:#ff4356;
+}
+
 .btn-outline {
     background:transparent;
-    border-color:#ffffff44;
+    border-color:#ffffff35;
 }
 
 .version {
-    margin-top:35px;
-    color:#999;
+    margin-top:40px;
     font-size:13px;
+    color:#999;
 }
 
 .version strong {
@@ -541,25 +535,25 @@ body.page-ready footer {
     display:inline-block;
 }
 
-/* =========================
-   COMMON SECTIONS
-========================= */
+/* =================================
+   GENERAL
+================================= */
 
 section {
-    padding:100px 22px;
+    padding:105px 22px;
 }
 
 .container {
-    max-width:1150px;
+    max-width:1180px;
     margin:auto;
 }
 
-.section-title {
+.section-heading {
     text-align:center;
-    margin-bottom:48px;
+    margin-bottom:50px;
 }
 
-.section-title small {
+.section-heading small {
     color:var(--red-light);
     font-size:12px;
     letter-spacing:3px;
@@ -567,17 +561,19 @@ section {
     display:block;
 }
 
-.section-title h2 {
-    font-size:clamp(28px,5vw,44px);
-    margin:12px 0;
+.section-heading h2 {
+    font-size:clamp(29px,5vw,45px);
+    margin:13px 0;
 }
 
-.section-title p {
+.section-heading p {
     color:var(--muted);
     font-size:14px;
 }
 
-/* ABOUT */
+/* =================================
+   ABOUT
+================================= */
 
 .about-grid {
     display:grid;
@@ -585,123 +581,161 @@ section {
     gap:22px;
 }
 
-.about-box,
-.info-box,
-.feature-card,
-.video-box,
-.join-box {
-    background:linear-gradient(145deg,#15161c,#0e0f13);
-    border:1px solid #ffffff12;
+.about-main,
+.about-info,
+.feature,
+.video-wrapper,
+.join-panel {
+    background:linear-gradient(145deg,#17171e,#0e0e13);
+    border:1px solid var(--border);
     border-radius:18px;
 }
 
-.about-box {
-    padding:35px;
+.about-main {
+    padding:36px;
+    position:relative;
+    overflow:hidden;
 }
 
-.about-box h3 {
-    font-size:23px;
+.about-main::before {
+    content:"OS";
+    position:absolute;
+    left:-10px;
+    bottom:-65px;
+    font-size:190px;
+    font-weight:900;
+    color:#ffffff05;
+    direction:ltr;
+}
+
+.about-main h3 {
+    font-size:24px;
     margin-bottom:18px;
+    position:relative;
 }
 
-.about-box p {
-    color:#b5b5be;
+.about-main p {
+    color:#b9b9c2;
     line-height:2.4;
     font-size:14px;
+    position:relative;
 }
 
-.info-list {
-    display:grid;
-    gap:14px;
-}
-
-.info-box {
+.about-info {
+    padding:23px;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:23px;
+    margin-bottom:13px;
 }
 
-.info-box small {
-    color:#999;
+.about-info small {
     display:block;
-    margin-bottom:6px;
+    color:#999;
+    margin-bottom:5px;
 }
 
-.info-box strong {
+.about-info strong {
     font-size:14px;
 }
 
-.info-icon {
+.info-symbol {
     width:45px;
     height:45px;
-    border-radius:12px;
-    background:#ed263b20;
     display:grid;
     place-items:center;
-    color:#ff6475;
-    font-size:20px;
+    border-radius:12px;
+    background:#ed263b20;
+    color:#ff6173;
+    font-size:21px;
 }
 
-/* FEATURES */
+/* =================================
+   FEATURES
+================================= */
 
 .features-section {
-    background:linear-gradient(180deg,#090a0e,#111218,#090a0e);
+    background:linear-gradient(180deg,#09090d,#111117,#09090d);
 }
 
-.feature-grid {
+.features-grid {
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:18px;
+    gap:19px;
 }
 
-.feature-card {
-    padding:28px;
+.feature {
+    padding:30px;
     transition:.35s;
+    position:relative;
+    overflow:hidden;
 }
 
-.feature-card:hover {
+.feature::before {
+    content:"";
+    position:absolute;
+    top:0;
+    right:0;
+    width:0;
+    height:2px;
+    background:var(--red);
+    transition:.4s;
+}
+
+.feature:hover::before {
+    width:100%;
+}
+
+.feature:hover {
     transform:translateY(-8px);
-    border-color:#ed263b77;
-    box-shadow:0 15px 40px #0006;
+    border-color:#ed263b66;
+    box-shadow:0 20px 40px #0006;
 }
 
 .feature-icon {
-    color:#ff5263;
-    font-size:30px;
+    width:55px;
+    height:55px;
+    display:grid;
+    place-items:center;
+    border-radius:15px;
+    color:#ff6374;
+    background:#ed263b1c;
+    font-size:26px;
 }
 
-.feature-card h3 {
+.feature h3 {
     font-size:17px;
-    margin:15px 0 9px;
+    margin:18px 0 9px;
 }
 
-.feature-card p {
-    color:#aaa;
-    line-height:2.1;
+.feature p {
+    color:#aaaab4;
+    line-height:2.2;
     font-size:13px;
 }
 
-/* VIDEO */
+/* =================================
+   VIDEO
+================================= */
 
 .video-section {
-    background:radial-gradient(ellipse at center,#60101c30,transparent 60%);
+    background:radial-gradient(ellipse at center,#75102130,transparent 60%);
 }
 
-.video-box {
-    max-width:920px;
-    margin:auto;
+.video-wrapper {
+    max-width:950px;
     padding:12px;
-    box-shadow:0 30px 80px #0008;
+    margin:auto;
+    box-shadow:0 25px 80px #0008;
 }
 
 .video-frame {
     width:100%;
     aspect-ratio:16/9;
     position:relative;
-    overflow:hidden;
-    border-radius:12px;
     background:#050507;
+    border-radius:12px;
+    overflow:hidden;
 }
 
 .video-frame iframe {
@@ -712,69 +746,89 @@ section {
     border:0;
 }
 
-.video-caption {
-    color:#999;
+.video-description {
     text-align:center;
+    color:#999;
     font-size:12px;
-    margin-top:18px;
+    margin-top:20px;
 }
 
-/* JOIN */
+/* =================================
+   JOIN
+================================= */
 
-.join-box {
-    padding:35px;
+.join-panel {
+    padding:36px;
     display:flex;
     justify-content:space-between;
     align-items:center;
     gap:25px;
     flex-wrap:wrap;
+    position:relative;
+    overflow:hidden;
 }
 
-.join-box h3 {
-    font-size:23px;
-    margin-bottom:8px;
+.join-panel::before {
+    content:"";
+    position:absolute;
+    width:250px;
+    height:250px;
+    right:-100px;
+    top:-130px;
+    background:#ed263b22;
+    filter:blur(80px);
 }
 
-.join-box p {
+.join-panel h3 {
+    font-size:24px;
+    margin-bottom:9px;
+    position:relative;
+}
+
+.join-panel p {
     color:#aaa;
     font-size:13px;
+    position:relative;
 }
 
-.ip-container {
+.ip-box {
     display:flex;
-    gap:10px;
     align-items:center;
+    gap:10px;
     direction:ltr;
-    background:#08090c;
+    background:#08080b;
     border:1px solid #ffffff20;
-    padding:10px;
-    border-radius:10px;
+    padding:11px;
+    border-radius:11px;
     max-width:100%;
+    position:relative;
 }
 
-.ip-container code {
-    color:#eee;
+.ip-box code {
     font-family:Consolas,monospace;
     font-size:12px;
+    color:#eee;
     overflow-wrap:anywhere;
 }
 
-.copy-button {
+.copy-btn {
     border:0;
+    padding:10px 14px;
     background:var(--red);
     color:white;
-    padding:10px 14px;
     border-radius:8px;
     font-weight:800;
     cursor:pointer;
     white-space:nowrap;
 }
 
-/* FOOTER */
+/* =================================
+   FOOTER
+================================= */
 
 footer {
-    border-top:1px solid #ffffff15;
-    padding:30px 20px;
+    border-top:1px solid var(--border);
+    padding:35px 20px;
     text-align:center;
     color:#85858e;
     font-size:12px;
@@ -784,7 +838,9 @@ footer strong {
     color:white;
 }
 
-/* SCROLL REVEAL */
+/* =================================
+   SCROLL ANIMATIONS
+================================= */
 
 .reveal {
     opacity:0;
@@ -792,52 +848,53 @@ footer strong {
     transition:opacity .8s ease,transform .8s ease;
 }
 
-.reveal.visible {
+.reveal.show {
     opacity:1;
     transform:translateY(0);
 }
 
-/* MOBILE */
+/* =================================
+   RESPONSIVE
+================================= */
 
-@media(max-width:760px) {
+@media(max-width:800px) {
 
-    .links {
+    .nav-links {
         display:none;
         position:absolute;
         top:70px;
         right:15px;
         left:15px;
-        background:#111319;
+        padding:22px;
+        flex-direction:column;
+        background:#111116;
         border:1px solid #ffffff20;
         border-radius:13px;
-        padding:20px;
-        flex-direction:column;
-        align-items:stretch;
-        gap:18px;
+        gap:20px;
     }
 
-    .links.open {
+    .nav-links.open {
         display:flex;
     }
 
-    .menu-button {
+    .menu-btn {
         display:block;
     }
 
-    .nav-button {
+    .nav-join {
         display:none;
     }
 
     .hero {
-        min-height:620px;
+        min-height:650px;
     }
 
     .hero-content {
-        padding:80px 22px;
+        padding:90px 22px;
     }
 
     .hero h1 {
-        font-size:clamp(48px,14vw,78px);
+        font-size:clamp(48px,14vw,82px);
     }
 
     section {
@@ -848,25 +905,29 @@ footer strong {
         grid-template-columns:1fr;
     }
 
-    .feature-grid {
+    .features-grid {
         grid-template-columns:1fr;
     }
 
-    .join-box {
-        padding:24px;
+    .join-panel {
+        padding:25px;
     }
 
-    .ip-container {
+    .ip-box {
         width:100%;
     }
 
-    .ip-container code {
+    .ip-box code {
         font-size:10px;
     }
 
-    .intro-logo {
-        width:85px;
-        height:85px;
+    .intro-orbit {
+        width:85vw;
+    }
+
+    .logo-3d {
+        width:90px;
+        height:90px;
     }
 }
 
@@ -881,30 +942,25 @@ footer strong {
 </style>
 </head>
 
-<body class="intro-active">
+<body class="loading">
 
 <!-- CINEMATIC INTRO -->
 
 <div class="intro" id="intro">
 
-    <div class="intro-bg"></div>
+    <div class="intro-background"></div>
     <div class="intro-grid"></div>
-    <div class="intro-light"></div>
+    <div class="intro-orbit"></div>
+    <div class="intro-glow"></div>
 
-    <div class="particles">
-        <i class="particle"></i>
-        <i class="particle"></i>
-        <i class="particle"></i>
-        <i class="particle"></i>
-        <i class="particle"></i>
-        <i class="particle"></i>
-        <i class="particle"></i>
-        <i class="particle"></i>
+    <div class="intro-particles">
+        <i></i><i></i><i></i><i></i><i></i>
+        <i></i><i></i><i></i><i></i><i></i>
     </div>
 
     <div class="intro-content">
 
-        <div class="intro-logo">
+        <div class="logo-3d">
             <span>OS</span>
         </div>
 
@@ -912,20 +968,20 @@ footer strong {
             OS <span>CRAFT</span>
         </h1>
 
-        <p class="intro-subtitle">
+        <p class="intro-sub">
             SMP • ROLEPLAY
         </p>
 
-        <div class="intro-line">
+        <div class="intro-divider">
             <span></span>
         </div>
 
         <div class="intro-status">
-            ENTERING THE WORLD
+            PREPARING YOUR EXPERIENCE
         </div>
 
-        <button class="intro-enter" id="enterButton">
-            ورود به دنیای OS CRAFT
+        <button class="enter-btn" id="enterBtn">
+            ورود به سایت
         </button>
 
     </div>
@@ -940,19 +996,19 @@ footer strong {
         OS <span>CRAFT</span>
     </a>
 
-    <div class="links" id="navLinks">
+    <div class="nav-links" id="navLinks">
         <a href="#top">صفحه اصلی</a>
-        <a href="#about">درباره سرور</a>
+        <a href="#about">معرفی سرور</a>
         <a href="#features">امکانات</a>
         <a href="#video">ویدیو</a>
-        <a href="#join">اتصال به سرور</a>
+        <a href="#join">اتصال</a>
     </div>
 
-    <a href="#join" class="nav-button">
+    <a href="#join" class="nav-join">
         ورود به سرور
     </a>
 
-    <button class="menu-button" id="menuButton">
+    <button class="menu-btn" id="menuBtn">
         ☰
     </button>
 
@@ -965,28 +1021,31 @@ footer strong {
 
 <section class="hero">
 
+    <div class="hero-grid"></div>
+    <div class="hero-circle"></div>
+
     <div class="hero-content">
 
-        <div class="hero-label">
-            WELCOME TO OS CRAFT
+        <div class="hero-tag">
+            WELCOME TO THE WORLD
         </div>
 
         <h1>
             OS <span>CRAFT</span>
         </h1>
 
-        <p class="hero-sub">
+        <p class="hero-mode">
             SMP + ROLEPLAY
         </p>
 
-        <p class="hero-description">
+        <p class="hero-text">
             به دنیای OS CRAFT خوش آمدی؛ تجربه‌ای متفاوت
             از بقا و نقش‌آفرینی در یک شهر زنده.
             شغل انتخاب کن، کسب‌وکار بساز و در کنار دیگر
             بازیکنان دنیای خودت را تجربه کن.
         </p>
 
-        <div class="hero-actions">
+        <div class="hero-buttons">
             <a href="#join" class="btn">
                 اطلاعات اتصال
             </a>
@@ -1009,56 +1068,60 @@ footer strong {
 
 <div class="container">
 
-    <div class="section-title reveal">
+    <div class="section-heading reveal">
         <small>ABOUT OS CRAFT</small>
-        <h2>درباره سرور</h2>
-        <p>یک تجربه SMP همراه با امکانات نقش‌آفرینی شهری</p>
+        <h2>معرفی سرور</h2>
+        <p>دنیایی متفاوت برای تجربه SMP و Roleplay</p>
     </div>
 
     <div class="about-grid">
 
-        <div class="about-box reveal">
+        <div class="about-main reveal">
 
-            <h3>دنیایی برای تجربه‌ای متفاوت</h3>
+            <h3>فراتر از یک سرور معمولی</h3>
 
             <p>
-                در OS CRAFT می‌توانی وارد یک فضای چندنفره شوی،
-                شغل داشته باشی، در اقتصاد شهر فعالیت کنی
-                و با بازیکنان دیگر تعامل داشته باشی.
+                OS CRAFT یک سرور ماینکرفت با ترکیب
+                SMP و Roleplay است.
 
-                هدف، ساختن یک تجربه سرگرم‌کننده و منظم
-                از ماینکرفت در قالب SMP و Roleplay است.
+                در این دنیا می‌توانی شغل انتخاب کنی،
+                در اقتصاد شهر فعالیت داشته باشی،
+                خانه بخری و با دیگر بازیکنان تعامل کنی.
+
+                امکانات مختلف سرور برای ساختن یک تجربه
+                چندنفره و نقش‌آفرینی شهری طراحی شده‌اند.
             </p>
 
         </div>
 
-        <div class="info-list">
+        <div>
 
-            <div class="info-box reveal">
+            <div class="about-info reveal">
                 <div>
-                    <small>حالت بازی</small>
+                    <small>نوع سرور</small>
                     <strong>SMP + ROLEPLAY</strong>
                 </div>
-                <div class="info-icon">✦</div>
+                <div class="info-symbol">✦</div>
             </div>
 
-            <div class="info-box reveal">
+            <div class="about-info reveal">
                 <div>
-                    <small>نسخه سرور</small>
+                    <small>نسخه بازی</small>
                     <strong>26.2</strong>
                 </div>
-                <div class="info-icon">◆</div>
+                <div class="info-symbol">◆</div>
             </div>
 
-            <div class="info-box reveal">
+            <div class="about-info reveal">
                 <div>
                     <small>پلتفرم</small>
                     <strong>Minecraft Java</strong>
                 </div>
-                <div class="info-icon">▣</div>
+                <div class="info-symbol">▣</div>
             </div>
 
         </div>
+
     </div>
 </div>
 </section>
@@ -1069,65 +1132,65 @@ footer strong {
 
 <div class="container">
 
-    <div class="section-title reveal">
+    <div class="section-heading reveal">
         <small>SERVER FEATURES</small>
-        <h2>امکانات سرور</h2>
-        <p>بخش‌هایی از تجربه‌ای که در OS CRAFT منتظر توست</p>
+        <h2>امکانات OS CRAFT</h2>
+        <p>بخش‌های مختلف تجربه نقش‌آفرینی در سرور</p>
     </div>
 
-    <div class="feature-grid">
+    <div class="features-grid">
 
-        <article class="feature-card reveal">
+        <article class="feature reveal">
             <div class="feature-icon">⌂</div>
-            <h3>زندگی شهری</h3>
+            <h3>خانه و ملک</h3>
             <p>
-                در شهر خانه داشته باش، محل زندگی‌ات را
-                انتخاب کن و در فضای شهری فعالیت کن.
+                خانه موردنظرت را پیدا کن و
+                در شهر صاحب یک فضای شخصی شو.
             </p>
         </article>
 
-        <article class="feature-card reveal">
+        <article class="feature reveal">
             <div class="feature-icon">⚒</div>
             <h3>سیستم شغل‌ها</h3>
             <p>
-                با انتخاب شغل مناسب، در بخش‌های مختلف
-                شهر نقش داشته باش و پیشرفت کن.
+                شغل خودت را انتخاب کن و
+                در بخش‌های مختلف شهر فعالیت داشته باش.
             </p>
         </article>
 
-        <article class="feature-card reveal">
+        <article class="feature reveal">
             <div class="feature-icon">◇</div>
-            <h3>اقتصاد و خریدوفروش</h3>
+            <h3>اقتصاد شهری</h3>
             <p>
-                از امکانات اقتصادی و فروشگاه‌ها برای
-                خریدوفروش و مدیریت دارایی‌ها استفاده کن.
+                از امکانات اقتصادی برای
+                مدیریت پول و خریدوفروش استفاده کن.
             </p>
         </article>
 
-        <article class="feature-card reveal">
+        <article class="feature reveal">
             <div class="feature-icon">▤</div>
             <h3>کسب‌وکارها</h3>
             <p>
-                در فعالیت‌های اقتصادی شهر مشارکت کن
-                و کسب‌وکارهای مختلف را تجربه کن.
+                در فعالیت‌های اقتصادی شهر
+                مشارکت کن و کسب‌وکار داشته باش.
             </p>
         </article>
 
-        <article class="feature-card reveal">
+        <article class="feature reveal">
             <div class="feature-icon">♧</div>
-            <h3>خانه و ملک</h3>
+            <h3>زندگی شهری</h3>
             <p>
-                خانه موردنظرت را پیدا کن و فضای شخصی
-                خودت را در شهر داشته باش.
+                در فضای شهری سرور زندگی کن
+                و با دیگر بازیکنان تعامل داشته باش.
             </p>
         </article>
 
-        <article class="feature-card reveal">
+        <article class="feature reveal">
             <div class="feature-icon">◎</div>
             <h3>تجربه چندنفره</h3>
             <p>
-                با دیگر بازیکنان تعامل داشته باش
-                و ماجراجویی‌های گروهی را تجربه کن.
+                با دوستانت وارد سرور شو
+                و تجربه‌های گروهی داشته باش.
             </p>
         </article>
 
@@ -1141,29 +1204,30 @@ footer strong {
 
 <div class="container">
 
-    <div class="section-title reveal">
-        <small>WATCH OS CRAFT</small>
-        <h2>ویدیو سرور</h2>
-        <p>با تماشای ویدیو، بیشتر با فضای OS CRAFT آشنا شو</p>
+    <div class="section-heading reveal">
+        <small>OFFICIAL VIDEO</small>
+        <h2>ویدیو OS CRAFT</h2>
+        <p>نگاهی به فضای سرور و تجربه بازی</p>
     </div>
 
-    <div class="video-box reveal">
+    <div class="video-wrapper reveal">
 
         <div class="video-frame">
 
             <iframe
                 src="https://www.aparat.com/video/video/embed/videohash/gac4d89/vt/frame"
-                title="OS CRAFT Aparat Video"
+                title="OS CRAFT"
                 allow="autoplay; fullscreen"
                 allowfullscreen
                 loading="lazy">
             </iframe>
 
         </div>
+
     </div>
 
-    <p class="video-caption">
-        ویدیو از آپارات پخش می‌شود.
+    <p class="video-description">
+        پخش ویدیو از سرویس آپارات
     </p>
 
 </div>
@@ -1175,26 +1239,24 @@ footer strong {
 
 <div class="container">
 
-    <div class="section-title reveal">
-        <small>JOIN THE SERVER</small>
-        <h2>آماده ورود هستی؟</h2>
-        <p>اطلاعات اتصال به سرور را کپی کن و وارد بازی شو</p>
+    <div class="section-heading reveal">
+        <small>JOIN OS CRAFT</small>
+        <h2>ورود به سرور</h2>
+        <p>آماده‌ای وارد دنیای OS CRAFT شوی؟</p>
     </div>
 
-    <div class="join-box reveal">
+    <div class="join-panel reveal">
 
         <div>
-            <h3>به OS CRAFT بپیوند</h3>
+            <h3>به ما بپیوند!</h3>
             <p>نسخه موردنیاز: Minecraft 26.2</p>
         </div>
 
-        <div class="ip-container">
+        <div class="ip-box">
 
-            <code id="serverIP">
-                sarafraz7171-srv-os_craft_asli.play.mihancraft.com:25566
-            </code>
+            <code id="serverIP">sarafraz7171-srv-os_craft_asli.play.mihancraft.com:25566</code>
 
-            <button class="copy-button" id="copyButton">
+            <button class="copy-btn" id="copyBtn">
                 کپی IP
             </button>
 
@@ -1207,8 +1269,6 @@ footer strong {
 
 </main>
 
-<!-- FOOTER -->
-
 <footer>
     <strong>OS CRAFT</strong>
     &nbsp; • &nbsp;
@@ -1219,57 +1279,48 @@ footer strong {
 
 <script>
 
-/* INTRO CONTROL */
+/* INTRO */
 
 const intro = document.getElementById("intro");
 
-let introClosed = false;
+let introFinished = false;
 
-function enterWebsite() {
+function finishIntro() {
 
-    if (introClosed) return;
+    if (introFinished) return;
 
-    introClosed = true;
+    introFinished = true;
 
-    intro.classList.add("finished");
+    intro.classList.add("out");
 
-    document.body.classList.remove("intro-active");
+    document.body.classList.remove("loading");
 
-    document.body.classList.add("page-ready");
+    document.body.classList.add("ready");
 
-    // همیشه صفحه از بالای سایت آغاز شود
-    window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: "instant"
-    });
+    window.scrollTo(0,0);
+
 }
 
-document.getElementById("enterButton")
-.addEventListener("click", enterWebsite);
+document.getElementById("enterBtn")
+.addEventListener("click", finishIntro);
 
-// ورود خودکار بعد از نمایش کامل اینترو
 window.addEventListener("load", () => {
 
-    setTimeout(() => {
-        enterWebsite();
-    }, 5000);
+    setTimeout(finishIntro, 6000);
 
 });
 
-// جلوگیری از باقی ماندن صفحه پشت اینترو
-setTimeout(() => {
-    enterWebsite();
-}, 9000);
+// Safety fallback
+setTimeout(finishIntro, 10000);
 
 
 /* MOBILE MENU */
 
-const menuButton = document.getElementById("menuButton");
+const menuBtn = document.getElementById("menuBtn");
 
 const navLinks = document.getElementById("navLinks");
 
-menuButton.addEventListener("click", () => {
+menuBtn.addEventListener("click", () => {
 
     navLinks.classList.toggle("open");
 
@@ -1286,58 +1337,58 @@ document.querySelectorAll("#navLinks a").forEach(link => {
 });
 
 
-/* COPY SERVER IP */
+/* COPY IP */
 
-document.getElementById("copyButton")
+document.getElementById("copyBtn")
 .addEventListener("click", async () => {
 
     const ip = document.getElementById("serverIP")
     .textContent.trim();
 
-    const button = document.getElementById("copyButton");
+    const btn = document.getElementById("copyBtn");
 
     try {
 
         await navigator.clipboard.writeText(ip);
 
-        button.textContent = "کپی شد ✓";
+        btn.textContent = "کپی شد ✓";
 
-    } catch (error) {
+    } catch(error) {
 
-        const input = document.createElement("textarea");
+        const temp = document.createElement("textarea");
 
-        input.value = ip;
+        temp.value = ip;
 
-        document.body.appendChild(input);
+        document.body.appendChild(temp);
 
-        input.select();
+        temp.select();
 
         document.execCommand("copy");
 
-        input.remove();
+        temp.remove();
 
-        button.textContent = "کپی شد ✓";
+        btn.textContent = "کپی شد ✓";
 
     }
 
     setTimeout(() => {
 
-        button.textContent = "کپی IP";
+        btn.textContent = "کپی IP";
 
-    }, 2000);
+    },2000);
 
 });
 
 
-/* SCROLL ANIMATIONS */
+/* SCROLL REVEAL */
 
 const observer = new IntersectionObserver(entries => {
 
     entries.forEach(entry => {
 
-        if (entry.isIntersecting) {
+        if(entry.isIntersecting) {
 
-            entry.target.classList.add("visible");
+            entry.target.classList.add("show");
 
             observer.unobserve(entry.target);
 
@@ -1345,9 +1396,7 @@ const observer = new IntersectionObserver(entries => {
 
     });
 
-}, {
-    threshold:0.12
-});
+},{threshold:.12});
 
 document.querySelectorAll(".reveal").forEach(element => {
 
