@@ -3,25 +3,34 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#11152d">
-<title>OS CRAFT | SMP + Roleplay</title>
+
+<title>OS CRAFT | SMP + ROLEPLAY</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap');
+
+/* =========================
+   تنظیمات اصلی سایت
+========================= */
 
 :root {
-  --bg: #10152d;
-  --ink: #f7f5ff;
-  --muted: #c4c8df;
   --gold: #ffd477;
   --cyan: #72e5df;
   --purple: #a99aff;
+  --white: #ffffff;
+  --muted: #c4c8df;
   --line: #ffffff20;
 }
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
@@ -30,15 +39,14 @@ html {
 }
 
 body {
-  margin: 0;
   font-family: Vazirmatn, Tahoma, sans-serif;
-  color: var(--ink);
-  background:
-    radial-gradient(ellipse at 12% 8%, #51418b80, transparent 34%),
-    radial-gradient(ellipse at 90% 35%, #146d7780, transparent 34%),
-    linear-gradient(145deg, #11152d, #20234c 55%, #102b43);
-  background-attachment: fixed;
+  color: white;
   overflow-x: hidden;
+
+  background:
+    radial-gradient(ellipse at 10% 10%, #51418b80, transparent 35%),
+    radial-gradient(ellipse at 90% 40%, #146d7780, transparent 35%),
+    linear-gradient(145deg, #11152d, #20234c 55%, #102b43);
 }
 
 a {
@@ -47,7 +55,7 @@ a {
 }
 
 button {
-  font: inherit;
+  font-family: inherit;
   cursor: pointer;
 }
 
@@ -56,16 +64,26 @@ button {
   margin: auto;
 }
 
-/* INTRO */
+
+/* =========================
+   INTRO - شروع سینمایی
+========================= */
 
 .intro {
   position: fixed;
   inset: 0;
-  z-index: 100;
-  background: linear-gradient(135deg, #171a3d, #252052 55%, #123b4b);
-  display: grid;
-  place-items: center;
-  transition: opacity .55s ease, visibility .55s;
+  z-index: 1000;
+  overflow: hidden;
+
+  background: #10152d;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition:
+    opacity 1s ease,
+    visibility 1s ease;
 }
 
 .intro.hide {
@@ -74,87 +92,234 @@ button {
   pointer-events: none;
 }
 
-.intro-box {
+
+/* تصویر شهر */
+
+.intro-city {
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    linear-gradient(
+      to bottom,
+      rgba(10, 13, 34, .15),
+      rgba(10, 13, 34, .25) 45%,
+      rgba(10, 13, 34, .95)
+    ),
+    url("https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1920&q=80");
+
+  background-size: cover;
+  background-position: center;
+
+  transform: scale(1.15);
+
+  animation: cityZoom 6s ease-out forwards;
+}
+
+/* نور روی تصویر */
+
+.intro-light {
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      ellipse at 50% 60%,
+      rgba(255, 212, 119, .18),
+      transparent 45%
+    );
+
+  pointer-events: none;
+}
+
+/* محتوای وسط */
+
+.intro-content {
+  position: relative;
+  z-index: 5;
+
   text-align: center;
-  animation: introIn .7s ease both;
+
+  padding: 20px;
+
+  animation: contentAppear 1.4s ease both;
+}
+
+.intro-small {
+  font-size: .85rem;
+  letter-spacing: 5px;
+  color: #ffe2a0;
+
+  margin-bottom: 18px;
 }
 
 .intro-logo {
-  width: 86px;
-  height: 86px;
-  margin: auto;
-  border-radius: 26px;
-  display: grid;
-  place-items: center;
-  background: linear-gradient(135deg, var(--gold), #9cebe4);
-  color: #222447;
-  font-size: 2.5rem;
+  font-size: clamp(4rem, 11vw, 8rem);
   font-weight: 900;
-  box-shadow: 0 12px 40px #ffd47735;
+
+  line-height: 1;
+
+  letter-spacing: -8px;
+
+  background:
+    linear-gradient(
+      120deg,
+      #fff4c9,
+      #ffd477,
+      #ffffff,
+      #72e5df
+    );
+
+  background-size: 200% auto;
+
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+
+  filter: drop-shadow(0 0 25px #ffd47770);
+
+  animation: logoShine 4s linear infinite;
 }
 
-.intro-title {
-  font-weight: 900;
+.intro-name {
+  font-size: clamp(1.1rem, 3vw, 1.7rem);
+  font-weight: 800;
+
+  letter-spacing: 7px;
+
+  margin-top: 15px;
+}
+
+.intro-subtitle {
+  color: #e3e6f7;
+  font-size: .95rem;
+
+  margin-top: 12px;
+
   letter-spacing: 3px;
-  font-size: 1.8rem;
-  margin: 17px 0 4px;
 }
 
-.intro-sub {
-  color: #d4d5e9;
-  font-size: .9rem;
-}
+/* خط لودینگ */
 
-.loader {
-  width: 120px;
+.intro-loader {
+  width: 170px;
   height: 3px;
-  background: #ffffff25;
-  margin: 22px auto 0;
-  border-radius: 9px;
+
+  background: #ffffff30;
+
+  border-radius: 20px;
+
+  margin: 35px auto 0;
+
   overflow: hidden;
 }
 
-.loader:after {
-  content: "";
+.intro-loader span {
   display: block;
-  width: 45%;
+
+  width: 40%;
   height: 100%;
-  background: var(--gold);
-  animation: load 1.1s ease-in-out infinite;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--gold),
+    white
+  );
+
+  animation: loaderMove 1.5s ease-in-out infinite;
 }
 
-@keyframes load {
-  from { transform: translateX(220%); }
-  to { transform: translateX(-220%); }
+/* دکمه رد کردن */
+
+.skip-intro {
+  position: absolute;
+  z-index: 10;
+
+  bottom: 35px;
+  left: 35px;
+
+  border: 1px solid #ffffff55;
+  background: #10152d88;
+
+  color: white;
+
+  padding: 10px 18px;
+  border-radius: 12px;
+
+  backdrop-filter: blur(8px);
+
+  transition: .2s;
 }
 
-@keyframes introIn {
+.skip-intro:hover {
+  background: #ffd477;
+  color: #222;
+}
+
+/* انیمیشن ها */
+
+@keyframes cityZoom {
+  from {
+    transform: scale(1.15);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes contentAppear {
   from {
     opacity: 0;
-    transform: translateY(12px) scale(.97);
+    transform: translateY(30px);
   }
+
   to {
     opacity: 1;
-    transform: none;
+    transform: translateY(0);
   }
 }
 
-/* HEADER */
+@keyframes logoShine {
+  to {
+    background-position: 200% center;
+  }
+}
+
+@keyframes loaderMove {
+  from {
+    transform: translateX(250%);
+  }
+
+  to {
+    transform: translateX(-250%);
+  }
+}
+
+
+/* =========================
+   HEADER
+========================= */
 
 header {
   position: sticky;
   top: 0;
-  z-index: 20;
+  z-index: 50;
+
   background: #11152ddd;
   backdrop-filter: blur(14px);
+
   border-bottom: 1px solid var(--line);
 }
 
 .nav {
   height: 76px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   gap: 20px;
 }
 
@@ -162,26 +327,33 @@ header {
   display: flex;
   align-items: center;
   gap: 11px;
+
   font-weight: 900;
   font-size: 1.25rem;
-  letter-spacing: 1px;
 }
 
 .brand-mark {
   width: 42px;
   height: 42px;
+
   border-radius: 14px;
+
   display: grid;
   place-items: center;
+
   color: #1c2040;
-  background: linear-gradient(135deg, var(--gold), #fff0b9);
-  font-weight: 900;
-  box-shadow: 0 5px 24px #ffd47735;
+
+  background: linear-gradient(
+    135deg,
+    var(--gold),
+    #fff0b9
+  );
 }
 
 .links {
   display: flex;
   gap: 24px;
+
   color: #e1e2f2;
   font-size: .92rem;
 }
@@ -192,32 +364,45 @@ header {
 
 .menu {
   display: none;
+
   background: #ffffff12;
   color: white;
+
   border: 1px solid var(--line);
+
   padding: 8px 12px;
   border-radius: 10px;
 }
 
-/* HERO */
+
+/* =========================
+   HERO
+========================= */
 
 .hero {
   min-height: 590px;
+
   display: grid;
   grid-template-columns: 1.1fr .9fr;
+
   align-items: center;
   gap: 40px;
+
   padding: 75px 0 65px;
 }
 
 .eyebrow {
   display: inline-flex;
-  gap: 9px;
   align-items: center;
+  gap: 9px;
+
   border: 1px solid #ffd47755;
   background: #ffd47712;
+
   color: #ffe1a0;
+
   border-radius: 30px;
+
   padding: 8px 15px;
   font-size: .85rem;
 }
@@ -225,29 +410,40 @@ header {
 .dot {
   width: 8px;
   height: 8px;
+
   border-radius: 50%;
+
   background: #71e6b3;
   box-shadow: 0 0 12px #71e6b3;
 }
 
 h1 {
   font-size: clamp(2.7rem, 6vw, 5.4rem);
+
   line-height: 1.12;
   margin: 22px 0 16px;
+
   font-weight: 900;
-  letter-spacing: -2px;
 }
 
 h1 span {
-  background: linear-gradient(90deg, #fff0b7, var(--gold), #9cf3eb);
+  background: linear-gradient(
+    90deg,
+    #fff0b7,
+    var(--gold),
+    #9cf3eb
+  );
+
   background-clip: text;
   color: transparent;
 }
 
 .lead {
   color: var(--muted);
+
   font-size: 1.08rem;
   line-height: 2;
+
   max-width: 590px;
 }
 
@@ -255,14 +451,18 @@ h1 span {
   display: flex;
   flex-wrap: wrap;
   gap: 13px;
+
   margin-top: 28px;
 }
 
 .btn {
   border: 0;
   border-radius: 13px;
+
   padding: 13px 22px;
+
   font-weight: 800;
+
   transition: .2s;
 }
 
@@ -271,8 +471,14 @@ h1 span {
 }
 
 .primary {
-  background: linear-gradient(110deg, var(--gold), #fff0bd);
+  background: linear-gradient(
+    110deg,
+    var(--gold),
+    #fff0bd
+  );
+
   color: #28213a;
+
   box-shadow: 0 10px 28px #ffd47730;
 }
 
@@ -282,11 +488,16 @@ h1 span {
   color: white;
 }
 
-/* HERO VISUAL */
+
+/* =========================
+   HERO VISUAL
+========================= */
 
 .visual {
   position: relative;
+
   min-height: 350px;
+
   display: grid;
   place-items: center;
 }
@@ -294,42 +505,69 @@ h1 span {
 .orb {
   width: min(340px, 75vw);
   aspect-ratio: 1;
+
   border-radius: 34% 66% 61% 39% / 40% 40% 60% 60%;
-  background: linear-gradient(145deg, #ffd477, #a99aff 48%, #72e5df);
+
+  background: linear-gradient(
+    145deg,
+    #ffd477,
+    #a99aff 48%,
+    #72e5df
+  );
+
   filter: drop-shadow(0 25px 55px #8e83ff45);
+
   animation: float 7s ease-in-out infinite;
+
   display: grid;
   place-items: center;
-  transform: rotate(-8deg);
 }
 
 .orb-inner {
   width: 78%;
   height: 78%;
+
   border-radius: inherit;
-  background: linear-gradient(145deg, #252650, #172c49);
+
+  background: linear-gradient(
+    145deg,
+    #252650,
+    #172c49
+  );
+
   display: grid;
   place-items: center;
+
   border: 1px solid #ffffff55;
-  transform: rotate(8deg);
 }
 
 .orb-logo {
   font-size: 7rem;
   font-weight: 900;
+
   letter-spacing: -12px;
-  background: linear-gradient(130deg, #fff2bd, var(--gold), #83e9e2);
+
+  background: linear-gradient(
+    130deg,
+    #fff2bd,
+    var(--gold),
+    #83e9e2
+  );
+
   background-clip: text;
   color: transparent;
 }
 
 .float-card {
   position: absolute;
+
   background: #1b2147d9;
   border: 1px solid #ffffff30;
-  backdrop-filter: blur(12px);
+
   padding: 13px 17px;
+
   border-radius: 15px;
+
   box-shadow: 0 15px 40px #0003;
 }
 
@@ -345,11 +583,14 @@ h1 span {
 
 @keyframes float {
   50% {
-    transform: translateY(-13px) rotate(-3deg);
+    transform: translateY(-13px);
   }
 }
 
-/* SECTIONS */
+
+/* =========================
+   SECTIONS
+========================= */
 
 section {
   padding: 76px 0;
@@ -357,6 +598,7 @@ section {
 
 .section-head {
   text-align: center;
+
   margin: 0 auto 36px;
   max-width: 680px;
 }
@@ -365,7 +607,6 @@ section {
   color: var(--gold);
   font-weight: 800;
   font-size: .85rem;
-  letter-spacing: 1px;
 }
 
 .section-head h2 {
@@ -376,7 +617,6 @@ section {
 .section-head p {
   color: var(--muted);
   line-height: 1.9;
-  margin: 0;
 }
 
 .grid {
@@ -387,41 +627,53 @@ section {
 
 .card {
   padding: 24px;
+
   border: 1px solid var(--line);
   border-radius: 20px;
-  background: linear-gradient(145deg, #ffffff15, #ffffff08);
-  box-shadow: 0 15px 40px #080c2420;
+
+  background: linear-gradient(
+    145deg,
+    #ffffff15,
+    #ffffff08
+  );
+
   transition: .25s;
 }
 
 .card:hover {
   transform: translateY(-5px);
   border-color: #ffd47775;
-  background: #ffffff1b;
 }
 
 .icon {
   width: 48px;
   height: 48px;
+
   border-radius: 15px;
+
   display: grid;
   place-items: center;
+
   font-size: 1.5rem;
-  background: linear-gradient(135deg, #ffd47735, #72e5df25);
+
+  background: #ffd47725;
+
   margin-bottom: 16px;
 }
 
 .card h3 {
-  margin: 0 0 8px;
+  margin-bottom: 8px;
 }
 
 .card p {
   color: var(--muted);
   line-height: 1.85;
-  margin: 0;
 }
 
-/* JOBS */
+
+/* =========================
+   JOBS
+========================= */
 
 .jobs {
   grid-template-columns: repeat(4, 1fr);
@@ -436,7 +688,10 @@ section {
   margin: 0 auto 12px;
 }
 
-/* COMMANDS */
+
+/* =========================
+   COMMANDS
+========================= */
 
 .command-list {
   display: grid;
@@ -448,9 +703,13 @@ section {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   gap: 15px;
+
   padding: 15px 18px;
+
   border-radius: 14px;
+
   background: #ffffff10;
   border: 1px solid var(--line);
 }
@@ -458,51 +717,79 @@ section {
 code {
   direction: ltr;
   unicode-bidi: plaintext;
+
   color: #ffe2a0;
   background: #080d2580;
+
   padding: 6px 10px;
   border-radius: 8px;
-  font-size: .9rem;
 }
 
-/* CONNECT */
+
+/* =========================
+   CONNECT
+========================= */
 
 .connect {
-  background: linear-gradient(120deg, #ffd47720, #a99aff20, #72e5df20);
+  background: linear-gradient(
+    120deg,
+    #ffd47720,
+    #a99aff20,
+    #72e5df20
+  );
+
   border: 1px solid #ffffff25;
+
   border-radius: 28px;
+
   padding: 36px;
   text-align: center;
 }
 
 .server-ip {
   direction: ltr;
+
   display: inline-block;
+
   margin: 16px 0;
   padding: 13px 18px;
+
   border-radius: 12px;
+
   background: #10152d;
+
   border: 1px solid #ffd47765;
   color: #ffe3a3;
+
   font-weight: 800;
+
   overflow-wrap: anywhere;
 }
 
+
+/* =========================
+   FOOTER
+========================= */
+
 footer {
   padding: 30px 0;
+
   border-top: 1px solid var(--line);
+
   color: #bfc4dc;
   text-align: center;
-  font-size: .9rem;
 }
 
-/* MOBILE */
+
+/* =========================
+   RESPONSIVE
+========================= */
 
 @media(max-width:800px) {
+
   .hero {
     grid-template-columns: 1fr;
     text-align: center;
-    padding-top: 55px;
   }
 
   .lead {
@@ -527,15 +814,18 @@ footer {
 
   .links {
     display: none;
+
     position: absolute;
+
     top: 76px;
     right: 0;
     left: 0;
+
     padding: 20px;
+
     background: #141936;
+
     flex-direction: column;
-    gap: 15px;
-    border-bottom: 1px solid var(--line);
   }
 
   .links.open {
@@ -548,6 +838,7 @@ footer {
 }
 
 @media(max-width:520px) {
+
   section {
     padding: 58px 0;
   }
@@ -555,10 +846,6 @@ footer {
   .grid,
   .command-list {
     grid-template-columns: 1fr;
-  }
-
-  .hero {
-    min-height: auto;
   }
 
   .orb {
@@ -578,16 +865,11 @@ footer {
     flex-direction: column;
   }
 
-  .nav {
-    height: 68px;
-  }
-
-  .links {
-    top: 68px;
+  .skip-intro {
+    left: 15px;
+    bottom: 15px;
   }
 }
-
-/* REDUCE MOTION */
 
 @media(prefers-reduced-motion:reduce) {
   *,
@@ -595,53 +877,95 @@ footer {
   *:after {
     animation-duration: .01ms !important;
     animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
     transition-duration: .01ms !important;
   }
 }
+
 </style>
 </head>
 
 <body>
 
-<!-- INTRO -->
+<!-- =========================
+     INTRO
+========================= -->
+
 <div class="intro" id="intro">
-  <div class="intro-box">
-    <div class="intro-logo">OS</div>
-    <div class="intro-title">OS CRAFT</div>
-    <div class="intro-sub">SMP • ROLEPLAY • 26.2</div>
-    <div class="loader"></div>
+
+  <div class="intro-city"></div>
+  <div class="intro-light"></div>
+
+  <div class="intro-content">
+
+    <div class="intro-small">
+      WELCOME TO
+    </div>
+
+    <div class="intro-logo">
+      OS
+    </div>
+
+    <div class="intro-name">
+      OS CRAFT
+    </div>
+
+    <div class="intro-subtitle">
+      SMP + ROLEPLAY
+    </div>
+
+    <div class="intro-loader">
+      <span></span>
+    </div>
+
   </div>
+
+  <button class="skip-intro" id="skipIntro">
+    رد کردن ←
+  </button>
+
 </div>
 
-<!-- HEADER -->
+
+<!-- =========================
+     HEADER
+========================= -->
+
 <header>
-  <div class="wrap nav">
 
-    <a class="brand" href="#home">
-      <span class="brand-mark">OS</span>
-      <span>OS CRAFT</span>
-    </a>
+<div class="wrap nav">
 
-    <nav class="links" id="navLinks">
-      <a href="#about">معرفی</a>
-      <a href="#features">امکانات</a>
-      <a href="#jobs">شغل‌ها</a>
-      <a href="#commands">دستورات</a>
-      <a href="#connect">ورود به سرور</a>
-    </nav>
+  <a class="brand" href="#home">
+    <span class="brand-mark">OS</span>
+    <span>OS CRAFT</span>
+  </a>
 
-    <button class="menu" id="menuBtn">☰</button>
+  <nav class="links" id="navLinks">
+    <a href="#about">معرفی</a>
+    <a href="#features">امکانات</a>
+    <a href="#jobs">شغل‌ها</a>
+    <a href="#commands">دستورات</a>
+    <a href="#connect">ورود به سرور</a>
+  </nav>
 
-  </div>
+  <button class="menu" id="menuBtn">
+    ☰
+  </button>
+
+</div>
+
 </header>
+
 
 <main>
 
-<!-- HERO -->
+<!-- =========================
+     HERO
+========================= -->
+
 <section class="wrap hero" id="home">
 
   <div>
+
     <div class="eyebrow">
       <span class="dot"></span>
       سرور فعال OS CRAFT • نسخه 26.2
@@ -653,75 +977,118 @@ footer {
     </h1>
 
     <p class="lead">
-      ترکیبی از بقا، اقتصاد و زندگی شهری در یک تجربه SMP + Roleplay.
-      شغل انتخاب کن، پیشرفت کن و در شهر جایگاه خودت را بساز.
+      ترکیبی از بقا، اقتصاد و زندگی شهری
+      در یک تجربه SMP + Roleplay.
+      شغل انتخاب کن، پیشرفت کن و در شهر
+      جایگاه خودت را بساز.
     </p>
 
     <div class="actions">
-      <a class="btn primary" href="#connect">ورود به سرور</a>
-      <a class="btn secondary" href="#features">آشنایی با امکانات</a>
+      <a class="btn primary" href="#connect">
+        ورود به سرور
+      </a>
+
+      <a class="btn secondary" href="#features">
+        آشنایی با امکانات
+      </a>
     </div>
+
   </div>
 
+
   <div class="visual">
+
     <div class="orb">
       <div class="orb-inner">
         <div class="orb-logo">OS</div>
       </div>
     </div>
 
-    <div class="float-card one">✨ اقتصاد و خریدوفروش</div>
-    <div class="float-card two">🏙️ تجربه زندگی شهری</div>
+    <div class="float-card one">
+      ✨ اقتصاد و خریدوفروش
+    </div>
+
+    <div class="float-card two">
+      🏙️ تجربه زندگی شهری
+    </div>
+
   </div>
 
 </section>
 
-<!-- ABOUT -->
+
+<!-- =========================
+     ABOUT
+========================= -->
+
 <section id="about">
+
 <div class="wrap">
 
   <div class="section-head">
     <div class="kicker">ABOUT OS CRAFT</div>
+
     <h2>OS CRAFT چیست؟</h2>
+
     <p>
       یک سرور ماینکرفت با فضای شهری و نقش‌آفرینی؛
-      جایی برای ساختن، همکاری، تجارت و تجربه یک زندگی متفاوت.
+      جایی برای ساختن، همکاری، تجارت و تجربه
+      یک زندگی متفاوت.
     </p>
   </div>
+
 
   <div class="grid">
 
     <article class="card">
       <div class="icon">🏙️</div>
       <h3>شهر زنده</h3>
-      <p>در یک شهر مشترک زندگی کن، خانه داشته باش و با بازیکنان دیگر تعامل داشته باش.</p>
+      <p>
+        در یک شهر مشترک زندگی کن،
+        خانه داشته باش و با بازیکنان دیگر تعامل داشته باش.
+      </p>
     </article>
 
     <article class="card">
       <div class="icon">💎</div>
       <h3>اقتصاد سرور</h3>
-      <p>با فعالیت و انجام کارها درآمد کسب کن و از فروشگاه‌ها خرید کن.</p>
+      <p>
+        با فعالیت و انجام کارها درآمد کسب کن
+        و از فروشگاه‌ها خرید کن.
+      </p>
     </article>
 
     <article class="card">
       <div class="icon">🤝</div>
       <h3>نقش‌آفرینی</h3>
-      <p>نقش خودت را انتخاب کن و در شکل‌گیری اتفاقات شهر سهم داشته باش.</p>
+      <p>
+        نقش خودت را انتخاب کن و در اتفاقات شهر سهم داشته باش.
+      </p>
     </article>
 
   </div>
+
 </div>
+
 </section>
 
-<!-- FEATURES -->
+
+<!-- =========================
+     FEATURES
+========================= -->
+
 <section id="features">
+
 <div class="wrap">
 
   <div class="section-head">
     <div class="kicker">SERVER FEATURES</div>
     <h2>امکانات سرور</h2>
-    <p>ابزارها و سیستم‌هایی برای یک تجربه کامل‌تر از بازی گروهی.</p>
+    <p>
+      ابزارها و سیستم‌هایی برای یک تجربه کامل‌تر از بازی گروهی.
+    </p>
   </div>
+
 
   <div class="grid">
 
@@ -740,19 +1107,19 @@ footer {
     <article class="card">
       <div class="icon">📱</div>
       <h3>موبایل درون‌بازی</h3>
-      <p>دسترسی به امکاناتی مانند ارتباطات و خدمات شهری.</p>
+      <p>دسترسی به امکانات ارتباطات و خدمات شهری.</p>
     </article>
 
     <article class="card">
       <div class="icon">⛏️</div>
-      <h3>فعالیت و کسب درآمد</h3>
-      <p>با کار و فعالیت در سرور منابع و درآمد به دست بیاور.</p>
+      <h3>کسب درآمد</h3>
+      <p>با کار و فعالیت در سرور درآمد به دست بیاور.</p>
     </article>
 
     <article class="card">
       <div class="icon">🏦</div>
       <h3>بانک</h3>
-      <p>از سیستم اقتصادی برای مدیریت دارایی‌های خود استفاده کن.</p>
+      <p>دارایی‌های خود را در سیستم اقتصادی مدیریت کن.</p>
     </article>
 
     <article class="card">
@@ -762,18 +1129,28 @@ footer {
     </article>
 
   </div>
+
 </div>
+
 </section>
 
-<!-- JOBS -->
+
+<!-- =========================
+     JOBS
+========================= -->
+
 <section id="jobs">
+
 <div class="wrap">
 
   <div class="section-head">
     <div class="kicker">CHOOSE YOUR PATH</div>
     <h2>شغل‌های قابل انتخاب</h2>
-    <p>با انتخاب شغل، مسیر پیشرفت خودت را در شهر شروع کن.</p>
+    <p>
+      با انتخاب شغل، مسیر پیشرفت خودت را در شهر شروع کن.
+    </p>
   </div>
+
 
   <div class="grid jobs">
 
@@ -818,18 +1195,29 @@ footer {
     </article>
 
   </div>
+
 </div>
+
 </section>
 
-<!-- COMMANDS -->
+
+<!-- =========================
+     COMMANDS
+========================= -->
+
 <section id="commands">
+
 <div class="wrap">
 
   <div class="section-head">
     <div class="kicker">QUICK GUIDE</div>
     <h2>دستورات کاربردی</h2>
-    <p>برای استفاده از امکانات مختلف سرور، این دستورات را به خاطر بسپار.</p>
+    <p>
+      برای استفاده از امکانات مختلف سرور،
+      این دستورات را به خاطر بسپار.
+    </p>
   </div>
+
 
   <div class="command-list">
 
@@ -865,23 +1253,26 @@ footer {
 
   </div>
 
-  <p style="text-align:center;color:var(--muted);margin-top:18px;font-size:.88rem">
-    ممکن است برخی دستورات با توجه به نقش و دسترسی بازیکن محدود باشند.
-  </p>
-
 </div>
+
 </section>
 
-<!-- CONNECT -->
+
+<!-- =========================
+     CONNECT
+========================= -->
+
 <section id="connect">
+
 <div class="wrap">
 
   <div class="connect">
 
     <div class="kicker">JOIN THE SERVER</div>
+
     <h2>آماده‌ای وارد شهر شوی؟</h2>
 
-    <p style="color:var(--muted)">
+    <p style="color:var(--muted); margin-top:12px">
       آدرس سرور را کپی کن و در بخش Multiplayer ماینکرفت وارد کن.
     </p>
 
@@ -895,18 +1286,25 @@ footer {
       کپی آدرس سرور
     </button>
 
-    <p id="copyStatus" aria-live="polite"
-       style="min-height:24px;color:var(--cyan);margin-bottom:0"></p>
+    <p id="copyStatus"
+       aria-live="polite"
+       style="min-height:24px;color:var(--cyan);margin-top:10px">
+    </p>
 
-    <p style="color:var(--muted);margin:8px 0 0">
+    <p style="color:var(--muted);margin-top:8px">
       نسخه سرور: 26.2
     </p>
 
   </div>
+
 </div>
+
 </section>
 
 </main>
+
+
+<!-- FOOTER -->
 
 <footer>
   <div class="wrap">
@@ -914,44 +1312,71 @@ footer {
   </div>
 </footer>
 
+
 <script>
-// INTRO
-const intro = document.getElementById('intro');
 
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    intro.classList.add('hide');
-  }, 1250);
-}, { once: true });
+/* =========================
+   INTRO CONTROL
+========================= */
 
-// MOBILE MENU
-const menuBtn = document.getElementById('menuBtn');
-const navLinks = document.getElementById('navLinks');
+const intro = document.getElementById("intro");
+const skipIntro = document.getElementById("skipIntro");
 
-menuBtn.addEventListener('click', () => {
-  navLinks.classList.toggle('open');
+function closeIntro() {
+  intro.classList.add("hide");
+}
+
+// نمایش اینترو برای مدت مشخص
+const introTimer = setTimeout(closeIntro, 5000);
+
+// دکمه رد کردن
+skipIntro.addEventListener("click", () => {
+  clearTimeout(introTimer);
+  closeIntro();
 });
 
-navLinks.querySelectorAll('a').forEach(a => {
-  a.addEventListener('click', () => {
-    navLinks.classList.remove('open');
+
+/* =========================
+   MOBILE MENU
+========================= */
+
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
+
+menuBtn.addEventListener("click", () => {
+  navLinks.classList.toggle("open");
+});
+
+navLinks.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("open");
   });
 });
 
-// COPY SERVER IP
-document.getElementById('copyBtn').addEventListener('click', async () => {
 
-  const ip = document.getElementById('serverIp').textContent.trim();
-  const status = document.getElementById('copyStatus');
+/* =========================
+   COPY SERVER IP
+========================= */
+
+document.getElementById("copyBtn").addEventListener("click", async () => {
+
+  const ip = document.getElementById("serverIp").textContent.trim();
+  const status = document.getElementById("copyStatus");
 
   try {
+
     await navigator.clipboard.writeText(ip);
-    status.textContent = 'آدرس سرور کپی شد!';
+
+    status.textContent = "آدرس سرور کپی شد!";
+
   } catch (error) {
-    status.textContent = 'کپی خودکار ممکن نیست؛ آدرس را دستی انتخاب کن.';
+
+    status.textContent = "کپی خودکار ممکن نیست؛ آدرس را دستی انتخاب کن.";
+
   }
 
 });
+
 </script>
 
 </body>
