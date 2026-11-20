@@ -1,14 +1,7 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  // انیمیشن شروع سایت
-  const intro = document.getElementById("intro");
-
-  window.setTimeout(() => {
-    intro?.classList.add("done");
-  }, 2800);
-
-  // منوی موبایل
+  // Mobile menu
   const menuToggle = document.getElementById("menuToggle");
   const nav = document.getElementById("nav");
 
@@ -22,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // کپی کردن IP سرور
+  // Copy server IP
   const copyButton = document.getElementById("copyIp");
   const ip = document.getElementById("serverIp");
   const status = document.getElementById("copyStatus");
