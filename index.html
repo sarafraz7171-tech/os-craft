@@ -1,46 +1,746 @@
 
-<!-- OS CRAFT APARAT VIDEO -->
-<section class="section" id="videos">
-  <div class="section-head">
-    <div class="small">OS CRAFT MEDIA</div>
-    <h2>ویدیوهای OS CRAFT</h2>
-    <p>گزارش‌ها، معرفی امکانات و ویدیوهای رسمی سرور</p>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080808">
+<title>OS CRAFT | SMP + ROLEPLAY</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --red:#e32636;
+  --red2:#ff4557;
+  --bg:#080808;
+  --panel:#111;
+  --text:#fff;
+  --muted:#999;
+}
+* {box-sizing:border-box;margin:0;padding:0}
+html {scroll-behavior:smooth}
+body {
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Vazirmatn',sans-serif;
+  overflow-x:hidden;
+}
+a {text-decoration:none;color:inherit}
+button {font-family:inherit;cursor:pointer}
+
+/* BACKGROUND */
+.background-glow {
+  position:fixed;
+  width:500px;height:500px;
+  border-radius:50%;
+  background:rgba(227,38,54,.09);
+  filter:blur(100px);
+  pointer-events:none;
+  z-index:-1;
+  top:15%;right:-250px;
+}
+.background-glow.two {
+  top:65%;right:auto;left:-300px;
+  background:rgba(140,20,35,.08);
+}
+
+/* NAVBAR */
+header {
+  height:78px;
+  padding:0 8%;
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:100;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:rgba(8,8,8,.78);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,.07);
+  transition:.3s;
+}
+header.scrolled {
+  height:66px;
+  background:rgba(5,5,5,.96);
+}
+.logo {
+  font-size:28px;
+  font-weight:900;
+  letter-spacing:2px;
+}
+.logo span {color:var(--red)}
+.nav-links {
+  display:flex;gap:28px;align-items:center;
+}
+.nav-links a {
+  font-size:13px;color:#bbb;
+  transition:.3s;position:relative;
+}
+.nav-links a:after {
+  content:"";position:absolute;
+  bottom:-8px;right:0;width:0;height:2px;
+  background:var(--red);transition:.3s;
+}
+.nav-links a:hover {color:white}
+.nav-links a:hover:after {width:100%}
+.nav-btn {
+  background:var(--red);
+  border:1px solid var(--red);
+  color:white;border-radius:8px;
+  padding:10px 17px;font-weight:700;
+  transition:.3s;
+}
+.nav-btn:hover {
+  background:transparent;
+  box-shadow:0 0 20px rgba(227,38,54,.3);
+}
+.menu-btn {
+  display:none;background:none;border:0;
+  color:white;font-size:25px;
+}
+
+/* HERO */
+.hero {
+  min-height:100vh;
+  position:relative;
+  display:flex;align-items:center;
+  padding:130px 10% 90px;
+  overflow:hidden;
+  background:
+    linear-gradient(90deg,rgba(0,0,0,.96),rgba(0,0,0,.5)),
+    url('https://images.unsplash.com/photo-1607513746994-51f730a44832?auto=format&fit=crop&w=1900&q=85') center/cover;
+}
+.hero:before {
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(0deg,var(--bg),transparent 35%,transparent 75%,var(--bg));
+}
+.hero-content {position:relative;z-index:2;max-width:720px}
+.hero-label {
+  display:inline-flex;align-items:center;gap:10px;
+  color:#ff7783;font-size:12px;font-weight:800;
+  letter-spacing:3px;
+  border:1px solid rgba(227,38,54,.4);
+  padding:9px 15px;border-radius:30px;
+  background:rgba(227,38,54,.08);
+}
+.pulse-dot {
+  width:7px;height:7px;border-radius:50%;
+  background:var(--red);
+  box-shadow:0 0 12px var(--red);
+  animation:pulse 1.5s infinite;
+}
+@keyframes pulse {
+  50% {opacity:.3;transform:scale(.7)}
+}
+.hero h1 {
+  font-size:clamp(55px,9vw,110px);
+  line-height:1.15;
+  margin:28px 0 18px;
+  font-weight:900;
+  letter-spacing:-3px;
+}
+.hero h1 span {
+  color:var(--red);
+  text-shadow:0 0 45px rgba(227,38,54,.3);
+}
+.hero-description {
+  color:#c2c2c2;
+  font-size:15px;line-height:2.4;
+  max-width:580px;
+}
+.hero-actions {
+  display:flex;gap:13px;
+  flex-wrap:wrap;margin-top:32px;
+}
+.btn-main,.btn-outline {
+  padding:14px 25px;border-radius:9px;
+  font-size:13px;font-weight:800;
+  transition:.3s;
+}
+.btn-main {
+  background:var(--red);color:white;
+  border:1px solid var(--red);
+  box-shadow:0 8px 30px rgba(227,38,54,.2);
+}
+.btn-main:hover {
+  transform:translateY(-4px);
+  box-shadow:0 12px 35px rgba(227,38,54,.4);
+}
+.btn-outline {
+  border:1px solid #555;color:white;
+  background:rgba(0,0,0,.3);
+}
+.btn-outline:hover {
+  border-color:var(--red);
+  background:rgba(227,38,54,.1);
+}
+.hero-bottom {
+  position:absolute;bottom:35px;left:10%;
+  color:#777;font-size:11px;
+  letter-spacing:3px;
+}
+.scroll-line {
+  width:1px;height:50px;
+  background:linear-gradient(var(--red),transparent);
+  display:inline-block;vertical-align:middle;
+  margin-right:12px;
+}
+
+/* COMMON */
+.section {
+  padding:110px 9%;
+  position:relative;
+}
+.section-title {text-align:center;margin-bottom:55px}
+.section-title .overline {
+  color:var(--red);font-size:11px;
+  font-weight:900;letter-spacing:3px;
+}
+.section-title h2 {
+  font-size:clamp(28px,4vw,43px);
+  margin:13px 0;
+}
+.section-title p {
+  color:var(--muted);font-size:13px;
+}
+.red-line {
+  height:3px;width:55px;
+  background:var(--red);
+  margin:17px auto 0;
+  border-radius:5px;
+  box-shadow:0 0 15px var(--red);
+}
+
+/* INTRO */
+.intro-grid {
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:55px;align-items:center;
+}
+.intro-image {
+  height:400px;border-radius:17px;
+  overflow:hidden;position:relative;
+  border:1px solid #333;
+}
+.intro-image img {
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .8s;
+}
+.intro-image:hover img {transform:scale(1.06)}
+.intro-image:after {
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(0deg,rgba(0,0,0,.6),transparent);
+}
+.intro-text .overline {color:var(--red);font-size:12px;font-weight:800}
+.intro-text h2 {font-size:35px;margin:15px 0}
+.intro-text p {color:#aaa;font-size:13px;line-height:2.5}
+.intro-stats {
+  display:flex;gap:35px;margin-top:30px;flex-wrap:wrap;
+}
+.stat strong {
+  display:block;font-size:27px;color:white;
+}
+.stat span {font-size:11px;color:#888}
+
+/* FEATURES */
+.features {
+  background:linear-gradient(180deg,#0c0c0c,#080808);
+}
+.feature-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:17px;
+}
+.feature-card {
+  padding:30px;
+  min-height:205px;
+  background:linear-gradient(140deg,#171717,#0e0e0e);
+  border:1px solid #262626;
+  border-radius:14px;
+  position:relative;overflow:hidden;
+  transition:transform .35s,border-color .35s;
+}
+.feature-card:before {
+  content:"";position:absolute;
+  width:120px;height:120px;
+  background:rgba(227,38,54,.12);
+  filter:blur(50px);
+  top:-70px;right:-60px;
+  transition:.4s;
+}
+.feature-card:hover {
+  transform:translateY(-7px);
+  border-color:rgba(227,38,54,.65);
+}
+.feature-card:hover:before {
+  background:rgba(227,38,54,.3);
+}
+.feature-icon {
+  width:48px;height:48px;
+  border-radius:12px;
+  background:rgba(227,38,54,.12);
+  border:1px solid rgba(227,38,54,.3);
+  display:grid;place-items:center;
+  font-size:22px;margin-bottom:22px;
+}
+.feature-card h3 {font-size:17px;margin-bottom:10px}
+.feature-card p {font-size:12px;color:#999;line-height:2.2}
+
+/* GALLERY */
+.gallery {
+  display:grid;grid-template-columns:1.3fr 1fr 1fr;
+  grid-template-rows:220px 220px;gap:14px;
+}
+.gallery-item {
+  border-radius:13px;overflow:hidden;
+  position:relative;background:#171717;
+}
+.gallery-item:first-child {grid-row:span 2}
+.gallery-item img {
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .6s,filter .5s;
+}
+.gallery-item:hover img {
+  transform:scale(1.08);
+  filter:brightness(.7);
+}
+.gallery-item:after {
+  content:"";position:absolute;inset:40% 0 0;
+  background:linear-gradient(transparent,rgba(0,0,0,.65));
+}
+
+/* SERVER */
+.server-section {
+  background:
+    linear-gradient(100deg,rgba(0,0,0,.95),rgba(25,5,9,.9)),
+    url('https://images.unsplash.com/photo-1607513746994-51f730a44832?auto=format&fit=crop&w=1500&q=80') center/cover;
+}
+.server-card {
+  max-width:900px;margin:auto;
+  padding:45px;
+  background:rgba(15,15,15,.85);
+  border:1px solid rgba(227,38,54,.35);
+  border-radius:18px;
+  text-align:center;
+  box-shadow:0 20px 80px rgba(0,0,0,.3);
+}
+.server-card h2 {font-size:30px;margin:12px 0}
+.server-card p {font-size:13px;color:#aaa}
+.server-version {
+  display:inline-block;
+  color:#ff7b85;
+  font-size:12px;margin:8px 0 25px;
+}
+.server-ip {
+  direction:ltr;
+  background:#080808;border:1px solid #333;
+  border-radius:9px;padding:17px;
+  color:#eee;font-size:14px;
+  word-break:break-all;margin-bottom:18px;
+}
+.copy-btn {
+  background:var(--red);color:white;
+  border:0;border-radius:8px;
+  padding:13px 28px;font-weight:800;
+  transition:.3s;
+}
+.copy-btn:hover {box-shadow:0 0 25px rgba(227,38,54,.4);transform:translateY(-3px)}
+.copy-feedback {height:25px;color:#76d99a;font-size:12px;margin-top:12px}
+
+/* VIDEO */
+.video-container {
+  max-width:850px;margin:auto;
+  border:1px solid #333;border-radius:15px;
+  padding:9px;background:#141414;
+  box-shadow:0 20px 70px #000;
+}
+.video-container iframe {
+  display:block;width:100%;aspect-ratio:16/9;
+  border:0;border-radius:9px;
+}
+.video-link {text-align:center;margin-top:25px}
+
+/* FOOTER */
+footer {
+  background:#050505;
+  border-top:1px solid #242424;
+  padding:55px 9% 25px;
+}
+.footer-top {
+  display:flex;justify-content:space-between;
+  gap:30px;flex-wrap:wrap;
+}
+.footer-brand h2 {font-size:28px}
+.footer-brand h2 span {color:var(--red)}
+.footer-brand p {font-size:12px;color:#888;margin-top:10px}
+.footer-links h4 {margin-bottom:15px;font-size:14px}
+.footer-links a {display:block;color:#888;font-size:12px;margin:9px 0;transition:.2s}
+.footer-links a:hover {color:var(--red)}
+.footer-bottom {
+  border-top:1px solid #222;
+  margin-top:35px;padding-top:20px;
+  text-align:center;color:#666;font-size:11px;
+}
+
+/* REVEAL */
+.reveal {
+  opacity:0;transform:translateY(35px);
+  transition:opacity .7s ease,transform .7s ease;
+}
+.reveal.visible {opacity:1;transform:translateY(0)}
+
+/* PARTICLES */
+.particles {
+  position:absolute;inset:0;pointer-events:none;overflow:hidden;
+}
+.particle {
+  position:absolute;width:3px;height:3px;
+  border-radius:50%;background:#ff5967;
+  opacity:0;animation:floatUp linear infinite;
+}
+@keyframes floatUp {
+  0% {transform:translateY(30px);opacity:0}
+  20% {opacity:.7}
+  80% {opacity:.3}
+  100% {transform:translateY(-300px);opacity:0}
+}
+
+/* MOBILE */
+@media(max-width:900px) {
+  header {padding:0 5%}
+  .nav-links {gap:15px}
+  .nav-links a {font-size:11px}
+  .intro-grid {gap:30px}
+  .feature-grid {grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:650px) {
+  header {height:68px}
+  .logo {font-size:23px}
+  .menu-btn {display:block}
+  .nav-links {
+    display:none;position:absolute;top:68px;
+    right:0;left:0;background:#0b0b0b;
+    flex-direction:column;padding:25px;
+    border-bottom:1px solid #333;
+  }
+  .nav-links.open {display:flex}
+  .nav-links a {font-size:14px}
+  .nav-btn {font-size:11px;padding:9px 11px}
+  .hero {padding:130px 7% 100px;min-height:90vh}
+  .hero h1 {letter-spacing:-2px}
+  .hero-description {font-size:13px}
+  .hero-bottom {left:7%;font-size:9px}
+  .section {padding:75px 6%}
+  .intro-grid {grid-template-columns:1fr}
+  .intro-image {height:270px;order:2}
+  .intro-text h2 {font-size:28px}
+  .feature-grid {grid-template-columns:1fr}
+  .gallery {
+    grid-template-columns:1fr 1fr;
+    grid-template-rows:180px 150px 150px;
+  }
+  .gallery-item:first-child {grid-row:span 2}
+  .server-card {padding:27px 17px}
+  .server-card h2 {font-size:24px}
+  .server-ip {font-size:11px}
+  .footer-top {flex-direction:column}
+}
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after {
+    animation-duration:.01ms!important;
+    transition-duration:.01ms!important;
+    scroll-behavior:auto!important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background-glow"></div>
+<div class="background-glow two"></div>
+
+<header id="header">
+  <a href="#home" class="logo">OS <span>CRAFT</span></a>
+
+  <nav class="nav-links" id="navLinks">
+    <a href="#home">صفحه اصلی</a>
+    <a href="#about">درباره ما</a>
+    <a href="#features">امکانات</a>
+    <a href="#gallery">تصاویر</a>
+    <a href="#videos">ویدیوها</a>
+    <a href="#server">اتصال به سرور</a>
+  </nav>
+
+  <div style="display:flex;gap:12px;align-items:center">
+    <a href="#server" class="nav-btn">ورود به سرور</a>
+    <button class="menu-btn" id="menuBtn" aria-label="باز کردن منو">☰</button>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <div class="particles" id="particles"></div>
+  <div class="hero-content reveal">
+    <div class="hero-label">
+      <span class="pulse-dot"></span>
+      MINECRAFT SMP + ROLEPLAY
+    </div>
+
+    <h1>OS <span>CRAFT</span></h1>
+
+    <p class="hero-description">
+      دنیایی با امکانات متنوع، سیستم اقتصادی، مشاغل،
+      خانه‌ها و تجربه‌ای متفاوت از Minecraft SMP + RolePlay.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#server" class="btn-main">اطلاعات اتصال به سرور</a>
+      <a href="#about" class="btn-outline">معرفی OS CRAFT</a>
+    </div>
   </div>
 
-  <div class="video-layout">
-
-    <div class="video-box">
-      <div class="aparat-responsive">
-        <iframe
-          src="https://www.aparat.com/video/video/embed/videohash/gac4d89/vt/frame"
-          title="ویدیوی OS CRAFT"
-          allowFullScreen
-          webkitallowfullscreen
-          mozallowfullscreen
-          loading="lazy">
-        </iframe>
-      </div>
-
-      <div class="video-info">
-        <h3>ویدیوی رسمی OS CRAFT</h3>
-        <p>مشاهده ویدیو از طریق پخش‌کننده آپارات</p>
-      </div>
-    </div>
-
-    <div class="video-side">
-      <h3>رسانه رسمی OS CRAFT</h3>
-      <p>
-        ویدیوهای معرفی، آموزش‌ها، گزارش فعالیت‌ها
-        و محتوای تصویری سرور از این بخش قابل مشاهده هستند.
-      </p>
-
-      <a class="btn btn-primary"
-         href="https://www.aparat.com/os_craft"
-         target="_blank"
-         rel="noopener">
-        مشاهده کانال آپارات
-      </a>
-    </div>
-
+  <div class="hero-bottom">
+    <span class="scroll-line"></span>
+    EXPLORE THE WORLD
   </div>
 </section>
+
+<section class="section" id="about">
+  <div class="intro-grid">
+    <div class="intro-image reveal">
+      <img src="https://images.unsplash.com/photo-1607513746994-51f730a44832?auto=format&fit=crop&w=1000&q=85" alt="Minecraft world" loading="lazy">
+    </div>
+
+    <div class="intro-text reveal">
+      <div class="overline">ABOUT OS CRAFT</div>
+      <h2>درباره سرور</h2>
+      <p>
+        OS CRAFT یک سرور ماینکرفت با سبک SMP و RolePlay است.
+        در این سرور بازیکنان می‌توانند در شهر فعالیت کنند،
+        شغل انتخاب کنند، خانه داشته باشند و در سیستم اقتصادی
+        سرور مشارکت کنند.
+      </p>
+      <div class="intro-stats">
+        <div class="stat"><strong>26.2</strong><span>نسخه سرور</span></div>
+        <div class="stat"><strong>SMP</strong><span>سبک بازی</span></div>
+        <div class="stat"><strong>RP</strong><span>نقش‌آفرینی</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section features" id="features">
+  <div class="section-title reveal">
+    <div class="overline">SERVER FEATURES</div>
+    <h2>امکانات OS CRAFT</h2>
+    <p>بخش‌های مختلف سرور و سیستم‌های قابل استفاده</p>
+    <div class="red-line"></div>
+  </div>
+
+  <div class="feature-grid">
+    <div class="feature-card reveal">
+      <div class="feature-icon">🏦</div>
+      <h3>سیستم بانک</h3>
+      <p>مدیریت پول و دارایی‌های بازیکنان در اقتصاد سرور.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">💼</div>
+      <h3>سیستم مشاغل</h3>
+      <p>انتخاب شغل و فعالیت در بخش‌های مختلف شهر.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">🏠</div>
+      <h3>سیستم خانه</h3>
+      <p>خرید، مالکیت و مدیریت خانه‌های اختصاصی.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">🛒</div>
+      <h3>فروشگاه</h3>
+      <p>خرید آیتم‌ها و استفاده از امکانات فروشگاهی.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">🏙️</div>
+      <h3>زندگی شهری</h3>
+      <p>فعالیت در محیط شهری و تعامل با دیگر بازیکنان.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">🎮</div>
+      <h3>SMP + RolePlay</h3>
+      <p>ترکیبی از بقا، اقتصاد و نقش‌آفرینی در ماینکرفت.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="gallery">
+  <div class="section-title reveal">
+    <div class="overline">VISUAL EXPERIENCE</div>
+    <h2>گالری تصاویر</h2>
+    <p>نمایی از فضای ماینکرفت</p>
+    <div class="red-line"></div>
+  </div>
+
+  <div class="gallery">
+    <div class="gallery-item reveal">
+      <img src="https://images.unsplash.com/photo-1607513746994-51f730a44832?auto=format&fit=crop&w=1000&q=85" alt="Minecraft landscape" loading="lazy">
+    </div>
+    <div class="gallery-item reveal">
+      <img src="https://images.unsplash.com/photo-1627856013091-fed6e4e30025?auto=format&fit=crop&w=800&q=80" alt="Minecraft scene" loading="lazy">
+    </div>
+    <div class="gallery-item reveal">
+      <img src="https://images.unsplash.com/photo-1587573089734-09cb69c0f2c9?auto=format&fit=crop&w=800&q=80" alt="Gaming setup" loading="lazy">
+    </div>
+    <div class="gallery-item reveal">
+      <img src="https://images.unsplash.com/photo-1603481546238-487240415921?auto=format&fit=crop&w=800&q=80" alt="Gaming environment" loading="lazy">
+    </div>
+    <div class="gallery-item reveal">
+      <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?auto=format&fit=crop&w=800&q=80" alt="Gaming" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section class="section server-section" id="server">
+  <div class="server-card reveal">
+    <div class="overline">JOIN OS CRAFT</div>
+    <h2>اتصال به سرور</h2>
+    <p>نسخه 26.2 | Minecraft SMP + RolePlay</p>
+    <div class="server-version">JAVA EDITION</div>
+
+    <div class="server-ip" id="serverIP">
+      sarafraz7171-srv-os_craft_asli.play.mihancraft.com:25566
+    </div>
+
+    <button class="copy-btn" id="copyBtn">کپی آدرس سرور</button>
+    <div class="copy-feedback" id="copyFeedback"></div>
+  </div>
+</section>
+
+<section class="section" id="videos">
+  <div class="section-title reveal">
+    <div class="overline">OS CRAFT MEDIA</div>
+    <h2>ویدیوهای سرور</h2>
+    <p>اخبار و محتوای تصویری OS CRAFT</p>
+    <div class="red-line"></div>
+  </div>
+
+  <div class="video-container reveal">
+    <iframe
+      src="https://www.aparat.com/video/video/embed/videohash/gac4d89/vt/frame"
+      allowfullscreen
+      loading="lazy"
+      title="ویدیوی OS CRAFT">
+    </iframe>
+  </div>
+
+  <div class="video-link">
+    <a href="https://www.aparat.com/os_craft" target="_blank" rel="noopener" class="btn-outline">
+      مشاهده کانال آپارات
+    </a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <h2>OS <span>CRAFT</span></h2>
+      <p>Minecraft SMP + RolePlay</p>
+      <p>نسخه 26.2</p>
+    </div>
+
+    <div class="footer-links">
+      <h4>دسترسی سریع</h4>
+      <a href="#home">صفحه اصلی</a>
+      <a href="#about">درباره سرور</a>
+      <a href="#features">امکانات</a>
+      <a href="#server">اتصال به سرور</a>
+    </div>
+
+    <div class="footer-links">
+      <h4>شبکه‌های اجتماعی</h4>
+      <a href="https://www.aparat.com/os_craft" target="_blank" rel="noopener">آپارات OS CRAFT</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    © OS CRAFT — تمامی حقوق محفوظ است.
+  </div>
+</footer>
+
+<script>
+/* HEADER SCROLL */
+const header = document.getElementById("header");
+
+window.addEventListener("scroll", () => {
+  header.classList.toggle("scrolled", window.scrollY > 40);
+}, {passive:true});
+
+/* MOBILE MENU */
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
+
+menuBtn.addEventListener("click", () => {
+  navLinks.classList.toggle("open");
+  menuBtn.textContent = navLinks.classList.contains("open") ? "×" : "☰";
+});
+
+navLinks.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("open");
+    menuBtn.textContent = "☰";
+  });
+});
+
+/* SCROLL REVEAL */
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, {threshold:0.12});
+
+document.querySelectorAll(".reveal").forEach(element => {
+  revealObserver.observe(element);
+});
+
+/* PARTICLES - LIMITED COUNT FOR PERFORMANCE */
+const particleArea = document.getElementById("particles");
+
+for (let i = 0; i < 22; i++) {
+  const particle = document.createElement("span");
+  particle.className = "particle";
+  particle.style.left = Math.random() * 100 + "%";
+  particle.style.bottom = Math.random() * 100 + "%";
+  particle.style.animationDuration = (5 + Math.random() * 8) + "s";
+  particle.style.animationDelay = (Math.random() * 7) + "s";
+  particleArea.appendChild(particle);
+}
+
+/* COPY SERVER IP */
+const copyBtn = document.getElementById("copyBtn");
+const feedback = document.getElementById("copyFeedback");
+
+copyBtn.addEventListener("click", async () => {
+  const ip = document.getElementById("serverIP").textContent.trim();
+
+  try {
+    await navigator.clipboard.writeText(ip);
+    feedback.textContent = "آدرس سرور با موفقیت کپی شد.";
+    copyBtn.textContent = "کپی شد ✓";
+  } catch (error) {
+    feedback.textContent = "کپی خودکار انجام نشد؛ آدرس را دستی کپی کنید.";
+  }
+
+  setTimeout(() => {
+    feedback.textContent = "";
+    copyBtn.textContent = "کپی آدرس سرور";
+  }, 2500);
+});
+</script>
+
+</body>
+</html>
