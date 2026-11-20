@@ -1,39 +1,89 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  // Mobile menu
-  const menuToggle = document.getElementById("menuToggle");
-  const nav = document.getElementById("nav");
+  // SMART INTRO
+  const intro = document.getElementById("intro");
 
-  menuToggle?.addEventListener("click", () => {
-    nav?.classList.toggle("open");
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  const alreadySeen = sessionStorage.getItem("osCraftIntroSeen");
+
+  if (intro) {
+    if (alreadySeen || reduceMotion) {
+      intro.classList.add("hidden");
+    } else {
+      sessionStorage.setItem("osCraftIntroSeen", "yes");
+
+      window.setTimeout(() => {
+        intro.classList.add("hidden");
+      }, 3200);
+    }
+  }
+
+  // MOBILE MENU
+  const menuButton = document.getElementById("menuButton");
+  const navigation = document.getElementById("navigation");
+
+  menuButton?.addEventListener("click", () => {
+    navigation?.classList.toggle("open");
   });
 
-  nav?.querySelectorAll("a").forEach(link => {
+  navigation?.querySelectorAll("a").forEach(link => {
     link.addEventListener("click", () => {
-      nav.classList.remove("open");
+      navigation.classList.remove("open");
     });
   });
 
-  // Copy server IP
-  const copyButton = document.getElementById("copyIp");
-  const ip = document.getElementById("serverIp");
-  const status = document.getElementById("copyStatus");
+  // SCROLL REVEAL
+  const revealElements = document.querySelectorAll(".reveal");
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          obs.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12
+    });
+
+    revealElements.forEach(element => {
+      observer.observe(element);
+    });
+  } else {
+    revealElements.forEach(element => {
+      element.classList.add("visible");
+    });
+  }
+
+  // COPY SERVER IP
+  const copyButton = document.getElementById("copyButton");
+  const serverIP = document.getElementById("serverIP");
+  const copyMessage = document.getElementById("copyMessage");
 
   copyButton?.addEventListener("click", async () => {
-    const value = ip?.textContent?.trim();
+    const address = serverIP?.textContent.trim();
 
-    if (!value) return;
+    if (!address) return;
 
     try {
-      await navigator.clipboard.writeText(value);
+      await navigator.clipboard.writeText(address);
 
-      status.textContent = "آدرس سرور کپی شد!";
-      copyButton.textContent = "کپی شد ✓";
+      copyMessage.textContent = "آدرس سرور با موفقیت کپی شد!";
+      copyButton.textContent = "COPIED ✓";
 
-    } catch {
-      status.textContent =
-        "کپی خودکار در این مرورگر در دسترس نیست؛ آدرس را دستی انتخاب کن.";
+      setTimeout(() => {
+        copyButton.textContent = "COPY IP";
+        copyMessage.textContent = "";
+      }, 2500);
+
+    } catch (error) {
+      copyMessage.textContent =
+        "کپی خودکار ممکن نیست؛ آدرس را دستی انتخاب کن.";
     }
   });
 
