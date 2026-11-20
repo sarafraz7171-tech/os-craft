@@ -2,1210 +2,291 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#090909">
-<meta name="description" content="OS CRAFT - سرور ماینکرفت SMP + ROLEPLAY">
-<title>OS CRAFT | Official Website</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-<style>
-:root {
-  --red: #e32636;
-  --red-light: #ff4050;
-  --bg: #080808;
-  --panel: #111111;
-  --text: #f5f5f5;
-  --muted: #a1a1a1;
-  --border: rgba(255,255,255,.09);
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: 'Vazirmatn', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  overflow-x: hidden;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-button {
-  font-family: inherit;
-}
-
-/* BACKGROUND */
-
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: -1;
-  background:
-    radial-gradient(ellipse at 15% 15%, rgba(227,38,54,.12), transparent 40%),
-    radial-gradient(ellipse at 85% 65%, rgba(120,0,20,.10), transparent 40%);
-}
-
-.noise {
-  position: fixed;
-  inset: 0;
-  opacity: .035;
-  pointer-events: none;
-  z-index: 20;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.3'/%3E%3C/svg%3E");
-}
-
-/* INTRO */
-
-.intro {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background: #050505;
-  animation: introExit 1s ease 3.2s forwards;
-}
-
-.intro::before {
-  content: "";
-  position: absolute;
-  width: 350px;
-  height: 350px;
-  border-radius: 50%;
-  background: rgba(227,38,54,.18);
-  filter: blur(100px);
-}
-
-.intro-logo {
-  position: relative;
-  font-size: clamp(48px, 10vw, 100px);
-  font-weight: 900;
-  letter-spacing: 5px;
-  color: white;
-  text-shadow: 0 0 20px rgba(227,38,54,.7);
-  animation: logoAppear 1.2s ease both;
-}
-
-.intro-logo span {
-  color: var(--red);
-}
-
-.intro-sub {
-  position: relative;
-  margin-top: 12px;
-  color: #aaa;
-  letter-spacing: 7px;
-  font-size: 13px;
-  animation: fadeUp 1s ease .6s both;
-}
-
-.intro-line {
-  position: relative;
-  width: 180px;
-  height: 2px;
-  margin-top: 35px;
-  background: #252525;
-  overflow: hidden;
-}
-
-.intro-line::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--red);
-  transform: translateX(-100%);
-  animation: loading 1.7s ease .5s forwards;
-}
-
-@keyframes logoAppear {
-  from { opacity: 0; transform: scale(.5); filter: blur(15px); }
-  to { opacity: 1; transform: scale(1); filter: blur(0); }
-}
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes loading {
-  to { transform: translateX(0); }
-}
-
-@keyframes introExit {
-  to { opacity: 0; visibility: hidden; pointer-events: none; }
-}
-
-/* HEADER */
-
-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  height: 76px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 8%;
-  background: rgba(8,8,8,.88);
-  backdrop-filter: blur(18px);
-  border-bottom: 1px solid var(--border);
-}
-
-.brand {
-  font-size: 25px;
-  font-weight: 900;
-  letter-spacing: 1px;
-}
-
-.brand span {
-  color: var(--red);
-}
-
-nav {
-  display: flex;
-  gap: 30px;
-  align-items: center;
-}
-
-nav a {
-  color: #bbb;
-  font-size: 13px;
-  transition: .3s;
-}
-
-nav a:hover {
-  color: var(--red-light);
-}
-
-.header-btn {
-  padding: 9px 19px;
-  border: 1px solid var(--red);
-  border-radius: 8px;
-  color: white;
-  font-size: 12px;
-  transition: .3s;
-}
-
-.header-btn:hover {
-  background: var(--red);
-  box-shadow: 0 0 20px rgba(227,38,54,.35);
-}
-
-.menu-btn {
-  display: none;
-  background: none;
-  border: none;
-  color: white;
-  font-size: 27px;
-  cursor: pointer;
-}
-
-/* HERO */
-
-.hero {
-  min-height: 650px;
-  padding: 100px 8%;
-  display: flex;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero::after {
-  content: "OS";
-  position: absolute;
-  left: -30px;
-  top: 30px;
-  font-size: 370px;
-  font-weight: 900;
-  color: rgba(255,255,255,.018);
-  pointer-events: none;
-}
-
-.hero-content {
-  position: relative;
-  z-index: 2;
-  max-width: 720px;
-  animation: fadeUp .9s ease 3.4s both;
-}
-
-.tag {
-  display: inline-block;
-  padding: 8px 15px;
-  border: 1px solid rgba(227,38,54,.45);
-  border-radius: 30px;
-  color: #ff6570;
-  font-size: 12px;
-  margin-bottom: 25px;
-  background: rgba(227,38,54,.07);
-}
-
-.hero h1 {
-  font-size: clamp(55px, 9vw, 105px);
-  line-height: 1.1;
-  font-weight: 900;
-  letter-spacing: 2px;
-}
-
-.hero h1 span {
-  color: var(--red);
-  text-shadow: 0 0 35px rgba(227,38,54,.25);
-}
-
-.hero h2 {
-  margin-top: 18px;
-  font-size: 22px;
-  font-weight: 500;
-  color: #ddd;
-  letter-spacing: 4px;
-}
-
-.hero p {
-  max-width: 550px;
-  margin-top: 25px;
-  line-height: 2.2;
-  color: var(--muted);
-  font-size: 14px;
-}
-
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 13px;
-  margin-top: 35px;
-}
-
-.btn {
-  padding: 13px 24px;
-  border-radius: 9px;
-  font-size: 13px;
-  font-weight: 700;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  transition: .3s;
-  cursor: pointer;
-}
-
-.btn-primary {
-  background: var(--red);
-  color: white;
-  border: 1px solid var(--red);
-}
-
-.btn-primary:hover {
-  background: #b91627;
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(227,38,54,.25);
-}
-
-.btn-outline {
-  border: 1px solid #444;
-  color: white;
-}
-
-.btn-outline:hover {
-  border-color: var(--red);
-  color: var(--red-light);
-}
-
-.hero-glow {
-  position: absolute;
-  width: 400px;
-  height: 400px;
-  left: 7%;
-  top: 20%;
-  border-radius: 50%;
-  background: rgba(180,0,25,.12);
-  filter: blur(100px);
-}
-
-/* SECTIONS */
-
-.section {
-  padding: 100px 8%;
-}
-
-.section-head {
-  margin-bottom: 45px;
-}
-
-.small {
-  color: var(--red-light);
-  font-size: 11px;
-  letter-spacing: 3px;
-  font-weight: 800;
-  margin-bottom: 12px;
-  direction: ltr;
-  text-align: right;
-}
-
-.section-head h2 {
-  font-size: clamp(28px, 4vw, 42px);
-  font-weight: 800;
-}
-
-.section-head p {
-  margin-top: 12px;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 2;
-}
-
-.section-head h2::after {
-  content: "";
-  display: block;
-  width: 55px;
-  height: 3px;
-  background: var(--red);
-  margin-top: 17px;
-  border-radius: 5px;
-}
-
-/* ABOUT */
-
-.about {
-  background: linear-gradient(180deg, #0b0b0b, #101010);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-
-.about-content {
-  max-width: 850px;
-  color: #bdbdbd;
-  line-height: 2.5;
-  font-size: 15px;
-}
-
-.about-content strong {
-  color: white;
-}
-
-/* FEATURES */
-
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-}
-
-.feature-card {
-  background: linear-gradient(145deg, #151515, #0d0d0d);
-  border: 1px solid var(--border);
-  border-radius: 15px;
-  padding: 30px 25px;
-  transition: .35s;
-  position: relative;
-  overflow: hidden;
-}
-
-.feature-card::before {
-  content: "";
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 3px;
-  height: 0;
-  background: var(--red);
-  transition: .35s;
-}
-
-.feature-card:hover {
-  transform: translateY(-7px);
-  border-color: rgba(227,38,54,.45);
-  box-shadow: 0 15px 40px rgba(0,0,0,.3);
-}
-
-.feature-card:hover::before {
-  height: 100%;
-}
-
-.feature-icon {
-  width: 48px;
-  height: 48px;
-  display: grid;
-  place-items: center;
-  background: rgba(227,38,54,.12);
-  border-radius: 12px;
-  font-size: 23px;
-  margin-bottom: 20px;
-}
-
-.feature-card h3 {
-  font-size: 17px;
-  margin-bottom: 12px;
-}
-
-.feature-card p {
-  font-size: 13px;
-  color: var(--muted);
-  line-height: 2.2;
-}
-
-/* NEWS */
-
-.news {
-  background: #0d0d0d;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-
-.news-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 18px;
-}
-
-.news-card {
-  padding: 25px;
-  border: 1px solid var(--border);
-  background: #121212;
-  border-radius: 13px;
-  transition: .3s;
-}
-
-.news-card:hover {
-  border-color: rgba(227,38,54,.4);
-}
-
-.news-label {
-  color: var(--red-light);
-  font-size: 11px;
-  margin-bottom: 12px;
-}
-
-.news-card h3 {
-  font-size: 17px;
-  margin-bottom: 10px;
-}
-
-.news-card p {
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 2;
-}
-
-/* VIDEO */
-
-.video-section {
-  background: linear-gradient(180deg, #080808, #101010);
-}
-
-.video-layout {
-  display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  gap: 25px;
-  align-items: stretch;
-}
-
-.video-box,
-.video-side {
-  background: #121212;
-  border: 1px solid var(--border);
-  border-radius: 15px;
-  overflow: hidden;
-}
-
-.aparat-responsive {
-  position: relative;
-  width: 100%;
-  padding-bottom: 56.25%;
-  background: #000;
-}
-
-.aparat-responsive iframe {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
-
-.video-info {
-  padding: 22px;
-}
-
-.video-info h3 {
-  font-size: 17px;
-}
-
-.video-info p {
-  color: var(--muted);
-  font-size: 12px;
-  margin-top: 8px;
-}
-
-.video-side {
-  padding: 30px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-}
-
-.video-side h3 {
-  font-size: 23px;
-  margin-bottom: 15px;
-}
-
-.video-side p {
-  color: var(--muted);
-  line-height: 2.3;
-  font-size: 13px;
-  margin-bottom: 25px;
-}
-
-/* APARAT */
-
-.aparat-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 25px;
-  padding: 35px;
-  background: linear-gradient(110deg, #191919, #111);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-}
-
-.aparat-brand {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.aparat-logo {
-  width: 65px;
-  height: 65px;
-  border-radius: 16px;
-  display: grid;
-  place-items: center;
-  background: #ed1c24;
-  color: white;
-  font-size: 26px;
-  font-weight: 900;
-}
-
-.aparat-brand h3 {
-  font-size: 20px;
-  margin-bottom: 7px;
-}
-
-.aparat-brand p {
-  color: var(--muted);
-  font-size: 12px;
-}
-
-/* CONNECT */
-
-.connect {
-  background: linear-gradient(135deg, #1a080a, #0c0c0c 60%);
-  border-top: 1px solid rgba(227,38,54,.2);
-}
-
-.server-box {
-  max-width: 800px;
-  padding: 35px;
-  border-radius: 16px;
-  background: rgba(255,255,255,.035);
-  border: 1px solid rgba(227,38,54,.25);
-}
-
-.server-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-  flex-wrap: wrap;
-  padding: 17px 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.server-row:last-child {
-  border-bottom: none;
-}
-
-.server-label {
-  color: var(--muted);
-  font-size: 13px;
-}
-
-.server-value {
-  direction: ltr;
-  font-size: 14px;
-  font-weight: 700;
-  word-break: break-word;
-}
-
-.copy-btn {
-  background: var(--red);
-  color: white;
-  border: none;
-  border-radius: 7px;
-  padding: 9px 15px;
-  cursor: pointer;
-  transition: .3s;
-}
-
-.copy-btn:hover {
-  background: #b91627;
-}
-
-/* FOOTER */
-
-footer {
-  padding: 45px 8% 25px;
-  background: #050505;
-  border-top: 1px solid var(--border);
-}
-
-.footer-top {
-  display: flex;
-  justify-content: space-between;
-  gap: 30px;
-  flex-wrap: wrap;
-  padding-bottom: 30px;
-}
-
-.footer-logo {
-  font-size: 25px;
-  font-weight: 900;
-}
-
-.footer-logo span {
-  color: var(--red);
-}
-
-.footer-description {
-  color: var(--muted);
-  font-size: 12px;
-  margin-top: 12px;
-  line-height: 2;
-}
-
-.footer-links {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.footer-links a {
-  font-size: 12px;
-  color: #aaa;
-  transition: .3s;
-}
-
-.footer-links a:hover {
-  color: var(--red);
-}
-
-.footer-bottom {
-  border-top: 1px solid var(--border);
-  padding-top: 20px;
-  text-align: center;
-  color: #666;
-  font-size: 11px;
-}
-
-/* SCROLL REVEAL */
-
-.reveal {
-  opacity: 0;
-  transform: translateY(25px);
-  transition: .8s ease;
-}
-
-.reveal.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* RESPONSIVE */
-
-@media(max-width: 900px) {
-  header {
-    padding: 0 5%;
-  }
-
-  nav {
-    gap: 15px;
-  }
-
-  .hero {
-    padding: 90px 6%;
-  }
-
-  .section {
-    padding: 80px 6%;
-  }
-
-  .features-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .video-layout {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media(max-width: 650px) {
-  header {
-    height: 68px;
-  }
-
-  .menu-btn {
-    display: block;
-  }
-
-  nav {
-    position: absolute;
-    top: 68px;
-    right: 0;
-    left: 0;
-    background: #0b0b0b;
-    border-bottom: 1px solid var(--border);
-    display: none;
-    flex-direction: column;
-    padding: 22px;
-    gap: 22px;
-  }
-
-  nav.active {
-    display: flex;
-  }
-
-  .header-btn {
-    display: none;
-  }
-
-  .hero {
-    min-height: 600px;
-    padding: 80px 6%;
-  }
-
-  .hero h1 {
-    font-size: 60px;
-  }
-
-  .hero h2 {
-    font-size: 16px;
-    letter-spacing: 2px;
-  }
-
-  .hero p {
-    font-size: 13px;
-  }
-
-  .hero::after {
-    font-size: 230px;
-  }
-
-  .section {
-    padding: 70px 6%;
-  }
-
-  .features-grid,
-  .news-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .aparat-card {
-    align-items: flex-start;
-    flex-direction: column;
-    padding: 25px;
-  }
-
-  .server-box {
-    padding: 20px;
-  }
-
-  .server-row {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .server-value {
-    font-size: 12px;
-  }
-
-  .footer-top {
-    flex-direction: column;
-  }
-
-  .intro-sub {
-    letter-spacing: 4px;
-  }
-}
-
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OS CRAFT | وضعیت سرور</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Tahoma, Arial, sans-serif;
+      background: #101116;
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .server-card {
+      width: 100%;
+      max-width: 460px;
+      background: linear-gradient(145deg, #20212a, #15161d);
+      border: 1px solid #343541;
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: 0 20px 60px #0008;
+    }
+
+    .logo {
+      color: #ff3939;
+      font-size: 28px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-align: center;
+    }
+
+    .subtitle {
+      color: #999;
+      text-align: center;
+      margin-top: 8px;
+      font-size: 13px;
+    }
+
+    .status {
+      margin: 28px 0;
+      padding: 20px;
+      border-radius: 15px;
+      background: #292a34;
+      text-align: center;
+    }
+
+    .status-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #888;
+      margin-left: 8px;
+    }
+
+    .status-text {
+      font-size: 23px;
+      font-weight: bold;
+    }
+
+    .online { color: #35df85; }
+    .offline { color: #ff5050; }
+    .checking { color: #ffc857; }
+
+    .status.online-bg .status-dot { background: #35df85; }
+    .status.offline-bg .status-dot { background: #ff5050; }
+    .status.checking-bg .status-dot { background: #ffc857; }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .stat {
+      background: #292a34;
+      border-radius: 13px;
+      padding: 18px 10px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      color: #aaa;
+      font-size: 12px;
+    }
+
+    .ip-box {
+      margin-top: 18px;
+      padding: 15px;
+      background: #292a34;
+      border-radius: 12px;
+      text-align: center;
+      direction: ltr;
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      border: none;
+      border-radius: 12px;
+      padding: 16px;
+      background: #e52e38;
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    button:hover {
+      background: #ff414b;
+      transform: translateY(-2px);
+    }
+
+    button:disabled {
+      opacity: .6;
+      cursor: wait;
+      transform: none;
+    }
+
+    .last-check {
+      color: #888;
+      text-align: center;
+      font-size: 11px;
+      margin-top: 17px;
+    }
+
+    .error {
+      color: #ff8585;
+      text-align: center;
+      font-size: 12px;
+      margin-top: 12px;
+      line-height: 1.8;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="noise"></div>
+  <main class="server-card">
 
-<!-- CINEMATIC INTRO -->
-<div class="intro">
-  <div class="intro-logo">OS <span>CRAFT</span></div>
-  <div class="intro-sub">SMP + ROLEPLAY</div>
-  <div class="intro-line"></div>
-</div>
+    <div class="logo">OS CRAFT</div>
+    <div class="subtitle">SMP + ROLE PLAY</div>
 
-<!-- HEADER -->
-<header>
-  <a href="#home" class="brand">OS <span>CRAFT</span></a>
-
-  <button class="menu-btn" id="menuBtn" aria-label="باز کردن منو">☰</button>
-
-  <nav id="nav">
-    <a href="#home">صفحه اصلی</a>
-    <a href="#about">معرفی سرور</a>
-    <a href="#features">امکانات</a>
-    <a href="#news">اطلاعیه‌ها</a>
-    <a href="#videos">ویدیوها</a>
-    <a href="#aparat">آپارات</a>
-  </nav>
-
-  <a href="#connect" class="header-btn">ورود به سرور</a>
-</header>
-
-<!-- HERO -->
-<main>
-<section class="hero" id="home">
-  <div class="hero-glow"></div>
-
-  <div class="hero-content">
-    <div class="tag">OFFICIAL MINECRAFT SERVER</div>
-
-    <h1>OS <span>CRAFT</span></h1>
-
-    <h2>SMP + ROLEPLAY</h2>
-
-    <p>
-      تجربه‌ای متفاوت از دنیای ماینکرفت؛
-      با ساختار اقتصادی، مشاغل، خانه‌ها، کسب‌وکارها
-      و سیستم نقش‌آفرینی در یک شهر زنده.
-    </p>
-
-    <div class="hero-actions">
-      <a href="#connect" class="btn btn-primary">اطلاعات اتصال</a>
-      <a href="#about" class="btn btn-outline">معرفی سرور</a>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section class="section about reveal" id="about">
-  <div class="section-head">
-    <div class="small">ABOUT OS CRAFT</div>
-    <h2>درباره OS CRAFT</h2>
-    <p>معرفی ساختار و فضای سرور</p>
-  </div>
-
-  <div class="about-content">
-    <p>
-      <strong>OS CRAFT</strong> یک سرور ماینکرفت با سبک
-      <strong>SMP + ROLEPLAY</strong> است که در آن بازیکنان
-      می‌توانند در یک شهر فعالیت کنند، شغل انتخاب کنند،
-      درآمد به دست آورند، خانه داشته باشند و کسب‌وکار خود را توسعه دهند.
-    </p>
-    <br>
-    <p>
-      سیستم اقتصادی و امکانات نقش‌آفرینی سرور با هدف ایجاد
-      تجربه‌ای منظم و جذاب طراحی شده‌اند.
-    </p>
-  </div>
-</section>
-
-<!-- FEATURES -->
-<section class="section reveal" id="features">
-  <div class="section-head">
-    <div class="small">SERVER FEATURES</div>
-    <h2>امکانات سرور</h2>
-    <p>بخش‌های اصلی تجربه OS CRAFT</p>
-  </div>
-
-  <div class="features-grid">
-
-    <div class="feature-card">
-      <div class="feature-icon">🏙️</div>
-      <h3>شهر و زندگی شهری</h3>
-      <p>فعالیت در محیط شهری و تعامل با سایر بازیکنان.</p>
-    </div>
-
-    <div class="feature-card">
-      <div class="feature-icon">💼</div>
-      <h3>سیستم مشاغل</h3>
-      <p>انتخاب شغل و فعالیت در بخش‌های مختلف شهر.</p>
-    </div>
-
-    <div class="feature-card">
-      <div class="feature-icon">💰</div>
-      <h3>اقتصاد و بانک</h3>
-      <p>تجربه سیستم اقتصادی و مدیریت درآمد در بازی.</p>
-    </div>
-
-    <div class="feature-card">
-      <div class="feature-icon">🏠</div>
-      <h3>خانه و املاک</h3>
-      <p>خرید، فروش و اجاره خانه در شهر.</p>
-    </div>
-
-    <div class="feature-card">
-      <div class="feature-icon">🏪</div>
-      <h3>کسب‌وکارها</h3>
-      <p>فعالیت در فروشگاه‌ها و بخش‌های اقتصادی شهر.</p>
-    </div>
-
-    <div class="feature-card">
-      <div class="feature-icon">🎭</div>
-      <h3>Role Play</h3>
-      <p>تعامل اجتماعی و ایفای نقش در فضای سرور.</p>
-    </div>
-
-  </div>
-</section>
-
-<!-- NEWS -->
-<section class="section news reveal" id="news">
-  <div class="section-head">
-    <div class="small">LATEST UPDATES</div>
-    <h2>اخبار و اطلاعیه‌ها</h2>
-    <p>آخرین اطلاعات و اطلاعیه‌های سرور</p>
-  </div>
-
-  <div class="news-grid">
-
-    <div class="news-card">
-      <div class="news-label">SERVER VERSION</div>
-      <h3>نسخه 26.2</h3>
-      <p>نسخه فعلی سرور OS CRAFT: 26.2</p>
-    </div>
-
-    <div class="news-card">
-      <div class="news-label">OFFICIAL WEBSITE</div>
-      <h3>وب‌سایت رسمی OS CRAFT</h3>
-      <p>اطلاعات سرور، معرفی امکانات و محتوای رسانه‌ای را از این وب‌سایت دنبال کنید.</p>
-    </div>
-
-  </div>
-</section>
-
-<!-- VIDEOS -->
-<section class="section video-section reveal" id="videos">
-  <div class="section-head">
-    <div class="small">OS CRAFT MEDIA</div>
-    <h2>ویدیوهای OS CRAFT</h2>
-    <p>گزارش‌ها، معرفی امکانات و ویدیوهای رسمی سرور</p>
-  </div>
-
-  <div class="video-layout">
-
-    <div class="video-box">
-      <div class="aparat-responsive">
-        <iframe
-          src="https://www.aparat.com/video/video/embed/videohash/gac4d89/vt/frame"
-          title="ویدیوی OS CRAFT"
-          allowFullScreen
-          webkitallowfullscreen
-          mozallowfullscreen
-          loading="lazy">
-        </iframe>
-      </div>
-
-      <div class="video-info">
-        <h3>ویدیوی رسمی OS CRAFT</h3>
-        <p>مشاهده ویدیو از طریق پخش‌کننده آپارات</p>
-      </div>
-    </div>
-
-    <div class="video-side">
-      <h3>رسانه رسمی OS CRAFT</h3>
-      <p>
-        ویدیوهای معرفی، آموزش‌ها، گزارش فعالیت‌ها
-        و محتوای تصویری سرور از این بخش قابل مشاهده هستند.
-      </p>
-
-      <a class="btn btn-primary"
-         href="https://www.aparat.com/v/gac4d89"
-         target="_blank"
-         rel="noopener">
-        مشاهده ویدیو در آپارات
-      </a>
-    </div>
-
-  </div>
-</section>
-
-<!-- APARAT -->
-<section class="section reveal" id="aparat">
-  <div class="section-head">
-    <div class="small">FOLLOW OUR MEDIA</div>
-    <h2>کانال رسمی آپارات</h2>
-    <p>برای مشاهده ویدیوهای بیشتر به کانال OS CRAFT مراجعه کنید.</p>
-  </div>
-
-  <div class="aparat-card">
-    <div class="aparat-brand">
-      <div class="aparat-logo">A</div>
-      <div>
-        <h3>OS CRAFT</h3>
-        <p>کانال رسمی آپارات</p>
-      </div>
-    </div>
-
-    <a class="btn btn-primary"
-       href="https://www.aparat.com/os_craft"
-       target="_blank"
-       rel="noopener">
-      ورود به کانال آپارات
-    </a>
-  </div>
-</section>
-
-<!-- CONNECT -->
-<section class="section connect reveal" id="connect">
-  <div class="section-head">
-    <div class="small">JOIN THE SERVER</div>
-    <h2>اتصال به سرور</h2>
-    <p>اطلاعات اتصال به سرور رسمی OS CRAFT</p>
-  </div>
-
-  <div class="server-box">
-
-    <div class="server-row">
-      <span class="server-label">نام سرور</span>
-      <span class="server-value">OS CRAFT</span>
-    </div>
-
-    <div class="server-row">
-      <span class="server-label">نسخه ماینکرفت</span>
-      <span class="server-value">26.2</span>
-    </div>
-
-    <div class="server-row">
-      <span class="server-label">آدرس سرور</span>
-      <span class="server-value" id="serverIP">
-        sarafraz7171-srv-os_craft_asli.play.mihancraft.com:25566
+    <section class="status" id="statusBox">
+      <span class="status-dot"></span>
+      <span class="status-text" id="statusText">
+        هنوز بررسی نشده
       </span>
+    </section>
+
+    <section class="stats">
+
+      <div class="stat">
+        <div class="stat-value" id="players">--</div>
+        <div class="stat-label">بازیکنان آنلاین</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-value" id="maxPlayers">--</div>
+        <div class="stat-label">ظرفیت سرور</div>
+      </div>
+
+      <div class="stat" style="grid-column: 1 / -1">
+        <div class="stat-value" id="version">--</div>
+        <div class="stat-label">نسخه ماینکرفت</div>
+      </div>
+
+    </section>
+
+    <div class="ip-box">
+      sarafraz7171-srv-os_craft_asli.play.mihancraft.com:25566
     </div>
 
-    <div class="server-row">
-      <span class="server-label">کپی آدرس</span>
-      <button class="copy-btn" id="copyBtn">کپی IP</button>
+    <button id="checkButton" onclick="checkServer()">
+      بررسی وضعیت سرور
+    </button>
+
+    <div class="error" id="error"></div>
+
+    <div class="last-check" id="lastCheck">
+      آخرین بررسی: هنوز انجام نشده
     </div>
 
-  </div>
-</section>
-</main>
+  </main>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-top">
+  <script>
+    const HOST =
+      "sarafraz7171-srv-os_craft_asli.play.mihancraft.com";
 
-    <div>
-      <div class="footer-logo">OS <span>CRAFT</span></div>
-      <p class="footer-description">
-        Minecraft SMP + Roleplay Server
-        <br>
-        وب‌سایت رسمی OS CRAFT
-      </p>
-    </div>
+    const PORT = 25566;
 
-    <div class="footer-links">
-      <a href="#home">صفحه اصلی</a>
-      <a href="#features">امکانات</a>
-      <a href="#videos">ویدیوها</a>
-      <a href="https://www.aparat.com/os_craft" target="_blank" rel="noopener">آپارات</a>
-    </div>
+    async function checkServer() {
+      const button = document.getElementById("checkButton");
+      const statusBox = document.getElementById("statusBox");
+      const statusText = document.getElementById("statusText");
+      const errorBox = document.getElementById("error");
 
-  </div>
+      button.disabled = true;
+      button.textContent = "در حال بررسی...";
+      errorBox.textContent = "";
 
-  <div class="footer-bottom">
-    © 2026 OS CRAFT — All Rights Reserved
-  </div>
-</footer>
+      statusText.textContent = "در حال بررسی";
+      statusText.className = "status-text checking";
+      statusBox.className = "status checking-bg";
 
-<script>
-/* MOBILE MENU */
+      try {
+        const url =
+          `https://api.mcsrvstat.us/3/${HOST}:${PORT}?t=${Date.now()}`;
 
-const menuBtn = document.getElementById("menuBtn");
-const nav = document.getElementById("nav");
+        const response = await fetch(url, {
+          cache: "no-store"
+        });
 
-menuBtn.addEventListener("click", () => {
-  nav.classList.toggle("active");
-});
+        if (!response.ok) {
+          throw new Error("API_RESPONSE_ERROR");
+        }
 
-nav.querySelectorAll("a").forEach(link => {
-  link.addEventListener("click", () => {
-    nav.classList.remove("active");
-  });
-});
+        const data = await response.json();
 
-/* COPY SERVER IP */
+        if (data.online === true) {
+          statusText.textContent = "سرور آنلاین است";
+          statusText.className = "status-text online";
+          statusBox.className = "status online-bg";
 
-const copyBtn = document.getElementById("copyBtn");
-const serverIP = document.getElementById("serverIP");
+          document.getElementById("players").textContent =
+            data.players?.online ?? 0;
 
-copyBtn.addEventListener("click", async () => {
-  const ip = serverIP.textContent.trim();
+          document.getElementById("maxPlayers").textContent =
+            data.players?.max ?? "--";
 
-  try {
-    await navigator.clipboard.writeText(ip);
-    copyBtn.textContent = "کپی شد ✓";
-  } catch (error) {
-    const textArea = document.createElement("textarea");
-    textArea.value = ip;
-    document.body.appendChild(textArea);
-    textArea.select();
-    document.execCommand("copy");
-    textArea.remove();
-    copyBtn.textContent = "کپی شد ✓";
-  }
+          document.getElementById("version").textContent =
+            data.version || "نامشخص";
 
-  setTimeout(() => {
-    copyBtn.textContent = "کپی IP";
-  }, 2000);
-});
+        } else {
+          statusText.textContent = "سرور آفلاین است";
+          statusText.className = "status-text offline";
+          statusBox.className = "status offline-bg";
 
-/* SCROLL REVEAL */
+          document.getElementById("players").textContent = "--";
+          document.getElementById("maxPlayers").textContent = "--";
+          document.getElementById("version").textContent = "--";
+        }
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("show");
-      observer.unobserve(entry.target);
+        document.getElementById("lastCheck").textContent =
+          "آخرین بررسی: " + new Date().toLocaleTimeString("fa-IR");
+
+      } catch (error) {
+        statusText.textContent = "بررسی ناموفق بود";
+        statusText.className = "status-text offline";
+        statusBox.className = "status offline-bg";
+
+        document.getElementById("players").textContent = "--";
+        document.getElementById("maxPlayers").textContent = "--";
+        document.getElementById("version").textContent = "--";
+
+        errorBox.textContent =
+          "ارتباط با سرویس بررسی وضعیت برقرار نشد. دوباره تلاش کن.";
+
+        document.getElementById("lastCheck").textContent =
+          "آخرین تلاش: " + new Date().toLocaleTimeString("fa-IR");
+
+      } finally {
+        button.disabled = false;
+        button.textContent = "بررسی دوباره وضعیت سرور";
+      }
     }
-  });
-}, {
-  threshold: 0.12
-});
-
-document.querySelectorAll(".reveal").forEach(element => {
-  observer.observe(element);
-});
-</script>
+  </script>
 
 </body>
 </html>
