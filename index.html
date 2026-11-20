@@ -3,10 +3,10 @@
 <html lang="fa" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#09090d">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#08090d">
   <meta name="description" content="OS CRAFT | Minecraft SMP + Roleplay">
-  <title>OS CRAFT | SMP + ROLEPLAY</title>
+  <title>OS CRAFT — SMP + ROLEPLAY</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,272 +16,245 @@
 </head>
 <body>
 
-  <!-- CINEMATIC INTRO -->
-  <div class="intro" id="intro">
-    <div class="intro-line"></div>
+  <!-- SMART CINEMATIC INTRO -->
+  <div class="intro" id="intro" aria-label="OS CRAFT">
+    <div class="intro-noise"></div>
+    <div class="intro-light"></div>
 
-    <div class="intro-center">
-      <div class="intro-symbol">OS</div>
-      <div class="intro-name">OS <span>CRAFT</span></div>
-      <div class="intro-caption">SMP <i>+</i> ROLEPLAY</div>
+    <div class="intro-content">
+      <div class="intro-overline">A NEW WORLD IS WAITING</div>
+      <div class="intro-logo">
+        <span class="intro-os">OS</span>
+        <span class="intro-craft">CRAFT</span>
+      </div>
+      <div class="intro-divider"></div>
+      <div class="intro-subtitle">SURVIVE <i>•</i> BUILD <i>•</i> ROLEPLAY</div>
     </div>
+
+    <div class="intro-bottom">EST. OS CRAFT EXPERIENCE</div>
   </div>
 
+  <!-- BACKGROUND -->
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+  <div class="background-grid"></div>
+
   <!-- HEADER -->
-  <header class="topbar">
+  <header class="header">
     <a class="brand" href="#home">
-      <span class="brand-mark">OS</span>
-      <span>CRAFT</span>
+      <span class="brand-icon">OS</span>
+      <span class="brand-text">CRAFT</span>
     </a>
 
-    <button class="menu-toggle" id="menuToggle" aria-label="باز کردن منو">☰</button>
+    <button class="menu-button" id="menuButton" aria-label="منو">☰</button>
 
-    <nav id="nav">
+    <nav class="navigation" id="navigation">
       <a href="#home">خانه</a>
-      <a href="#about">درباره سرور</a>
-      <a href="#features">ویژگی‌ها</a>
+      <a href="#about">معرفی</a>
+      <a href="#features">امکانات</a>
       <a href="#jobs">شغل‌ها</a>
-      <a href="#join">ورود به سرور</a>
+      <a href="#connect">اتصال</a>
     </nav>
 
-    <a class="top-cta" href="#join">اتصال به سرور <span>↗</span></a>
+    <a class="header-button" href="#connect">ورود به سرور <span>↗</span></a>
   </header>
 
   <main>
 
     <!-- HERO -->
-    <section class="hero" id="home">
-      <div class="hero-bg"></div>
-      <div class="hero-grid"></div>
-
-      <div class="hero-content">
-        <div class="eyebrow">
-          <span class="live-dot"></span>
-          دنیای OS CRAFT آماده‌ی ورود توست
+    <section class="hero section-wrap" id="home">
+      <div class="hero-content reveal">
+        <div class="status-label">
+          <span class="status-dot"></span>
+          دنیای OS CRAFT
         </div>
+
+        <div class="hero-mini-title">MINECRAFT SMP + ROLEPLAY</div>
 
         <h1>
-          فراتر از یک<br>
-          <span>سرور ماینکرفت</span>
+          دنیایی فراتر از
+          <span>یک بازی معمولی</span>
         </h1>
 
-        <p class="hero-lead">
-          یک تجربه متفاوت از بقا، اقتصاد و زندگی شهری در دنیای Minecraft
+        <p class="hero-description">
+          تجربه‌ای متفاوت از زندگی شهری، اقتصاد، ساخت‌وساز و ماجراجویی
+          در دنیای Minecraft.
         </p>
 
-        <div class="version-line">
-          نسخه <b>26.2</b>
-          <span class="separator">/</span>
-          <span>IP سرور</span>
+        <div class="hero-version">
+          <span>SERVER VERSION</span>
+          <strong>26.2</strong>
         </div>
 
-        <div class="server-address" dir="ltr">
-          sarafraz7171-srv-os_craft_asli.play.mihancraft.com:25566
-        </div>
-
-        <div class="hero-actions">
-          <a class="btn btn-red" href="#join">
-            شروع ماجراجویی <span>↗</span>
-          </a>
-          <a class="btn btn-ghost" href="#features">
-            مشاهده امکانات
-          </a>
+        <div class="hero-buttons">
+          <a href="#connect" class="button-primary">ورود به دنیای OS <span>↗</span></a>
+          <a href="#about" class="button-secondary">بیشتر بدانید</a>
         </div>
       </div>
 
-      <div class="hero-side-note">
-        SURVIVE · BUILD · ROLEPLAY
+      <div class="hero-art reveal">
+        <div class="art-orbit orbit-one"></div>
+        <div class="art-orbit orbit-two"></div>
+        <div class="art-glow"></div>
+        <div class="art-card">
+          <div class="art-card-top">
+            <span>OS CRAFT</span>
+            <span class="art-live"><i></i> EXPERIENCE</span>
+          </div>
+          <div class="art-logo">OS<span>.</span></div>
+          <div class="art-card-bottom">
+            <span>MINECRAFT</span>
+            <span>SMP / ROLEPLAY</span>
+          </div>
+        </div>
+        <div class="art-floating floating-one">BUILD YOUR WORLD</div>
+        <div class="art-floating floating-two">26.2 / JAVA</div>
       </div>
 
-      <div class="scroll-hint">
-        <span></span>
-        اسکرول کن
+      <div class="hero-bottom">
+        <span>SCROLL TO EXPLORE</span>
+        <span class="hero-bottom-line"></span>
+        <span>01 — 04</span>
       </div>
     </section>
 
     <!-- ABOUT -->
-    <section class="section about" id="about">
-      <div class="section-kicker">01 / ABOUT</div>
-
-      <div class="section-heading">
-        <h2>دنیایی برای <span>تجربه‌های تازه</span></h2>
+    <section class="section-wrap section-block" id="about">
+      <div class="section-heading reveal">
+        <div class="section-label">01 / ABOUT OS CRAFT</div>
+        <h2>به دنیای <span>OS CRAFT</span> خوش آمدی</h2>
         <p>
-          OS CRAFT ترکیبی از SMP و Roleplay است؛
-          جایی برای ساختن، پیشرفت کردن و تعامل با بازیکنان دیگر.
+          اینجا فقط قرار نیست بازی کنی؛ می‌توانی زندگی شهری را تجربه کنی،
+          شغل داشته باشی، خانه بسازی و در اقتصاد سرور فعالیت کنی.
         </p>
       </div>
 
       <div class="about-grid">
-        <div class="about-panel">
-          <span class="panel-number">OS / 01</span>
-
-          <h3>زندگی در یک دنیای زنده</h3>
-
+        <article class="about-main glass-card reveal">
+          <div class="card-index">OS / 001</div>
+          <div class="about-symbol">◈</div>
+          <h3>یک تجربه متفاوت از Minecraft</h3>
           <p>
-            خانه بساز، کسب‌وکار راه‌اندازی کن،
-            شغل انتخاب کن و در اقتصاد شهر نقش داشته باش.
+            از شروع مسیر تا پیشرفت در شهر، هر بازیکن می‌تواند
+            فعالیت و هدف خودش را در سرور دنبال کند.
           </p>
+          <div class="card-accent"></div>
+        </article>
 
-          <div class="panel-line"></div>
-        </div>
-
-        <div class="about-visual">
-          <div class="visual-word">
-            OS<br>
-            <span>CRAFT</span>
-          </div>
-
-          <span class="visual-tag">MINECRAFT EXPERIENCE</span>
-        </div>
+        <article class="about-side glass-card reveal">
+          <div class="side-decoration">OS</div>
+          <div class="side-caption">YOUR WORLD</div>
+          <h3>بقا، ساختن، تعامل</h3>
+          <p>ترکیبی از SMP و Roleplay در یک دنیای مشترک.</p>
+        </article>
       </div>
     </section>
 
     <!-- FEATURES -->
-    <section class="section features" id="features">
-      <div class="section-kicker">02 / FEATURES</div>
-
-      <div class="section-heading">
+    <section class="section-wrap section-block features-section" id="features">
+      <div class="section-heading reveal">
+        <div class="section-label">02 / SERVER FEATURES</div>
         <h2>امکانات <span>سرور</span></h2>
-        <p>چیزهایی که تجربه‌ی OS CRAFT را شکل می‌دهند.</p>
+        <p>ابزارها و سیستم‌هایی برای ساخت تجربه‌ای کامل‌تر.</p>
       </div>
 
       <div class="feature-grid">
-
-        <article class="feature-card">
-          <div class="feature-icon">⌂</div>
-          <span>01</span>
+        <article class="feature-card reveal">
+          <div class="feature-number">01</div>
+          <div class="feature-symbol">⌂</div>
           <h3>زندگی شهری</h3>
-          <p>خانه داشته باش، ملک اجاره کن و در شهر زندگی بساز.</p>
+          <p>خانه داشته باش، ملک اجاره کن و در شهر زندگی کن.</p>
         </article>
 
-        <article class="feature-card">
-          <div class="feature-icon">◇</div>
-          <span>02</span>
-          <h3>اقتصاد پویا</h3>
-          <p>خرید و فروش، کسب درآمد و مدیریت دارایی‌ها.</p>
+        <article class="feature-card reveal">
+          <div class="feature-number">02</div>
+          <div class="feature-symbol">◇</div>
+          <h3>اقتصاد سرور</h3>
+          <p>خریدوفروش کن و با فعالیت در شهر درآمد کسب کن.</p>
         </article>
 
-        <article class="feature-card">
-          <div class="feature-icon">✳</div>
-          <span>03</span>
+        <article class="feature-card reveal">
+          <div class="feature-number">03</div>
+          <div class="feature-symbol">✳</div>
           <h3>سیستم شغل‌ها</h3>
-          <p>با انتخاب شغل، مسیر پیشرفت خودت را پیدا کن.</p>
+          <p>شغل انتخاب کن و در مسیر اقتصادی خودت پیشرفت کن.</p>
         </article>
 
-        <article class="feature-card">
-          <div class="feature-icon">▦</div>
-          <span>04</span>
-          <h3>کسب‌وکارها</h3>
-          <p>در فعالیت‌های اقتصادی شهر مشارکت کن.</p>
+        <article class="feature-card reveal">
+          <div class="feature-number">04</div>
+          <div class="feature-symbol">▦</div>
+          <h3>کسب‌وکار</h3>
+          <p>در فعالیت‌های اقتصادی و تجاری شهر مشارکت داشته باش.</p>
         </article>
 
-        <article class="feature-card">
-          <div class="feature-icon">♧</div>
-          <span>05</span>
+        <article class="feature-card reveal">
+          <div class="feature-number">05</div>
+          <div class="feature-symbol">♧</div>
           <h3>ساخت‌وساز</h3>
-          <p>خانه و سازه‌های خودت را در دنیای سرور گسترش بده.</p>
+          <p>سازه‌ها و خانه‌های خودت را در دنیای سرور توسعه بده.</p>
         </article>
 
-        <article class="feature-card">
-          <div class="feature-icon">◎</div>
-          <span>06</span>
+        <article class="feature-card reveal">
+          <div class="feature-number">06</div>
+          <div class="feature-symbol">◎</div>
           <h3>تجربه SMP</h3>
-          <p>در کنار دیگر بازیکنان زنده بمان و ماجراجویی کن.</p>
+          <p>در کنار بازیکنان دیگر بقا و ماجراجویی را تجربه کن.</p>
         </article>
-
       </div>
     </section>
 
     <!-- JOBS -->
-    <section class="section jobs" id="jobs">
-      <div class="section-kicker">03 / JOBS</div>
-
-      <div class="section-heading">
-        <h2>شغل خودت را <span>انتخاب کن</span></h2>
-        <p>در اقتصاد شهر نقش بگیر و با فعالیتت پیشرفت کن.</p>
+    <section class="section-wrap section-block" id="jobs">
+      <div class="section-heading reveal">
+        <div class="section-label">03 / CAREER SYSTEM</div>
+        <h2>مسیر خودت را <span>انتخاب کن</span></h2>
+        <p>در دنیای OS CRAFT می‌توانی با انتخاب شغل، نقش خودت را پیدا کنی.</p>
       </div>
 
-      <div class="job-list">
-        <div class="job-item">
-          <b>01</b>
-          <span>کشاورز</span>
-          <small>FARMER</small>
-        </div>
-
-        <div class="job-item">
-          <b>02</b>
-          <span>کارگر</span>
-          <small>WORKER</small>
-        </div>
-
-        <div class="job-item">
-          <b>03</b>
-          <span>معمار</span>
-          <small>BUILDER</small>
-        </div>
-
-        <div class="job-item">
-          <b>04</b>
-          <span>پزشک</span>
-          <small>DOCTOR</small>
-        </div>
-
-        <div class="job-item">
-          <b>05</b>
-          <span>حمل‌ونقل</span>
-          <small>TRANSPORT</small>
-        </div>
-
-        <div class="job-item">
-          <b>06</b>
-          <span>مدیریت کسب‌وکار</span>
-          <small>BUSINESS</small>
-        </div>
+      <div class="jobs-panel reveal">
+        <div class="job-row"><b>01</b><span>کشاورز</span><small>FARMER</small></div>
+        <div class="job-row"><b>02</b><span>کارگر</span><small>WORKER</small></div>
+        <div class="job-row"><b>03</b><span>معمار</span><small>BUILDER</small></div>
+        <div class="job-row"><b>04</b><span>پزشک</span><small>DOCTOR</small></div>
+        <div class="job-row"><b>05</b><span>حمل‌ونقل</span><small>TRANSPORT</small></div>
+        <div class="job-row"><b>06</b><span>مدیریت کسب‌وکار</span><small>BUSINESS</small></div>
       </div>
     </section>
 
     <!-- CONNECT -->
-    <section class="join-section" id="join">
-      <div class="join-glow"></div>
+    <section class="connect-section section-wrap" id="connect">
+      <div class="connect-decoration"></div>
 
-      <div class="section-kicker">04 / CONNECT</div>
+      <div class="connect-content reveal">
+        <div class="section-label">04 / JOIN THE SERVER</div>
+        <h2>آماده ورود به <span>OS CRAFT</span> هستی؟</h2>
+        <p>نسخه موردنیاز را اجرا کن و آدرس سرور را در Minecraft وارد کن.</p>
 
-      <h2>
-        آماده‌ای وارد <span>OS CRAFT</span> بشی؟
-      </h2>
+        <div class="connect-version">MINECRAFT JAVA <i>•</i> VERSION 26.2</div>
 
-      <p>
-        آدرس سرور را کپی کن و به جمع بازیکنان بپیوند.
-      </p>
+        <div class="ip-box" dir="ltr">
+          <code id="serverIP">sarafraz7171-srv-os_craft_asli.play.mihancraft.com:25566</code>
+          <button id="copyButton">COPY IP</button>
+        </div>
 
-      <div class="join-version">
-        Minecraft Java · Version 26.2
-      </div>
+        <div class="copy-message" id="copyMessage" aria-live="polite"></div>
 
-      <div class="copy-address" dir="ltr">
-        <code id="serverIp">sarafraz7171-srv-os_craft_asli.play.mihancraft.com:25566</code>
-        <button id="copyIp">کپی آدرس</button>
-      </div>
-
-      <div class="join-links">
-        <a href="https://aparat.com/os_craft" target="_blank" rel="noopener">
-          کانال آپارات ↗
+        <a class="aparat-link" href="https://aparat.com/os_craft" target="_blank" rel="noopener">
+          مشاهده کانال آپارات ↗
         </a>
       </div>
-
-      <p class="copy-status" id="copyStatus" aria-live="polite"></p>
     </section>
 
   </main>
 
   <!-- FOOTER -->
-  <footer>
-    <a class="brand footer-brand" href="#home">
-      <span class="brand-mark">OS</span>
-      <span>CRAFT</span>
+  <footer class="footer">
+    <a class="brand" href="#home">
+      <span class="brand-icon">OS</span>
+      <span class="brand-text">CRAFT</span>
     </a>
 
-    <span>© OS CRAFT — SMP + ROLEPLAY</span>
+    <span>OS CRAFT — SMP + ROLEPLAY</span>
 
     <a href="#home">بازگشت به بالا ↑</a>
   </footer>
